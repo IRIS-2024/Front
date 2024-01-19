@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iris_flutter/theme.dart';
+import 'package:iris_flutter/view/page/detail_info/info_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
         colorScheme: MaterialTheme.lightScheme().toColorScheme(),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: InfoPage()
     );
   }
 }
