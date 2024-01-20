@@ -17,72 +17,72 @@ class _InfoPageState extends State<InfoPage> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-              title: const Text('실종 신고'),
-              centerTitle: true,
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back), // 햄버거버튼 아이콘 생성
+            title: const Text(
+              '실종 신고',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            centerTitle: true,
+            elevation: 0, // 앱 바 뒷 배경색 제거
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back), // 햄버거버튼 아이콘 생성
+              onPressed: () {
+                // 아이콘 버튼 실행
+                print('뒤로가기');
+              },
+            ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.bookmark_outline), // 장바구니 아이콘 생성
                 onPressed: () {
                   // 아이콘 버튼 실행
-                  print('뒤로가기');
+                  print('북마크 버튼 실행');
                 },
               ),
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.bookmark_outline), // 장바구니 아이콘 생성
-                  onPressed: () {
-                    // 아이콘 버튼 실행
-                    print('북마크 버튼 실행');
-                  },
+            ],
+            bottom: TabBar(
+              labelColor: Colors.white, // 배경색
+              unselectedLabelColor: Theme.of(context).colorScheme.primary,
+              indicatorSize: TabBarIndicatorSize.label,
+              indicator: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: Theme.of(context).colorScheme.primary),
+              tabs: [
+                Tab(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(
+                            color: Theme.of(context).colorScheme.primary,
+                            width: 1)),
+                    child: const Align(
+                      alignment: Alignment.center,
+                      child: Text("실종 정보"),
+                    ),
+                  ),
                 ),
-              ]),
-          body: Column(
+                Tab(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(
+                            color: Theme.of(context).colorScheme.primary,
+                            width: 1)),
+                    child: const Align(
+                      alignment: Alignment.center,
+                      child: Text("제보"),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          body: const Column(
             children: [
-              Container(
-                margin: const EdgeInsets.only(
-                  top: 10.0,
-                ),
-                // height: 35.0,
-                child: TabBar(
-                  labelColor: Colors.white, // 배경색
-                  unselectedLabelColor: Theme.of(context).colorScheme.primary,
-                  indicatorSize: TabBarIndicatorSize.label,
-                  indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Theme.of(context).colorScheme.primary),
-                  tabs: [
-                    Tab(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            border: Border.all(
-                                color: Theme.of(context).colorScheme.primary,
-                                width: 1)),
-                        child: const Align(
-                          alignment: Alignment.center,
-                          child: Text("실종 정보"),
-                        ),
-                      ),
-                    ),
-                    Tab(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            border: Border.all(
-                                color: Theme.of(context).colorScheme.primary,
-                                width: 1)),
-                        child: const Align(
-                          alignment: Alignment.center,
-                          child: Text("제보"),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
+              SizedBox(
+                // 탭 바와 본문의 여백을 위해
                 height: 12,
               ),
-              const Expanded(
+              Expanded(
                 child: TabBarView(
                   children: [InfoTab(), ReportTab()],
                 ),
