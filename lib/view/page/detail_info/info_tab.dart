@@ -45,7 +45,7 @@ class _InfoTabState extends State<InfoTab> {
                         onPageChanged: (index, reason) =>
                             setState(() => activeIndex = index))),
                 Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
                       children: [
                         if (activeIndex != 0)
@@ -75,9 +75,10 @@ class _InfoTabState extends State<InfoTab> {
             ),
             const SizedBox(height: 12),
             buildIndicator(),
-            const SizedBox(height: 24),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+              color: Colors.white,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
