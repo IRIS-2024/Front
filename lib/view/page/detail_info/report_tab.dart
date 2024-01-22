@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iris_flutter/view/page/detail_info/image_dialog.dart';
 import 'package:iris_flutter/view/page/detail_info/map_widget.dart';
 
 class ReportTab extends StatefulWidget {
