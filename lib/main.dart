@@ -13,14 +13,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: MaterialTheme.lightScheme().toColorScheme(),
-        useMaterial3: true,
-      ),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: InfoPage()
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: MaterialTheme.lightScheme().toColorScheme(),
+          useMaterial3: true,
+        ),
+        // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        home: const InfoPage());
   }
 }
 
