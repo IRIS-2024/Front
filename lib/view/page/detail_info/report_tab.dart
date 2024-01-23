@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:iris_flutter/view/page/detail_info/image_dialog.dart';
+import 'package:iris_flutter/view/page/detail_info/map_widget.dart';
 
 class ReportTab extends StatefulWidget {
   const ReportTab({super.key});
@@ -23,8 +25,9 @@ class _ReportTabState extends State<ReportTab> {
     return SingleChildScrollView(
       child: Column(children: [
         // map()
-        Container(
+        const SizedBox(
           height: 300,
+          child: MapWidget(),
         ),
         const SizedBox(height: 12),
         Container(
@@ -43,6 +46,7 @@ class _ReportTabState extends State<ReportTab> {
         Container(
           color: Colors.white,
           child: ListView.separated(
+            primary: false,
             shrinkWrap: true,
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
             itemCount: 5,
@@ -57,8 +61,16 @@ class _ReportTabState extends State<ReportTab> {
                       margin: const EdgeInsets.symmetric(horizontal: 5),
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.network(urlImages[index],
-                              fit: BoxFit.cover))),
+                          child: GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (_) =>
+                                      ImageDialog(urlImages[index]));
+                            },
+                            child: Image.network(urlImages[index],
+                                fit: BoxFit.cover),
+                          ))),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Column(
