@@ -1,5 +1,10 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:iris_flutter/model/comment_img_item_model.dart';
 import 'package:iris_flutter/view/page/detail_info/map_widget.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:photo_view/photo_view_gallery.dart';
 
 class ReportTab extends StatefulWidget {
   const ReportTab({super.key});
@@ -9,6 +14,7 @@ class ReportTab extends StatefulWidget {
 }
 
 class _ReportTabState extends State<ReportTab> {
+  // urlImages = 댓글 사진 썸네일(대표 이미지)
   final urlImages = [
     'https://images.unsplash.com/photo-1612825173281-9a193378527e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=499&q=80',
     'https://images.unsplash.com/photo-1580654712603-eb43273aff33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
@@ -17,7 +23,53 @@ class _ReportTabState extends State<ReportTab> {
     'https://images.unsplash.com/photo-1570829053985-56e661df1ca2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
   ];
 
+  // galleries = 댓글 하나에 등록된 여러 이미지의 모음
+  List<CommentImgItemModel> galleries = [
+    CommentImgItemModel(
+        id: 1,
+        resource:
+            'https://images.unsplash.com/photo-1612825173281-9a193378527e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=499&q=80',
+        isSVG: false,
+        description: 'First Photo'),
+    CommentImgItemModel(
+        id: 2,
+        resource:
+            'https://images.unsplash.com/photo-1580654712603-eb43273aff33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        isSVG: false,
+        description: 'Second Photo'),
+    CommentImgItemModel(
+        id: 3,
+        resource:
+            'https://images.unsplash.com/photo-1627916607164-7b20241db935?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80',
+        isSVG: false,
+        description: 'Third Photo'),
+    CommentImgItemModel(
+        id: 4,
+        resource:
+            'https://images.unsplash.com/photo-1522037576655-7a93ce0f4d10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        isSVG: false,
+        description: 'Fourth Photo'),
+    CommentImgItemModel(
+        id: 5,
+        resource:
+            'https://images.unsplash.com/photo-1570829053985-56e661df1ca2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        isSVG: false,
+        description: 'Fifth Photo'),
+  ];
+
   bool isSwitched = true;
+
+  late int currentIndex;
+
+  PageController pageController = PageController(initialPage: 0);
+
+  final carouselController = CarouselController();
+
+  @override
+  void initState() {
+    super.initState();
+    currentIndex = 0; //  widget.initialIndex;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,12 +113,57 @@ class _ReportTabState extends State<ReportTab> {
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: GestureDetector(
-                            onTap: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (_) =>
-                                      ImageDialog(urlImages[index]));
-                            },
+                            onTap: () => showDialog<String>(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  Dialog.fullscreen(
+                                backgroundColor: Colors.black.withOpacity(0.5),
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    // PhotoViewGallery.builder(
+                                    //   scrollPhysics:
+                                    //       const BouncingScrollPhysics(),
+                                    //   builder: _buildItem,
+                                    //   itemCount: galleries.length,
+                                    //   // loadingBuilder: loadingBuilder,
+                                    //   backgroundDecoration: BoxDecoration(
+                                    //       color: Colors.black.withOpacity(0.5)),
+                                    //   pageController: pageController,
+                                    //   onPageChanged: galleryPageChange,
+                                    //   scrollDirection: Axis.horizontal,
+                                    // ),
+                                    CarouselSlider.builder(
+                                        carouselController: carouselController,
+                                        itemCount: urlImages.length,
+                                        itemBuilder:
+                                            (context, index, realindex) {
+                                          final images = urlImages[index];
+                                          return buildImage(images, index);
+                                        },
+                                        options: CarouselOptions(
+                                            initialPage: 0,
+                                            height: 300,
+                                            enableInfiniteScroll: false,
+                                            onPageChanged: (index, reason) =>
+                                                setState(() =>
+                                                    currentIndex = index))),
+                                    Align(
+                                      alignment: Alignment.bottomRight,
+                                      child: TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text(
+                                          '닫기',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                             child: Image.network(urlImages[index],
                                 fit: BoxFit.cover),
                           ))),
@@ -77,6 +174,7 @@ class _ReportTabState extends State<ReportTab> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Flexible(
@@ -90,6 +188,7 @@ class _ReportTabState extends State<ReportTab> {
                           ],
                         ),
                         const Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text("옷차림", style: TextStyle(color: Colors.grey)),
                             SizedBox(
@@ -129,4 +228,26 @@ class _ReportTabState extends State<ReportTab> {
       ]),
     );
   }
+
+  PhotoViewGalleryPageOptions _buildItem(BuildContext context, int index) {
+    final item = galleries[index];
+    return PhotoViewGalleryPageOptions(
+        imageProvider: NetworkImage(item.resource),
+        initialScale: PhotoViewComputedScale.contained,
+        minScale: PhotoViewComputedScale.contained * (0.5 + index / 10),
+        maxScale: PhotoViewComputedScale.contained * 1.1,
+        heroAttributes: PhotoViewHeroAttributes(tag: item.id));
+  }
+
+  void galleryPageChange(int index) {
+    setState() {
+      currentIndex = index;
+    }
+  }
+
+  Widget buildImage(String urlImage, int index) => Container(
+      margin: const EdgeInsets.symmetric(horizontal: 5),
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Image.network(urlImage, fit: BoxFit.cover)));
 }
