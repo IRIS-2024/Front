@@ -121,33 +121,18 @@ class _ReportTabState extends State<ReportTab> {
                                 child: Stack(
                                   alignment: Alignment.center,
                                   children: [
-                                    // PhotoViewGallery.builder(
-                                    //   scrollPhysics:
-                                    //       const BouncingScrollPhysics(),
-                                    //   builder: _buildItem,
-                                    //   itemCount: galleries.length,
-                                    //   // loadingBuilder: loadingBuilder,
-                                    //   backgroundDecoration: BoxDecoration(
-                                    //       color: Colors.black.withOpacity(0.5)),
-                                    //   pageController: pageController,
-                                    //   onPageChanged: galleryPageChange,
-                                    //   scrollDirection: Axis.horizontal,
-                                    // ),
-                                    CarouselSlider.builder(
-                                        carouselController: carouselController,
-                                        itemCount: urlImages.length,
-                                        itemBuilder:
-                                            (context, index, realindex) {
-                                          final images = urlImages[index];
-                                          return buildImage(images, index);
-                                        },
-                                        options: CarouselOptions(
-                                            initialPage: 0,
-                                            height: 300,
-                                            enableInfiniteScroll: false,
-                                            onPageChanged: (index, reason) =>
-                                                setState(() =>
-                                                    currentIndex = index))),
+                                    PhotoViewGallery.builder(
+                                      scrollPhysics:
+                                          const BouncingScrollPhysics(),
+                                      builder: _buildItem,
+                                      itemCount: galleries.length,
+                                      // loadingBuilder: loadingBuilder,
+                                      backgroundDecoration: const BoxDecoration(
+                                          color: Colors.transparent),
+                                      pageController: pageController,
+                                      onPageChanged: galleryPageChange,
+                                      scrollDirection: Axis.horizontal,
+                                    ),
                                     Align(
                                       alignment: Alignment.bottomRight,
                                       child: TextButton(
@@ -244,10 +229,4 @@ class _ReportTabState extends State<ReportTab> {
       currentIndex = index;
     }
   }
-
-  Widget buildImage(String urlImage, int index) => Container(
-      margin: const EdgeInsets.symmetric(horizontal: 5),
-      child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Image.network(urlImage, fit: BoxFit.cover)));
 }
