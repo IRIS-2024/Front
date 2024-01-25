@@ -26,6 +26,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
 
     return Form(
       key: _formKey,
+      // autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Scaffold(
         appBar: customAppBar(
             title: '실종자 등록',
@@ -39,7 +40,8 @@ class _InfoFormPageState extends State<InfoFormPage> {
             })),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(left: 16.0, right: 16, bottom: 25, top: 10),
+            padding: const EdgeInsets.only(
+                left: 16.0, right: 16, bottom: 25, top: 10),
             child: Column(
               children: [
                 // 사진
@@ -78,7 +80,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
                               infoFormController.ageController,
                           title: '만 나이',
                           isRequired: true,
-                          suffixText: '세'),
+                          unitText: '세'),
                     )
                   ],
                 ),
@@ -92,7 +94,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
                                 infoFormController.heightController,
                             title: '키',
                             isRequired: false,
-                            suffixText: 'cm')),
+                            unitText: 'cm')),
                     const Padding(padding: EdgeInsets.only(right: 10)),
                     Flexible(
                         flex: 1,
@@ -101,7 +103,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
                                 infoFormController.weightController,
                             title: '몸무게',
                             isRequired: false,
-                            suffixText: 'kg')),
+                            unitText: 'kg')),
                   ],
                 ),
                 // 마지막 위치
@@ -126,7 +128,9 @@ class _InfoFormPageState extends State<InfoFormPage> {
                           label: Text(infoFormController.location.value)),
                     ),
                     Obx(
-                      ()=> infoFormController.location.value == Config.enterLocation && infoFormController.initValidation.value != true
+                      () => infoFormController.location.value ==
+                                  Config.enterLocation &&
+                              infoFormController.initValidation.value != true
                           ? Padding(
                               padding: const EdgeInsets.only(top: 7),
                               child: Text(
@@ -144,10 +148,10 @@ class _InfoFormPageState extends State<InfoFormPage> {
 
                 // 실종 당시 옷차림
                 basicField(
-                    textEditingController: infoFormController.dressController,
-                    title: '실종 당시 옷차림',
-                    isRequired: false,
-                    hintText: '상•하의 모양, 색상, 액세서리 등을 적어주세요.', 
+                  textEditingController: infoFormController.dressController,
+                  title: '실종 당시 옷차림',
+                  isRequired: false,
+                  hintText: '상•하의 모양, 색상, 액세서리 등을 적어주세요.',
                   maxLength: 40,
                 ),
                 // 특이사항
@@ -235,33 +239,41 @@ class _InfoFormPageState extends State<InfoFormPage> {
       {required TextEditingController textEditingController,
       required String title,
       required bool isRequired,
-      required String suffixText}) {
+      required String unitText}) {
     return Column(
       children: [
         fieldTitle(title: title, isRequired: isRequired),
-        TextFormField(
-          controller: textEditingController,
-          maxLength: 3,
-          decoration: InputDecoration(
-            isDense: true,
-            // hintText: '세',
-            // hintTextDirection: TextDirection.rtl,
-            counterText: '',
-            suffix: Text(suffixText),
-            border: OutlineInputBorder(
-                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                borderSide:
-                    BorderSide(color: Theme.of(context).colorScheme.outline)),
+        Stack(children: [
+          TextFormField(
+            controller: textEditingController,
+            maxLength: 3,
+            decoration: InputDecoration(
+              isDense: true,
+              counterText: '',
+              border: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                  borderSide:
+                      BorderSide(color: Theme.of(context).colorScheme.outline)),
+            ),
+            keyboardType: TextInputType.number,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            validator: (value) {
+              if (value!.isEmpty && isRequired) {
+                return '만 나이를 입력해 주세요.';
+              }
+              return null;
+            },
           ),
-          keyboardType: TextInputType.number,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-          validator: (value) {
-            if (value!.isEmpty && isRequired) {
-              return '만 나이를 입력해 주세요.';
-            }
-            return null;
-          },
-        ),
+          Positioned(
+              top: 18,
+              right: 12,
+              child: Center(
+                  child: Text(
+                unitText,
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.outline, fontSize: 16),
+              ))),
+        ]),
         const Padding(padding: EdgeInsets.only(bottom: 15)),
       ],
     );
