@@ -40,20 +40,36 @@ class _ImageFormCarouselState extends State<ImageFormCarousel> {
       padding: const EdgeInsets.only(bottom: 25),
       child: Column(
         children: [
-          OutlinedButton.icon(
-              onPressed: () {
-                infoFormController.pickImage();
-              },
-              style: OutlinedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 200),
-                  foregroundColor: Theme.of(context).colorScheme.primary,
-                  side: BorderSide(
-                    color: Theme.of(context).colorScheme.outline,
-                  ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0))),
-              icon: const Icon(Icons.add_circle_outline),
-              label: const Text('실종자 사진 추가')),
+          OutlinedButton(
+            onPressed: () {
+              infoFormController.pickImage();
+            },
+            style: OutlinedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 200),
+                foregroundColor: Theme.of(context).colorScheme.primary,
+                side: BorderSide(
+                  color: Theme.of(context).colorScheme.outline,
+                ),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0))),
+            child: Column(
+              children: [
+                const Text(''),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.add_circle_outline),
+                    Padding(padding: EdgeInsets.only(right: 5)),
+                    Text('실종자 사진 추가')
+                  ],
+                ),
+                Text('(최대 3장)', style: TextStyle(
+                  fontSize: 12,
+                  color: Theme.of(context).colorScheme.outline
+                ),)
+              ],
+            ),
+          ),
           Obx(
             () => infoFormController.images.isEmpty &&
                     infoFormController.initValidation.value != true
