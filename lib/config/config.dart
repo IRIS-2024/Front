@@ -10,4 +10,6 @@ class Config {
 
   static int maxImagesLength = 3;
 
+  static int maxImagesLength = 3;
+
 }
