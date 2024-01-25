@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iris_flutter/src/app.dart';
 import 'package:iris_flutter/theme.dart';
 import 'package:iris_flutter/view/page/detail_info/info_page.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-        home: const InfoPage());
+        home: const App());
   }
 }
 

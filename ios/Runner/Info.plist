@@ -49,5 +49,15 @@
 	<key>Want to display location on map, and track it.</key>
 	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
 	<key>Want to display location on map, and track it.</key>
+	<key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <!-- google login -->
+        <string>com.googleusercontent.apps.816088408558-m8j4ju4fklhoo76bf2850vm0vo1p2007</string>
+      </array>
+      </dict>
+    </array>
 </dict>
 </plist>
