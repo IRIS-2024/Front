@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iris_flutter/theme.dart';
+import 'package:iris_flutter/view/page/detail_info/info_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,13 +13,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: MaterialTheme.lightScheme().toColorScheme(),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: MaterialTheme.lightScheme().toColorScheme(),
+          useMaterial3: true,
+        ),
+        // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        home: const InfoPage());
   }
 }
 
