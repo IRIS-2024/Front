@@ -5,6 +5,7 @@ import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/comm/register_button.dart';
 import 'package:iris_flutter/view/controller/info_form/info_form_controller.dart';
+import 'package:iris_flutter/view/page/Info_form/image_form_carousel.dart';
 
 enum Gender { man, woman }
 
@@ -29,7 +30,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
         appBar: customAppBar(
             title: '실종자 등록',
             actions: RegisterButton(onPressed: () {
-              // validate location
+              // validate image, location
               infoFormController.initValidation.value = false;
               if (_formKey.currentState!.validate()) {
                 // 정보 등록 (저장)
@@ -38,11 +39,11 @@ class _InfoFormPageState extends State<InfoFormPage> {
             })),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(left: 16.0, right: 16, bottom: 25),
+            padding: const EdgeInsets.only(left: 16.0, right: 16, bottom: 25, top: 10),
             child: Column(
               children: [
                 // 사진
-                Text('// 사진'),
+                ImageFormCarousel(),
                 // 실종자 이름
                 basicField(
                     textEditingController: infoFormController.nameController,
@@ -107,25 +108,6 @@ class _InfoFormPageState extends State<InfoFormPage> {
                 Column(
                   children: [
                     fieldTitle(title: '마지막 위치', isRequired: true),
-                    // TextFormField(
-                    //   controller: infoFormController.locationController,
-                    //   readOnly: true,
-                    //   decoration: InputDecoration(
-                    //     isDense: true,
-                    //     // hintText: hintText,
-                    //     border: OutlineInputBorder(
-                    //         borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                    //         borderSide:
-                    //         BorderSide(color: Theme.of(context).colorScheme.outline)),
-                    //   ),
-                    //   validator: (value) {
-                    //     // if (value!.isEmpty && isRequired) {
-                    //     //   return '이름을 입력해주세요.';
-                    //     // }
-                    //     // return null;
-                    //   },
-                    // ),
-
                     Obx(
                       () => OutlinedButton.icon(
                           onPressed: () {
@@ -143,11 +125,10 @@ class _InfoFormPageState extends State<InfoFormPage> {
                           icon: const Icon(Icons.my_location),
                           label: Text(infoFormController.location.value)),
                     ),
-                    //TODO
                     Obx(
                       ()=> infoFormController.location.value == Config.enterLocation && infoFormController.initValidation.value != true
                           ? Padding(
-                              padding: const EdgeInsets.only(top: 10),
+                              padding: const EdgeInsets.only(top: 7),
                               child: Text(
                                 '위치를 입력해 주세요.',
                                 style: TextStyle(

@@ -5,4 +5,6 @@ class Config {
   static String man = '남자';
   static String woman = '여자';
 
+  static int maxImagesLength = 3;
+
 }
