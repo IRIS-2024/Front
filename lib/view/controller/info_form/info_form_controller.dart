@@ -6,8 +6,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/page/Info_form/info_form_dialog.dart';
+import 'package:iris_flutter/view/page/main/main_page.dart';
 
-class InfoFormController extends GetxController{
+class InfoFormController {
   RxList<XFile> images = <XFile>[].obs;
 
   RxBool initValidation = true.obs;
@@ -72,5 +73,6 @@ class InfoFormController extends GetxController{
     // 최종 글 등록
     // get navigation, snackBar
     customSnackBar(title: '실종 신고 등록', message: '실종 신고 등록이 완료되었습니다.', context: context);
+    Get.offAll(()=>MainPage());
   }
 }
