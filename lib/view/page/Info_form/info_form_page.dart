@@ -34,7 +34,9 @@ class _InfoFormPageState extends State<InfoFormPage> {
             actions: RegisterButton(onPressed: () {
               // validate image, location
               infoFormController.initValidation.value = false;
-              if (_formKey.currentState!.validate()) {
+              if (_formKey.currentState!.validate() &&
+                  infoFormController.images.isNotEmpty &&
+                  infoFormController.location.value != Config.enterLocation) {
                 // 정보 등록 (저장)
                 infoFormController.registerInfo();
               }
@@ -46,7 +48,10 @@ class _InfoFormPageState extends State<InfoFormPage> {
             child: Column(
               children: [
                 // 사진
-                ImageFormCarousel(),
+                ImageFormCarousel(
+                  title: '실종자',
+                  controller: infoFormController,
+                ),
                 // 실종자 이름
                 TextForm(
                     textEditingController: infoFormController.nameController,
@@ -61,6 +66,8 @@ class _InfoFormPageState extends State<InfoFormPage> {
                     Flexible(
                         flex: 1,
                         child: BasicForm(
+                          title: '성별',
+                          isRequired: true,
                           widget: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -105,40 +112,47 @@ class _InfoFormPageState extends State<InfoFormPage> {
                 ),
                 // 마지막 위치
                 BasicForm(
+                    title: '마지막 위치',
+                    isRequired: true,
                     widget: Obx(
-                  () => Column(
-                    children: [
-                      OutlinedButton.icon(
-                          onPressed: () {
-                            // 위치 받아온 다음,
-                            infoFormController.location.value = '새로운 위치';
-                          },
-                          style: OutlinedButton.styleFrom(
-                              minimumSize: const Size(double.infinity, 55),
-                              foregroundColor: Colors.black,
-                              side: BorderSide(
-                                color: Theme.of(context).colorScheme.outline,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0))),
-                          icon: const Icon(Icons.my_location),
-                          label: Text(infoFormController.location.value)),
-                      infoFormController.location.value ==
-                                  Config.enterLocation &&
-                              infoFormController.initValidation.value != true
-                          ? Padding(
-                              padding: const EdgeInsets.only(top: 7),
-                              child: Text(
-                                '위치를 입력해 주세요.',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: Theme.of(context).colorScheme.error),
-                              ),
-                            )
-                          : const SizedBox(),
-                    ],
-                  ),
-                )),
+                      () => Column(
+                        children: [
+                          OutlinedButton.icon(
+                              onPressed: () {
+                                // 위치 받아온 다음,
+                                infoFormController.location.value = '새로운 위치';
+                              },
+                              style: OutlinedButton.styleFrom(
+                                  minimumSize: const Size(double.infinity, 55),
+                                  foregroundColor: Colors.black,
+                                  side: BorderSide(
+                                    color:
+                                        Theme.of(context).colorScheme.outline,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(10.0))),
+                              icon: const Icon(Icons.my_location),
+                              label: Text(infoFormController.location.value)),
+                          infoFormController.location.value ==
+                                      Config.enterLocation &&
+                                  infoFormController.initValidation.value !=
+                                      true
+                              ? Padding(
+                                  padding: const EdgeInsets.only(top: 7),
+                                  child: Text(
+                                    '위치를 입력해 주세요.',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .error),
+                                  ),
+                                )
+                              : const SizedBox(),
+                        ],
+                      ),
+                    )),
 
                 // 실종 당시 옷차림
                 TextForm(

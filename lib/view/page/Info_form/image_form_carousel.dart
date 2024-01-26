@@ -3,11 +3,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
-import 'package:iris_flutter/view/controller/info_form/info_form_controller.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ImageFormCarousel extends StatefulWidget {
-  const ImageFormCarousel({Key? key}) : super(key: key);
+  final String title;
+  final dynamic controller;
+  const ImageFormCarousel({Key? key, required this.title, required this.controller}) : super(key: key);
 
   @override
   State<ImageFormCarousel> createState() => _ImageFormCarouselState();
@@ -19,30 +20,24 @@ class _ImageFormCarouselState extends State<ImageFormCarousel> {
 
   @override
   void initState() {
-    Get.put(InfoFormController()).images.clear();
+    widget.controller.images.clear();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    Get.put(InfoFormController());
-    final infoFormController = Get.find<InfoFormController>();
-
     return Obx(() =>
-        infoFormController.images.isEmpty ? addInitImage() : imageCarousel());
+        widget.controller.images.isEmpty ? addInitImage() : imageCarousel());
   }
 
   Widget addInitImage() {
-    Get.put(InfoFormController());
-    final infoFormController = Get.find<InfoFormController>();
-
     return Padding(
       padding: const EdgeInsets.only(bottom: 25),
       child: Column(
         children: [
           OutlinedButton(
             onPressed: () {
-              infoFormController.pickImage();
+              widget.controller.pickImage();
             },
             style: OutlinedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 200),
@@ -55,12 +50,12 @@ class _ImageFormCarouselState extends State<ImageFormCarousel> {
             child: Column(
               children: [
                 const Text(''),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.add_circle_outline),
-                    Padding(padding: EdgeInsets.only(right: 5)),
-                    Text('실종자 사진 추가')
+                    const Icon(Icons.add_circle_outline),
+                    const Padding(padding: EdgeInsets.only(right: 5)),
+                    Text('${widget.title} 사진 추가')
                   ],
                 ),
                 Text('(최대 3장)', style: TextStyle(
@@ -71,8 +66,8 @@ class _ImageFormCarouselState extends State<ImageFormCarousel> {
             ),
           ),
           Obx(
-            () => infoFormController.images.isEmpty &&
-                    infoFormController.initValidation.value != true
+            () => widget.controller.images.isEmpty &&
+                    widget.controller.initValidation.value != true
                 ? Padding(
                     padding: const EdgeInsets.only(top: 7),
                     child: Text(
@@ -90,9 +85,6 @@ class _ImageFormCarouselState extends State<ImageFormCarousel> {
   }
 
   Widget imageCarousel() {
-    Get.put(InfoFormController());
-    final infoFormController = Get.find<InfoFormController>();
-
     return Column(
       children: [
         Obx(
@@ -102,9 +94,9 @@ class _ImageFormCarouselState extends State<ImageFormCarousel> {
               // Carousel
               CarouselSlider.builder(
                   carouselController: carouselController,
-                  itemCount: infoFormController.images.length,
+                  itemCount: widget.controller.images.length,
                   itemBuilder: (context, index, realindex) {
-                    final image = infoFormController.images[index];
+                    final image = widget.controller.images[index];
                     return buildImage(image.path, index);
                   },
                   options: CarouselOptions(
@@ -128,7 +120,7 @@ class _ImageFormCarouselState extends State<ImageFormCarousel> {
                           },
                         ),
                       const Spacer(),
-                      if (activeIndex != (infoFormController.images.length - 1))
+                      if (activeIndex != (widget.controller.images.length - 1))
                         IconButton(
                           icon: const Icon(Icons.arrow_forward_ios_rounded),
                           onPressed: () => {
@@ -146,8 +138,7 @@ class _ImageFormCarouselState extends State<ImageFormCarousel> {
                   right: MediaQuery.of(context).size.width / 9,
                   child: IconButton(
                       onPressed: () {
-                        print('print activeIndex: ${activeIndex}');
-                        infoFormController.images.removeAt(activeIndex);
+                        widget.controller.images.removeAt(activeIndex);
                       },
                       icon: const Icon(Icons.delete_outline),
                       style: IconButton.styleFrom(
@@ -161,18 +152,18 @@ class _ImageFormCarouselState extends State<ImageFormCarousel> {
           () => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              infoFormController.images.length + 1 <= Config.maxImagesLength
+              widget.controller.images.length + 1 <= Config.maxImagesLength
                   ? const SizedBox(
                       width: 100,
                     )
                   : const SizedBox(),
-              buildIndicator(),
+              buildIndicator(widget.controller),
 
               // 추가 버튼 따로
-              infoFormController.images.length + 1 <= Config.maxImagesLength
+              widget.controller.images.length + 1 <= Config.maxImagesLength
                   ? OutlinedButton.icon(
                       onPressed: () {
-                        infoFormController.pickImage();
+                        widget.controller.pickImage();
                       },
                       style: OutlinedButton.styleFrom(
                           minimumSize: const Size(40, 35),
@@ -190,6 +181,8 @@ class _ImageFormCarouselState extends State<ImageFormCarousel> {
         const Padding(padding: EdgeInsets.only(bottom: 15)),
       ],
     );
+
+
   }
 
   Widget buildImage(String imagePath, int index) {
@@ -204,10 +197,7 @@ class _ImageFormCarouselState extends State<ImageFormCarousel> {
             )));
   }
 
-  Widget buildIndicator() {
-    Get.put(InfoFormController());
-    final infoFormController = Get.find<InfoFormController>();
-
+  Widget buildIndicator(dynamic controller) {
     return AnimatedSmoothIndicator(
         onDotClicked: animateToSlide,
         effect: WormEffect(
@@ -215,7 +205,7 @@ class _ImageFormCarouselState extends State<ImageFormCarousel> {
             dotWidth: 12,
             dotHeight: 12),
         activeIndex: activeIndex,
-        count: infoFormController.images.length);
+        count: controller.images.length);
   }
 
   void animateToSlide(int index) => carouselController.animateToPage(index);
