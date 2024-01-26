@@ -29,7 +29,11 @@ class InfoFormController {
     print('print dressControllerText: ${clothesController.text}');
     print('print noteController: ${noteController.text}');
     //사진 저장 +
+
+    // 이미지 생성
   }
+
+
 
   void pickImage() async {
     final ImagePicker picker = ImagePicker();
