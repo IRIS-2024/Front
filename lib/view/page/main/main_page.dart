@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:iris_flutter/view/controller/main/main_controller.dart';
+import 'package:iris_flutter/view/page/Info_form/info_form_page.dart';
 import 'package:iris_flutter/view/page/main/main_tab_widget.dart';
 
 class MainPage extends StatelessWidget {
@@ -55,7 +58,7 @@ class MainPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(onPressed: () {
-
+        Get.to(() => InfoFormPage());
       }, label: Text('신고하기'),
       icon: Icon(Icons.report_gmailerrorred),)
     );

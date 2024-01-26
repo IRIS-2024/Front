@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
+import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/page/main/latest_info_widget.dart';
 import 'package:iris_flutter/view/page/main/main_map_widget.dart';
 
@@ -72,13 +74,7 @@ class _MainTabWidgetState extends State<MainTabWidget>
               controller: _nestedTabController,
               children: [
                 // 최신 글
-                Column(
-                  children: [
-                    LatestInfoWidget(),
-                    LatestInfoWidget(),
-                  ],
-                ),
-
+                LatestInfoWidget(),
                 // 지도
                 MainMapWidget()
               ],
