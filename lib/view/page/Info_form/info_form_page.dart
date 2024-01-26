@@ -38,7 +38,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
                   infoFormController.images.isNotEmpty &&
                   infoFormController.location.value != Config.enterLocation) {
                 // 정보 등록 (저장)
-                infoFormController.registerInfo();
+                infoFormController.saveInfo(context);
               }
             })),
         body: SingleChildScrollView(
