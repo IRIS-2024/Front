@@ -5,16 +5,17 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class ImageFormCarousel extends StatefulWidget {
+// form: 이미지 캐로셀
+class ImageCarouselForm extends StatefulWidget {
   final String title;
   final dynamic controller;
-  const ImageFormCarousel({Key? key, required this.title, required this.controller}) : super(key: key);
+  const ImageCarouselForm({Key? key, required this.title, required this.controller}) : super(key: key);
 
   @override
-  State<ImageFormCarousel> createState() => _ImageFormCarouselState();
+  State<ImageCarouselForm> createState() => _ImageCarouselFormState();
 }
 
-class _ImageFormCarouselState extends State<ImageFormCarousel> {
+class _ImageCarouselFormState extends State<ImageCarouselForm> {
   CarouselController carouselController = CarouselController();
   int activeIndex = 0;
 
