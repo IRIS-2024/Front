@@ -3,11 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
+import 'package:iris_flutter/view/comm/form/basic_form.dart';
+import 'package:iris_flutter/view/comm/form/form_title.dart';
+import 'package:iris_flutter/view/comm/form/text_form.dart';
 import 'package:iris_flutter/view/comm/register_button.dart';
 import 'package:iris_flutter/view/controller/info_form/info_form_controller.dart';
 import 'package:iris_flutter/view/page/Info_form/image_form_carousel.dart';
-
-enum Gender { man, woman }
 
 class InfoFormPage extends StatefulWidget {
   const InfoFormPage({Key? key}) : super(key: key);
@@ -47,7 +48,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
                 // 사진
                 ImageFormCarousel(),
                 // 실종자 이름
-                basicField(
+                TextForm(
                     textEditingController: infoFormController.nameController,
                     title: '실종자 이름',
                     isRequired: true,
@@ -59,18 +60,14 @@ class _InfoFormPageState extends State<InfoFormPage> {
                   children: [
                     Flexible(
                         flex: 1,
-                        child: Column(
-                          children: [
-                            fieldTitle(title: '성별', isRequired: true),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                genderButton(title: '여자', gender: Gender.woman),
-                                genderButton(title: '남자', gender: Gender.man),
-                              ],
-                            ),
-                            const Padding(padding: EdgeInsets.only(bottom: 10)),
-                          ],
+                        child: BasicForm(
+                          widget: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              genderButton(title: '여자', gender: Gender.woman),
+                              genderButton(title: '남자', gender: Gender.man),
+                            ],
+                          ),
                         )),
                     const Padding(padding: EdgeInsets.only(right: 10)),
                     Flexible(
@@ -107,11 +104,11 @@ class _InfoFormPageState extends State<InfoFormPage> {
                   ],
                 ),
                 // 마지막 위치
-                Column(
-                  children: [
-                    fieldTitle(title: '마지막 위치', isRequired: true),
-                    Obx(
-                      () => OutlinedButton.icon(
+                BasicForm(
+                    widget: Obx(
+                  () => Column(
+                    children: [
+                      OutlinedButton.icon(
                           onPressed: () {
                             // 위치 받아온 다음,
                             infoFormController.location.value = '새로운 위치';
@@ -126,9 +123,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
                                   borderRadius: BorderRadius.circular(10.0))),
                           icon: const Icon(Icons.my_location),
                           label: Text(infoFormController.location.value)),
-                    ),
-                    Obx(
-                      () => infoFormController.location.value ==
+                      infoFormController.location.value ==
                                   Config.enterLocation &&
                               infoFormController.initValidation.value != true
                           ? Padding(
@@ -141,21 +136,20 @@ class _InfoFormPageState extends State<InfoFormPage> {
                               ),
                             )
                           : const SizedBox(),
-                    ),
-                    const Padding(padding: EdgeInsets.only(bottom: 15)),
-                  ],
-                ),
+                    ],
+                  ),
+                )),
 
                 // 실종 당시 옷차림
-                basicField(
-                  textEditingController: infoFormController.dressController,
+                TextForm(
+                  textEditingController: infoFormController.clothesController,
                   title: '실종 당시 옷차림',
                   isRequired: false,
                   hintText: '상•하의 모양, 색상, 액세서리 등을 적어주세요.',
                   maxLength: 40,
                 ),
                 // 특이사항
-                basicField(
+                TextForm(
                     textEditingController: infoFormController.noteController,
                     title: '특이사항',
                     isRequired: false,
@@ -170,71 +164,6 @@ class _InfoFormPageState extends State<InfoFormPage> {
     );
   }
 
-  // text Field 의 제목
-  Column fieldTitle({
-    required String title,
-    required bool isRequired,
-  }) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Text(
-              title,
-              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-            ),
-            isRequired == true
-                ? const Text(
-                    '*',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        color: Colors.red),
-                  )
-                : const SizedBox()
-          ],
-        ),
-        const Padding(padding: EdgeInsets.only(bottom: 10)),
-      ],
-    );
-  }
-
-  Column basicField({
-    required TextEditingController textEditingController,
-    required String title,
-    required bool isRequired,
-    required String hintText,
-    required int maxLength,
-    int? maxLengths,
-  }) {
-    return Column(
-      children: [
-        fieldTitle(title: title, isRequired: isRequired),
-        TextFormField(
-          controller: textEditingController,
-          maxLines: maxLengths ?? 1,
-          maxLength: maxLength,
-          decoration: InputDecoration(
-            isDense: true,
-            hintText: hintText,
-            // counterText: '',
-            border: OutlineInputBorder(
-                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                borderSide:
-                    BorderSide(color: Theme.of(context).colorScheme.outline)),
-          ),
-          validator: (value) {
-            if (value!.isEmpty && isRequired) {
-              return '이름을 입력해주세요.';
-            }
-            return null;
-          },
-        ),
-        const Padding(padding: EdgeInsets.only(bottom: 15)),
-      ],
-    );
-  }
-
   Column numberField(
       {required TextEditingController textEditingController,
       required String title,
@@ -242,7 +171,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
       required String unitText}) {
     return Column(
       children: [
-        fieldTitle(title: title, isRequired: isRequired),
+        formTitle(title: title, isRequired: isRequired),
         Stack(children: [
           TextFormField(
             controller: textEditingController,
