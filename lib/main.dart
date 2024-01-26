@@ -4,6 +4,7 @@ import 'package:iris_flutter/theme.dart';
 import 'package:iris_flutter/view/page/Info_form/info_form_page.dart';
 import 'package:iris_flutter/view/page/comment_form/comment_form_page.dart';
 import 'package:iris_flutter/view/page/main/main_page.dart';
+import 'package:iris_flutter/view/page/detail_info/info_page.dart';
 
 void main() {
   runApp(const MyApp());
