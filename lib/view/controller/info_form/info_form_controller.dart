@@ -199,9 +199,6 @@ class InfoFormController {
                   }, child: Text('AI 이미지를 사용하여 등록하기'),style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.primaryContainer,
                     foregroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0)
-                      )
                   ),)),
               SizedBox(
                   width: double.infinity,

@@ -12,10 +12,6 @@ class RegisterButton extends StatelessWidget {
         ElevatedButton(
           onPressed: onPressed,
           style: ButtonStyle(
-            shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                )),
             backgroundColor: MaterialStateProperty.resolveWith((states) {
               if (states.contains(MaterialState.disabled)) {
                 return Theme.of(context).disabledColor;
