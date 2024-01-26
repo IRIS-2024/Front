@@ -18,10 +18,16 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: MaterialTheme.lightScheme().toColorScheme(),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0)
+              )
+          )
+        ),
         useMaterial3: true,
       ),
       home: const InfoFormPage(),
-      // home: const TmpPage(),
     );
   }
 }
