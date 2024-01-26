@@ -6,9 +6,9 @@ import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/comm/form/basic_form.dart';
 import 'package:iris_flutter/view/comm/form/form_title.dart';
 import 'package:iris_flutter/view/comm/form/text_form.dart';
-import 'package:iris_flutter/view/comm/register_button.dart';
+import 'package:iris_flutter/view/comm/form/register_button.dart';
 import 'package:iris_flutter/view/controller/info_form/info_form_controller.dart';
-import 'package:iris_flutter/view/page/Info_form/image_form_carousel.dart';
+import 'package:iris_flutter/view/comm/form/image_carousel_form.dart';
 
 class InfoFormPage extends StatefulWidget {
   const InfoFormPage({Key? key}) : super(key: key);
@@ -48,7 +48,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
             child: Column(
               children: [
                 // 사진
-                ImageFormCarousel(
+                ImageCarouselForm(
                   title: '실종자',
                   controller: infoFormController,
                 ),
