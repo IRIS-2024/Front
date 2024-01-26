@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iris_flutter/config/config.dart';
+import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 
 class InfoFormController {
   RxList<XFile> images = <XFile>[].obs;
@@ -103,7 +104,7 @@ class InfoFormController {
           SizedBox(
               width: double.infinity,
               child: ElevatedButton(onPressed: () {
-                registerInfo();
+                registerInfo(context);
               }, child: Text('AI 이미지 없이 등록하기'),)),
         ],
       ),
@@ -195,7 +196,7 @@ class InfoFormController {
                   width: double.infinity,
                   child: ElevatedButton(onPressed: () {
                     // AI 이미지 추가
-                    registerInfo();
+                    registerInfo(context);
                   }, child: Text('AI 이미지를 사용하여 등록하기'),style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.primaryContainer,
                     foregroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -203,15 +204,17 @@ class InfoFormController {
               SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(onPressed: () {
-                    registerInfo();
+                    registerInfo(context);
                   }, child: Text('AI 이미지 없이 등록하기'),)),
             ],
           ),
         )));
   }
 
-  registerInfo() {
+  registerInfo(BuildContext context) {
     // 최종 글 등록
     // get navigation, snackBar
+    customSnackBar(title: '실종 신고 등록', message: '실종 신고 등록이 완료되었습니다.', context: context);
+    Get.back();
   }
 }
