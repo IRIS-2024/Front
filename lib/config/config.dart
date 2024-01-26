@@ -1,3 +1,5 @@
+enum Gender { man, woman }
+
 class Config {
 
   // info form page
