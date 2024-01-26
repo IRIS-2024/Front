@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/page/main/latest_info_widget.dart';
 import 'package:iris_flutter/view/page/main/main_map_widget.dart';
 
@@ -59,13 +60,7 @@ class _MainTabWidgetState extends State<MainTabWidget>
                     // update current location
 
                     // updated
-                    // Get.showSnackbar(GetSnackBar(
-                    //   title: '저장 실패',
-                    //   message: '사진 저장에 실패했습니다. 화면에 재접속하여 새로고침 후 다시 시도해주세요.',
-                    //   icon: Icon(Icons.check,
-                    //       color: Theme.of(context).colorScheme.tertiary),
-                    //   duration: Duration(seconds: 3),
-                    // ));
+                    customSnackBar(title: '위치 갱신', message: '현 위치를 갱신하였습니다.', context: context);
                   },
                   icon: Icon(Icons.my_location)),
             ],
@@ -74,6 +69,7 @@ class _MainTabWidgetState extends State<MainTabWidget>
           // tab View
           Expanded(
             child: TabBarView(
+              controller: _nestedTabController,
               children: [
                 // 최신 글
                 Column(
@@ -86,7 +82,6 @@ class _MainTabWidgetState extends State<MainTabWidget>
                 // 지도
                 MainMapWidget()
               ],
-              controller: _nestedTabController,
             ),
           ),
         ],
