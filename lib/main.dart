@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/theme.dart';
 import 'package:iris_flutter/view/page/main/main_page.dart';
-import 'package:iris_flutter/src/login_app.dart';
+import 'package:iris_flutter/view/page/login/app.dart';
 
 void main() {
   runApp(const MyApp());

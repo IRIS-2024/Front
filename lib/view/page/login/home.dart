@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:iris_flutter/view/page/login/login.dart';
+import 'package:iris_flutter/view/page/login/login_page.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
