@@ -6,20 +6,20 @@ class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   Future<UserCredential> signInWithGoogle() async {
-    // Trigger the authentication flow
+    // 인증 플로우 시작
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-    // Obtain the auth details from the request
+    // 요청으로부터 인증 세부 정보 가져오기
     final GoogleSignInAuthentication? googleAuth =
         await googleUser?.authentication;
 
-    // Create a new credential
+    // 새로운 credential 생성
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
 
-    // Once signed in, return the UserCredential
+    // 로그인 성공 시, UserCredential 반환
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
