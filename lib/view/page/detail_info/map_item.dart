@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
-class MapWidget extends StatefulWidget {
-  const MapWidget({super.key});
+class MapItem extends StatefulWidget {
+  const MapItem({super.key});
 
   @override
-  State<MapWidget> createState() => _MapWidgetState();
+  State<MapItem> createState() => _MapItemState();
 }
 
-class _MapWidgetState extends State<MapWidget> {
+class _MapItemState extends State<MapItem> {
   final Location _locationController = Location();
 
   static const LatLng _pGooglePlex = LatLng(37.545042, 126.965879);

@@ -18,7 +18,7 @@ class _InfoPageState extends State<InfoPage> {
       child: Scaffold(
           appBar: AppBar(
             title: const Text(
-              '실종 신고',
+              '실종 정보',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             centerTitle: true,
@@ -56,7 +56,7 @@ class _InfoPageState extends State<InfoPage> {
                             width: 1)),
                     child: const Align(
                       alignment: Alignment.center,
-                      child: Text("실종 정보"),
+                      child: Text("상세 내용"),
                     ),
                   ),
                 ),
