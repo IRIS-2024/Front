@@ -31,8 +31,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  get: ^4.6.6
-
   material_color_utilities:   # 정의된 색상의 특정 tone 값인 색 얻기 위해
   location: ^5.0.3
 
