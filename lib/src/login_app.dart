@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:iris_flutter/firebase_options.dart';
 import 'package:iris_flutter/view/page/login/home.dart';
 
-class App extends StatelessWidget {
-  const App({super.key});
+class LoginApp extends StatelessWidget {
+  const LoginApp({super.key});
 
   @override
   Widget build(BuildContext context) {
