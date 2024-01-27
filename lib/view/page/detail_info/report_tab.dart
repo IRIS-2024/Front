@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/model/comment_img_item_model.dart';
-import 'package:iris_flutter/view/page/detail_info/map_widget.dart';
+import 'package:iris_flutter/view/page/detail_info/map_item.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -78,7 +78,7 @@ class _ReportTabState extends State<ReportTab> {
         // map()
         const SizedBox(
           height: 300,
-          child: MapWidget(),
+          child: MapItem(),
         ),
         const SizedBox(height: 12),
         Container(
@@ -100,7 +100,7 @@ class _ReportTabState extends State<ReportTab> {
             primary: false,
             shrinkWrap: true,
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
-            itemCount: 5,
+            itemCount: urlImages.length,
             itemBuilder: (BuildContext context, int index) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.start,
