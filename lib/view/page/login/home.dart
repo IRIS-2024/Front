@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iris_flutter/view/page/login/login.dart';
 
 class Home extends StatefulWidget {
@@ -10,6 +11,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Future<void> _signOut() async {
+    // Firebase 로그아웃
+    await FirebaseAuth.instance.signOut();
+
+    // Google Sign-In 로그아웃
+    await GoogleSignIn().signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,17 +34,11 @@ class _HomeState extends State<Home> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("${snapshot.data?.displayName} 님 환영합니다."),
-                      TextButton(
-                          onPressed: FirebaseAuth.instance.signOut,
-                          child: const Text("로그아웃"))
+                      TextButton(onPressed: _signOut, child: const Text("로그아웃"))
                     ],
                   ),
                 );
               }
             }));
   }
-}
-
-class Login {
-  const Login();
 }
