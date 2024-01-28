@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/theme.dart';
+import 'package:iris_flutter/view/page/mypage/my_page.dart';
 import 'package:iris_flutter/view/page/mypage/written_reports.dart';
 
 void main() {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15.0)))),
         useMaterial3: true,
       ),
-      home: const WrittenReports(),
+      home: const MyPage(),
     );
   }
 }
