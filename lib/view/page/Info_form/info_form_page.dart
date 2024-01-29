@@ -120,6 +120,9 @@ class _InfoFormPageState extends State<InfoFormPage> {
                           OutlinedButton.icon(
                               onPressed: () {
                                 // 위치 받아온 다음,
+                                // Get.dialog(
+                                //     // const TmpLocationPage()
+                                // );
                                 infoFormController.location.value = '새로운 위치';
                               },
                               style: OutlinedButton.styleFrom(

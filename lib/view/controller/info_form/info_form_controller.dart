@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -69,7 +67,7 @@ class InfoFormController {
     // 이미지 넘기기
   }
 
-  registerInfo(BuildContext context) {
+  void registerInfo(BuildContext context) {
     // 최종 글 등록
     // get navigation, snackBar
     customSnackBar(title: '실종 신고 등록', message: '실종 신고 등록이 완료되었습니다.', context: context);

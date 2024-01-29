@@ -32,7 +32,6 @@ dependencies:
     sdk: flutter
 
   material_color_utilities:   # 정의된 색상의 특정 tone 값인 색 얻기 위해
-  location: ^5.0.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -47,6 +46,10 @@ dependencies:
   json_serializable: ^6.7.1
   flutter_svg: ^2.0.9
   photo_view: ^0.14.0
+  geolocator: ^10.1.0
+  dio: ^5.4.0
+  flutter_dotenv: ^5.1.0
+  location: ^5.0.3
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +77,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/config/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
