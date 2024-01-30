@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -7,13 +8,13 @@ class MapController {
   Rx<Position?> position = Rx<Position?>(null); // current location
   RxBool loading = false.obs;
   Rx<LatLng?> selectedLocation = Rx<LatLng?>(null);
-  RxString formattedAddress = ''.obs;
+  Rx<String?> formattedAddress = Rx<String?>(null);
   RxString regionAddress = ''.obs;
 
   void setInitialPosition() async {
     // 초기 현 위치 설정
     position.value = await _determinePosition();
-    print('print positionValue: ${position.value}');
+    debugPrint('print position.value: ${position.value}');
   }
 
   void selectLocation(LatLng loc) async {

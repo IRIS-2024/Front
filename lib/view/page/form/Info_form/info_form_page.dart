@@ -9,6 +9,7 @@ import 'package:iris_flutter/view/page/form/register_button.dart';
 import 'package:iris_flutter/view/page/form/text_form.dart';
 import 'package:iris_flutter/view/controller/info_form/info_form_controller.dart';
 import 'package:iris_flutter/view/page/form/image_carousel_form.dart';
+import 'package:iris_flutter/view/page/map/map_page.dart';
 
 class InfoFormPage extends StatefulWidget {
   const InfoFormPage({Key? key}) : super(key: key);
@@ -119,11 +120,9 @@ class _InfoFormPageState extends State<InfoFormPage> {
                         children: [
                           OutlinedButton.icon(
                               onPressed: () {
-                                // 위치 받아온 다음,
-                                // Get.dialog(
-                                //     // const TmpLocationPage()
-                                // );
-                                infoFormController.location.value = '새로운 위치';
+                                Get.dialog(
+                                  MapPage()
+                                );
                               },
                               style: OutlinedButton.styleFrom(
                                   minimumSize: const Size(double.infinity, 55),
