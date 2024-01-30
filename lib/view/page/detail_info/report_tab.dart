@@ -1,8 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iris_flutter/model/comment_img_item_model.dart';
-import 'package:iris_flutter/view/page/detail_info/map_widget.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -76,10 +74,10 @@ class _ReportTabState extends State<ReportTab> {
     return SingleChildScrollView(
       child: Column(children: [
         // map()
-        const SizedBox(
-          height: 300,
-          child: MapWidget(),
-        ),
+        // const SizedBox(
+        //   height: 300,
+        //   child: MapWidget(),
+        // ),
         const SizedBox(height: 12),
         Container(
             alignment: Alignment.centerRight,

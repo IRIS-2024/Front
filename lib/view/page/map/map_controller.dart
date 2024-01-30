@@ -4,12 +4,15 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iris_flutter/view/controller/google_map_service.dart';
 
+import '../../../model/location.dart';
+
 class MapController {
   Rx<Position?> position = Rx<Position?>(null); // current location
   RxBool loading = false.obs;
   Rx<LatLng?> selectedLocation = Rx<LatLng?>(null);
   Rx<String?> formattedAddress = Rx<String?>(null);
-  RxString regionAddress = ''.obs;
+  Rx<String?> regionAddress = Rx<String?>(null);
+  RxList<Location> markersList = <Location>[].obs;
 
   void setInitialPosition() async {
     // 초기 현 위치 설정
@@ -27,13 +30,31 @@ class MapController {
     selectedLocation.value = loc;
   }
 
-  void getAdminDistrictAddress(LatLng loc) async {
+  void getAdminDistrictAddress() async {
+    // 초기 위치 찾기
+    Position initPosition = await _determinePosition();
     // (행정) 지역 주소 받아오기
+    // final fullAddress = await GeocodingServices.getFormattedAddress(
+    //     initPosition.latitude, initPosition.longitude);
+
+    // 임시 현 위치 -----------
     final fullAddress = await GeocodingServices.getFormattedAddress(
-        loc.latitude, loc.longitude);
+        37.545144, 126.964381);
+    // final fullAddress = await GeocodingServices.getFormattedAddress(
+    //     35.394032, 126.676373);
+    // ---------------
+
     final fullAddressList = fullAddress.split(' ');
     regionAddress.value =
         '${fullAddressList[1]} ${fullAddressList[2]}';
+  }
+
+  void getMarkersDetails() {
+    // 마커 받아오기
+    markersList.value = [
+      Location(location_id: 1, latitude: 37.545105, longitude: 126.966237, address: '대한민국 서울특별시 용산구 청파동2가 63-3번지'),
+      Location(location_id: 2, latitude: 37.545729, longitude: 126.963611, address: '대한민국 서울특별시 청파동 어쩌구'),
+    ];
   }
 
   Future<Position> _determinePosition() async {

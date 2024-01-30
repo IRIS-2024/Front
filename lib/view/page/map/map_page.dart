@@ -48,13 +48,10 @@ class _MapPageState extends State<MapPage> {
                               126.676373),
                           zoom: 17),
                       onTap: (loc) {
-                        print(
+                        debugPrint(
                             'print locLongitude: ${loc.latitude} ${loc.longitude}');
                         mapController.selectLocation(loc);
                       },
-                      // onMapCreated: (GoogleMapController controller) {
-                      //   _controller.complete(controller);
-                      // },
                       markers: mapController.selectedLocation.value == null
                           ? {}
                           : {
