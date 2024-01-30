@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/page/form/Info_form/info_form_page.dart';
-import 'package:iris_flutter/view/page/main/main_tab_widget.dart';
+import 'package:iris_flutter/view/page/main/main_tab.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -52,7 +52,7 @@ class MainPage extends StatelessWidget {
               const Padding(padding: EdgeInsets.only(bottom: 14)),
 
               // main TabBar
-              MainTabWidget(),
+              MainTab(),
             ],
           ),
         ),

@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
-import 'package:iris_flutter/view/page/main/latest_info_widget.dart';
-import 'package:iris_flutter/view/page/main/main_map_widget.dart';
+import 'package:iris_flutter/view/page/main/latest_info_tab_view.dart';
+import 'package:iris_flutter/view/page/main/map_tab_view.dart';
 
-class MainTabWidget extends StatefulWidget {
-  const MainTabWidget({Key? key}) : super(key: key);
+class MainTab extends StatefulWidget {
+  const MainTab({Key? key}) : super(key: key);
 
   @override
-  State<MainTabWidget> createState() => _MainTabWidgetState();
+  State<MainTab> createState() => _MainTabState();
 }
 
-class _MainTabWidgetState extends State<MainTabWidget>
+class _MainTabState extends State<MainTab>
     with TickerProviderStateMixin {
   late TabController _nestedTabController;
 
@@ -74,9 +74,9 @@ class _MainTabWidgetState extends State<MainTabWidget>
               controller: _nestedTabController,
               children: [
                 // 최신 글
-                LatestInfoWidget(),
+                LatestInfoTabView(),
                 // 지도
-                MainMapWidget()
+                MapTabView()
               ],
             ),
           ),

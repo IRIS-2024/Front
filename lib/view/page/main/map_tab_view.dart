@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class MainMapWidget extends StatefulWidget {
-  const MainMapWidget({Key? key}) : super(key: key);
+class MapTabView extends StatefulWidget {
+  const MapTabView({Key? key}) : super(key: key);
 
   @override
-  State<MainMapWidget> createState() => _MainMapWidgetState();
+  State<MapTabView> createState() => _MapTabViewState();
 }
 
-class _MainMapWidgetState extends State<MainMapWidget> {
+class _MapTabViewState extends State<MapTabView> {
   late GoogleMapController mapController;
 
   final LatLng _center = const LatLng(45.521563, -122.677433);
