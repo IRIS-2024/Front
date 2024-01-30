@@ -8,21 +8,35 @@ class MapController {
   RxBool loading = false.obs;
   Rx<LatLng?> selectedLocation = Rx<LatLng?>(null);
   RxString formattedAddress = ''.obs;
+  RxString regionAddress = ''.obs;
 
-  void setInitialPosition() async { // 초기 현 위치 설정
+  void setInitialPosition() async {
+    // 초기 현 위치 설정
     position.value = await _determinePosition();
     print('print positionValue: ${position.value}');
   }
 
-  void selectLocation(LatLng loc) async { // 위치 선택
+  void selectLocation(LatLng loc) async {
+    // 위치 선택
     loading.value = true;
     // reverse geocoding process
-    formattedAddress.value = await GeocodingServices.getAddrFromLatlng(loc.latitude, loc.longitude);
+    formattedAddress.value = await GeocodingServices.getFormattedAddress(
+        loc.latitude, loc.longitude);
     loading.value = false;
     selectedLocation.value = loc;
   }
 
-  Future<Position> _determinePosition() async { // 현재 위치 받아오기 (서비스, 권한 확인)
+  void getAdminDistrictAddress(LatLng loc) async {
+    // (행정) 지역 주소 받아오기
+    final fullAddress = await GeocodingServices.getFormattedAddress(
+        loc.latitude, loc.longitude);
+    final fullAddressList = fullAddress.split(' ');
+    regionAddress.value =
+        '${fullAddressList[1]} ${fullAddressList[2]}';
+  }
+
+  Future<Position> _determinePosition() async {
+    // 현재 위치 받아오기 (서비스, 권한 확인)
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -58,5 +72,4 @@ class MapController {
     // continue accessing the position of the device.
     return await Geolocator.getCurrentPosition();
   }
-
 }
