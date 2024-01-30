@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:iris_flutter/view/controller/info_form/info_form_controller.dart';
 import 'package:iris_flutter/view/page/map/map_controller.dart';
 
 class MapPage extends StatefulWidget {
-  const MapPage({Key? key}) : super(key: key);
+  final dynamic controller;
+  const MapPage({Key? key, required this.controller}) : super(key: key);
 
   @override
   State<MapPage> createState() => _MapPageState();
@@ -100,8 +100,7 @@ class _MapPageState extends State<MapPage> {
   }
 
   void _onButtonPressed() {
-    Get.put(InfoFormController()).location.value = Get.put(MapController()).formattedAddress.value!;
-    debugPrint('print Get.put: ${Get.put(InfoFormController()).location.value}');
+    widget.controller.location.value = Get.put(MapController()).formattedAddress.value!;
     Get.back();
   }
 }

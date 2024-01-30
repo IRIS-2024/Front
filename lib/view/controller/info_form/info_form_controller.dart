@@ -15,7 +15,7 @@ class InfoFormController {
   TextEditingController ageController = TextEditingController();
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
-  RxString location = Config.enterLocation.obs;
+  Rx<String?> location = Rx<String?>(null);
   TextEditingController clothesController = TextEditingController();
   TextEditingController noteController = TextEditingController();
 

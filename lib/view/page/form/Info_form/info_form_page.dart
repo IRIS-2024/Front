@@ -37,7 +37,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
               infoFormController.initValidation.value = false;
               if (_formKey.currentState!.validate() &&
                   infoFormController.images.isNotEmpty &&
-                  infoFormController.location.value != Config.enterLocation) {
+                  infoFormController.location.value != null) {
                 // 정보 등록 (저장)
                 infoFormController.saveInfo(context);
               }
@@ -121,7 +121,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
                           OutlinedButton.icon(
                               onPressed: () {
                                 Get.dialog(
-                                  MapPage()
+                                  MapPage(controller: infoFormController,)
                                 );
                               },
                               style: OutlinedButton.styleFrom(
@@ -135,9 +135,9 @@ class _InfoFormPageState extends State<InfoFormPage> {
                                       borderRadius:
                                           BorderRadius.circular(10.0))),
                               icon: const Icon(Icons.my_location),
-                              label: Text(infoFormController.location.value)),
+                              label: Text(infoFormController.location.value ?? '위치 입력')),
                           infoFormController.location.value ==
-                                      Config.enterLocation &&
+                                      null &&
                                   infoFormController.initValidation.value !=
                                       true
                               ? Padding(
