@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
-import 'package:iris_flutter/view/comm/form/basic_form.dart';
-import 'package:iris_flutter/view/comm/form/text_form.dart';
-import 'package:iris_flutter/view/comm/form/register_button.dart';
+import 'package:iris_flutter/view/page/form/basic_form.dart';
 import 'package:iris_flutter/view/controller/comment_form/comment_form_controller.dart';
-import 'package:iris_flutter/view/comm/form/image_carousel_form.dart';
+import 'package:iris_flutter/view/page/form/image_carousel_form.dart';
+import 'package:iris_flutter/view/page/form/register_button.dart';
+import 'package:iris_flutter/view/page/form/text_form.dart';
+import 'package:iris_flutter/view/page/map/map_page.dart';
 
 class CommentFormPage extends StatefulWidget {
   const CommentFormPage({Key? key}) : super(key: key);
@@ -29,7 +30,7 @@ class _CommentFormState extends State<CommentFormPage> {
             commentController.initValidation.value = false;
             if (commentController.images.isNotEmpty &&
                 commentController.time.value != Config.enterTime &&
-                commentController.location.value != Config.enterLocation) {
+                commentController.location.value != null) {
               commentController.registerComment();
             }
           })),
@@ -125,7 +126,9 @@ class _CommentFormState extends State<CommentFormPage> {
                         OutlinedButton.icon(
                             onPressed: () {
                               // 위치 받아온 다음,
-                              commentController.location.value = '새로운 위치';
+                              Get.dialog(MapPage(
+                                controller: commentController,
+                              ));
                             },
                             style: OutlinedButton.styleFrom(
                                 minimumSize: const Size(double.infinity, 55),
@@ -136,9 +139,9 @@ class _CommentFormState extends State<CommentFormPage> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0))),
                             icon: const Icon(Icons.my_location),
-                            label: Text(commentController.location.value)),
-                        commentController.location.value ==
-                                    Config.enterLocation &&
+                            label: Text(
+                                commentController.location.value ?? '위치 입력')),
+                        commentController.location.value == null &&
                                 commentController.initValidation.value != true
                             ? Padding(
                                 padding: const EdgeInsets.only(top: 7),
