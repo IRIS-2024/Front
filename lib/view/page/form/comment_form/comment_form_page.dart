@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
-import 'package:iris_flutter/view/comm/form/basic_form.dart';
-import 'package:iris_flutter/view/comm/form/text_form.dart';
-import 'package:iris_flutter/view/comm/form/register_button.dart';
+import 'package:iris_flutter/view/page/form/basic_form.dart';
 import 'package:iris_flutter/view/controller/comment_form/comment_form_controller.dart';
-import 'package:iris_flutter/view/comm/form/image_carousel_form.dart';
+import 'package:iris_flutter/view/page/form/image_carousel_form.dart';
+import 'package:iris_flutter/view/page/form/register_button.dart';
+import 'package:iris_flutter/view/page/form/text_form.dart';
 
 class CommentFormPage extends StatefulWidget {
   const CommentFormPage({Key? key}) : super(key: key);

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
-import 'package:iris_flutter/view/page/Info_form/info_form_dialog.dart';
+import 'package:iris_flutter/view/page/form/Info_form/info_form_dialog.dart';
 import 'package:iris_flutter/view/page/main/main_page.dart';
 
 class InfoFormController {

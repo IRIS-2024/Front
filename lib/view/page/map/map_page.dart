@@ -37,8 +37,13 @@ class _MapPageState extends State<MapPage> {
                             // mapController.position.value!.latitude,
                             // mapController.position.value!.longitude,
                             // 임시 현 위치
-                            37.545144,
-                            126.964381),
+                            // 37.545144,
+                            // 126.964381
+                            // 임시 현 위치2
+                          35.394032,
+                          126.676373
+
+                        ),
                         zoom: 17),
                     onTap: (loc) {
                       print(
