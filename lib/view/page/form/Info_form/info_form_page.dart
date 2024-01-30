@@ -3,12 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
-import 'package:iris_flutter/view/comm/form/basic_form.dart';
-import 'package:iris_flutter/view/comm/form/form_title.dart';
-import 'package:iris_flutter/view/comm/form/text_form.dart';
-import 'package:iris_flutter/view/comm/form/register_button.dart';
+import 'package:iris_flutter/view/page/form/basic_form.dart';
+import 'package:iris_flutter/view/page/form/form_title.dart';
+import 'package:iris_flutter/view/page/form/register_button.dart';
+import 'package:iris_flutter/view/page/form/text_form.dart';
 import 'package:iris_flutter/view/controller/info_form/info_form_controller.dart';
-import 'package:iris_flutter/view/comm/form/image_carousel_form.dart';
+import 'package:iris_flutter/view/page/form/image_carousel_form.dart';
+import 'package:iris_flutter/view/page/map/map_page.dart';
 
 class InfoFormPage extends StatefulWidget {
   const InfoFormPage({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
               infoFormController.initValidation.value = false;
               if (_formKey.currentState!.validate() &&
                   infoFormController.images.isNotEmpty &&
-                  infoFormController.location.value != Config.enterLocation) {
+                  infoFormController.location.value != null) {
                 // 정보 등록 (저장)
                 infoFormController.saveInfo(context);
               }
@@ -119,8 +120,9 @@ class _InfoFormPageState extends State<InfoFormPage> {
                         children: [
                           OutlinedButton.icon(
                               onPressed: () {
-                                // 위치 받아온 다음,
-                                infoFormController.location.value = '새로운 위치';
+                                Get.dialog(
+                                  MapPage(controller: infoFormController,)
+                                );
                               },
                               style: OutlinedButton.styleFrom(
                                   minimumSize: const Size(double.infinity, 55),
@@ -133,9 +135,9 @@ class _InfoFormPageState extends State<InfoFormPage> {
                                       borderRadius:
                                           BorderRadius.circular(10.0))),
                               icon: const Icon(Icons.my_location),
-                              label: Text(infoFormController.location.value)),
+                              label: Text(infoFormController.location.value ?? '위치 입력')),
                           infoFormController.location.value ==
-                                      Config.enterLocation &&
+                                      null &&
                                   infoFormController.initValidation.value !=
                                       true
                               ? Padding(

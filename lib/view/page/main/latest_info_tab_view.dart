@@ -1,17 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/model/missing_info.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
 
-class LatestInfoWidget extends StatefulWidget {
-  const LatestInfoWidget({Key? key}) : super(key: key);
+class LatestInfoTabView extends StatefulWidget {
+  const LatestInfoTabView({Key? key}) : super(key: key);
 
   @override
-  State<LatestInfoWidget> createState() => _LatestInfoWidgetState();
+  State<LatestInfoTabView> createState() => _LatestInfoTabViewState();
 }
 
-class _LatestInfoWidgetState extends State<LatestInfoWidget> {
+class _LatestInfoTabViewState extends State<LatestInfoTabView> {
   @override
   void initState() {
     Get.put(MainController()).setTmpData();

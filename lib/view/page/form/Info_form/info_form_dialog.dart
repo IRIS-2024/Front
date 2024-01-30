@@ -35,7 +35,7 @@ void infoFormDialog(BuildContext context) {
                     title: '인적사항',
                     contents:
                     '${controller.selectedGender.value == Gender.man ? Config.man : Config.woman} / ${controller.ageController.text}세 / ${controller.heightController.text == '' ? '' : '${controller.heightController.text}cm'} / ${controller.weightController.text == '' ? '' : '${controller.weightController.text}kg'}'),
-                _titleAndInfo(title: '마지막 위치', contents: controller.location.value),
+                _titleAndInfo(title: '마지막 위치', contents: controller.location.value!),
                 _titleAndInfo(title: '옷차림', contents: controller.clothesController.text),
                 _titleAndInfo(title: '특이사항', contents: controller.noteController.text),
                 const Padding(padding: EdgeInsets.only(bottom: 24)),

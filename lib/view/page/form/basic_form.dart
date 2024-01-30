@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:iris_flutter/view/comm/form/form_title.dart';
+import 'package:iris_flutter/view/page/form/form_title.dart';
 
 // form : title + widget
 class BasicForm extends StatelessWidget {
