@@ -116,7 +116,7 @@ class _ReportTabState extends State<ReportTab> {
                               context: context,
                               builder: (BuildContext context) =>
                                   Dialog.fullscreen(
-                                backgroundColor: Colors.black.withOpacity(0.5),
+                                backgroundColor: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
                                 child: Stack(
                                   alignment: Alignment.center,
                                   children: [
@@ -168,20 +168,20 @@ class _ReportTabState extends State<ReportTab> {
                               ),]
                             ),
                             Text("8분전", style: CustomTextStyle.small),
-                        const Row(
+                        Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("옷차림", style: TextStyle(color: Colors.grey)),
+                            Text("옷차림", style: TextStyle(color: Theme.of(context).colorScheme.outline)),
                             SizedBox(
                               width: 8,
                             ),
                             Flexible(child: Text("산들림 비나리 소록소록 가온해 소록소록"))
                           ],
                         ),
-                        const Row(
+                        Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("당시 상황", style: TextStyle(color: Colors.grey)),
+                            Text("당시 상황", style: TextStyle(color: Theme.of(context).colorScheme.outline)),
                             SizedBox(
                               width: 8,
                             ),

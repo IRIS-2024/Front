@@ -45,7 +45,7 @@ class _MarkerDialogState extends State<MarkerDialog> {
           width: 70,
           child: Text(
             title,
-            style: TextStyle(color: Colors.grey),
+            style: TextStyle(color: Theme.of(context).colorScheme.outline),
           ),
         ),
         const Padding(padding: EdgeInsets.only(right: 5)),

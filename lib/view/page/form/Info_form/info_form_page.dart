@@ -127,7 +127,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
                               },
                               style: OutlinedButton.styleFrom(
                                   minimumSize: const Size(double.infinity, 55),
-                                  foregroundColor: Colors.black,
+                                  foregroundColor: Theme.of(context).colorScheme.onBackground,
                                   side: BorderSide(
                                     color:
                                         Theme.of(context).colorScheme.outline,
@@ -236,7 +236,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
           textStyle: CustomTextStyle.basic,
           foregroundColor: infoFormController.selectedGender.value == gender
               ? Theme.of(context).colorScheme.primary
-              : Colors.black,
+              : Theme.of(context).colorScheme.onBackground,
           side: BorderSide(
             color: infoFormController.selectedGender.value == gender
                 ? Theme.of(context).colorScheme.primary

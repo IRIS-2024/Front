@@ -43,19 +43,18 @@ class _MainPageState extends State<MainPage> {
                     child: Obx(
                           () => RichText(
                         text: TextSpan(
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 30,
-                                color: Theme.of(context).colorScheme.outline
                             ),
                             children: [
                               TextSpan(text: Get.put(MapController()).regionAddress.value ?? '현 위치 주변',
                                   style: TextStyle(
                                       color: Theme.of(context).colorScheme.primary
                                   )),
-                              const TextSpan(text: "에서 등록된 실종 정보입니다.",
+                              TextSpan(text: "에서 등록된 실종 정보입니다.",
                                   style: TextStyle(
-                                      color: Colors.black
+                                      color: Theme.of(context).colorScheme.onBackground,
                                   )
                               )
                             ]
