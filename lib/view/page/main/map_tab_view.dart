@@ -12,9 +12,6 @@ class _MapTabViewState extends State<MapTabView> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 5, bottom: 20),
-      child: MapMarkersPage(),
-    );
+    return const MapMarkersPage();
   }
 }

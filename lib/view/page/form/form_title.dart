@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 
 // text Field 의 제목
@@ -27,7 +28,7 @@ class FormTitle extends StatelessWidget {
                 : const SizedBox()
           ],
         ),
-        const Padding(padding: EdgeInsets.only(bottom: 10)),
+        const Padding(padding: CustomPadding.slimBottom),
       ],
     );
   }

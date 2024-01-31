@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/view/page/form/form_title.dart';
 
 // form : title + widget
@@ -20,7 +21,7 @@ class BasicForm extends StatelessWidget {
       children: [
         FormTitle(title: title, isRequired: true),
         widget,
-        const Padding(padding: EdgeInsets.only(bottom: 15)),
+        const Padding(padding: CustomPadding.mediumBottom),
       ],
     );
   }

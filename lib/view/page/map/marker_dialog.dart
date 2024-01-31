@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iris_flutter/config/config.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 
 class MarkerDialog extends StatefulWidget {
@@ -48,7 +49,7 @@ class _MarkerDialogState extends State<MarkerDialog> {
             style: TextStyle(color: Theme.of(context).colorScheme.outline),
           ),
         ),
-        const Padding(padding: EdgeInsets.only(right: 5)),
+        const Padding(padding: CustomPadding.slimRight),
         SizedBox(
             width: 180,
             child: Text(

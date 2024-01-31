@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/page/main/latest_info_tab_view.dart';
@@ -46,9 +47,6 @@ class _MainTabState extends State<MainTab>
                       borderRadius: const BorderRadius.all(Radius.circular(15.0)),
                   ),
                   indicatorSize: TabBarIndicatorSize.tab,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 3,
-                  ),
                   dividerColor: Colors.transparent,
                   tabs: const [
                     SizedBox(height: 40, child: Tab(text: "최신 글")),
@@ -57,7 +55,7 @@ class _MainTabState extends State<MainTab>
                   controller: _nestedTabController,
                 ),
               ),
-              const Padding(padding: EdgeInsets.only(right: 5)),
+              const Padding(padding: CustomPadding.slimRight),
               IconButton(
                   onPressed: () {
                     // update current location (Admin District)
@@ -71,14 +69,17 @@ class _MainTabState extends State<MainTab>
 
           // tab View
           Expanded(
-            child: TabBarView(
-              controller: _nestedTabController,
-              children: const [
-                // 최신 글
-                LatestInfoTabView(),
-                // 지도
-                MapTabView()
-              ],
+            child: Padding(
+              padding: CustomPadding.slimBottom,
+              child: TabBarView(
+                controller: _nestedTabController,
+                children: const [
+                  // 최신 글
+                  LatestInfoTabView(),
+                  // 지도
+                  MapTabView()
+                ],
+              ),
             ),
           ),
         ],
