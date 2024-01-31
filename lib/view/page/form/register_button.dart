@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 
 class RegisterButton extends StatelessWidget {
@@ -30,7 +31,7 @@ class RegisterButton extends StatelessWidget {
           ),
           child: const Text('등록', style: CustomTextStyle.basicBold),
         ),
-        const Padding(padding: EdgeInsets.only(right: 10)),
+        const Padding(padding: CustomPadding.regularRight),
       ],
     );
   }

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/info_form/info_form_controller.dart';
 
@@ -15,7 +16,7 @@ void infoFormDialog(BuildContext context) {
     Get.dialog(Obx(
         ()=> Dialog(
           child: Padding(
-            padding: const EdgeInsets.all(25.0),
+            padding: CustomPadding.dialogInsets,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -23,7 +24,7 @@ void infoFormDialog(BuildContext context) {
                   '작성하신 정보를 바탕으로\n이미지를 생성하시겠습니까?',
                   style: CustomTextStyle.titleBold,
                 ),
-                const Padding(padding: EdgeInsets.only(bottom: 15)),
+                const Padding(padding: CustomPadding.mediumBottom),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -31,7 +32,7 @@ void infoFormDialog(BuildContext context) {
                     style: CustomTextStyle.basicBold.copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
                 ),
-                const Padding(padding: EdgeInsets.only(bottom: 7)),
+                const Padding(padding: CustomPadding.slimBottom),
                 _titleAndInfo(
                   context: context,
                     title: '인적사항',
@@ -46,7 +47,7 @@ void infoFormDialog(BuildContext context) {
                 _titleAndInfo(
                     context: context,
                     title: '특이사항', contents: controller.noteController.text),
-                const Padding(padding: EdgeInsets.only(bottom: 24)),
+                const Padding(padding: CustomPadding.thickBottom),
                 SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(onPressed: () {
@@ -68,7 +69,7 @@ void infoFormDialog(BuildContext context) {
     Get.dialog(Obx(
       ()=> Dialog(
           child: Padding(
-            padding: const EdgeInsets.all(25.0),
+            padding: CustomPadding.dialogInsets,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -76,7 +77,7 @@ void infoFormDialog(BuildContext context) {
                   '작성하신 정보를 바탕으로\n이미지를 생성하는 중 입니다...',
                   style: CustomTextStyle.titleBold,
                 ),
-                const Padding(padding: EdgeInsets.only(bottom: 15)),
+                const Padding(padding: CustomPadding.mediumBottom),
                 // CircularProgressIndicator 추가
                 ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
@@ -97,7 +98,7 @@ void infoFormDialog(BuildContext context) {
     Get.dialog(Obx(
       ()=> Dialog(
           child: Padding(
-            padding: const EdgeInsets.all(25.0),
+            padding: CustomPadding.dialogInsets,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -105,7 +106,7 @@ void infoFormDialog(BuildContext context) {
                   '생성된 이미지를 함께\n등록하시겠습니까?',
                   style: CustomTextStyle.titleBold,
                 ),
-                const Padding(padding: EdgeInsets.only(bottom: 15)),
+                const Padding(padding: CustomPadding.mediumBottom),
                 ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
                     child: Image.file(
@@ -160,7 +161,7 @@ _titleAndInfo({required BuildContext context, required String title, required St
           style: TextStyle(color: Theme.of(context).colorScheme.outline),
         ),
       ),
-      const Padding(padding: EdgeInsets.only(right: 5)),
+      const Padding(padding: CustomPadding.slimRight),
       SizedBox(
           width: 180,
           child: Text(
