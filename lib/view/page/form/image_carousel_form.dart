@@ -10,7 +10,10 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class ImageCarouselForm extends StatefulWidget {
   final String title;
   final dynamic controller;
-  const ImageCarouselForm({Key? key, required this.title, required this.controller}) : super(key: key);
+
+  const ImageCarouselForm(
+      {Key? key, required this.title, required this.controller})
+      : super(key: key);
 
   @override
   State<ImageCarouselForm> createState() => _ImageCarouselFormState();
@@ -60,9 +63,12 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
                     Text('${widget.title} 사진 추가')
                   ],
                 ),
-                Text('(최대 3장)', style: CustomTextStyle.small.copyWith(color: Theme.of(context)
-                    .colorScheme
-                    .outline,),)
+                Text(
+                  '(최대 3장)',
+                  style: CustomTextStyle.small.copyWith(
+                    color: Theme.of(context).colorScheme.outline,
+                  ),
+                )
               ],
             ),
           ),
@@ -73,9 +79,8 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
                     padding: const EdgeInsets.only(top: 7),
                     child: Text(
                       '사진을 추가해 주세요.',
-                      style: CustomTextStyle.small.copyWith(color: Theme.of(context)
-                          .colorScheme
-                          .error),
+                      style: CustomTextStyle.small
+                          .copyWith(color: Theme.of(context).colorScheme.error),
                     ),
                   )
                 : const SizedBox(),
@@ -144,7 +149,7 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
                       icon: const Icon(Icons.delete_outline),
                       style: IconButton.styleFrom(
                           foregroundColor: Colors.white,
-                          backgroundColor: Colors.black.withOpacity(0.5))))
+                          backgroundColor: Theme.of(context).colorScheme.onBackground.withOpacity(0.5))))
             ],
           ),
         ),
@@ -182,8 +187,6 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
         const Padding(padding: EdgeInsets.only(bottom: 15)),
       ],
     );
-
-
   }
 
   Widget buildImage(String imagePath, int index) {

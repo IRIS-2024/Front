@@ -15,14 +15,14 @@ class RegisterButton extends StatelessWidget {
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.resolveWith((states) {
               if (states.contains(MaterialState.disabled)) {
-                return Theme.of(context).disabledColor;
+                return Theme.of(context).colorScheme.outline;
               } else {
                 return Theme.of(context).colorScheme.primaryContainer;
               }
             }),
             foregroundColor: MaterialStateProperty.resolveWith((states) {
               if (states.contains(MaterialState.disabled)) {
-                return Theme.of(context).disabledColor;
+                return Theme.of(context).colorScheme.outline;
               } else {
                 return Theme.of(context).colorScheme.onPrimaryContainer;
               }

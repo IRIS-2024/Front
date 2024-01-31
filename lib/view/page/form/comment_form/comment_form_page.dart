@@ -91,7 +91,7 @@ class _CommentFormState extends State<CommentFormPage> {
                             },
                             style: OutlinedButton.styleFrom(
                                 minimumSize: const Size(double.infinity, 55),
-                                foregroundColor: Colors.black,
+                                foregroundColor: Theme.of(context).colorScheme.onBackground,
                                 side: BorderSide(
                                   color: Theme.of(context).colorScheme.outline,
                                 ),
@@ -128,7 +128,7 @@ class _CommentFormState extends State<CommentFormPage> {
                             },
                             style: OutlinedButton.styleFrom(
                                 minimumSize: const Size(double.infinity, 55),
-                                foregroundColor: Colors.black,
+                                foregroundColor: Theme.of(context).colorScheme.onBackground,
                                 side: BorderSide(
                                   color: Theme.of(context).colorScheme.outline,
                                 ),

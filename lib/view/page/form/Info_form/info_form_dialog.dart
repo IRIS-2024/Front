@@ -33,12 +33,19 @@ void infoFormDialog(BuildContext context) {
                 ),
                 const Padding(padding: EdgeInsets.only(bottom: 7)),
                 _titleAndInfo(
+                  context: context,
                     title: '인적사항',
                     contents:
                     '${controller.selectedGender.value == Gender.man ? Config.man : Config.woman} / ${controller.ageController.text}세 / ${controller.heightController.text == '' ? '' : '${controller.heightController.text}cm'} / ${controller.weightController.text == '' ? '' : '${controller.weightController.text}kg'}'),
-                _titleAndInfo(title: '마지막 위치', contents: controller.location.value!),
-                _titleAndInfo(title: '옷차림', contents: controller.clothesController.text),
-                _titleAndInfo(title: '특이사항', contents: controller.noteController.text),
+                _titleAndInfo(
+                    context: context,
+                    title: '마지막 위치', contents: controller.location.value!),
+                _titleAndInfo(
+                    context: context,
+                    title: '옷차림', contents: controller.clothesController.text),
+                _titleAndInfo(
+                    context: context,
+                    title: '특이사항', contents: controller.noteController.text),
                 const Padding(padding: EdgeInsets.only(bottom: 24)),
                 SizedBox(
                     width: double.infinity,
@@ -142,7 +149,7 @@ _goToNextDialog(BuildContext context) {
   infoFormDialog(context);
 }
 
-_titleAndInfo({required String title, required String contents}) {
+_titleAndInfo({required BuildContext context, required String title, required String contents}) {
   return Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -150,7 +157,7 @@ _titleAndInfo({required String title, required String contents}) {
         width: 70,
         child: Text(
           title,
-          style: TextStyle(color: Colors.grey),
+          style: TextStyle(color: Theme.of(context).colorScheme.outline),
         ),
       ),
       const Padding(padding: EdgeInsets.only(right: 5)),

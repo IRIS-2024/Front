@@ -60,10 +60,10 @@ class _LatestInfoTabViewState extends State<LatestInfoTabView> {
           ),
           Row(
             children: [
-              Icon(Icons.access_time, size: 18, color: Theme.of(context).hintColor,),
+              Icon(Icons.access_time, size: 18, color: Theme.of(context).colorScheme.outline,),
               const Padding(padding: EdgeInsets.only(right: 5)),
               Text('24분전', style: TextStyle(
-                  color: Theme.of(context).hintColor
+                  color: Theme.of(context).colorScheme.outline
               ),),
             ],
           )
