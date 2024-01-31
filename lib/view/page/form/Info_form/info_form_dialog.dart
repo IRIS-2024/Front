@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/info_form/info_form_controller.dart';
 
 void infoFormDialog(BuildContext context) {
@@ -20,14 +21,14 @@ void infoFormDialog(BuildContext context) {
               children: [
                 const Text(
                   '작성하신 정보를 바탕으로\n이미지를 생성하시겠습니까?',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                  style: CustomTextStyle.titleBold,
                 ),
                 const Padding(padding: EdgeInsets.only(bottom: 15)),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     controller.nameController.text,
-                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.primary),
+                    style: CustomTextStyle.basicBold.copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
                 ),
                 const Padding(padding: EdgeInsets.only(bottom: 7)),
@@ -66,7 +67,7 @@ void infoFormDialog(BuildContext context) {
               children: [
                 const Text(
                   '작성하신 정보를 바탕으로\n이미지를 생성하는 중 입니다...',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                  style: CustomTextStyle.titleBold,
                 ),
                 const Padding(padding: EdgeInsets.only(bottom: 15)),
                 // CircularProgressIndicator 추가
@@ -95,7 +96,7 @@ void infoFormDialog(BuildContext context) {
               children: [
                 const Text(
                   '생성된 이미지를 함께\n등록하시겠습니까?',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                  style: CustomTextStyle.titleBold,
                 ),
                 const Padding(padding: EdgeInsets.only(bottom: 15)),
                 ClipRRect(
@@ -109,9 +110,7 @@ void infoFormDialog(BuildContext context) {
                   children: [
                     Checkbox(value: true, onChanged: (value) {
                     }),
-                    Text('대표 이미지로 사용', style: TextStyle(
-                        fontSize: 14
-                    ),)
+                    Text('대표 이미지로 사용')
                   ],
                 ),
                 SizedBox(
@@ -151,7 +150,7 @@ _titleAndInfo({required String title, required String contents}) {
         width: 70,
         child: Text(
           title,
-          style: TextStyle(color: Colors.grey, fontSize: 14),
+          style: TextStyle(color: Colors.grey),
         ),
       ),
       const Padding(padding: EdgeInsets.only(right: 5)),
@@ -159,7 +158,6 @@ _titleAndInfo({required String title, required String contents}) {
           width: 180,
           child: Text(
             contents,
-            style: TextStyle(fontSize: 14),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           )),

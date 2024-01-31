@@ -24,7 +24,7 @@ class TextForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        formTitle(title: title, isRequired: isRequired),
+        FormTitle(title: title, isRequired: isRequired),
         TextFormField(
           controller: textEditingController,
           maxLines: maxLengths ?? 1,

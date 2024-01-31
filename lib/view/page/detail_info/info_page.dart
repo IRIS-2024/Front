@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/page/detail_info/info_tab.dart';
 import 'package:iris_flutter/view/page/detail_info/report_tab.dart';
 
@@ -19,7 +20,7 @@ class _InfoPageState extends State<InfoPage> {
           appBar: AppBar(
             title: const Text(
               '실종 신고',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: CustomTextStyle.titleBold,
             ),
             centerTitle: true,
             elevation: 0, // 앱 바 뒷 배경색 제거

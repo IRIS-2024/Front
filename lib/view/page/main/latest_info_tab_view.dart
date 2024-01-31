@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/model/missing_info.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
 
@@ -52,9 +53,7 @@ class _LatestInfoTabViewState extends State<LatestInfoTabView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("${missingInfo.missingName} / ${missingInfo.missingAge}세 / ${missingInfo.missingLocation}",
-                style: const TextStyle(
-                    fontSize: 20
-                ),),
+                style: CustomTextStyle.title,),
               IconButton(onPressed: () {
               }, icon: const Icon(Icons.bookmark_border_outlined))
             ],

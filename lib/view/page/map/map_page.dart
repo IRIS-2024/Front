@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/page/map/map_controller.dart';
 
 class MapPage extends StatefulWidget {
@@ -81,9 +82,7 @@ class _MapPageState extends State<MapPage> {
                         mapController.formattedAddress.value != null
                         ? const Material(
                           child: Text('이 위치를 등록하시려면 버튼을 눌러주세요.',
-                          style: TextStyle(
-                            fontSize: 12
-                          ),),
+                          style: CustomTextStyle.small,),
                         ) : const SizedBox(height: 17,
                         )
                       ],
