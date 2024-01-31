@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/page/form/basic_form.dart';
 import 'package:iris_flutter/view/page/form/form_title.dart';
@@ -144,11 +145,9 @@ class _InfoFormPageState extends State<InfoFormPage> {
                                   padding: const EdgeInsets.only(top: 7),
                                   child: Text(
                                     '위치를 입력해 주세요.',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .error),
+                                    style: CustomTextStyle.small.copyWith(color: Theme.of(context)
+                                        .colorScheme
+                                        .error),
                                   ),
                                 )
                               : const SizedBox(),
@@ -187,7 +186,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
       required String unitText}) {
     return Column(
       children: [
-        formTitle(title: title, isRequired: isRequired),
+        FormTitle(title: title, isRequired: isRequired),
         Stack(children: [
           TextFormField(
             controller: textEditingController,
@@ -215,8 +214,8 @@ class _InfoFormPageState extends State<InfoFormPage> {
               child: Center(
                   child: Text(
                 unitText,
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.outline, fontSize: 16),
+                style: CustomTextStyle.basic.copyWith(
+                    color: Theme.of(context).colorScheme.outline),
               ))),
         ]),
         const Padding(padding: EdgeInsets.only(bottom: 15)),
@@ -234,7 +233,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
       },
       style: OutlinedButton.styleFrom(
           fixedSize: const Size(double.infinity, 55),
-          textStyle: const TextStyle(fontSize: 16),
+          textStyle: CustomTextStyle.basic,
           foregroundColor: infoFormController.selectedGender.value == gender
               ? Theme.of(context).colorScheme.primary
               : Colors.black,

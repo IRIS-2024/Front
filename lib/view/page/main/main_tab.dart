@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/page/main/latest_info_tab_view.dart';
 import 'package:iris_flutter/view/page/main/map_tab_view.dart';
@@ -38,8 +39,7 @@ class _MainTabState extends State<MainTab>
               Expanded(
                 child: TabBar(
                   labelColor: Theme.of(context).colorScheme.onPrimaryContainer,
-                  labelStyle:
-                      const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                  labelStyle: CustomTextStyle.basicBold,
                   indicator: BoxDecoration(
                       shape: BoxShape.rectangle,
                       color: Theme.of(context).colorScheme.primaryContainer,

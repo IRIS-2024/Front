@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 // form: 이미지 캐로셀
@@ -59,10 +60,9 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
                     Text('${widget.title} 사진 추가')
                   ],
                 ),
-                Text('(최대 3장)', style: TextStyle(
-                  fontSize: 12,
-                  color: Theme.of(context).colorScheme.outline
-                ),)
+                Text('(최대 3장)', style: CustomTextStyle.small.copyWith(color: Theme.of(context)
+                    .colorScheme
+                    .outline,),)
               ],
             ),
           ),
@@ -73,9 +73,9 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
                     padding: const EdgeInsets.only(top: 7),
                     child: Text(
                       '사진을 추가해 주세요.',
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: Theme.of(context).colorScheme.error),
+                      style: CustomTextStyle.small.copyWith(color: Theme.of(context)
+                          .colorScheme
+                          .error),
                     ),
                   )
                 : const SizedBox(),

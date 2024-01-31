@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iris_flutter/config/config.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 
 class MarkerDialog extends StatefulWidget {
   final dynamic controller;
@@ -18,7 +19,7 @@ class _MarkerDialogState extends State<MarkerDialog> {
           // 이름
           Text(
             widget.controller.nameController.text,
-            style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.primary),
+            style: CustomTextStyle.basicBold.copyWith(color: Theme.of(context).colorScheme.primary),
           ),
           // 사진 - 추후 추가
           // 상세 내용
@@ -44,7 +45,7 @@ class _MarkerDialogState extends State<MarkerDialog> {
           width: 70,
           child: Text(
             title,
-            style: TextStyle(color: Colors.grey, fontSize: 14),
+            style: TextStyle(color: Colors.grey),
           ),
         ),
         const Padding(padding: EdgeInsets.only(right: 5)),
@@ -52,7 +53,6 @@ class _MarkerDialogState extends State<MarkerDialog> {
             width: 180,
             child: Text(
               contents,
-              style: TextStyle(fontSize: 14),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             )),

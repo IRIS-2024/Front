@@ -18,7 +18,7 @@ class BasicForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        formTitle(title: title, isRequired: true),
+        FormTitle(title: title, isRequired: true),
         widget,
         const Padding(padding: EdgeInsets.only(bottom: 15)),
       ],
