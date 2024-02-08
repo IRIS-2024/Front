@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -73,8 +75,8 @@ class _InfoFormPageState extends State<InfoFormPage> {
                           widget: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              genderButton(title: '여자', gender: Gender.woman),
-                              genderButton(title: '남자', gender: Gender.man),
+                              genderButton(title: '여자', gender: Config.woman),
+                              genderButton(title: '남자', gender: Config.man),
                             ],
                           ),
                         )),
@@ -223,7 +225,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
     );
   }
 
-  Widget genderButton({required String title, required Gender gender}) {
+  Widget genderButton({required String title, required bool gender}) {
     Get.put(InfoFormController());
     final infoFormController = Get.find<InfoFormController>();
 
