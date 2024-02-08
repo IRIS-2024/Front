@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class InfoTab extends StatefulWidget {
@@ -82,7 +83,7 @@ class _InfoTabState extends State<InfoTab> {
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const Text(
                 "김실종",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                style: CustomTextStyle.titleBold,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,

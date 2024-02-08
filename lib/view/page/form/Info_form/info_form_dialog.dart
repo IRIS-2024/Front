@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/info_form/info_form_controller.dart';
 
 void infoFormDialog(BuildContext context) {
@@ -14,31 +16,38 @@ void infoFormDialog(BuildContext context) {
     Get.dialog(Obx(
         ()=> Dialog(
           child: Padding(
-            padding: const EdgeInsets.all(25.0),
+            padding: CustomPadding.dialogInsets,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
                   '작성하신 정보를 바탕으로\n이미지를 생성하시겠습니까?',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                  style: CustomTextStyle.titleBold,
                 ),
-                const Padding(padding: EdgeInsets.only(bottom: 15)),
+                const Padding(padding: CustomPadding.mediumBottom),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     controller.nameController.text,
-                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.primary),
+                    style: CustomTextStyle.basicBold.copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
                 ),
-                const Padding(padding: EdgeInsets.only(bottom: 7)),
+                const Padding(padding: CustomPadding.slimBottom),
                 _titleAndInfo(
+                  context: context,
                     title: '인적사항',
                     contents:
                     '${controller.selectedGender.value == Gender.man ? Config.man : Config.woman} / ${controller.ageController.text}세 / ${controller.heightController.text == '' ? '' : '${controller.heightController.text}cm'} / ${controller.weightController.text == '' ? '' : '${controller.weightController.text}kg'}'),
-                _titleAndInfo(title: '마지막 위치', contents: controller.location.value!),
-                _titleAndInfo(title: '옷차림', contents: controller.clothesController.text),
-                _titleAndInfo(title: '특이사항', contents: controller.noteController.text),
-                const Padding(padding: EdgeInsets.only(bottom: 24)),
+                _titleAndInfo(
+                    context: context,
+                    title: '마지막 위치', contents: controller.location.value!),
+                _titleAndInfo(
+                    context: context,
+                    title: '옷차림', contents: controller.clothesController.text),
+                _titleAndInfo(
+                    context: context,
+                    title: '특이사항', contents: controller.noteController.text),
+                const Padding(padding: CustomPadding.thickBottom),
                 SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(onPressed: () {
@@ -60,15 +69,15 @@ void infoFormDialog(BuildContext context) {
     Get.dialog(Obx(
       ()=> Dialog(
           child: Padding(
-            padding: const EdgeInsets.all(25.0),
+            padding: CustomPadding.dialogInsets,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
                   '작성하신 정보를 바탕으로\n이미지를 생성하는 중 입니다...',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                  style: CustomTextStyle.titleBold,
                 ),
-                const Padding(padding: EdgeInsets.only(bottom: 15)),
+                const Padding(padding: CustomPadding.mediumBottom),
                 // CircularProgressIndicator 추가
                 ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
@@ -89,15 +98,15 @@ void infoFormDialog(BuildContext context) {
     Get.dialog(Obx(
       ()=> Dialog(
           child: Padding(
-            padding: const EdgeInsets.all(25.0),
+            padding: CustomPadding.dialogInsets,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
                   '생성된 이미지를 함께\n등록하시겠습니까?',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                  style: CustomTextStyle.titleBold,
                 ),
-                const Padding(padding: EdgeInsets.only(bottom: 15)),
+                const Padding(padding: CustomPadding.mediumBottom),
                 ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
                     child: Image.file(
@@ -109,9 +118,7 @@ void infoFormDialog(BuildContext context) {
                   children: [
                     Checkbox(value: true, onChanged: (value) {
                     }),
-                    Text('대표 이미지로 사용', style: TextStyle(
-                        fontSize: 14
-                    ),)
+                    Text('대표 이미지로 사용')
                   ],
                 ),
                 SizedBox(
@@ -143,7 +150,7 @@ _goToNextDialog(BuildContext context) {
   infoFormDialog(context);
 }
 
-_titleAndInfo({required String title, required String contents}) {
+_titleAndInfo({required BuildContext context, required String title, required String contents}) {
   return Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -151,15 +158,14 @@ _titleAndInfo({required String title, required String contents}) {
         width: 70,
         child: Text(
           title,
-          style: TextStyle(color: Colors.grey, fontSize: 14),
+          style: TextStyle(color: Theme.of(context).colorScheme.outline),
         ),
       ),
-      const Padding(padding: EdgeInsets.only(right: 5)),
+      const Padding(padding: CustomPadding.slimRight),
       SizedBox(
           width: 180,
           child: Text(
             contents,
-            style: TextStyle(fontSize: 14),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           )),

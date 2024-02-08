@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/model/comment_img_item_model.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
@@ -115,7 +116,7 @@ class _ReportTabState extends State<ReportTab> {
                               context: context,
                               builder: (BuildContext context) =>
                                   Dialog.fullscreen(
-                                backgroundColor: Colors.black.withOpacity(0.5),
+                                backgroundColor: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
                                 child: Stack(
                                   alignment: Alignment.center,
                                   children: [
@@ -163,27 +164,24 @@ class _ReportTabState extends State<ReportTab> {
                             Flexible(
                               child: Text(
                                 "이 텍스트는 제목이 됩니다. 이렇게",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
-                              ),
+                                style: CustomTextStyle.titleBold),
+                              ),]
                             ),
-                            Text("8분전", style: TextStyle(fontSize: 12))
-                          ],
-                        ),
-                        const Row(
+                            Text("8분전", style: CustomTextStyle.small),
+                        Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("옷차림", style: TextStyle(color: Colors.grey)),
+                            Text("옷차림", style: TextStyle(color: Theme.of(context).colorScheme.outline)),
                             SizedBox(
                               width: 8,
                             ),
                             Flexible(child: Text("산들림 비나리 소록소록 가온해 소록소록"))
                           ],
                         ),
-                        const Row(
+                        Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("당시 상황", style: TextStyle(color: Colors.grey)),
+                            Text("당시 상황", style: TextStyle(color: Theme.of(context).colorScheme.outline)),
                             SizedBox(
                               width: 8,
                             ),
@@ -193,9 +191,7 @@ class _ReportTabState extends State<ReportTab> {
                           ],
                         ),
                         Text("일치율 88%",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                            style: CustomTextStyle.basicBold.copyWith(
                                 color: Theme.of(context).colorScheme.primary))
                       ],
                     ),

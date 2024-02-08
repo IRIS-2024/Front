@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/model/missing_info.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
 
@@ -26,8 +28,6 @@ class _LatestInfoTabViewState extends State<LatestInfoTabView> {
     ? SizedBox(
       height: 180,
       child: ListView.builder(
-          padding: const EdgeInsets.only(
-              top: 5, bottom: 20),
           itemCount: mainController.missingInfoList.length,
           itemBuilder: (BuildContext context, int idx) {
             return singleInfo(
@@ -41,7 +41,7 @@ class _LatestInfoTabViewState extends State<LatestInfoTabView> {
 
   singleInfo(MissingInfo missingInfo) {
     return Padding(
-      padding: const EdgeInsets.only(top: 5, bottom: 20),
+      padding: CustomPadding.thickBottom,
       child: Column(
         children: [
           ClipRRect(
@@ -52,19 +52,17 @@ class _LatestInfoTabViewState extends State<LatestInfoTabView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("${missingInfo.missingName} / ${missingInfo.missingAge}세 / ${missingInfo.missingLocation}",
-                style: const TextStyle(
-                    fontSize: 20
-                ),),
+                style: CustomTextStyle.title,),
               IconButton(onPressed: () {
               }, icon: const Icon(Icons.bookmark_border_outlined))
             ],
           ),
           Row(
             children: [
-              Icon(Icons.access_time, size: 18, color: Theme.of(context).hintColor,),
-              const Padding(padding: EdgeInsets.only(right: 5)),
+              Icon(Icons.access_time, size: 18, color: Theme.of(context).colorScheme.outline,),
+              const Padding(padding: CustomPadding.slimRight),
               Text('24분전', style: TextStyle(
-                  color: Theme.of(context).hintColor
+                  color: Theme.of(context).colorScheme.outline
               ),),
             ],
           )
