@@ -11,7 +11,7 @@ class InfoFormController {
 
   RxBool initValidation = true.obs;
   TextEditingController nameController = TextEditingController();
-  Rx<Gender> selectedGender = Gender.woman.obs;
+  RxBool selectedGender = Config.woman.obs;
   TextEditingController ageController = TextEditingController();
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
@@ -54,7 +54,7 @@ class InfoFormController {
 
   void createMontage(BuildContext context) {
     nameController.text = '김실종';
-    selectedGender.value = Gender.man;
+    selectedGender.value = Config.man;
     ageController.text = '7';
     heightController.text = '120';
     weightController.text = '43';
