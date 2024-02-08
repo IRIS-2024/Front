@@ -9,5 +9,4 @@ class Config {
   static String enterTime = '시간 입력';
 
   static int maxImagesLength = 3;
-
 }
