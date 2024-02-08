@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class GeocodingServices {
+class GoogleMapService {
   static Future<String> getAddrFromLatlng(double lat, double lng) async {
     try {
       String googleMapApiKey = dotenv.get("GOOGLE_MAP_API_KEY");
