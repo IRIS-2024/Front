@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:iris_flutter/model/location.dart';
 import 'package:iris_flutter/view/controller/google_map_service.dart';
 
-import '../../../model/location.dart';
 
 class MapController {
   Rx<Position?> position = Rx<Position?>(null); // current location

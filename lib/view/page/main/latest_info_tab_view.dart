@@ -46,12 +46,12 @@ class _LatestInfoTabViewState extends State<LatestInfoTabView> {
         children: [
           ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: Image.asset('assets/images/exImage.png', height: 170, width: 380, fit: BoxFit.fitWidth,)),
+              child: Image.network(missingInfo.images.first, height: 170, width: 380, fit: BoxFit.fitWidth,)),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("${missingInfo.missingName} / ${missingInfo.missingAge}세 / ${missingInfo.missingLocation}",
+              Text("${missingInfo.name} / ${missingInfo.age}세 / ${missingInfo.address}",
                 style: CustomTextStyle.title,),
               IconButton(onPressed: () {
               }, icon: const Icon(Icons.bookmark_border_outlined))
