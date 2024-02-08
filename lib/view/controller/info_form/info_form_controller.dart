@@ -35,6 +35,9 @@ class InfoFormController {
   }
 
   void saveInfo(BuildContext context) {
+
+
+
     print('print nameControllerText: ${nameController.text}');
     print('print selectedGender: ${selectedGender.value}');
     print('print ageControllerText: ${ageController.text}');

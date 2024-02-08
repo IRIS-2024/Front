@@ -24,7 +24,7 @@ class MapController {
     // 위치 선택
     loading.value = true;
     // reverse geocoding process
-    formattedAddress.value = await GeocodingServices.getFormattedAddress(
+    formattedAddress.value = await GoogleMapService.getAddrFromLatlng(
         loc.latitude, loc.longitude);
     loading.value = false;
     selectedLocation.value = loc;
@@ -34,13 +34,13 @@ class MapController {
     // 초기 위치 찾기
     Position initPosition = await _determinePosition();
     // (행정) 지역 주소 받아오기
-    // final fullAddress = await GeocodingServices.getFormattedAddress(
+    // final fullAddress = await GoogleMapService.getFormattedAddress(
     //     initPosition.latitude, initPosition.longitude);
 
     // 임시 현 위치 -----------
-    final fullAddress = await GeocodingServices.getFormattedAddress(
+    final fullAddress = await GoogleMapService.getAddrFromLatlng(
         37.545144, 126.964381);
-    // final fullAddress = await GeocodingServices.getFormattedAddress(
+    // final fullAddress = await GoogleMapService.getFormattedAddress(
     //     35.394032, 126.676373);
     // ---------------
 
