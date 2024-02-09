@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/model/comment_img_item_model.dart';
 import 'package:iris_flutter/view/page/detail_info/map_item.dart';
@@ -56,7 +57,6 @@ class _ReportTabState extends State<ReportTab> {
           child: ListView.separated(
             primary: false,
             shrinkWrap: true,
-            padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
             itemCount: urlImages.length,
             itemBuilder: (BuildContext context, int index) {
               return const ReportItem();

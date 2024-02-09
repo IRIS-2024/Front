@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/theme.dart';
+import 'package:iris_flutter/view/page/detail_info/info_page.dart';
+import 'package:iris_flutter/view/page/login/home.dart';
+import 'package:iris_flutter/view/page/login/login_init.dart';
 import 'package:iris_flutter/view/page/mypage/my_page.dart';
 import 'package:iris_flutter/view/page/mypage/written_reports.dart';
 
@@ -18,16 +21,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: MaterialTheme.lightScheme().toColorScheme(),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0)))),
-        useMaterial3: true,
-      ),
-      home: const MyPage(),
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: MaterialTheme.lightScheme().toColorScheme(),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0)))),
+          useMaterial3: true,
+        ),
+        home: const InfoPage());
   }
 }
