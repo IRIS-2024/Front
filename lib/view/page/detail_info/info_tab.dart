@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -45,7 +46,7 @@ class _InfoTabState extends State<InfoTab> {
                       onPageChanged: (index, reason) =>
                           setState(() => activeIndex = index))),
               Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: CustomPadding.pageInsets,
                   child: Row(
                     children: [
                       if (activeIndex != 0)

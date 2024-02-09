@@ -33,8 +33,6 @@ dependencies:
 
   material_color_utilities:   # 정의된 색상의 특정 tone 값인 색 얻기 위해
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   image_picker: ^1.0.7
   smooth_page_indicator: ^1.1.0
@@ -45,10 +43,19 @@ dependencies:
   json_serializable: ^6.7.1
   flutter_svg: ^2.0.9
   photo_view: ^0.14.0
+
+  # google login
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.16.0
+
+  google_sign_in: ^6.2.1
+
   geolocator: ^10.1.0
   dio: ^5.4.0
   flutter_dotenv: ^5.1.0
   get: ^4.6.6
+
+  location: ^5.0.3
 
 dev_dependencies:
   flutter_test:

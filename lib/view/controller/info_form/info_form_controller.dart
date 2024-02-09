@@ -35,9 +35,6 @@ class InfoFormController {
   }
 
   void saveInfo(BuildContext context) {
-
-
-
     print('print nameControllerText: ${nameController.text}');
     print('print selectedGender: ${selectedGender.value}');
     print('print ageControllerText: ${ageController.text}');
@@ -78,7 +75,7 @@ class InfoFormController {
     // 최종 글 등록
     // get navigation, snackBar
     customSnackBar(
-        title: '실종 신고 등록', message: '실종 신고 등록이 완료되었습니다.', context: context);
-    Get.offAll(() => MainPage());
+        title: '실종 정보 등록', message: '실종 정보 등록이 완료되었습니다.', context: context);
+    Get.offAll(() => const MainPage());
   }
 }
