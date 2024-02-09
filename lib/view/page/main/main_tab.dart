@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
-import 'package:iris_flutter/view/controller/main/main_controller.dart';
-import 'package:iris_flutter/view/page/main/latest_info_widget.dart';
-import 'package:iris_flutter/view/page/main/main_map_widget.dart';
+import 'package:iris_flutter/view/page/main/latest_info_tab_view.dart';
+import 'package:iris_flutter/view/page/main/map_tab_view.dart';
+import 'package:iris_flutter/view/page/map/map_controller.dart';
 
-class MainTabWidget extends StatefulWidget {
-  const MainTabWidget({Key? key}) : super(key: key);
+class MainTab extends StatefulWidget {
+  const MainTab({Key? key}) : super(key: key);
 
   @override
-  State<MainTabWidget> createState() => _MainTabWidgetState();
+  State<MainTab> createState() => _MainTabState();
 }
 
-class _MainTabWidgetState extends State<MainTabWidget>
+class _MainTabState extends State<MainTab>
     with TickerProviderStateMixin {
   late TabController _nestedTabController;
 
@@ -38,46 +40,46 @@ class _MainTabWidgetState extends State<MainTabWidget>
               Expanded(
                 child: TabBar(
                   labelColor: Theme.of(context).colorScheme.onPrimaryContainer,
-                  labelStyle:
-                      TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                  labelStyle: CustomTextStyle.basicBold,
                   indicator: BoxDecoration(
                       shape: BoxShape.rectangle,
                       color: Theme.of(context).colorScheme.primaryContainer,
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 3,
+                      borderRadius: const BorderRadius.all(Radius.circular(15.0)),
                   ),
-                  overlayColor: MaterialStatePropertyAll(Colors.transparent),
-                  tabs: [
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  dividerColor: Colors.transparent,
+                  tabs: const [
                     SizedBox(height: 40, child: Tab(text: "최신 글")),
                     SizedBox(height: 40, child: Tab(text: "지도"))
                   ],
                   controller: _nestedTabController,
                 ),
               ),
-              const Padding(padding: EdgeInsets.only(right: 5)),
+              const Padding(padding: CustomPadding.slimRight),
               IconButton(
                   onPressed: () {
-                    // update current location
-
+                    // update current location (Admin District)
+                    Get.put(MapController()).getAdminDistrictAddress();
                     // updated
                     customSnackBar(title: '위치 갱신', message: '현 위치를 갱신하였습니다.', context: context);
                   },
-                  icon: Icon(Icons.my_location)),
+                  icon: const Icon(Icons.my_location)),
             ],
           ),
 
           // tab View
           Expanded(
-            child: TabBarView(
-              controller: _nestedTabController,
-              children: [
-                // 최신 글
-                LatestInfoWidget(),
-                // 지도
-                MainMapWidget()
-              ],
+            child: Padding(
+              padding: CustomPadding.slimBottom,
+              child: TabBarView(
+                controller: _nestedTabController,
+                children: const [
+                  // 최신 글
+                  LatestInfoTabView(),
+                  // 지도
+                  MapTabView()
+                ],
+              ),
             ),
           ),
         ],

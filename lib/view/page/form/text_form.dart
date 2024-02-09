@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:iris_flutter/view/comm/form/form_title.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
+import 'package:iris_flutter/view/page/form/form_title.dart';
 
 // form:  title + text
 class TextForm extends StatelessWidget {
@@ -24,7 +25,7 @@ class TextForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        formTitle(title: title, isRequired: isRequired),
+        FormTitle(title: title, isRequired: isRequired),
         TextFormField(
           controller: textEditingController,
           maxLines: maxLengths ?? 1,
@@ -45,7 +46,8 @@ class TextForm extends StatelessWidget {
             return null;
           },
         ),
-        const Padding(padding: EdgeInsets.only(bottom: 15)),
+        const Padding(padding: CustomPadding.regularBottom),
+
       ],
     );
 

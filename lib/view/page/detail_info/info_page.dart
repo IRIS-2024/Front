@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/page/detail_info/info_tab.dart';
 import 'package:iris_flutter/view/page/detail_info/report_tab.dart';
 
