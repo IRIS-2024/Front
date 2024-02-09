@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 
 class RegisterButton extends StatelessWidget {
   final Function()? onPressed;
@@ -14,25 +16,22 @@ class RegisterButton extends StatelessWidget {
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.resolveWith((states) {
               if (states.contains(MaterialState.disabled)) {
-                return Theme.of(context).disabledColor;
+                return Theme.of(context).colorScheme.outline;
               } else {
                 return Theme.of(context).colorScheme.primaryContainer;
               }
             }),
             foregroundColor: MaterialStateProperty.resolveWith((states) {
               if (states.contains(MaterialState.disabled)) {
-                return Theme.of(context).disabledColor;
+                return Theme.of(context).colorScheme.outline;
               } else {
                 return Theme.of(context).colorScheme.onPrimaryContainer;
               }
             }),
           ),
-          child: const Text('등록', style: TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 15
-          ),),
+          child: const Text('등록', style: CustomTextStyle.basicBold),
         ),
-        const Padding(padding: EdgeInsets.only(right: 10)),
+        const Padding(padding: CustomPadding.regularRight),
       ],
     );
   }

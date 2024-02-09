@@ -1,11 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
-import 'package:iris_flutter/view/page/Info_form/info_form_dialog.dart';
+import 'package:iris_flutter/view/page/form/Info_form/info_form_dialog.dart';
 import 'package:iris_flutter/view/page/main/main_page.dart';
 
 class InfoFormController {
@@ -17,7 +15,7 @@ class InfoFormController {
   TextEditingController ageController = TextEditingController();
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
-  RxString location = Config.enterLocation.obs;
+  Rx<String?> location = Rx<String?>(null);
   TextEditingController clothesController = TextEditingController();
   TextEditingController noteController = TextEditingController();
 
@@ -73,11 +71,11 @@ class InfoFormController {
     // 이미지 넘기기
   }
 
-  registerInfo(BuildContext context) {
+  void registerInfo(BuildContext context) {
     // 최종 글 등록
     // get navigation, snackBar
     customSnackBar(
         title: '실종 정보 등록', message: '실종 정보 등록이 완료되었습니다.', context: context);
-    Get.offAll(() => MainPage());
+    Get.offAll(() => const MainPage());
   }
 }

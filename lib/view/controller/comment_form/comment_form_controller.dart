@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iris_flutter/config/config.dart';
+import 'package:iris_flutter/view/page/form/comment_form/registering_comment_page.dart';
 
 class CommentFormController {
   // validate
@@ -18,13 +19,14 @@ class CommentFormController {
   // 제보 댓글 - 제보 사진, 시간, 위치, 옷차림, 상황
   RxList<XFile> images = <XFile>[].obs;
   RxString time = Config.enterTime.obs;
-  RxString location = Config.enterLocation.obs;
+  Rx<String?> location = Rx<String?>(null);
   RxString clothes = ''.obs;
   TextEditingController clothesController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
 
   void registerComment() {
     print('print : regesterComment');
+    Get.to(()=>RegisteringCommentPage());
   }
 
   void pickImage() async {

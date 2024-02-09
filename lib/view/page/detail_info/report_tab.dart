@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/model/comment_img_item_model.dart';
 import 'package:iris_flutter/view/page/detail_info/map_item.dart';
 import 'package:iris_flutter/view/page/detail_info/report_item.dart';

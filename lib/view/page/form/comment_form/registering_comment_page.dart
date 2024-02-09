@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:iris_flutter/view/controller/comment_form/comment_form_controller.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
 
 class RegisteringCommentPage extends StatelessWidget {
   const RegisteringCommentPage({Key? key}) : super(key: key);
@@ -30,7 +29,7 @@ class RegisteringCommentPage extends StatelessWidget {
                   //   height: 200,
                   //   fit: BoxFit.fitHeight,
                   ),
-              const Padding(padding: EdgeInsets.only(bottom: 15)),
+              const Padding(padding: CustomPadding.mediumBottom),
               Text('제보 사진의 일치율 판별이 완료되면'),
               Text('제보가 등록됩니다.'),
             ],

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:iris_flutter/theme.dart';
+import 'package:iris_flutter/config/theme.dart';
 import 'package:iris_flutter/view/page/mypage/my_page.dart';
 import 'package:iris_flutter/view/page/mypage/written_reports.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: "assets/config/.env");
+
   runApp(const MyApp());
 }
 

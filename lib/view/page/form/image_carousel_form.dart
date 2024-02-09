@@ -3,13 +3,18 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 // form: 이미지 캐로셀
 class ImageCarouselForm extends StatefulWidget {
   final String title;
   final dynamic controller;
-  const ImageCarouselForm({Key? key, required this.title, required this.controller}) : super(key: key);
+
+  const ImageCarouselForm(
+      {Key? key, required this.title, required this.controller})
+      : super(key: key);
 
   @override
   State<ImageCarouselForm> createState() => _ImageCarouselFormState();
@@ -33,7 +38,7 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
 
   Widget addInitImage() {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 25),
+      padding: CustomPadding.thickBottom,
       child: Column(
         children: [
           OutlinedButton(
@@ -55,14 +60,16 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(Icons.add_circle_outline),
-                    const Padding(padding: EdgeInsets.only(right: 5)),
+                    const Padding(padding: CustomPadding.slimRight),
                     Text('${widget.title} 사진 추가')
                   ],
                 ),
-                Text('(최대 3장)', style: TextStyle(
-                  fontSize: 12,
-                  color: Theme.of(context).colorScheme.outline
-                ),)
+                Text(
+                  '(최대 3장)',
+                  style: CustomTextStyle.small.copyWith(
+                    color: Theme.of(context).colorScheme.outline,
+                  ),
+                )
               ],
             ),
           ),
@@ -70,12 +77,11 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
             () => widget.controller.images.isEmpty &&
                     widget.controller.initValidation.value != true
                 ? Padding(
-                    padding: const EdgeInsets.only(top: 7),
+                    padding: CustomPadding.slimRight,
                     child: Text(
                       '사진을 추가해 주세요.',
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: Theme.of(context).colorScheme.error),
+                      style: CustomTextStyle.small
+                          .copyWith(color: Theme.of(context).colorScheme.error),
                     ),
                   )
                 : const SizedBox(),
@@ -144,11 +150,11 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
                       icon: const Icon(Icons.delete_outline),
                       style: IconButton.styleFrom(
                           foregroundColor: Colors.white,
-                          backgroundColor: Colors.black.withOpacity(0.5))))
+                          backgroundColor: Theme.of(context).colorScheme.onBackground.withOpacity(0.5))))
             ],
           ),
         ),
-        const Padding(padding: EdgeInsets.only(bottom: 15)),
+        const Padding(padding: CustomPadding.regularBottom),
         Obx(
           () => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -179,11 +185,9 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
             ],
           ),
         ),
-        const Padding(padding: EdgeInsets.only(bottom: 15)),
+        const Padding(padding: CustomPadding.regularBottom),
       ],
     );
-
-
   }
 
   Widget buildImage(String imagePath, int index) {

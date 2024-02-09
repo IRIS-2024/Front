@@ -32,7 +32,6 @@ dependencies:
     sdk: flutter
 
   material_color_utilities:   # 정의된 색상의 특정 tone 값인 색 얻기 위해
-  location: ^5.0.3
 
   cupertino_icons: ^1.0.2
   image_picker: ^1.0.7
@@ -51,7 +50,12 @@ dependencies:
 
   google_sign_in: ^6.2.1
 
-  get:
+  geolocator: ^10.1.0
+  dio: ^5.4.0
+  flutter_dotenv: ^5.1.0
+  get: ^4.6.6
+
+  location: ^5.0.3
 
 dev_dependencies:
   flutter_test:
@@ -79,6 +83,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/config/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

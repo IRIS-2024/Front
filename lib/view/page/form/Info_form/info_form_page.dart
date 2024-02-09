@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
-import 'package:iris_flutter/view/comm/form/basic_form.dart';
-import 'package:iris_flutter/view/comm/form/form_title.dart';
-import 'package:iris_flutter/view/comm/form/text_form.dart';
-import 'package:iris_flutter/view/comm/form/register_button.dart';
+import 'package:iris_flutter/view/page/form/basic_form.dart';
+import 'package:iris_flutter/view/page/form/form_title.dart';
+import 'package:iris_flutter/view/page/form/register_button.dart';
+import 'package:iris_flutter/view/page/form/text_form.dart';
 import 'package:iris_flutter/view/controller/info_form/info_form_controller.dart';
-import 'package:iris_flutter/view/comm/form/image_carousel_form.dart';
+import 'package:iris_flutter/view/page/form/image_carousel_form.dart';
+import 'package:iris_flutter/view/page/map/map_page.dart';
 
 class InfoFormPage extends StatefulWidget {
   const InfoFormPage({Key? key}) : super(key: key);
@@ -36,15 +39,14 @@ class _InfoFormPageState extends State<InfoFormPage> {
               infoFormController.initValidation.value = false;
               if (_formKey.currentState!.validate() &&
                   infoFormController.images.isNotEmpty &&
-                  infoFormController.location.value != Config.enterLocation) {
+                  infoFormController.location.value != null) {
                 // 정보 등록 (저장)
                 infoFormController.saveInfo(context);
               }
             })),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(
-                left: 16.0, right: 16, bottom: 25, top: 10),
+            padding: CustomPadding.pageInsets,
             child: Column(
               children: [
                 // 사진
@@ -76,7 +78,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
                             ],
                           ),
                         )),
-                    const Padding(padding: EdgeInsets.only(right: 10)),
+                    const Padding(padding: CustomPadding.regularRight),
                     Flexible(
                       flex: 1,
                       child: numberField(
@@ -99,7 +101,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
                             title: '키',
                             isRequired: false,
                             unitText: 'cm')),
-                    const Padding(padding: EdgeInsets.only(right: 10)),
+                    const Padding(padding: CustomPadding.regularRight),
                     Flexible(
                         flex: 1,
                         child: numberField(
@@ -119,12 +121,13 @@ class _InfoFormPageState extends State<InfoFormPage> {
                         children: [
                           OutlinedButton.icon(
                               onPressed: () {
-                                // 위치 받아온 다음,
-                                infoFormController.location.value = '새로운 위치';
+                                Get.dialog(
+                                  MapPage(controller: infoFormController,)
+                                );
                               },
                               style: OutlinedButton.styleFrom(
                                   minimumSize: const Size(double.infinity, 55),
-                                  foregroundColor: Colors.black,
+                                  foregroundColor: Theme.of(context).colorScheme.onBackground,
                                   side: BorderSide(
                                     color:
                                         Theme.of(context).colorScheme.outline,
@@ -133,20 +136,18 @@ class _InfoFormPageState extends State<InfoFormPage> {
                                       borderRadius:
                                           BorderRadius.circular(10.0))),
                               icon: const Icon(Icons.my_location),
-                              label: Text(infoFormController.location.value)),
+                              label: Text(infoFormController.location.value ?? '위치 입력')),
                           infoFormController.location.value ==
-                                      Config.enterLocation &&
+                                      null &&
                                   infoFormController.initValidation.value !=
                                       true
                               ? Padding(
-                                  padding: const EdgeInsets.only(top: 7),
+                                  padding: CustomPadding.slimBottom,
                                   child: Text(
                                     '위치를 입력해 주세요.',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .error),
+                                    style: CustomTextStyle.small.copyWith(color: Theme.of(context)
+                                        .colorScheme
+                                        .error),
                                   ),
                                 )
                               : const SizedBox(),
@@ -185,7 +186,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
       required String unitText}) {
     return Column(
       children: [
-        formTitle(title: title, isRequired: isRequired),
+        FormTitle(title: title, isRequired: isRequired),
         Stack(children: [
           TextFormField(
             controller: textEditingController,
@@ -213,11 +214,11 @@ class _InfoFormPageState extends State<InfoFormPage> {
               child: Center(
                   child: Text(
                 unitText,
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.outline, fontSize: 16),
+                style: CustomTextStyle.basic.copyWith(
+                    color: Theme.of(context).colorScheme.outline),
               ))),
         ]),
-        const Padding(padding: EdgeInsets.only(bottom: 15)),
+        const Padding(padding: CustomPadding.mediumBottom),
       ],
     );
   }
@@ -232,10 +233,10 @@ class _InfoFormPageState extends State<InfoFormPage> {
       },
       style: OutlinedButton.styleFrom(
           fixedSize: const Size(double.infinity, 55),
-          textStyle: const TextStyle(fontSize: 16),
+          textStyle: CustomTextStyle.basic,
           foregroundColor: infoFormController.selectedGender.value == gender
               ? Theme.of(context).colorScheme.primary
-              : Colors.black,
+              : Theme.of(context).colorScheme.onBackground,
           side: BorderSide(
             color: infoFormController.selectedGender.value == gender
                 ? Theme.of(context).colorScheme.primary
