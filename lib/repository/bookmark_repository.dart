@@ -7,9 +7,9 @@ part 'bookmark_repository.g.dart';
 abstract class BookmarkRepository {
   factory BookmarkRepository(Dio dio, {String baseUrl}) = _BookmarkRepository;
   
-  @POST('/bookmark/{id}')
+  @POST('/bookmarks/{id}')
   Future postBookmark(@Path() int id);
 
-  @POST('/bookmark/{id}')
+  @POST('/bookmarks/{id}')
   Future deleteBookmark(@Path() int id);
 }

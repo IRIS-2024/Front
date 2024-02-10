@@ -41,7 +41,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
               infoFormController.initValidation.value = false;
               if (_formKey.currentState!.validate() &&
                   infoFormController.images.isNotEmpty &&
-                  infoFormController.location.value != null) {
+                  infoFormController.address.value != null) {
                 // 정보 등록 (저장)
                 infoFormController.saveInfo(context);
               }
@@ -138,8 +138,8 @@ class _InfoFormPageState extends State<InfoFormPage> {
                                       borderRadius:
                                           BorderRadius.circular(10.0))),
                               icon: const Icon(Icons.my_location),
-                              label: Text(infoFormController.location.value ?? '위치 입력')),
-                          infoFormController.location.value ==
+                              label: Text(infoFormController.address.value ?? '위치 입력')),
+                          infoFormController.address.value ==
                                       null &&
                                   infoFormController.initValidation.value !=
                                       true
@@ -167,7 +167,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
                 ),
                 // 특이사항
                 TextForm(
-                    textEditingController: infoFormController.noteController,
+                    textEditingController: infoFormController.detailsController,
                     title: '특이사항',
                     isRequired: false,
                     hintText: '실종자의 체격, 얼굴형, 특이 행동, 질병 등을 적어주세요.',

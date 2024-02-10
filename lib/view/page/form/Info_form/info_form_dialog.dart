@@ -40,13 +40,13 @@ void infoFormDialog(BuildContext context) {
                     '${Config().getGenderText(controller.selectedGender.value)} / ${controller.ageController.text}세 / ${controller.heightController.text == '' ? '' : '${controller.heightController.text}cm'} / ${controller.weightController.text == '' ? '' : '${controller.weightController.text}kg'}'),
                 _titleAndInfo(
                     context: context,
-                    title: '마지막 위치', contents: controller.location.value!),
+                    title: '마지막 위치', contents: controller.address.value!),
                 _titleAndInfo(
                     context: context,
                     title: '옷차림', contents: controller.clothesController.text),
                 _titleAndInfo(
                     context: context,
-                    title: '특이사항', contents: controller.noteController.text),
+                    title: '특이사항', contents: controller.detailsController.text),
                 const Padding(padding: CustomPadding.thickBottom),
                 SizedBox(
                     width: double.infinity,
