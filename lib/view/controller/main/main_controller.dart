@@ -3,7 +3,6 @@ import 'package:iris_flutter/model/missing_info.dart';
 
 class MainController {
   RxList<MissingInfo> missingInfoList = <MissingInfo>[].obs;
-
   setTmpData() {
     // missingInfoList.value = [
     //   MissingInfo(name: '김말순',
