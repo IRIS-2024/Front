@@ -1,14 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'missing_info.g.dart';
+part 'comment.g.dart';
 
 @JsonSerializable()
-class MissingInfo {
-  String name;
-  bool gender;
-  int age;
-  int? height;
-  int? weight;
+class Comment {
+  int pid;
   String address;
   double latitude;
   double longitude;
@@ -19,12 +15,8 @@ class MissingInfo {
   DateTime createdAt;
   DateTime? updatedAt;
 
-  MissingInfo({
-    required this.name,
-    required this.gender,
-    required this.age,
-    this.height,
-    this.weight,
+  Comment({
+    required this.pid,
     required this.address,
     required this.latitude,
     required this.longitude,
@@ -36,7 +28,7 @@ class MissingInfo {
     this.updatedAt,
   });
 
-  factory MissingInfo.fromJson(Map<String, dynamic> json) => _$MissingInfoFromJson(json);
+  factory Comment.fromJson(Map<String, dynamic> json) => _$CommentFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MissingInfoToJson(this);
+  Map<String, dynamic> toJson() => _$CommentToJson(this);
 }

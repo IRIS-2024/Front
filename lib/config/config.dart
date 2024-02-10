@@ -1,10 +1,12 @@
-enum Gender { man, woman }
-
 class Config {
-
   // info form page
-  static String man = '남자';
-  static String woman = '여자';
+  static bool man = false;
+  static bool woman = true;
+
+  String getGenderText(bool gender) {
+    return gender == Config.woman ? '여자' : '남자';
+  }
+
   // comment form page
   static String enterTime = '시간 입력';
 
