@@ -1,17 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'missing_info.dart';
+part of 'comment.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MissingInfo _$MissingInfoFromJson(Map<String, dynamic> json) => MissingInfo(
-      name: json['name'] as String,
-      gender: json['gender'] as bool,
-      age: json['age'] as int,
-      height: json['height'] as int?,
-      weight: json['weight'] as int?,
+Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(
+      pid: json['pid'] as int,
       address: json['address'] as String,
       latitude: (json['latitude'] as num).toDouble(),
       longitude: (json['longitude'] as num).toDouble(),
@@ -26,13 +22,8 @@ MissingInfo _$MissingInfoFromJson(Map<String, dynamic> json) => MissingInfo(
           : DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$MissingInfoToJson(MissingInfo instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'gender': instance.gender,
-      'age': instance.age,
-      'height': instance.height,
-      'weight': instance.weight,
+Map<String, dynamic> _$CommentToJson(Comment instance) => <String, dynamic>{
+      'pid': instance.pid,
       'address': instance.address,
       'latitude': instance.latitude,
       'longitude': instance.longitude,

@@ -96,7 +96,7 @@ class _MapPageState extends State<MapPage> {
   }
 
   void _onButtonPressed() {
-    widget.controller.location.value = Get.put(MapController()).formattedAddress.value!;
+    widget.controller.address.value = Get.put(MapController()).formattedAddress.value!;
     Get.back();
   }
 }

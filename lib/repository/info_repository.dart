@@ -9,18 +9,18 @@ abstract class InfoRepository {
   factory InfoRepository(Dio dio, {String baseUrl}) = _InfoRepository;
 
   // 실종 정보 조회
-  @GET('/post/{id}')
+  @GET('/posts/{id}')
   Future<MissingInfo> getInfo(@Path() int id);
   
   // 실종 정보 List 조회
-  @GET('/post')
+  @GET('/posts')
   Future<List<MissingInfo>> getInfoList();
 
   // 실종 정보 작성
-  @POST('/post')
-  Future<MissingInfo> postInfo();
+  @POST('/posts')
+  Future<MissingInfo> postInfo(@Body() MissingInfo body);
 
   // 실종 정보 삭제
-  @DELETE('/post/{id}')
+  @DELETE('/posts/{id}')
   Future deleteInfo(@Path() int id);
 }

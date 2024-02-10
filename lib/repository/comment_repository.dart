@@ -9,7 +9,7 @@ abstract class CommentRepository {
   factory CommentRepository(Dio dio, {String baseUrl}) = _CommentRepository;
 
   // 제보 댓글 List 조회
-  @GET('/comment/{pid}')
+  @GET('/comments/{pid}')
   Future<List<Comment>> getCommentList(@Path() int pid);
 
   // 내가 작성한 제보글 조회
@@ -17,10 +17,10 @@ abstract class CommentRepository {
   // Future
 
   // 제보 댓글 작성
-  @POST('/comment/{pid}')
+  @POST('/comments/{pid}')
   Future postComment(@Path() int pid);
   
   // 제보 댓글 삭제
-  @DELETE('/comment/{cid}')
+  @DELETE('/comments/{cid}')
   Future deleteComment(@Path() int cid);
 }
