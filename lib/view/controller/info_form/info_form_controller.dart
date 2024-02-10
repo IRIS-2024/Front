@@ -80,7 +80,6 @@ class InfoFormController {
     //       images: formData
     //   )
     // );
-
     // 이미지 생성
     createMontage(context);
   }
@@ -111,7 +110,7 @@ class InfoFormController {
     // 최종 글 등록
     // get navigation, snackBar
     customSnackBar(
-        title: '실종 신고 등록', message: '실종 신고 등록이 완료되었습니다.', context: context);
-    Get.offAll(() => MainPage());
+        title: '실종 정보 등록', message: '실종 정보 등록이 완료되었습니다.', context: context);
+    Get.offAll(() => const MainPage());
   }
 }
