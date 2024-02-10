@@ -54,12 +54,16 @@ dependencies:
   dio: ^5.4.0
   flutter_dotenv: ^5.1.0
   get: ^4.6.6
+  retrofit: ^4.1.0
 
   location: ^5.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  retrofit_generator: '>=7.0.0 <8.0.0'
+  build_runner: '>=2.3.0 <4.0.0'
+  json_serializable: ^6.6.2
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

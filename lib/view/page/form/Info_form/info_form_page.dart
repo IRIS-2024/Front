@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -39,7 +41,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
               infoFormController.initValidation.value = false;
               if (_formKey.currentState!.validate() &&
                   infoFormController.images.isNotEmpty &&
-                  infoFormController.location.value != null) {
+                  infoFormController.address.value != null) {
                 // 정보 등록 (저장)
                 infoFormController.saveInfo(context);
               }
@@ -73,8 +75,8 @@ class _InfoFormPageState extends State<InfoFormPage> {
                           widget: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              genderButton(title: '여자', gender: Gender.woman),
-                              genderButton(title: '남자', gender: Gender.man),
+                              genderButton(title: '여자', gender: Config.woman),
+                              genderButton(title: '남자', gender: Config.man),
                             ],
                           ),
                         )),
@@ -136,8 +138,8 @@ class _InfoFormPageState extends State<InfoFormPage> {
                                       borderRadius:
                                           BorderRadius.circular(10.0))),
                               icon: const Icon(Icons.my_location),
-                              label: Text(infoFormController.location.value ?? '위치 입력')),
-                          infoFormController.location.value ==
+                              label: Text(infoFormController.address.value ?? '위치 입력')),
+                          infoFormController.address.value ==
                                       null &&
                                   infoFormController.initValidation.value !=
                                       true
@@ -165,7 +167,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
                 ),
                 // 특이사항
                 TextForm(
-                    textEditingController: infoFormController.noteController,
+                    textEditingController: infoFormController.detailsController,
                     title: '특이사항',
                     isRequired: false,
                     hintText: '실종자의 체격, 얼굴형, 특이 행동, 질병 등을 적어주세요.',
@@ -223,7 +225,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
     );
   }
 
-  Widget genderButton({required String title, required Gender gender}) {
+  Widget genderButton({required String title, required bool gender}) {
     Get.put(InfoFormController());
     final infoFormController = Get.find<InfoFormController>();
 
