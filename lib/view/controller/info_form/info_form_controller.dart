@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/dio_config.dart';
-import 'package:iris_flutter/model/missing_info.dart';
 import 'package:iris_flutter/repository/info_repository.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/page/form/Info_form/info_form_dialog.dart';
 import 'package:iris_flutter/view/page/main/main_page.dart';
+import 'package:dio/dio.dart' as dio_package;
 
 class InfoFormController {
   RxList<XFile> images = <XFile>[].obs;
@@ -19,6 +19,8 @@ class InfoFormController {
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
   Rx<String?> address = Rx<String?>(null);
+  Rx<double?> latitude = Rx<double?>(null);
+  Rx<double?> longitude = Rx<double?>(null);
   TextEditingController clothesController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
 
@@ -37,49 +39,31 @@ class InfoFormController {
     print('print imagesFirstPath: ${images.first.path}');
   }
 
-  void saveInfo(BuildContext context) {
-    // // FormData formData;
-    // final List<MultipartFile> files = images
-    //     .map((img) => MultipartFile.fromFileSync(img.path,
-    //     // contentType: MediaType("`````image", "jpg")
-    // ))
-    //     .toList();
-    // // formData = FormData.fromMap({"images": files});
-    //
-    // final formData = FormData.fromMap({
-    //   'name': nameController.text,
-    //   'gender': true,
-    //   'age': 0,
-    //   'height': 0,
-    //   'weight': 0,
-    //   'address': '서울시 용산구 갈월동 24',
-    //   'latitude': 0,
-    //   'longitude': 0,
-    //   'clothes': 'string',
-    //   'details': 'string',
-    //   'images': [
-    //     await MultipartFile.fromFile('path_to_image_1'),
-    //     await MultipartFile.fromFile('path_to_image_2'),
-    //     // ... add more image files as needed
-    //   ],
-    // });
-    //
-    // InfoRepository infoRepository = InfoRepository(createDio());
-    // infoRepository.postInfo(
-    //   MissingInfo(
-    //       name: nameController.text,
-    //       gender: selectedGender.value,
-    //       age: int.parse(ageController.text),
-    //       height: int.parse(heightController.text),
-    //       weight: int.parse(weightController.text),
-    //       address: address.value!,
-    //       latitude: 37.545144,
-    //       longitude: 126.964381,
-    //       clothes: clothesController.text,
-    //       details: detailsController.text,
-    //       images: formData
-    //   )
-    // );
+  Future<void> saveInfo(BuildContext context) async {
+    // request body form data 생성
+    final formData = dio_package.FormData.fromMap({
+      'name': nameController.text,
+      'gender': selectedGender.value,
+      'age': ageController.text,
+      'height': heightController.text,
+      'weight': heightController.text,
+      'address': address.value,
+      'latitude': latitude.value,
+      'longitude': longitude.value,
+      'clothes': clothesController.value,
+      'details': detailsController.text,
+      'bookmarked': false, // default
+      'images': List.generate(images.length,
+          (index) => dio_package.MultipartFile.fromFile(images[index].path)),
+      // 'discoveredAt': ,
+      'createdAt': DateTime.now().toString(),
+      'updatedAt': null,
+    });
+
+    final dio = createDio();
+    dio.options.contentType = 'multipart/form-data';
+    InfoRepository infoRepository = InfoRepository(dio);
+    infoRepository.postInfo(formData);
     // 이미지 생성
     createMontage(context);
   }
