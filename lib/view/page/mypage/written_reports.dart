@@ -59,7 +59,7 @@ class _WrittenReportsState extends State<WrittenReports> {
                               SizedBox(
                                 width: MediaQuery.of(context).size.width - 120,
                                 child: Text(
-                                    '${mainController.missingInfoList[idx].missingName} / ${mainController.missingInfoList[idx].missingGender} / ${mainController.missingInfoList[idx].missingAge} 세 / ${mainController.missingInfoList[idx].missingLocation}',
+                                    '${mainController.missingInfoList[idx].name} / ${mainController.missingInfoList[idx].gender} / ${mainController.missingInfoList[idx].age} 세 / ${mainController.missingInfoList[idx].address}',
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(
                                       fontSize: 16,
