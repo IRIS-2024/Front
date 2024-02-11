@@ -4,7 +4,7 @@ part 'comment.g.dart';
 
 @JsonSerializable()
 class Comment {
-  int pid;
+  int cid;
   String address;
   double latitude;
   double longitude;
@@ -16,7 +16,7 @@ class Comment {
   DateTime? updatedAt;
 
   Comment({
-    required this.pid,
+    required this.cid,
     required this.address,
     required this.latitude,
     required this.longitude,
@@ -28,7 +28,8 @@ class Comment {
     this.updatedAt,
   });
 
-  factory Comment.fromJson(Map<String, dynamic> json) => _$CommentFromJson(json);
+  factory Comment.fromJson(Map<String, dynamic> json) =>
+      _$CommentFromJson(json);
 
   Map<String, dynamic> toJson() => _$CommentToJson(this);
 }

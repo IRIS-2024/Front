@@ -17,6 +17,7 @@ MissingInfo _$MissingInfoFromJson(Map<String, dynamic> json) => MissingInfo(
       longitude: (json['longitude'] as num).toDouble(),
       clothes: json['clothes'] as String?,
       details: json['details'] as String?,
+      bookmarked: json['bookmarked'] as bool,
       images:
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
       discoveredAt: DateTime.parse(json['discoveredAt'] as String),
@@ -39,6 +40,7 @@ Map<String, dynamic> _$MissingInfoToJson(MissingInfo instance) =>
       'clothes': instance.clothes,
       'details': instance.details,
       'images': instance.images,
+      'bookmarked': instance.bookmarked,
       'discoveredAt': instance.discoveredAt.toIso8601String(),
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
