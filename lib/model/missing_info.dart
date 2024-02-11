@@ -15,6 +15,7 @@ class MissingInfo {
   String? clothes;
   String? details;
   List<String> images;
+  bool bookmarked;
   DateTime discoveredAt;
   DateTime createdAt;
   DateTime? updatedAt;
@@ -30,13 +31,15 @@ class MissingInfo {
     required this.longitude,
     this.clothes,
     this.details,
+    required this.bookmarked,
     required this.images,
     required this.discoveredAt,
     required this.createdAt,
     this.updatedAt,
   });
 
-  factory MissingInfo.fromJson(Map<String, dynamic> json) => _$MissingInfoFromJson(json);
+  factory MissingInfo.fromJson(Map<String, dynamic> json) =>
+      _$MissingInfoFromJson(json);
 
   Map<String, dynamic> toJson() => _$MissingInfoToJson(this);
 }

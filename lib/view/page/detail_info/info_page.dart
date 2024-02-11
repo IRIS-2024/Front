@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
+import 'package:iris_flutter/view/controller/detail_info/info_controller.dart';
 import 'package:iris_flutter/view/page/detail_info/info_tab.dart';
-import 'package:iris_flutter/view/page/detail_info/report_tab.dart';
+import 'package:iris_flutter/view/page/detail_info/comment_tab.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
@@ -11,6 +13,15 @@ class InfoPage extends StatefulWidget {
 }
 
 class _InfoPageState extends State<InfoPage> {
+  InfoController infoController = Get.put(InfoController());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    infoController.loadData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -85,7 +96,7 @@ class _InfoPageState extends State<InfoPage> {
               ),
               Expanded(
                 child: TabBarView(
-                  children: [InfoTab(), ReportTab()],
+                  children: [InfoTab(), CommentTab()],
                 ),
               )
             ],

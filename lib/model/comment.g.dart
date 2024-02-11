@@ -7,7 +7,7 @@ part of 'comment.dart';
 // **************************************************************************
 
 Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(
-      pid: json['pid'] as int,
+      cid: json['cid'] as int,
       address: json['address'] as String,
       latitude: (json['latitude'] as num).toDouble(),
       longitude: (json['longitude'] as num).toDouble(),
@@ -23,7 +23,7 @@ Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(
     );
 
 Map<String, dynamic> _$CommentToJson(Comment instance) => <String, dynamic>{
-      'pid': instance.pid,
+      'cid': instance.cid,
       'address': instance.address,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
