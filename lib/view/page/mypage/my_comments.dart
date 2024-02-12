@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/model/my_comments_response.dart';
+import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/controller/mypage/my_comments_controller.dart';
+import 'package:iris_flutter/view/page/detail_info/info_page.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -45,29 +47,33 @@ class _MyCommentsState extends State<MyComments> {
                       children: [
                         Card(
                           color: Theme.of(context).colorScheme.surfaceVariant,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(5),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(50),
-                                  child: Image.network(
-                                    missingInfo.imgUrl,
-                                    height: 40,
-                                    width: 40,
-                                    fit: BoxFit.cover,
+                          child: InkWell(
+                            onTap: () => Get.to(const InfoPage()),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(5),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(50),
+                                    child: Image.network(
+                                      missingInfo.imgUrl,
+                                      height: 40,
+                                      width: 40,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const Padding(padding: CustomPadding.slimRight),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width - 120,
-                                child: Text(
-                                    '${missingInfo.name} / ${missingInfo.gender ? "남" : "여"} / ${missingInfo.age} 세 / ${missingInfo.address}',
-                                    overflow: TextOverflow.ellipsis,
-                                    style: CustomTextStyle.basic),
-                              ),
-                            ],
+                                const Padding(padding: CustomPadding.slimRight),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width - 120,
+                                  child: Text(
+                                      '${missingInfo.name} / ${missingInfo.gender ? "남" : "여"} / ${missingInfo.age} 세 / ${missingInfo.address}',
+                                      overflow: TextOverflow.ellipsis,
+                                      style: CustomTextStyle.basic),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         ListView.separated(
@@ -114,7 +120,7 @@ class _MyCommentsState extends State<MyComments> {
                       fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ),
-              Text(missingInfo.commentList[cmtIdx].createdAt.toString(),
+              Text(convertDateString(missingInfo.commentList[cmtIdx].createdAt),
                   style: const TextStyle(fontSize: 12))
             ],
           ),
@@ -186,7 +192,7 @@ class _MyCommentsState extends State<MyComments> {
                       const SizedBox(
                         height: 6,
                       ),
-                      Text('${missingInfo.commentList[cmtIdx].accuracy}',
+                      Text('일치율 ${missingInfo.commentList[cmtIdx].accuracy} %',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
