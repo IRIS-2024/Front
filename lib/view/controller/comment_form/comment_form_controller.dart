@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/view/page/form/comment_form/registering_comment_page.dart';
 
 class CommentFormController {
+  Rx<TimeOfDay?> timeOfDay = Rx<TimeOfDay?>(null);
   // validate
   RxBool initValidation = true.obs;
 
@@ -18,21 +17,26 @@ class CommentFormController {
 
   // 제보 댓글 - 제보 사진, 시간, 위치, 옷차림, 상황
   RxList<XFile> images = <XFile>[].obs;
-  RxString time = Config.enterTime.obs;
-  Rx<String?> location = Rx<String?>(null);
+  Rx<String?> address = Rx<String?>(null);
   RxString clothes = ''.obs;
   TextEditingController clothesController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
-
-  void registerComment() {
-    print('print : regesterComment');
-    Get.to(()=>RegisteringCommentPage());
-  }
 
   void pickImage() async {
     final ImagePicker picker = ImagePicker();
     await picker.pickMultiImage().then((value) {
       images += value;
     });
+  }
+
+  bool validateRequiredFields() {
+    // 필수 값: images, discoveredAt, address
+    // * null 여부 검증
+    return images.isNotEmpty && timeOfDay.value != null && address.value != null;
+  }
+
+  void registerComment() {
+    print('print : regesterComment');
+    Get.to(()=>RegisteringCommentPage());
   }
 }
