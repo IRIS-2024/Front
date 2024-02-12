@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iris_flutter/config/config.dart';
-import 'package:iris_flutter/config/dio_config.dart';
-import 'package:iris_flutter/repository/info_repository.dart';
 import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/page/form/Info_form/info_form_dialog.dart';
@@ -14,8 +12,9 @@ class InfoFormController {
   RxList<XFile> images = <XFile>[].obs;
   Rx<TimeOfDay?> timeOfDay = Rx<TimeOfDay?>(null);
   RxBool isChecked = true.obs;
-
+  // validate
   RxBool initValidation = true.obs;
+
   TextEditingController nameController = TextEditingController();
   RxBool gender = Config.woman.obs;
   TextEditingController ageController = TextEditingController();
@@ -32,8 +31,6 @@ class InfoFormController {
     await picker.pickMultiImage().then((value) {
       images += value;
     });
-
-    print('print imagesFirstPath: ${images.first.path}');
   }
 
   bool validateRequiredFields(GlobalKey<FormState> formKey) {
@@ -44,39 +41,38 @@ class InfoFormController {
     return formKey.currentState!.validate() && images.isNotEmpty && timeOfDay.value != null && address.value != null;
   }
 
-  Future<void> saveInfo(BuildContext context) async {
+  Future<void> saveInfo() async {
     // TODO 주석 삭제, 통신 확인
     // request body form data 생성
     final formData = dio_package.FormData.fromMap({
       'name': nameController.text,
       'gender': gender.value,
       'age': ageController.text,
-      'height': heightController.text,
-      'weight': heightController.text,
+      'height': heightController.text, // * nullable 여부
+      'weight': weightController.text,
       'address': address.value,
       'latitude': latitude.value,
       'longitude': longitude.value,
-      'clothes': clothesController.value,
-      'details': detailsController.text,
-      'bookmarked': false, // default
+      'disappearedAt': combineTimeOfDayWithCurrentDate(timeOfDay.value!),
+      'clothes': clothesController.text.isEmpty ? null : clothesController.text,
+      'details': detailsController.text.isEmpty ? null : clothesController.text,
       'images': List.generate(images.length,
           (index) => dio_package.MultipartFile.fromFile(images[index].path)),
-      'disappearedAt': combineTimeOfDayWithCurrentDate(timeOfDay.value!),
-      'createdAt': DateTime.now().toString(),
-      'updatedAt': null,
     });
-    //
+
     // final dio = createDio();
     // dio.options.contentType = 'multipart/form-data';
     // InfoRepository infoRepository = InfoRepository(dio);
     // infoRepository.postInfo(formData);
 
-    // 이미지 생성
-    createAIImage(context);
+    // 등록 Dialog
+    infoFormDialog();
   }
 
-  void createAIImage(BuildContext context) {
-    infoFormDialog(context);
+  Future<void> createAIImage() async{
+    // AI 이미지 생성 과정
+    // TODO 임시 딜레이
+    await Future.delayed(const Duration(milliseconds: 3000));
   }
 
   void registerInfo(BuildContext context) {
