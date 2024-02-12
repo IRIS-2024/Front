@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/page/mypage/bookmark_info.dart';
-import 'package:iris_flutter/view/page/mypage/written_info.dart';
-import 'package:iris_flutter/view/page/mypage/written_reports.dart';
+import 'package:iris_flutter/view/page/mypage/my_posts.dart';
+import 'package:iris_flutter/view/page/mypage/my_comments.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({super.key});
@@ -66,7 +66,7 @@ class _MyPageState extends State<MyPage> {
                           topLeft: Radius.circular(15),
                           topRight: Radius.circular(15))),
                   onTap: () {
-                    Get.to(() => const WrittenInfo());
+                    Get.to(() => const MyPosts());
                   },
                   leading: Icon(
                     Icons.people,
@@ -79,7 +79,7 @@ class _MyPageState extends State<MyPage> {
                 ListTile(
                   tileColor: Theme.of(context).colorScheme.surfaceVariant,
                   onTap: () {
-                    Get.to(() => const WrittenReports());
+                    Get.to(() => const MyComments());
                   },
                   leading: const Icon(Icons.chat),
                   title: const Text("작성한 제보 댓글"),
