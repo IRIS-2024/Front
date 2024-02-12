@@ -21,12 +21,9 @@ class MapController {
   }
 
   void selectLocation(LatLng loc) async {
-    // 위치 선택
-    loading.value = true;
     // reverse geocoding process
     formattedAddress.value = await GoogleMapService.getAddrFromLatlng(
         loc.latitude, loc.longitude);
-    loading.value = false;
     selectedLocation.value = loc;
   }
 

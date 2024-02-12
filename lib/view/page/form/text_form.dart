@@ -33,7 +33,6 @@ class TextForm extends StatelessWidget {
           decoration: InputDecoration(
             isDense: true,
             hintText: hintText,
-            // counterText: '',
             border: OutlineInputBorder(
                 borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                 borderSide:
