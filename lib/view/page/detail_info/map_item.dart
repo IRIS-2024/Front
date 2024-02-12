@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:iris_flutter/view/controller/detail_info/info_controller.dart';
 import 'package:location/location.dart';
 
 class MapItem extends StatefulWidget {
@@ -11,28 +13,32 @@ class MapItem extends StatefulWidget {
 
 class _MapItemState extends State<MapItem> {
   final Location _locationController = Location();
+  InfoController infoController = Get.find<InfoController>();
 
-  static const LatLng _pGooglePlex = LatLng(37.545042, 126.965879);
-  static const LatLng _pParkPlex = LatLng(37.543489, 126.966199);
   LatLng? _currentP;
+  late LatLng _pGooglePlex;
+  late LatLng _pParkPlex;
+
   @override
   void initState() {
     super.initState();
-    // getLocationUpdates();  // 사용자의 현재 위치에 기반하여 화면을 바꿀 때
+    _pGooglePlex = LatLng(infoController.missingInfo.value.latitude,
+        infoController.missingInfo.value.longitude);
+    _pParkPlex = LatLng(infoController.missingInfo.value.latitude,
+        infoController.missingInfo.value.longitude);
   }
 
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-      initialCameraPosition:
-          const CameraPosition(target: _pGooglePlex, zoom: 17),
+      initialCameraPosition: CameraPosition(target: _pGooglePlex, zoom: 17),
       markers: {
-        const Marker(
-            markerId: MarkerId("_currentLocation"),
+        Marker(
+            markerId: const MarkerId("_currentLocation"),
             icon: BitmapDescriptor.defaultMarker,
             position: _pGooglePlex),
-        const Marker(
-            markerId: MarkerId("_sourceLocation"),
+        Marker(
+            markerId: const MarkerId("_sourceLocation"),
             icon: BitmapDescriptor.defaultMarker,
             position: _pParkPlex)
       },
