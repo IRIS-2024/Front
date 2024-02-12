@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/dio_config.dart';
 import 'package:iris_flutter/repository/info_repository.dart';
+import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/page/form/Info_form/info_form_dialog.dart';
 import 'package:iris_flutter/view/page/main/main_page.dart';
@@ -11,10 +12,11 @@ import 'package:dio/dio.dart' as dio_package;
 
 class InfoFormController {
   RxList<XFile> images = <XFile>[].obs;
+  Rx<TimeOfDay?> timeOfDay = Rx<TimeOfDay?>(null);
 
   RxBool initValidation = true.obs;
   TextEditingController nameController = TextEditingController();
-  RxBool selectedGender = Config.woman.obs;
+  RxBool gender = Config.woman.obs;
   TextEditingController ageController = TextEditingController();
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
@@ -23,9 +25,6 @@ class InfoFormController {
   Rx<double?> longitude = Rx<double?>(null);
   TextEditingController clothesController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
-
-  // 생성 시간
-  // 수정 시간
 
   // Dialog Index
   RxInt dialogIndex = 0.obs;
@@ -39,11 +38,19 @@ class InfoFormController {
     print('print imagesFirstPath: ${images.first.path}');
   }
 
+  bool validateRequiredFields(GlobalKey<FormState> formKey) {
+    // 필수 값: images, name, gender, age, disappearedAt, address
+    // * gender는 기본 값이 정해져 있음
+    // * form Key validation 방식으로 name, age 검증함
+    // * images, disappearedAt, address null 여부 검증
+    return formKey.currentState!.validate() && images.isNotEmpty && timeOfDay.value != null && address.value != null;
+  }
+
   Future<void> saveInfo(BuildContext context) async {
     // request body form data 생성
     final formData = dio_package.FormData.fromMap({
       'name': nameController.text,
-      'gender': selectedGender.value,
+      'gender': gender.value,
       'age': ageController.text,
       'height': heightController.text,
       'weight': heightController.text,
@@ -55,7 +62,7 @@ class InfoFormController {
       'bookmarked': false, // default
       'images': List.generate(images.length,
           (index) => dio_package.MultipartFile.fromFile(images[index].path)),
-      // 'discoveredAt': ,
+      'disappearedAt': combineTimeOfDayWithCurrentDate(timeOfDay.value!),
       'createdAt': DateTime.now().toString(),
       'updatedAt': null,
     });
@@ -70,7 +77,7 @@ class InfoFormController {
 
   void createMontage(BuildContext context) {
     nameController.text = '김실종';
-    selectedGender.value = Config.man;
+    gender.value = Config.man;
     ageController.text = '7';
     heightController.text = '120';
     weightController.text = '43';
