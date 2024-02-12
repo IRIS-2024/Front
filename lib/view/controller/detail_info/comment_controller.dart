@@ -43,8 +43,8 @@ class CommentController extends GetxController {
           clothes: "옷차림2은 이렇습니다.",
           details:
               "발견 당시 특이사항2은 이랬습니다. 친구와 같이 있는 듯 보였는데 큰 이상은 없어보여서 긴가민가했습니다. 지나고보니 맞을수도 있다고 생각해서 제보를 올립니다.",
-          discoveredAt: "2024-02-09T07:11:42.069Z",
-          createdAt: "2024-02-09T07:11:42.069Z"),
+          discoveredAt: "2024-02-12T18:05:42.069Z",
+          createdAt: "2024-02-12T18:05:42.069Z"),
       Comment(
           cid: 3,
           title: "서울시 청파동 3가 33",
