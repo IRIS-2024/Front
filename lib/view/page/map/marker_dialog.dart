@@ -27,7 +27,7 @@ class _MarkerDialogState extends State<MarkerDialog> {
           _titleAndInfo(
               title: '인적사항',
               contents:
-              '${Config().getGenderText(widget.controller.selectedGender.value)} / ${widget.controller.agewidget.controller.text}세 / ${widget.controller.heightwidget.controller.text == '' ? '' : '${widget.controller.heightwidget.controller.text}cm'} / ${widget.controller.weightwidget.controller.text == '' ? '' : '${widget.controller.weightwidget.controller.text}kg'}'),
+              '${Config().getGenderText(widget.controller.gender.value)} / ${widget.controller.agewidget.controller.text}세 / ${widget.controller.heightwidget.controller.text == '' ? '' : '${widget.controller.heightwidget.controller.text}cm'} / ${widget.controller.weightwidget.controller.text == '' ? '' : '${widget.controller.weightwidget.controller.text}kg'}'),
           _titleAndInfo(title: '마지막 위치', contents: widget.controller.address.value!),
           _titleAndInfo(title: '옷차림', contents: widget.controller.clotheswidget.controller.text),
           _titleAndInfo(title: '특이사항', contents: widget.controller.notewidget.controller.text),

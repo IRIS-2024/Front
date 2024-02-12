@@ -39,9 +39,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
             actions: RegisterButton(onPressed: () {
               // validate image, location
               infoFormController.initValidation.value = false;
-              if (_formKey.currentState!.validate() &&
-                  infoFormController.images.isNotEmpty &&
-                  infoFormController.address.value != null) {
+              if (infoFormController.validateRequiredFields(_formKey)) {
                 // 정보 등록 (저장)
                 infoFormController.saveInfo(context);
               }
@@ -114,6 +112,58 @@ class _InfoFormPageState extends State<InfoFormPage> {
                             unitText: 'kg')),
                   ],
                 ),
+
+                // 실종 시각
+              BasicForm(
+                    title: '실종 시각',
+                    isRequired: true,
+                    widget: Obx(
+                      () => Column(
+                        children: [
+                          OutlinedButton.icon(
+                              onPressed: () async {
+                                final TimeOfDay? timeOfDay =
+                                    await showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.now(),
+                                );
+                                infoFormController.timeOfDay.value = timeOfDay;
+                              },
+                              style: OutlinedButton.styleFrom(
+                                  minimumSize: const Size(double.infinity, 55),
+                                  foregroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
+                                  side: BorderSide(
+                                    color:
+                                        Theme.of(context).colorScheme.outline,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(10.0))),
+                              icon: const Icon(Icons.access_time),
+                              label: Text(
+                                  infoFormController.timeOfDay.value == null?
+                                      Config.enterTime: '${infoFormController.timeOfDay.value?.hour} : ${infoFormController.timeOfDay.value?.hour}')),
+                          infoFormController.timeOfDay.value == null &&
+                                  infoFormController.initValidation.value !=
+                                      true
+                              ? Column(
+                                children: [
+                                  const Padding(padding: CustomPadding.slimBottom),
+                                  Text(
+                                    '시간을 입력해 주세요.',
+                                    style: CustomTextStyle.small.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .error),
+                                  ),
+                                ],
+                              )
+                              : const SizedBox(),
+                        ],
+                      ),
+                    )),
                 // 마지막 위치
                 BasicForm(
                     title: '마지막 위치',
@@ -123,13 +173,15 @@ class _InfoFormPageState extends State<InfoFormPage> {
                         children: [
                           OutlinedButton.icon(
                               onPressed: () {
-                                Get.dialog(
-                                  MapPage(controller: infoFormController,)
-                                );
+                                Get.dialog(MapPage(
+                                  controller: infoFormController,
+                                ));
                               },
                               style: OutlinedButton.styleFrom(
                                   minimumSize: const Size(double.infinity, 55),
-                                  foregroundColor: Theme.of(context).colorScheme.onBackground,
+                                  foregroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
                                   side: BorderSide(
                                     color:
                                         Theme.of(context).colorScheme.outline,
@@ -138,19 +190,23 @@ class _InfoFormPageState extends State<InfoFormPage> {
                                       borderRadius:
                                           BorderRadius.circular(10.0))),
                               icon: const Icon(Icons.my_location),
-                              label: Text(infoFormController.address.value ?? '위치 입력')),
-                          infoFormController.address.value ==
-                                      null &&
+                              label: Text(
+                                  infoFormController.address.value ?? '위치 입력')),
+                          infoFormController.address.value == null &&
                                   infoFormController.initValidation.value !=
                                       true
-                              ? Padding(
-                                  padding: CustomPadding.slimBottom,
-                                  child: Text(
-                                    '위치를 입력해 주세요.',
-                                    style: CustomTextStyle.small.copyWith(color: Theme.of(context)
-                                        .colorScheme
-                                        .error),
-                                  ),
+                              ? Column(
+                                  children: [
+                                    const Padding(
+                                        padding: CustomPadding.slimBottom),
+                                    Text(
+                                      '위치를 입력해 주세요.',
+                                      style: CustomTextStyle.small.copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .error),
+                                    ),
+                                  ],
                                 )
                               : const SizedBox(),
                         ],
@@ -216,8 +272,8 @@ class _InfoFormPageState extends State<InfoFormPage> {
               child: Center(
                   child: Text(
                 unitText,
-                style: CustomTextStyle.basic.copyWith(
-                    color: Theme.of(context).colorScheme.outline),
+                style: CustomTextStyle.basic
+                    .copyWith(color: Theme.of(context).colorScheme.outline),
               ))),
         ]),
         const Padding(padding: CustomPadding.mediumBottom),
@@ -231,16 +287,16 @@ class _InfoFormPageState extends State<InfoFormPage> {
 
     return OutlinedButton(
       onPressed: () {
-        infoFormController.selectedGender.value = gender;
+        infoFormController.gender.value = gender;
       },
       style: OutlinedButton.styleFrom(
           fixedSize: const Size(double.infinity, 55),
           textStyle: CustomTextStyle.basic,
-          foregroundColor: infoFormController.selectedGender.value == gender
+          foregroundColor: infoFormController.gender.value == gender
               ? Theme.of(context).colorScheme.primary
               : Theme.of(context).colorScheme.onBackground,
           side: BorderSide(
-            color: infoFormController.selectedGender.value == gender
+            color: infoFormController.gender.value == gender
                 ? Theme.of(context).colorScheme.primary
                 : Theme.of(context).colorScheme.outline,
           ),
