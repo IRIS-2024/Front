@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
-import 'package:iris_flutter/utils/conversion_utils.dart';
+import 'package:iris_flutter/utils/time_diff_utils.dart';
 import 'package:iris_flutter/view/controller/detail_info/comment_controller.dart';
 import 'package:iris_flutter/view/controller/detail_info/info_controller.dart';
 import 'package:iris_flutter/view/page/detail_info/map_item.dart';
@@ -78,8 +78,8 @@ class _CommentTabState extends State<CommentTab> {
                           ),
                         ),
                         Text(
-                            getTimeDifference(
-                                comtController.commentList[cmtIdx].createdAt),
+                            getTimeDiffText(
+                                comtController.commentList[cmtIdx].createdAt, comtController.commentList[cmtIdx].updatedAt),
                             style: const TextStyle(fontSize: 12))
                       ],
                     ),
@@ -242,30 +242,5 @@ class _CommentTabState extends State<CommentTab> {
 
   void galleryPageChange(int index) {
     comtController.changeImgSlideIdx(index);
-  }
-
-  String getTimeDifference(String text) {
-    DateTime givenTime = DateTime.parse(text);
-
-    DateTime now = DateTime.now();
-    Duration difference = now.difference(givenTime);
-
-    // 차이를 분 단위로 계산
-    int minutesDifference = difference.inMinutes;
-
-    if (minutesDifference < 1) {
-      return '방금 전';
-    } else if (minutesDifference < 60) {
-      return '$minutesDifference 분 전';
-    } else {
-      int hoursDifference = difference.inHours;
-
-      // 차이가 24시간을 넘어가는 경우
-      if (hoursDifference >= 24) {
-        return convertDateString(text);
-      }
-
-      return '$hoursDifference 시간 전';
-    }
   }
 }

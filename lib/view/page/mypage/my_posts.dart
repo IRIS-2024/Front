@@ -32,8 +32,9 @@ class _MyPostsState extends State<MyPosts> {
                     padding: const EdgeInsets.only(top: 5, bottom: 20),
                     itemCount: mainController.missingInfoList.length,
                     itemBuilder: (BuildContext context, int idx) {
-                      return SingleInfo(
-                          missingInfo: mainController.missingInfoList[idx]);
+                      return SingleInfoItem(
+                        controller: mainController,
+                          info: mainController.missingInfoList[idx]);
                     })
                 : const Center(
                     child: Text("작성한 실종 정보가 없습니다."),

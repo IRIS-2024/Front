@@ -1,4 +1,5 @@
 import 'package:iris_flutter/model/missing_info.dart';
+import 'package:iris_flutter/model/post_list.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 
@@ -14,7 +15,7 @@ abstract class InfoRepository {
   
   // 실종 정보 List 조회
   @GET('/posts')
-  Future<List<MissingInfo>> getInfoList();
+  Future<List<PostList>> getInfoList();
 
   // 실종 정보 작성
   @POST('/posts')
