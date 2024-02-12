@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/page/form/basic_form.dart';
@@ -41,7 +40,7 @@ class TimeForm extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.0))),
                   icon: const Icon(Icons.access_time),
                   label: Text(controller.timeOfDay.value == null
-                      ? Config.enterTime
+                      ? '위치 입력'
                       : '${controller.timeOfDay.value?.hour} : ${controller.timeOfDay.value?.hour}')),
               controller.timeOfDay.value == null &&
                       controller.initValidation.value != true
