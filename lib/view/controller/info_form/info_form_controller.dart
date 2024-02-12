@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iris_flutter/config/config.dart';
-import 'package:iris_flutter/config/dio_config.dart';
-import 'package:iris_flutter/repository/info_repository.dart';
 import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/page/form/Info_form/info_form_dialog.dart';
@@ -14,8 +12,9 @@ class InfoFormController {
   RxList<XFile> images = <XFile>[].obs;
   Rx<TimeOfDay?> timeOfDay = Rx<TimeOfDay?>(null);
   RxBool isChecked = true.obs;
-
+  // validate
   RxBool initValidation = true.obs;
+
   TextEditingController nameController = TextEditingController();
   RxBool gender = Config.woman.obs;
   TextEditingController ageController = TextEditingController();
