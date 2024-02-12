@@ -6,21 +6,17 @@ import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/info_form/info_form_controller.dart';
 
-void infoFormDialog(BuildContext context) {
+void infoFormDialog() {
   Get.put(InfoFormController());
   final controller = Get.find<InfoFormController>();
 
-  Future<void> createAIImage() async {
-    // TODO 임시 딜레이
-    await Future.delayed(const Duration(milliseconds: 3000));
-  }
-
   Get.dialog(
+    barrierDismissible: false,
     Dialog(
         child: Padding(
       padding: CustomPadding.dialogInsets,
       child: FutureBuilder(
-        future: createAIImage(),
+        future: controller.createAIImage(),
         builder: (context, snap) {
           if (snap.connectionState != ConnectionState.done) {
             return Column(
