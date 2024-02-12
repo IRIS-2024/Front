@@ -21,7 +21,7 @@ class MainController {
           images: [
             'https://blenderartists.org/uploads/default/original/4X/5/4/f/54f2cbb9c456be76911967e686ca5898ac6a065d.jpeg',
           ],
-          discoveredAt: "2024-02-09T07:11:42.069Z",
+          disappearedAt: "2024-02-09T07:11:42.069Z",
           createdAt: "2024-02-09T07:11:42.069Z",
           updatedAt: null),
       MissingInfo(
@@ -41,7 +41,7 @@ class MainController {
             'https://cdn.class101.net/images/587ecdf0-4329-4447-ac00-f2b25b23eab8',
             'https://blenderartists.org/uploads/default/original/4X/5/4/f/54f2cbb9c456be76911967e686ca5898ac6a065d.jpeg',
           ],
-          discoveredAt: "2024-02-09T07:11:42.069Z",
+          disappearedAt: "2024-02-09T07:11:42.069Z",
           createdAt: "2024-02-09T07:11:42.069Z",
           updatedAt: null),
     ];
