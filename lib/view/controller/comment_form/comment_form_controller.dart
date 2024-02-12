@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:iris_flutter/config/dio_config.dart';
 import 'package:iris_flutter/repository/comment_repository.dart';
 import 'package:iris_flutter/utils/conversion_utils.dart';
-import 'package:iris_flutter/view/page/form/comment_form/registering_comment_page.dart';
+import 'package:iris_flutter/view/comm/custom_snackbar.dart';
+import 'package:iris_flutter/view/page/form/comment_form/comment_form_dialog.dart';
 import 'package:dio/dio.dart' as dio_package;
+import 'package:iris_flutter/view/page/main/main_page.dart';
 
 class CommentFormController {
   Rx<TimeOfDay?> timeOfDay = Rx<TimeOfDay?>(null);
@@ -45,7 +46,7 @@ class CommentFormController {
         address.value != null;
   }
 
-  Future<void> saveComment() async {
+  Future<void> registerComment() async {
     // TODO 주석 삭제, 통신 확인, pid
     int pid = 0;
 
@@ -66,11 +67,21 @@ class CommentFormController {
     // dio.options.contentType = 'multipart/form-data';
     // CommentRepository commentRepository = CommentRepository(dio);
     // commentRepository.postComment(pid);
+
+    // 등록 Dialog
+    // Get.to(() => CommentFormDialog()));
+    commentFormDialog();
   }
 
-  void registerComment() {
-    print('print detailsController.text: ${detailsController.text}');
+  Future<void> getMatchingRate() async {
+    // 일치율 판별 과정
+    // TODO 임시 딜레이
+    await Future.delayed(const Duration(milliseconds: 3000));
+  }
 
-    Get.to(() => RegisteringCommentPage());
+  void completeRegistration(BuildContext context) {
+    customSnackBar(
+        title: '제보 댓글 등록', message: '제보 댓글 등록이 완료되었습니다.', context: context);
+    Get.offAll(() => const MainPage()); // TODO 그 전의 Info 상세
   }
 }

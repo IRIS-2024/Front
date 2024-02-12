@@ -41,7 +41,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
               infoFormController.initValidation.value = false;
               if (infoFormController.validateRequiredFields(_formKey)) {
                 // 정보 등록 (저장)
-                infoFormController.saveInfo(context);
+                infoFormController.saveInfo();
               }
             })),
         body: SingleChildScrollView(

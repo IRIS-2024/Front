@@ -41,7 +41,7 @@ class InfoFormController {
     return formKey.currentState!.validate() && images.isNotEmpty && timeOfDay.value != null && address.value != null;
   }
 
-  Future<void> saveInfo(BuildContext context) async {
+  Future<void> saveInfo() async {
     // TODO 주석 삭제, 통신 확인
     // request body form data 생성
     final formData = dio_package.FormData.fromMap({
@@ -65,12 +65,14 @@ class InfoFormController {
     // InfoRepository infoRepository = InfoRepository(dio);
     // infoRepository.postInfo(formData);
 
-    // 이미지 생성
-    createAIImage(context);
+    // 등록 Dialog
+    infoFormDialog();
   }
 
-  void createAIImage(BuildContext context) {
-    infoFormDialog(context);
+  Future<void> createAIImage() async{
+    // AI 이미지 생성 과정
+    // TODO 임시 딜레이
+    await Future.delayed(const Duration(milliseconds: 3000));
   }
 
   void registerInfo(BuildContext context) {
