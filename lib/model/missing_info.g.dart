@@ -17,13 +17,12 @@ MissingInfo _$MissingInfoFromJson(Map<String, dynamic> json) => MissingInfo(
       longitude: (json['longitude'] as num).toDouble(),
       clothes: json['clothes'] as String?,
       details: json['details'] as String?,
+      bookmarked: json['bookmarked'] as bool,
       images:
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
-      discoveredAt: DateTime.parse(json['discoveredAt'] as String),
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
-          ? null
-          : DateTime.parse(json['updatedAt'] as String),
+      disappearedAt: json['disappearedAt'] as String,
+      createdAt: json['createdAt'] as String,
+      updatedAt: json['updatedAt'] as String?,
     );
 
 Map<String, dynamic> _$MissingInfoToJson(MissingInfo instance) =>
@@ -38,8 +37,9 @@ Map<String, dynamic> _$MissingInfoToJson(MissingInfo instance) =>
       'longitude': instance.longitude,
       'clothes': instance.clothes,
       'details': instance.details,
+      'bookmarked': instance.bookmarked,
       'images': instance.images,
-      'discoveredAt': instance.discoveredAt.toIso8601String(),
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'disappearedAt': instance.disappearedAt,
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
     };

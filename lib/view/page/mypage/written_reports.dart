@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iris_flutter/model/missing_info.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/page/detail_info/report_item.dart';
@@ -59,7 +58,7 @@ class _WrittenReportsState extends State<WrittenReports> {
                               SizedBox(
                                 width: MediaQuery.of(context).size.width - 120,
                                 child: Text(
-                                    '${mainController.missingInfoList[idx].missingName} / ${mainController.missingInfoList[idx].missingGender} / ${mainController.missingInfoList[idx].missingAge} 세 / ${mainController.missingInfoList[idx].missingLocation}',
+                                    '${mainController.missingInfoList[idx].name} / ${mainController.missingInfoList[idx].gender} / ${mainController.missingInfoList[idx].age} 세 / ${mainController.missingInfoList[idx].address}',
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(
                                       fontSize: 16,

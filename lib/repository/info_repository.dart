@@ -18,7 +18,7 @@ abstract class InfoRepository {
 
   // 실종 정보 작성
   @POST('/posts')
-  Future<MissingInfo> postInfo(@Body() MissingInfo body);
+  Future<MissingInfo> postInfo(@Body() FormData data);
 
   // 실종 정보 삭제
   @DELETE('/posts/{id}')

@@ -37,7 +37,7 @@ void infoFormDialog(BuildContext context) {
                   context: context,
                     title: '인적사항',
                     contents:
-                    '${Config().getGenderText(controller.selectedGender.value)} / ${controller.ageController.text}세 / ${controller.heightController.text == '' ? '' : '${controller.heightController.text}cm'} / ${controller.weightController.text == '' ? '' : '${controller.weightController.text}kg'}'),
+                    '${Config().getGenderText(controller.gender.value)} / ${controller.ageController.text}세 / ${controller.heightController.text == '' ? '' : '${controller.heightController.text}cm'} / ${controller.weightController.text == '' ? '' : '${controller.weightController.text}kg'}'),
                 _titleAndInfo(
                     context: context,
                     title: '마지막 위치', contents: controller.address.value!),

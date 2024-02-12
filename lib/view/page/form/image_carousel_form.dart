@@ -76,14 +76,16 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
           Obx(
             () => widget.controller.images.isEmpty &&
                     widget.controller.initValidation.value != true
-                ? Padding(
-                    padding: CustomPadding.slimRight,
-                    child: Text(
+                ? Column(
+                  children: [
+                    const Padding(padding: CustomPadding.slimBottom),
+                    Text(
                       '사진을 추가해 주세요.',
                       style: CustomTextStyle.small
                           .copyWith(color: Theme.of(context).colorScheme.error),
                     ),
-                  )
+                  ],
+                )
                 : const SizedBox(),
           ),
         ],
