@@ -31,8 +31,6 @@ class InfoFormController {
     await picker.pickMultiImage().then((value) {
       images += value;
     });
-
-    print('print imagesFirstPath: ${images.first.path}');
   }
 
   bool validateRequiredFields(GlobalKey<FormState> formKey) {
@@ -50,21 +48,18 @@ class InfoFormController {
       'name': nameController.text,
       'gender': gender.value,
       'age': ageController.text,
-      'height': heightController.text,
-      'weight': heightController.text,
+      'height': heightController.text, // * nullable 여부
+      'weight': weightController.text,
       'address': address.value,
       'latitude': latitude.value,
       'longitude': longitude.value,
-      'clothes': clothesController.value,
-      'details': detailsController.text,
-      'bookmarked': false, // default
+      'disappearedAt': combineTimeOfDayWithCurrentDate(timeOfDay.value!),
+      'clothes': clothesController.text.isEmpty ? null : clothesController.text,
+      'details': detailsController.text.isEmpty ? null : clothesController.text,
       'images': List.generate(images.length,
           (index) => dio_package.MultipartFile.fromFile(images[index].path)),
-      'disappearedAt': combineTimeOfDayWithCurrentDate(timeOfDay.value!),
-      'createdAt': DateTime.now().toString(),
-      'updatedAt': null,
     });
-    //
+
     // final dio = createDio();
     // dio.options.contentType = 'multipart/form-data';
     // InfoRepository infoRepository = InfoRepository(dio);
