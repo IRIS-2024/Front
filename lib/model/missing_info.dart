@@ -16,7 +16,7 @@ class MissingInfo {
   String? details;
   bool bookmarked;
   List<String> images;
-  String discoveredAt;
+  String disappearedAt;
   String createdAt;
   String? updatedAt;
 
@@ -33,7 +33,7 @@ class MissingInfo {
     this.details,
     required this.bookmarked,
     required this.images,
-    required this.discoveredAt,
+    required this.disappearedAt,
     required this.createdAt,
     this.updatedAt,
   });
