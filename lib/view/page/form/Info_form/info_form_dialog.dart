@@ -27,12 +27,9 @@ void infoFormDialog(BuildContext context) {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  '작성하신 정보를 바탕으로',
+                  '실종자 정보를 기반으로 \nAI 이미지를 생성하는 중 입니다.',
                   style: CustomTextStyle.titleBold,
-                ),
-                const Text(
-                  '이미지를 생성하는 중 입니다...',
-                  style: CustomTextStyle.titleBold,
+                  textAlign: TextAlign.center,
                 ),
                 const Padding(padding: CustomPadding.mediumBottom),
                 Stack(alignment: AlignmentDirectional.center, children: [
@@ -53,12 +50,9 @@ void infoFormDialog(BuildContext context) {
             mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
-                '생성된 이미지를 함께',
+                '생성된 AI 이미지를 대표\n이미지로 사용하시겠습니까?',
                 style: CustomTextStyle.titleBold,
-              ),
-              const Text(
-                '등록하시겠습니까?',
-                style: CustomTextStyle.titleBold,
+                textAlign: TextAlign.center,
               ),
               const Padding(padding: CustomPadding.mediumBottom),
               ClipRRect(

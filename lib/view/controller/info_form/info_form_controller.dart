@@ -46,25 +46,25 @@ class InfoFormController {
 
   Future<void> saveInfo(BuildContext context) async {
     // TODO 주석 삭제, 통신 확인
-    // // request body form data 생성
-    // final formData = dio_package.FormData.fromMap({
-    //   'name': nameController.text,
-    //   'gender': gender.value,
-    //   'age': ageController.text,
-    //   'height': heightController.text,
-    //   'weight': heightController.text,
-    //   'address': address.value,
-    //   'latitude': latitude.value,
-    //   'longitude': longitude.value,
-    //   'clothes': clothesController.value,
-    //   'details': detailsController.text,
-    //   'bookmarked': false, // default
-    //   'images': List.generate(images.length,
-    //       (index) => dio_package.MultipartFile.fromFile(images[index].path)),
-    //   'disappearedAt': combineTimeOfDayWithCurrentDate(timeOfDay.value!),
-    //   'createdAt': DateTime.now().toString(),
-    //   'updatedAt': null,
-    // });
+    // request body form data 생성
+    final formData = dio_package.FormData.fromMap({
+      'name': nameController.text,
+      'gender': gender.value,
+      'age': ageController.text,
+      'height': heightController.text,
+      'weight': heightController.text,
+      'address': address.value,
+      'latitude': latitude.value,
+      'longitude': longitude.value,
+      'clothes': clothesController.value,
+      'details': detailsController.text,
+      'bookmarked': false, // default
+      'images': List.generate(images.length,
+          (index) => dio_package.MultipartFile.fromFile(images[index].path)),
+      'disappearedAt': combineTimeOfDayWithCurrentDate(timeOfDay.value!),
+      'createdAt': DateTime.now().toString(),
+      'updatedAt': null,
+    });
     //
     // final dio = createDio();
     // dio.options.contentType = 'multipart/form-data';
