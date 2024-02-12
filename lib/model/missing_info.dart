@@ -38,7 +38,8 @@ class MissingInfo {
     this.updatedAt,
   });
 
-  factory MissingInfo.fromJson(Map<String, dynamic> json) => _$MissingInfoFromJson(json);
+  factory MissingInfo.fromJson(Map<String, dynamic> json) =>
+      _$MissingInfoFromJson(json);
 
   Map<String, dynamic> toJson() => _$MissingInfoToJson(this);
 }
