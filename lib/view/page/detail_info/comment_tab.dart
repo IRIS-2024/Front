@@ -74,7 +74,7 @@ class _CommentTabState extends State<CommentTab> {
                       children: [
                         Flexible(
                           child: Text(
-                            comtController.commentList[cmtIdx].address,
+                            comtController.commentList[cmtIdx].title,
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 20),
                           ),
@@ -213,7 +213,8 @@ class _CommentTabState extends State<CommentTab> {
                                 const SizedBox(
                                   height: 6,
                                 ),
-                                Text("일치율 88%",
+                                Text(
+                                    '${comtController.commentList[cmtIdx].accuracy}',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 18,

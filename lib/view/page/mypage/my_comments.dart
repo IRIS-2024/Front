@@ -109,7 +109,7 @@ class _MyCommentsState extends State<MyComments> {
             children: [
               Flexible(
                 child: Text(
-                  missingInfo.commentList[cmtIdx].address,
+                  missingInfo.commentList[cmtIdx].title,
                   style: const TextStyle(
                       fontWeight: FontWeight.bold, fontSize: 20),
                 ),
@@ -186,7 +186,7 @@ class _MyCommentsState extends State<MyComments> {
                       const SizedBox(
                         height: 6,
                       ),
-                      Text("일치율 88%",
+                      Text('${missingInfo.commentList[cmtIdx].accuracy}',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
