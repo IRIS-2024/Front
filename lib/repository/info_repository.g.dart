@@ -46,13 +46,13 @@ class _InfoRepository implements InfoRepository {
   }
 
   @override
-  Future<List<MissingInfo>> getInfoList() async {
+  Future<List<PostList>> getInfoList() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<MissingInfo>>(Options(
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<PostList>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -69,7 +69,7 @@ class _InfoRepository implements InfoRepository {
               baseUrl,
             ))));
     var value = _result.data!
-        .map((dynamic i) => MissingInfo.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => PostList.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }

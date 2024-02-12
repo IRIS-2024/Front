@@ -14,6 +14,7 @@ import 'package:iris_flutter/view/page/form/register_button.dart';
 import 'package:iris_flutter/view/page/form/text_form.dart';
 import 'package:iris_flutter/view/controller/info_form/info_form_controller.dart';
 import 'package:iris_flutter/view/page/form/image_carousel_form.dart';
+import 'package:iris_flutter/view/page/form/time_form.dart';
 
 class InfoFormPage extends StatefulWidget {
   const InfoFormPage({Key? key}) : super(key: key);
@@ -114,56 +115,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
                 ),
 
                 // 실종 시각
-              BasicForm(
-                    title: '실종 시각',
-                    isRequired: true,
-                    widget: Obx(
-                      () => Column(
-                        children: [
-                          OutlinedButton.icon(
-                              onPressed: () async {
-                                final TimeOfDay? timeOfDay =
-                                    await showTimePicker(
-                                  context: context,
-                                  initialTime: TimeOfDay.now(),
-                                );
-                                infoFormController.timeOfDay.value = timeOfDay;
-                              },
-                              style: OutlinedButton.styleFrom(
-                                  minimumSize: const Size(double.infinity, 55),
-                                  foregroundColor: Theme.of(context)
-                                      .colorScheme
-                                      .onBackground,
-                                  side: BorderSide(
-                                    color:
-                                        Theme.of(context).colorScheme.outline,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(10.0))),
-                              icon: const Icon(Icons.access_time),
-                              label: Text(
-                                  infoFormController.timeOfDay.value == null?
-                                      Config.enterTime: '${infoFormController.timeOfDay.value?.hour} : ${infoFormController.timeOfDay.value?.hour}')),
-                          infoFormController.timeOfDay.value == null &&
-                                  infoFormController.initValidation.value !=
-                                      true
-                              ? Column(
-                                children: [
-                                  const Padding(padding: CustomPadding.slimBottom),
-                                  Text(
-                                    '시간을 입력해 주세요.',
-                                    style: CustomTextStyle.small.copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .error),
-                                  ),
-                                ],
-                              )
-                              : const SizedBox(),
-                        ],
-                      ),
-                    )),
+                TimeForm(title: '실종 시각', controller: infoFormController),
                 // 마지막 위치
                 AddressForm(title: '마지막 위치', controller: infoFormController),
 

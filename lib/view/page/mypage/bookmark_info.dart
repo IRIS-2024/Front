@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iris_flutter/model/missing_info.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/page/main/single_info_item.dart';
@@ -33,8 +32,9 @@ class _BookmarkInfoState extends State<BookmarkInfo> {
                     padding: const EdgeInsets.only(top: 5, bottom: 20),
                     itemCount: mainController.missingInfoList.length,
                     itemBuilder: (BuildContext context, int idx) {
-                      return SingleInfo(
-                          missingInfo: mainController.missingInfoList[idx]);
+                      return SingleInfoItem(
+                        controller: mainController,
+                          info: mainController.missingInfoList[idx]);
                     })
                 : const Center(
                     child: Text("북마크한 실종 정보가 없습니다."),
