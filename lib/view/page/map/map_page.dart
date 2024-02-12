@@ -96,7 +96,12 @@ class _MapPageState extends State<MapPage> {
   }
 
   void _onButtonPressed() {
-    widget.controller.address.value = Get.put(MapController()).formattedAddress.value!;
+    final mapController = Get.put(MapController());
+    // 주소 저장
+    widget.controller.address.value = mapController.formattedAddress.value!;
+    // 위도, 경도 저장
+    widget.controller.latitude.value = mapController.selectedLocation.value?.latitude;
+    widget.controller.longitude.value = mapController.selectedLocation.value?.longitude;
     Get.back();
   }
 }

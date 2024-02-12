@@ -57,7 +57,7 @@ class _WrittenInfoState extends State<WrittenInfo> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${missingInfo.missingName} / ${missingInfo.missingAge}세 / ${missingInfo.missingLocation}",
+                "${missingInfo.name} / ${missingInfo.age}세 / ${missingInfo.address}",
                 style: const TextStyle(fontSize: 20),
               ),
               IconButton(

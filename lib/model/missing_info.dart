@@ -14,10 +14,11 @@ class MissingInfo {
   double longitude;
   String? clothes;
   String? details;
+  bool bookmarked;
   List<String> images;
-  DateTime discoveredAt;
-  DateTime createdAt;
-  DateTime? updatedAt;
+  String disappearedAt;
+  String createdAt;
+  String? updatedAt;
 
   MissingInfo({
     required this.name,
@@ -30,8 +31,9 @@ class MissingInfo {
     required this.longitude,
     this.clothes,
     this.details,
+    required this.bookmarked,
     required this.images,
-    required this.discoveredAt,
+    required this.disappearedAt,
     required this.createdAt,
     this.updatedAt,
   });
