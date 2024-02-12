@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
-import 'package:iris_flutter/config/dio_config.dart';
 import 'package:iris_flutter/model/missing_info.dart';
-import 'package:iris_flutter/repository/info_repository.dart';
 
 class InfoController extends GetxController {
   Rx<MissingInfo> missingInfo = MissingInfo(
@@ -42,7 +40,7 @@ class InfoController extends GetxController {
   //   }
   // }
 
-  void loadData() {
+  void loadData(int id) {
     MissingInfo loadData = MissingInfo(
       name: "김송송",
       age: 10,
