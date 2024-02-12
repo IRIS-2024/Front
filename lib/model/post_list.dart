@@ -7,11 +7,11 @@ class PostList {
   int pid;
   String imgUrl;
   String name;
-  String age;
+  int age;
   String address;
   String disappearedAt;
   String createdAt;
-  String updatedAt;
+  String? updatedAt;
   bool bookmarked;
 
   PostList({
