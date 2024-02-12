@@ -4,14 +4,14 @@ import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/page/main/single_info_item.dart';
 
-class WrittenInfo extends StatefulWidget {
-  const WrittenInfo({super.key});
+class MyPosts extends StatefulWidget {
+  const MyPosts({super.key});
 
   @override
-  State<WrittenInfo> createState() => _WrittenInfoState();
+  State<MyPosts> createState() => _MyPostsState();
 }
 
-class _WrittenInfoState extends State<WrittenInfo> {
+class _MyPostsState extends State<MyPosts> {
   @override
   void initState() {
     Get.put(MainController()).setTmpData();
