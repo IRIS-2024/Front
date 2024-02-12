@@ -13,8 +13,8 @@ class InfoController extends GetxController {
     longitude: 0.0,
     bookmarked: false,
     images: [""],
-    discoveredAt: DateTime.now(),
-    createdAt: DateTime.now(),
+    disappearedAt: '',
+    createdAt: '',
   ).obs;
 
   List<String> urlImages = [
@@ -58,8 +58,8 @@ class InfoController extends GetxController {
       clothes:
           "바나나 감사합니다 아름드리 아리아 아름드리 도르레 바나나 바나나 나비잠 가온해 가온누리 여우별 별하 나래 로운 별빛 소록소록 나비잠 도서 예그리나 노트북 가온해",
       bookmarked: false,
-      discoveredAt: DateTime.now(),
-      createdAt: DateTime.now(),
+      disappearedAt: "2024-02-09T07:11:42.069Z",
+      createdAt: "2024-02-09T07:11:42.069Z",
     );
 
     missingInfo.value = loadData;

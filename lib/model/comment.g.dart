@@ -8,29 +8,29 @@ part of 'comment.dart';
 
 Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(
       cid: json['cid'] as int,
-      address: json['address'] as String,
+      title: json['title'] as String,
       latitude: (json['latitude'] as num).toDouble(),
       longitude: (json['longitude'] as num).toDouble(),
       clothes: json['clothes'] as String?,
       details: json['details'] as String?,
       images:
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
-      discoveredAt: DateTime.parse(json['discoveredAt'] as String),
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
-          ? null
-          : DateTime.parse(json['updatedAt'] as String),
+      accuracy: json['accuracy'] as int?,
+      discoveredAt: json['discoveredAt'] as String,
+      createdAt: json['createdAt'] as String,
+      updatedAt: json['updatedAt'] as String?,
     );
 
 Map<String, dynamic> _$CommentToJson(Comment instance) => <String, dynamic>{
       'cid': instance.cid,
-      'address': instance.address,
+      'title': instance.title,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
       'clothes': instance.clothes,
       'details': instance.details,
+      'accuracy': instance.accuracy,
       'images': instance.images,
-      'discoveredAt': instance.discoveredAt.toIso8601String(),
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'discoveredAt': instance.discoveredAt,
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
     };

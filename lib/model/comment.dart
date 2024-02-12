@@ -5,24 +5,26 @@ part 'comment.g.dart';
 @JsonSerializable()
 class Comment {
   int cid;
-  String address;
+  String title;
   double latitude;
   double longitude;
   String? clothes;
   String? details;
+  int? accuracy;
   List<String> images;
-  DateTime discoveredAt;
-  DateTime createdAt;
-  DateTime? updatedAt;
+  String discoveredAt;
+  String createdAt;
+  String? updatedAt;
 
   Comment({
     required this.cid,
-    required this.address,
+    required this.title,
     required this.latitude,
     required this.longitude,
     this.clothes,
     this.details,
     required this.images,
+    this.accuracy,
     required this.discoveredAt,
     required this.createdAt,
     this.updatedAt,
