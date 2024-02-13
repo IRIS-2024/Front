@@ -16,9 +16,9 @@ class _PostPageState extends State<PostPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    infoController.loadData();
+    // *** Get.arguments 읽어와서 사용
+    infoController.loadData(Get.arguments);
   }
 
   @override
@@ -37,8 +37,7 @@ class _PostPageState extends State<PostPage> {
             leading: IconButton(
               icon: const Icon(Icons.arrow_back), // 햄버거버튼 아이콘 생성
               onPressed: () {
-                // 아이콘 버튼 실행
-                print('뒤로가기');
+                Get.back();
               },
             ),
             actions: [

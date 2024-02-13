@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/controller/mypage/bookmark_post_controller.dart';
+import 'package:iris_flutter/view/page/main/single_info_item.dart';
 import 'package:iris_flutter/view/page/mypage/post_item.dart';
 
 class BookmarkPost extends StatefulWidget {
@@ -31,8 +32,9 @@ class _BookmarkPostState extends State<BookmarkPost> {
                     padding: const EdgeInsets.only(top: 5, bottom: 20),
                     itemCount: bookmarkController.postList.length,
                     itemBuilder: (BuildContext context, int idx) {
-                      return PostItem(
-                          missingInfo: bookmarkController.postList[idx]);
+                      return SingleInfoItem(
+                          controller: bookmarkController,
+                          info: bookmarkController.postList[idx]);
                     })
                 : const Center(
                     child: Text("북마크한 실종 정보가 없습니다."),
