@@ -14,7 +14,7 @@ class CommentFormController {
   // validate
   RxBool initValidation = true.obs;
 
-  // 실종 정보 일부 데이터 - 대표 사진, 이름, 성별, 나이, 주소 TODO 이전 화면에서 받아오기
+  // 실종 정보 일부 데이터 - 대표 사진, 이름, 성별, 나이, 주소
   RxString postImage = ''.obs;
   RxString postName = ''.obs;
   RxBool postGender = true.obs;
