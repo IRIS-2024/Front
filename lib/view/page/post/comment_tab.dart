@@ -36,9 +36,13 @@ class _CommentTabState extends State<CommentTab> {
     return SingleChildScrollView(
       child: Column(children: [
         // map()
-        const SizedBox(
+        SizedBox(
           height: 300,
-          child: MapItem(),
+          child: Obx(
+            () => detailController.post.value.latitude == null
+                ? const CircularProgressIndicator()
+                : const MapItem(),
+          ),
         ),
         const SizedBox(height: 12),
         Container(
@@ -52,6 +56,7 @@ class _CommentTabState extends State<CommentTab> {
                   setState(() {
                     isSwitched = value;
                     print(isSwitched);
+                    // 필터 API 요청
                   });
                 })),
         Container(
@@ -90,142 +95,110 @@ class _CommentTabState extends State<CommentTab> {
                     // 내용
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                            // 이미지(썸네일)
-                            constraints: BoxConstraints(
-                                maxWidth: MediaQuery.of(context).size.width),
-                            width: 100,
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: GestureDetector(
-                                  onTap: () => showDialog<String>(
-                                    context: context,
-                                    builder: (BuildContext context) =>
-                                        Dialog.fullscreen(
-                                      backgroundColor:
-                                          Colors.black.withOpacity(0.5),
-                                      child: Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          PhotoViewGallery.builder(
-                                            scrollPhysics:
-                                                const BouncingScrollPhysics(),
-                                            builder: (BuildContext context,
-                                                int imgIdx) {
-                                              final item = comtController
-                                                  .commentList[cmtIdx]
-                                                  .images[imgIdx];
-                                              return PhotoViewGalleryPageOptions(
-                                                  imageProvider:
-                                                      NetworkImage(item),
-                                                  initialScale:
-                                                      PhotoViewComputedScale
-                                                          .contained,
-                                                  minScale:
-                                                      PhotoViewComputedScale
-                                                              .contained *
-                                                          (0.5 + imgIdx / 10),
-                                                  maxScale:
-                                                      PhotoViewComputedScale
-                                                              .contained *
-                                                          1.1,
-                                                  heroAttributes:
-                                                      PhotoViewHeroAttributes(
-                                                          tag: imgIdx));
-                                            },
-                                            itemCount: comtController
-                                                .commentList[cmtIdx]
-                                                .images
-                                                .length,
-                                            // loadingBuilder: loadingBuilder,
-                                            backgroundDecoration:
-                                                const BoxDecoration(
-                                                    color: Colors.transparent),
-                                            pageController: pageController,
-                                            onPageChanged: galleryPageChange,
-                                            scrollDirection: Axis.horizontal,
-                                          ),
-                                          Align(
-                                            alignment: Alignment.bottomRight,
-                                            child: TextButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: const Text(
-                                                '닫기',
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                        if (comtController
+                            .commentList[cmtIdx].images.isNotEmpty)
+                          Column(
+                            children: [
+                              Container(
+                                // 이미지(썸네일)
+                                constraints: BoxConstraints(
+                                    maxWidth:
+                                        MediaQuery.of(context).size.width),
+                                width: 100,
+                                child: Stack(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        comtController
+                                            .commentList[cmtIdx].images[0],
+                                        fit: BoxFit.cover,
                                       ),
                                     ),
-                                  ),
-                                  child: Image.network(
-                                      comtController
-                                          .commentList[cmtIdx].images[0],
-                                      fit: BoxFit.cover),
-                                ))),
-                        const SizedBox(width: 12),
-                        if (comtController.commentList[cmtIdx].clothes !=
-                                null &&
-                            comtController.commentList[cmtIdx].details != null)
-                          Expanded(
-                            // 상세 정보 글
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                if (comtController
-                                        .commentList[cmtIdx].clothes !=
-                                    null)
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Text("옷차림",
-                                          style: TextStyle(color: Colors.grey)),
-                                      const SizedBox(
-                                        width: 8,
+                                    Positioned(
+                                      top: 8,
+                                      right: 8,
+                                      child: GestureDetector(
+                                        onTap: () => showDialog<String>(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              imgDialog(cmtIdx, context),
+                                        ),
+                                        child: Container(
+                                          padding: const EdgeInsets.all(4),
+                                          decoration: BoxDecoration(
+                                            color:
+                                                Colors.black.withOpacity(0.6),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Text(
+                                            "${comtController.commentList[cmtIdx].images.length}",
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
                                       ),
-                                      Flexible(
-                                          child: Text(comtController
-                                              .commentList[cmtIdx].clothes!))
-                                    ],
-                                  ),
-                                if (comtController
-                                        .commentList[cmtIdx].details !=
-                                    null)
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Text("당시 상황",
-                                          style: TextStyle(color: Colors.grey)),
-                                      const SizedBox(
-                                        width: 8,
-                                      ),
-                                      Flexible(
-                                          child: Text(comtController
-                                              .commentList[cmtIdx].details!))
-                                    ],
-                                  ),
-                                const SizedBox(
-                                  height: 6,
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                    '일치율 ${comtController.commentList[cmtIdx].accuracy} %',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary))
-                              ],
-                            ),
+                              ),
+                              const Padding(padding: CustomPadding.slimBottom),
+                              Text(
+                                  '일치율 ${comtController.commentList[cmtIdx].accuracy} %',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary))
+                            ],
                           ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          // 상세 정보 글
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (comtController.commentList[cmtIdx].clothes !=
+                                  null)
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text("옷차림",
+                                        style: TextStyle(color: Colors.grey)),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    Flexible(
+                                        child: Text(comtController
+                                            .commentList[cmtIdx].clothes!))
+                                  ],
+                                ),
+                              if (comtController.commentList[cmtIdx].details !=
+                                  null)
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text("당시 상황",
+                                        style: TextStyle(color: Colors.grey)),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    Flexible(
+                                        child: Text(comtController
+                                            .commentList[cmtIdx].details!))
+                                  ],
+                                ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -238,6 +211,49 @@ class _CommentTabState extends State<CommentTab> {
           ),
         )
       ]),
+    );
+  }
+
+  Dialog imgDialog(int cmtIdx, BuildContext context) {
+    return Dialog.fullscreen(
+      backgroundColor: Colors.black.withOpacity(0.5),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          PhotoViewGallery.builder(
+            scrollPhysics: const BouncingScrollPhysics(),
+            builder: (BuildContext context, int imgIdx) {
+              final item = comtController.commentList[cmtIdx].images[imgIdx];
+              return PhotoViewGalleryPageOptions(
+                  imageProvider: NetworkImage(item),
+                  initialScale: PhotoViewComputedScale.contained,
+                  minScale:
+                      PhotoViewComputedScale.contained * (0.5 + imgIdx / 10),
+                  maxScale: PhotoViewComputedScale.contained * 1.1,
+                  heroAttributes: PhotoViewHeroAttributes(tag: imgIdx));
+            },
+            itemCount: comtController.commentList[cmtIdx].images.length,
+            // loadingBuilder: loadingBuilder,
+            backgroundDecoration:
+                const BoxDecoration(color: Colors.transparent),
+            pageController: pageController,
+            onPageChanged: galleryPageChange,
+            scrollDirection: Axis.horizontal,
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text(
+                '닫기',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

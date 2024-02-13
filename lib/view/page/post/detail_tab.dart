@@ -29,9 +29,9 @@ class _DetailTabState extends State<DetailTab> {
             children: [
               CarouselSlider.builder(
                   carouselController: controller,
-                  itemCount: detailController.urlImages.length,
+                  itemCount: detailController.post.value.images.length,
                   itemBuilder: (context, index, realindex) {
-                    final images = detailController.urlImages[index];
+                    final images = detailController.post.value.images[index];
                     return buildImage(images, index);
                   },
                   options: CarouselOptions(
@@ -56,7 +56,7 @@ class _DetailTabState extends State<DetailTab> {
                         ),
                       const Spacer(),
                       if (activeIndex !=
-                          (detailController.urlImages.length - 1))
+                          (detailController.post.value.images.length - 1))
                         IconButton(
                           icon: const Icon(Icons.arrow_forward_ios_rounded),
                           onPressed: () => {
@@ -126,7 +126,7 @@ class _DetailTabState extends State<DetailTab> {
       onDotClicked: animateToSlide,
       effect: const WormEffect(dotWidth: 15),
       activeIndex: activeIndex,
-      count: detailController.urlImages.length);
+      count: detailController.post.value.images.length);
 
   void animateToSlide(int index) => controller.animateToPage(index);
 }
