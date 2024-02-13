@@ -6,11 +6,11 @@ import 'package:iris_flutter/config/dio_config.dart';
 import 'package:iris_flutter/repository/post_repository.dart';
 import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
-import 'package:iris_flutter/view/page/form/Info_form/info_form_dialog.dart';
+import 'package:iris_flutter/view/page/form/post_form/post_form_dialog.dart';
 import 'package:iris_flutter/view/page/main/main_page.dart';
 import 'package:dio/dio.dart' as dio_package;
 
-class InfoFormController {
+class PostFormController {
   RxList<XFile> images = <XFile>[].obs;
   Rx<TimeOfDay?> timeOfDay = Rx<TimeOfDay?>(null);
   RxBool isChecked = true.obs;
@@ -46,7 +46,7 @@ class InfoFormController {
         address.value != null;
   }
 
-  Future<void> saveInfo() async {
+  Future<void> submitPost() async {
     // TODO 주석 삭제, 통신 확인
     // request body form data 생성
     final formData = dio_package.FormData.fromMap({
@@ -71,7 +71,7 @@ class InfoFormController {
     // infoRepository.postInfo(formData);
 
     // 등록 Dialog
-    infoFormDialog();
+    postFormDialog();
   }
 
   Future<void> createAIImage() async {
@@ -80,7 +80,7 @@ class InfoFormController {
     await Future.delayed(const Duration(milliseconds: 3000));
   }
 
-  void registerInfo(BuildContext context) {
+  void submitFinalPost(BuildContext context) {
     // TODO 최종 글 등록
 
     // get navigation, snackBar

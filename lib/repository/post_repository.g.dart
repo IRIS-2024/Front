@@ -19,7 +19,7 @@ class _PostRepository implements PostRepository {
   String? baseUrl;
 
   @override
-  Future<Post> getInfo(int id) async {
+  Future<Post> getPost(int id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -46,7 +46,7 @@ class _PostRepository implements PostRepository {
   }
 
   @override
-  Future<List<Post>> getInfoList() async {
+  Future<List<Post>> getPostList() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -75,7 +75,7 @@ class _PostRepository implements PostRepository {
   }
 
   @override
-  Future<Post> postInfo(FormData data) async {
+  Future<Post> postPost(FormData data) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -102,7 +102,7 @@ class _PostRepository implements PostRepository {
   }
 
   @override
-  Future<dynamic> deleteInfo(int id) async {
+  Future<dynamic> deletePost(int id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

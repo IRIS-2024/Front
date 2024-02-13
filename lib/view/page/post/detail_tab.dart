@@ -86,11 +86,11 @@ class _DetailTabState extends State<DetailTab> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: infoItem(
+                    child: postItem(
                         "성별", detailController.post.value.gender ? "남" : "여"),
                   ),
                   Expanded(
-                    child: infoItem("만나이", detailController.post.value.age),
+                    child: postItem("만나이", detailController.post.value.age),
                   )
                 ],
               ),
@@ -99,21 +99,21 @@ class _DetailTabState extends State<DetailTab> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: infoItem(
+                    child: postItem(
                         "키", "${detailController.post.value.height} cm"),
                   ),
                   Expanded(
-                    child: infoItem(
+                    child: postItem(
                         "몸무게", "${detailController.post.value.weight} kg"),
                   )
                 ],
               ),
               const Divider(),
-              infoItem("마지막 위치", detailController.post.value.address),
+              postItem("마지막 위치", detailController.post.value.address),
               const Divider(),
-              infoItem("실종 당시 옷차림", detailController.post.value.clothes),
+              postItem("실종 당시 옷차림", detailController.post.value.clothes),
               const Divider(),
-              infoItem("특이사항", detailController.post.value.details),
+              postItem("특이사항", detailController.post.value.details),
               const Divider(),
             ]),
           ),
@@ -137,7 +137,7 @@ Widget buildImage(String urlImage, int index) => Container(
         borderRadius: BorderRadius.circular(10),
         child: Image.network(urlImage, fit: BoxFit.cover)));
 
-Widget infoItem(String title, dynamic context) => Column(
+Widget postItem(String title, dynamic context) => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
-import 'package:iris_flutter/view/page/mypage/bookmark_post.dart';
-import 'package:iris_flutter/view/page/mypage/my_posts.dart';
-import 'package:iris_flutter/view/page/mypage/my_comments.dart';
+import 'package:iris_flutter/view/page/my_page/bookmark_post.dart';
+import 'package:iris_flutter/view/page/my_page/my_posts.dart';
+import 'package:iris_flutter/view/page/my_page/my_comments.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({super.key});

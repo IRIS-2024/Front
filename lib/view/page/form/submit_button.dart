@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 
-class RegisterButton extends StatelessWidget {
+class SubmitButton extends StatelessWidget {
   final Function()? onPressed;
 
-  const RegisterButton({Key? key, required this.onPressed}) : super(key: key);
+  const SubmitButton({Key? key, required this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
