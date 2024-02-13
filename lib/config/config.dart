@@ -16,7 +16,7 @@ class Config {
 
   static final routers = [
     GetPage(
-        name: routerDetailInfo,
+        name: routerPost,
         page: () => const PostPage(),
         transition: Transition.noTransition),
     GetPage(
@@ -25,6 +25,6 @@ class Config {
         transition: Transition.noTransition),
   ];
   // routers name
-  static String routerDetailInfo = '/detail_info';
+  static String routerPost = '/detail_info';
   static String routerCommentForm = '/comment_form';
 }

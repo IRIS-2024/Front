@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
-import 'package:iris_flutter/view/controller/main/main_controller.dart';
-import 'package:iris_flutter/view/controller/mypage/bookmark_controller.dart';
-import 'package:iris_flutter/view/controller/mypage/my_post_controller.dart';
+import 'package:iris_flutter/view/controller/my_page/my_post_controller.dart';
 import 'package:iris_flutter/view/page/main/single_post_item.dart';
 
 class MyPosts extends StatefulWidget {
@@ -40,7 +38,7 @@ class _MyPostsState extends State<MyPosts> {
                               itemBuilder: (BuildContext context, int idx) {
                                 return SinglePostItem(
                                     controller: postController,
-                                    info: postController.postList[idx]);
+                                    post: postController.postList[idx]);
                               }),
                         ),
                       ),

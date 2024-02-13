@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
-import 'package:iris_flutter/view/controller/comment_form/comment_form_controller.dart';
+import 'package:iris_flutter/view/controller/form/comment_form/comment_form_controller.dart';
 
 // Page 버전
 class CommentFormDialog extends StatelessWidget {

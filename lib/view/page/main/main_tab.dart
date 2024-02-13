@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
-import 'package:iris_flutter/view/page/main/latest_info_tab_view.dart';
+import 'package:iris_flutter/view/page/main/latest_post_tab_view.dart';
 import 'package:iris_flutter/view/page/main/map_tab_view.dart';
 import 'package:iris_flutter/view/page/map/map_controller.dart';
 
@@ -75,7 +75,7 @@ class _MainTabState extends State<MainTab>
                 controller: _nestedTabController,
                 children: const [
                   // 최신 글
-                  LatestInfoTabView(),
+                  LatestPostTabView(),
                   // 지도
                   MapTabView()
                 ],

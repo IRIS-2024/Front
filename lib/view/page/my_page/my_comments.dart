@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
-import 'package:iris_flutter/view/controller/mypage/my_comments_controller.dart';
+import 'package:iris_flutter/view/controller/my_page/my_comments_controller.dart';
 import 'package:iris_flutter/view/page/post/post_page.dart';
 import 'package:iris_flutter/view/page/post/single_comment_item.dart';
 
