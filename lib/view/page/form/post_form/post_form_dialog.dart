@@ -73,7 +73,7 @@ void postFormDialog() {
                   child: ElevatedButton(
                     onPressed: () {
                       // AI 이미지 추가
-                      controller.registerPost(context);
+                      controller.submitFinalPost(context);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor:

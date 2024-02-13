@@ -46,7 +46,7 @@ class PostFormController {
         address.value != null;
   }
 
-  Future<void> savePost() async {
+  Future<void> submitPost() async {
     // TODO 주석 삭제, 통신 확인
     // request body form data 생성
     final formData = dio_package.FormData.fromMap({
@@ -80,7 +80,7 @@ class PostFormController {
     await Future.delayed(const Duration(milliseconds: 3000));
   }
 
-  void registerPost(BuildContext context) {
+  void submitFinalPost(BuildContext context) {
     // TODO 최종 글 등록
 
     // get navigation, snackBar
