@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/view/controller/post/detail_controller.dart';
 import 'package:iris_flutter/view/page/post/detail_tab.dart';
 import 'package:iris_flutter/view/page/post/comment_tab.dart';
+import 'package:iris_flutter/config/config.dart';
 
 class PostPage extends StatefulWidget {
   const PostPage({super.key});
@@ -99,6 +100,14 @@ class _PostPageState extends State<PostPage> {
                 ),
               )
             ],
+          ),
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              print('print infoController.missingInfo.value: ${detailController.post.value.address}');
+              Get.toNamed(Config.routerCommentForm, arguments: detailController.post.value);
+            },
+            label: const Text('제보하기'),
+            icon: const Icon(Icons.report_gmailerrorred),
           )),
     );
   }
