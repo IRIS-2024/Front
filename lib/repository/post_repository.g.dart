@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'info_repository.dart';
+part of 'post_repository.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'info_repository.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _InfoRepository implements InfoRepository {
-  _InfoRepository(
+class _PostRepository implements PostRepository {
+  _PostRepository(
     this._dio, {
     this.baseUrl,
   });
@@ -19,13 +19,13 @@ class _InfoRepository implements InfoRepository {
   String? baseUrl;
 
   @override
-  Future<MissingInfo> getInfo(int id) async {
+  Future<Post> getInfo(int id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<MissingInfo>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Post>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -41,18 +41,18 @@ class _InfoRepository implements InfoRepository {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MissingInfo.fromJson(_result.data!);
+    final value = Post.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<List<PostList>> getInfoList() async {
+  Future<List<Post>> getInfoList() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<PostList>>(Options(
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Post>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -69,19 +69,19 @@ class _InfoRepository implements InfoRepository {
               baseUrl,
             ))));
     var value = _result.data!
-        .map((dynamic i) => PostList.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => Post.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }
 
   @override
-  Future<MissingInfo> postInfo(FormData data) async {
+  Future<Post> postInfo(FormData data) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = data;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<MissingInfo>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Post>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -97,7 +97,7 @@ class _InfoRepository implements InfoRepository {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MissingInfo.fromJson(_result.data!);
+    final value = Post.fromJson(_result.data!);
     return value;
   }
 

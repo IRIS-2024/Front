@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/utils/time_diff_utils.dart';
-import 'package:iris_flutter/view/controller/detail_info/comment_controller.dart';
-import 'package:iris_flutter/view/controller/detail_info/info_controller.dart';
-import 'package:iris_flutter/view/page/detail_info/map_item.dart';
+import 'package:iris_flutter/view/controller/post/comment_controller.dart';
+import 'package:iris_flutter/view/controller/post/detail_controller.dart';
+import 'package:iris_flutter/view/page/post/map_item.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -22,7 +22,7 @@ class _CommentTabState extends State<CommentTab> {
   final carouselController = CarouselController();
   PageController pageController = PageController(initialPage: 0);
 
-  InfoController infoController = Get.find<InfoController>();
+  DetailController detailController = Get.find<DetailController>();
   CommentController comtController = Get.put(CommentController());
 
   @override
@@ -79,7 +79,8 @@ class _CommentTabState extends State<CommentTab> {
                         ),
                         Text(
                             getTimeDiffText(
-                                comtController.commentList[cmtIdx].createdAt, comtController.commentList[cmtIdx].updatedAt),
+                                comtController.commentList[cmtIdx].createdAt,
+                                comtController.commentList[cmtIdx].updatedAt),
                             style: const TextStyle(fontSize: 12))
                       ],
                     ),

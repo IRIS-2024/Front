@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'missing_info.g.dart';
+part 'post.g.dart';
 
 @JsonSerializable()
-class MissingInfo {
+class Post {
   String name;
   bool gender;
   int age;
@@ -20,7 +20,7 @@ class MissingInfo {
   String createdAt;
   String? updatedAt;
 
-  MissingInfo({
+  Post({
     required this.name,
     required this.gender,
     required this.age,
@@ -38,8 +38,7 @@ class MissingInfo {
     this.updatedAt,
   });
 
-  factory MissingInfo.fromJson(Map<String, dynamic> json) =>
-      _$MissingInfoFromJson(json);
+  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MissingInfoToJson(this);
+  Map<String, dynamic> toJson() => _$PostToJson(this);
 }

@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'post_list.g.dart';
+part 'short_post.g.dart';
 
 @JsonSerializable()
-class PostList {
+class shortPost {
   int pid;
   String imgUrl;
   String name;
@@ -14,7 +14,7 @@ class PostList {
   String? updatedAt;
   bool bookmarked;
 
-  PostList({
+  shortPost({
     required this.pid,
     required this.imgUrl,
     required this.name,
@@ -26,8 +26,8 @@ class PostList {
     required this.bookmarked,
   });
 
-  factory PostList.fromJson(Map<String, dynamic> json) =>
-      _$PostListFromJson(json);
+  factory shortPost.fromJson(Map<String, dynamic> json) =>
+      _$shortPostFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PostListToJson(this);
+  Map<String, dynamic> toJson() => _$shortPostToJson(this);
 }

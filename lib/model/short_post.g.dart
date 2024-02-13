@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'post_list.dart';
+part of 'short_post.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PostList _$PostListFromJson(Map<String, dynamic> json) => PostList(
+shortPost _$shortPostFromJson(Map<String, dynamic> json) => shortPost(
       pid: json['pid'] as int,
       imgUrl: json['imgUrl'] as String,
       name: json['name'] as String,
@@ -18,7 +18,7 @@ PostList _$PostListFromJson(Map<String, dynamic> json) => PostList(
       bookmarked: json['bookmarked'] as bool,
     );
 
-Map<String, dynamic> _$PostListToJson(PostList instance) => <String, dynamic>{
+Map<String, dynamic> _$shortPostToJson(shortPost instance) => <String, dynamic>{
       'pid': instance.pid,
       'imgUrl': instance.imgUrl,
       'name': instance.name,
