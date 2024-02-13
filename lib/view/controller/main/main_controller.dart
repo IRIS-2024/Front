@@ -3,11 +3,11 @@ import 'package:iris_flutter/model/post.dart';
 import 'package:iris_flutter/model/short_post.dart';
 
 class MainController {
-  RxList<shortPost> postList = <shortPost>[].obs;
+  RxList<ShortPost> postList = <ShortPost>[].obs;
 
   setTmpData() {
     postList.value = [
-      shortPost(
+      ShortPost(
           pid: 0,
           imgUrl:
               'https://blenderartists.org/uploads/default/original/4X/5/4/f/54f2cbb9c456be76911967e686ca5898ac6a065d.jpeg',
@@ -18,7 +18,7 @@ class MainController {
           disappearedAt: "2024-02-09T07:11:42.069Z",
           createdAt: "2024-02-09T07:11:42.069Z",
           updatedAt: null),
-      shortPost(
+      ShortPost(
           pid: 0,
           imgUrl:
               'https://cdn.class101.net/images/587ecdf0-4329-4447-ac00-f2b25b23eab8',
@@ -29,7 +29,7 @@ class MainController {
           createdAt: "2024-02-12 22:57:05.427963",
           updatedAt: null,
           bookmarked: true),
-      shortPost(
+      ShortPost(
           pid: 1,
           imgUrl:
               'https://blenderartists.org/uploads/default/original/4X/5/4/f/54f2cbb9c456be76911967e686ca5898ac6a065d.jpeg',

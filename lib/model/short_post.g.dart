@@ -6,7 +6,7 @@ part of 'short_post.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-shortPost _$shortPostFromJson(Map<String, dynamic> json) => shortPost(
+ShortPost _$ShortPostFromJson(Map<String, dynamic> json) => ShortPost(
       pid: json['pid'] as int,
       imgUrl: json['imgUrl'] as String,
       name: json['name'] as String,
@@ -18,7 +18,7 @@ shortPost _$shortPostFromJson(Map<String, dynamic> json) => shortPost(
       bookmarked: json['bookmarked'] as bool,
     );
 
-Map<String, dynamic> _$shortPostToJson(shortPost instance) => <String, dynamic>{
+Map<String, dynamic> _$ShortPostToJson(ShortPost instance) => <String, dynamic>{
       'pid': instance.pid,
       'imgUrl': instance.imgUrl,
       'name': instance.name,
