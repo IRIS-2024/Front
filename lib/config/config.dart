@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:iris_flutter/view/page/post/post_page.dart';
+import 'package:iris_flutter/view/page/form/comment_form/comment_form_page.dart';
 
 class Config {
   // gender
@@ -18,7 +19,12 @@ class Config {
         name: routerDetailInfo,
         page: () => const PostPage(),
         transition: Transition.noTransition),
+    GetPage(
+        name: routerCommentForm,
+        page: () => const CommentFormPage(),
+        transition: Transition.noTransition),
   ];
   // routers name
   static String routerDetailInfo = '/detail_info';
+  static String routerCommentForm = '/comment_form';
 }
