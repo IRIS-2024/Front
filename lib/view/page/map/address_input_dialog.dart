@@ -2,17 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
-import 'package:iris_flutter/view/page/map/map_controller.dart';
+import 'package:iris_flutter/view/controller/map/map_controller.dart';
 
-class MapPage extends StatefulWidget {
-  final dynamic controller;
-  const MapPage({Key? key, required this.controller}) : super(key: key);
-
-  @override
-  State<MapPage> createState() => _MapPageState();
+void addressInputDialog(dynamic controller) {
+  Get.dialog(AddressInputMap(
+    controller: controller,
+  ));
 }
 
-class _MapPageState extends State<MapPage> {
+class AddressInputMap extends StatefulWidget {
+  final dynamic controller;
+  const AddressInputMap({Key? key, required this.controller}) : super(key: key);
+
+  @override
+  State<AddressInputMap> createState() => _AddressInputMapState();
+}
+
+class _AddressInputMapState extends State<AddressInputMap> {
   @override
   void initState() {
     super.initState();
