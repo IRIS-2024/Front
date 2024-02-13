@@ -6,7 +6,6 @@ class MainController {
   RxList<shortPost> postList = <shortPost>[].obs;
 
   setTmpData() {
-    print('print DateTime.now(): ${DateTime.now()}');
     postList.value = [
       shortPost(
           pid: 0,

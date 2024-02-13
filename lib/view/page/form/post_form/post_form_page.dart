@@ -7,29 +7,29 @@ import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
+import 'package:iris_flutter/view/controller/form/post_form/post_form_controller.dart';
 import 'package:iris_flutter/view/page/form/address_form.dart';
 import 'package:iris_flutter/view/page/form/basic_form.dart';
 import 'package:iris_flutter/view/page/form/form_title.dart';
 import 'package:iris_flutter/view/page/form/register_button.dart';
 import 'package:iris_flutter/view/page/form/text_form.dart';
-import 'package:iris_flutter/view/controller/info_form/info_form_controller.dart';
 import 'package:iris_flutter/view/page/form/image_carousel_form.dart';
 import 'package:iris_flutter/view/page/form/time_form.dart';
 
-class InfoFormPage extends StatefulWidget {
-  const InfoFormPage({Key? key}) : super(key: key);
+class PostFormPage extends StatefulWidget {
+  const PostFormPage({Key? key}) : super(key: key);
 
   @override
-  State<InfoFormPage> createState() => _InfoFormPageState();
+  State<PostFormPage> createState() => _PostFormPageState();
 }
 
-class _InfoFormPageState extends State<InfoFormPage> {
+class _PostFormPageState extends State<PostFormPage> {
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    Get.put(InfoFormController());
-    final infoFormController = Get.find<InfoFormController>();
+    Get.put(PostFormController());
+    final postController = Get.find<PostFormController>();
 
     return Form(
       key: _formKey,
@@ -39,10 +39,10 @@ class _InfoFormPageState extends State<InfoFormPage> {
             title: '실종자 등록',
             actions: RegisterButton(onPressed: () {
               // validate image, location
-              infoFormController.initValidation.value = false;
-              if (infoFormController.validateRequiredFields(_formKey)) {
+              postController.initValidation.value = false;
+              if (postController.validateRequiredFields(_formKey)) {
                 // 정보 등록 (저장)
-                infoFormController.saveInfo();
+                postController.savePost();
               }
             })),
         body: SingleChildScrollView(
@@ -53,11 +53,11 @@ class _InfoFormPageState extends State<InfoFormPage> {
                 // 사진
                 ImageCarouselForm(
                   title: '실종자',
-                  controller: infoFormController,
+                  controller: postController,
                 ),
                 // 실종자 이름
                 TextForm(
-                    textEditingController: infoFormController.nameController,
+                    textEditingController: postController.nameController,
                     title: '실종자 이름',
                     isRequired: true,
                     hintText: '실종자 이름을 입력해주세요.',
@@ -84,7 +84,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
                       flex: 1,
                       child: numberField(
                           textEditingController:
-                              infoFormController.ageController,
+                              postController.ageController,
                           title: '만 나이',
                           isRequired: true,
                           unitText: '세'),
@@ -98,7 +98,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
                         flex: 1,
                         child: numberField(
                             textEditingController:
-                                infoFormController.heightController,
+                                postController.heightController,
                             title: '키',
                             isRequired: false,
                             unitText: 'cm')),
@@ -107,7 +107,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
                         flex: 1,
                         child: numberField(
                             textEditingController:
-                                infoFormController.weightController,
+                                postController.weightController,
                             title: '몸무게',
                             isRequired: false,
                             unitText: 'kg')),
@@ -115,13 +115,13 @@ class _InfoFormPageState extends State<InfoFormPage> {
                 ),
 
                 // 실종 시각
-                TimeForm(title: '실종 시각', controller: infoFormController),
+                TimeForm(title: '실종 시각', controller: postController),
                 // 마지막 위치
-                AddressForm(title: '마지막 위치', controller: infoFormController),
+                AddressForm(title: '마지막 위치', controller: postController),
 
                 // 실종 당시 옷차림
                 TextForm(
-                  textEditingController: infoFormController.clothesController,
+                  textEditingController: postController.clothesController,
                   title: '실종 당시 옷차림',
                   isRequired: false,
                   hintText: '상•하의 모양, 색상, 액세서리 등을 적어주세요.',
@@ -129,7 +129,7 @@ class _InfoFormPageState extends State<InfoFormPage> {
                 ),
                 // 특이사항
                 TextForm(
-                    textEditingController: infoFormController.detailsController,
+                    textEditingController: postController.detailsController,
                     title: '특이사항',
                     isRequired: false,
                     hintText: '실종자의 체격, 얼굴형, 특이 행동, 질병 등을 적어주세요.',
@@ -188,8 +188,8 @@ class _InfoFormPageState extends State<InfoFormPage> {
   }
 
   Widget genderButton({required String title, required bool gender}) {
-    Get.put(InfoFormController());
-    final infoFormController = Get.find<InfoFormController>();
+    Get.put(PostFormController());
+    final infoFormController = Get.find<PostFormController>();
 
     return OutlinedButton(
       onPressed: () {

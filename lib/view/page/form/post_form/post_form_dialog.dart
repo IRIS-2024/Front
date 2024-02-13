@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
-import 'package:iris_flutter/view/controller/info_form/info_form_controller.dart';
+import 'package:iris_flutter/view/controller/form/post_form/post_form_controller.dart';
 
-void infoFormDialog() {
-  Get.put(InfoFormController());
-  final controller = Get.find<InfoFormController>();
+void postFormDialog() {
+  Get.put(PostFormController());
+  final controller = Get.find<PostFormController>();
 
   Get.dialog(
     barrierDismissible: false,
@@ -73,7 +73,7 @@ void infoFormDialog() {
                   child: ElevatedButton(
                     onPressed: () {
                       // AI 이미지 추가
-                      controller.registerInfo(context);
+                      controller.registerPost(context);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor:

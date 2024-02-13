@@ -5,7 +5,7 @@ import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/model/my_comments_response.dart';
 import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
-import 'package:iris_flutter/view/controller/mypage/my_comments_controller.dart';
+import 'package:iris_flutter/view/controller/my_page/my_comments_controller.dart';
 import 'package:iris_flutter/view/page/post/post_page.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
