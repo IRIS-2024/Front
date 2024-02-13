@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'missing_info.dart';
+part of 'post.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MissingInfo _$MissingInfoFromJson(Map<String, dynamic> json) => MissingInfo(
+Post _$PostFromJson(Map<String, dynamic> json) => Post(
       name: json['name'] as String,
       gender: json['gender'] as bool,
       age: json['age'] as int,
@@ -25,8 +25,7 @@ MissingInfo _$MissingInfoFromJson(Map<String, dynamic> json) => MissingInfo(
       updatedAt: json['updatedAt'] as String?,
     );
 
-Map<String, dynamic> _$MissingInfoToJson(MissingInfo instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{
       'name': instance.name,
       'gender': instance.gender,
       'age': instance.age,

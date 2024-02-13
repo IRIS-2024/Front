@@ -35,7 +35,7 @@ class _LatestInfoTabViewState extends State<LatestInfoTabView> {
         : const SizedBox();
   }
 
-  // singleInfo(MissingInfo missingInfo) {
+  // singleInfo(Post missingInfo) {
   //   return Padding(
   //     padding: CustomPadding.thickBottom,
   //     child: Column(
