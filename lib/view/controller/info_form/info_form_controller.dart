@@ -13,8 +13,10 @@ import 'package:dio/dio.dart' as dio_package;
 class InfoFormController {
   RxList<XFile> images = <XFile>[].obs;
   Rx<TimeOfDay?> timeOfDay = Rx<TimeOfDay?>(null);
-
+  RxBool isChecked = true.obs;
+  // validate
   RxBool initValidation = true.obs;
+
   TextEditingController nameController = TextEditingController();
   RxBool gender = Config.woman.obs;
   TextEditingController ageController = TextEditingController();
@@ -26,16 +28,11 @@ class InfoFormController {
   TextEditingController clothesController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
 
-  // Dialog Index
-  RxInt dialogIndex = 0.obs;
-
   void pickImage() async {
     final ImagePicker picker = ImagePicker();
     await picker.pickMultiImage().then((value) {
       images += value;
     });
-
-    print('print imagesFirstPath: ${images.first.path}');
   }
 
   bool validateRequiredFields(GlobalKey<FormState> formKey) {
@@ -49,59 +46,43 @@ class InfoFormController {
         address.value != null;
   }
 
-  Future<void> saveInfo(BuildContext context) async {
+  Future<void> saveInfo() async {
+    // TODO 주석 삭제, 통신 확인
     // request body form data 생성
     final formData = dio_package.FormData.fromMap({
       'name': nameController.text,
       'gender': gender.value,
       'age': ageController.text,
-      'height': heightController.text,
-      'weight': heightController.text,
+      'height': heightController.text, // * nullable 여부
+      'weight': weightController.text,
       'address': address.value,
       'latitude': latitude.value,
       'longitude': longitude.value,
-      'clothes': clothesController.value,
-      'details': detailsController.text,
-      'bookmarked': false, // default
+      'disappearedAt': combineTimeOfDayWithCurrentDate(timeOfDay.value!),
+      'clothes': clothesController.text.isEmpty ? null : clothesController.text,
+      'details': detailsController.text.isEmpty ? null : clothesController.text,
       'images': List.generate(images.length,
           (index) => dio_package.MultipartFile.fromFile(images[index].path)),
-      'disappearedAt': combineTimeOfDayWithCurrentDate(timeOfDay.value!),
-      'createdAt': DateTime.now().toString(),
-      'updatedAt': null,
     });
 
-    final dio = createDio();
-    dio.options.contentType = 'multipart/form-data';
-    PostRepository infoRepository = PostRepository(dio);
-    infoRepository.postInfo(formData);
-    // 이미지 생성
-    createMontage(context);
+    // final dio = createDio();
+    // dio.options.contentType = 'multipart/form-data';
+    // PostRepository infoRepository = PostRepository(dio);
+    // infoRepository.postInfo(formData);
+
+    // 등록 Dialog
+    infoFormDialog();
   }
 
-  void createMontage(BuildContext context) {
-    nameController.text = '김실종';
-    gender.value = Config.man;
-    ageController.text = '7';
-    heightController.text = '120';
-    weightController.text = '43';
-    address.value = '용산구 왕왕동';
-    clothesController.text = '빨간 반팔, 청바지, 은색 운동화, 파랑 캡모자';
-    detailsController.text =
-        '축구 공을 가지고 놀고 있었습니다. 또래에 비해 체구가 작습니다. 강아지를 쫓아다니는 특이행동을 합니다. 실종 당시 강아지를 쫓아가다 실종 되었습니다.';
-    images.value = [
-      XFile(
-          '/Users/rlaltj/Library/Developer/CoreSimulator/Devices/75911304-00BF-4B3E-8F6A-04D3460640F7/data/Containers/Data/Application/DC5001FD-B911-4E56-82A5-CBE3B93DC278/tmp/image_picker_F2DCFDDB-AA4B-42CC-BDAC-C4B8F78D8B1B-6065-0000022F112E4292.jpg'),
-      XFile(
-          '/Users/rlaltj/Library/Developer/CoreSimulator/Devices/75911304-00BF-4B3E-8F6A-04D3460640F7/data/Containers/Data/Application/DC5001FD-B911-4E56-82A5-CBE3B93DC278/tmp/image_picker_F2DCFDDB-AA4B-42CC-BDAC-C4B8F78D8B1B-6065-0000022F112E4292.jpg')
-    ];
-
-    dialogIndex.value = 0;
-    infoFormDialog(context);
-    // 이미지 넘기기
+  Future<void> createAIImage() async {
+    // AI 이미지 생성 과정
+    // TODO 임시 딜레이
+    await Future.delayed(const Duration(milliseconds: 3000));
   }
 
   void registerInfo(BuildContext context) {
-    // 최종 글 등록
+    // TODO 최종 글 등록
+
     // get navigation, snackBar
     customSnackBar(
         title: '실종 정보 등록', message: '실종 정보 등록이 완료되었습니다.', context: context);

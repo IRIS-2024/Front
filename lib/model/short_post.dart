@@ -11,7 +11,7 @@ class shortPost {
   String address;
   String disappearedAt;
   String createdAt;
-  String updatedAt;
+  String? updatedAt;
   bool bookmarked;
 
   shortPost({
