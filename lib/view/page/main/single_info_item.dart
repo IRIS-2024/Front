@@ -3,25 +3,19 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
-import 'package:iris_flutter/model/post_list.dart';
+import 'package:iris_flutter/model/short_post.dart';
 import 'package:iris_flutter/utils/time_diff_utils.dart';
 import 'package:iris_flutter/view/controller/mypage/bookmark_controller.dart';
 
-<<<<<<< HEAD
-class SingleInfo extends StatelessWidget {
-  Post missingInfo;
-  SingleInfo({super.key, required this.missingInfo});
-=======
 class SingleInfoItem extends StatefulWidget {
   final dynamic controller;
-  final PostList info;
+  final shortPost info;
 
   const SingleInfoItem({
     super.key,
     required this.controller,
     required this.info,
   });
->>>>>>> main
 
   @override
   State<SingleInfoItem> createState() => _SingleInfoItemState();
@@ -58,7 +52,8 @@ class _SingleInfoItemState extends State<SingleInfoItem> {
                   onPressed: () {
                     // 북마크 추가 or 삭제
                     // 통신
-                    Get.put(BookmarkController()).postAndDeleteBookmark(widget.info.bookmarked, widget.info.pid);
+                    Get.put(BookmarkController()).postAndDeleteBookmark(
+                        widget.info.bookmarked, widget.info.pid);
                     // 화면 변경
                     setState(() {
                       widget.info.bookmarked = !widget.info.bookmarked;
@@ -82,7 +77,7 @@ class _SingleInfoItemState extends State<SingleInfoItem> {
                 Text(
                   getTimeDiffText(widget.info.createdAt, widget.info.createdAt),
                   style:
-                  TextStyle(color: Theme.of(context).colorScheme.outline),
+                      TextStyle(color: Theme.of(context).colorScheme.outline),
                 ),
               ],
             )
