@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/view/controller/detail_info/info_controller.dart';
 import 'package:iris_flutter/view/page/detail_info/info_tab.dart';
 import 'package:iris_flutter/view/page/detail_info/comment_tab.dart';
@@ -33,7 +34,8 @@ class _InfoPageState extends State<InfoPage> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             centerTitle: true,
-            elevation: 0, // 앱 바 뒷 배경색 제거
+            elevation: 0,
+            // 앱 바 뒷 배경색 제거
             leading: IconButton(
               icon: const Icon(Icons.arrow_back), // 햄버거버튼 아이콘 생성
               onPressed: () {
@@ -50,7 +52,8 @@ class _InfoPageState extends State<InfoPage> {
               ),
             ],
             bottom: TabBar(
-              labelColor: Colors.white, // 배경색
+              labelColor: Colors.white,
+              // 배경색
               unselectedLabelColor: Theme.of(context).colorScheme.primary,
               indicatorSize: TabBarIndicatorSize.label,
               indicator: BoxDecoration(
@@ -98,6 +101,14 @@ class _InfoPageState extends State<InfoPage> {
                 ),
               )
             ],
+          ),
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              print('print infoController.missingInfo.value: ${infoController.missingInfo.value.address}');
+              Get.toNamed(Config.routerCommentForm, arguments: infoController.missingInfo.value);
+            },
+            label: const Text('제보하기'),
+            icon: const Icon(Icons.report_gmailerrorred),
           )),
     );
   }

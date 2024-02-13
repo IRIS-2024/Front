@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:iris_flutter/repository/comment_repository.dart';
+import 'package:iris_flutter/model/missing_info.dart';
 import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/page/form/comment_form/comment_form_dialog.dart';
@@ -15,13 +15,11 @@ class CommentFormController {
   RxBool initValidation = true.obs;
 
   // 실종 정보 일부 데이터 - 대표 사진, 이름, 성별, 나이, 주소 TODO 이전 화면에서 받아오기
-  RxString missingImage =
-      'https://blenderartists.org/uploads/default/original/4X/5/4/f/54f2cbb9c456be76911967e686ca5898ac6a065d.jpeg'
-          .obs;
-  RxString missingName = '김말순'.obs;
-  RxString missingGender = '여자'.obs;
-  RxString missingAge = '85세'.obs;
-  RxString missingLocation = '용산구 갈월동'.obs;
+  RxString postImage = ''.obs;
+  RxString postName = ''.obs;
+  RxBool postGender = true.obs;
+  RxInt postAge = 0.obs;
+  RxString postAddress = ''.obs;
 
   // 제보 댓글 - 제보 사진, 시간, 위치, 옷차림, 상황
   RxList<XFile> images = <XFile>[].obs;
@@ -30,6 +28,14 @@ class CommentFormController {
   Rx<double?> longitude = Rx<double?>(null);
   TextEditingController clothesController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
+
+  void setShortPostCard(MissingInfo post) {
+    postImage.value = post.images.first;
+    postName.value = post.name;
+    postGender.value = post.gender;
+    postAge.value = post.age;
+    postAddress.value = post.address;
+  }
 
   void pickImage() async {
     final ImagePicker picker = ImagePicker();
