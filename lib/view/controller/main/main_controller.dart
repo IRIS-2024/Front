@@ -2,11 +2,11 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/model/missing_info.dart';
 
 class MainController {
-  RxList<MissingInfo> missingInfoList = <MissingInfo>[].obs;
+  RxList<Post> missingInfoList = <Post>[].obs;
 
   setTmpData() {
     missingInfoList.value = [
-      MissingInfo(
+      Post(
           name: '김말순',
           gender: true,
           age: 85,
@@ -24,7 +24,7 @@ class MainController {
           disappearedAt: "2024-02-09T07:11:42.069Z",
           createdAt: "2024-02-09T07:11:42.069Z",
           updatedAt: null),
-      MissingInfo(
+      Post(
           name: '김실종',
           gender: false,
           age: 7,

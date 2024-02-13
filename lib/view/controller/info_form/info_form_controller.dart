@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/dio_config.dart';
-import 'package:iris_flutter/repository/info_repository.dart';
+import 'package:iris_flutter/repository/post_repository.dart';
 import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/page/form/Info_form/info_form_dialog.dart';
@@ -43,7 +43,10 @@ class InfoFormController {
     // * gender는 기본 값이 정해져 있음
     // * form Key validation 방식으로 name, age 검증함
     // * images, disappearedAt, address null 여부 검증
-    return formKey.currentState!.validate() && images.isNotEmpty && timeOfDay.value != null && address.value != null;
+    return formKey.currentState!.validate() &&
+        images.isNotEmpty &&
+        timeOfDay.value != null &&
+        address.value != null;
   }
 
   Future<void> saveInfo(BuildContext context) async {
@@ -69,7 +72,7 @@ class InfoFormController {
 
     final dio = createDio();
     dio.options.contentType = 'multipart/form-data';
-    InfoRepository infoRepository = InfoRepository(dio);
+    PostRepository infoRepository = PostRepository(dio);
     infoRepository.postInfo(formData);
     // 이미지 생성
     createMontage(context);

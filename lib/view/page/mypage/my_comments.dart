@@ -6,7 +6,7 @@ import 'package:iris_flutter/model/my_comments_response.dart';
 import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/controller/mypage/my_comments_controller.dart';
-import 'package:iris_flutter/view/page/detail_info/info_page.dart';
+import 'package:iris_flutter/view/page/detail_info/post_page.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -48,7 +48,7 @@ class _MyCommentsState extends State<MyComments> {
                         Card(
                           color: Theme.of(context).colorScheme.surfaceVariant,
                           child: InkWell(
-                            onTap: () => Get.to(const InfoPage()),
+                            onTap: () => Get.to(const PostPage()),
                             child: Row(
                               children: [
                                 Padding(

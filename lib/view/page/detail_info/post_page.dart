@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/detail_info/info_controller.dart';
 import 'package:iris_flutter/view/page/detail_info/info_tab.dart';
 import 'package:iris_flutter/view/page/detail_info/comment_tab.dart';
 
-class InfoPage extends StatefulWidget {
-  const InfoPage({super.key});
+class PostPage extends StatefulWidget {
+  const PostPage({super.key});
 
   @override
-  State<InfoPage> createState() => _InfoPageState();
+  State<PostPage> createState() => _PostPageState();
 }
 
-class _InfoPageState extends State<InfoPage> {
+class _PostPageState extends State<PostPage> {
   InfoController infoController = Get.put(InfoController());
 
   @override

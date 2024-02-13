@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
-import 'package:iris_flutter/model/missing_info.dart';
+import 'package:iris_flutter/model/short_post.dart';
 
-class SingleInfo extends StatelessWidget {
-  Post missingInfo;
-  SingleInfo({super.key, required this.missingInfo});
+class PostItem extends StatelessWidget {
+  shortPost missingInfo;
+  PostItem({super.key, required this.missingInfo});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class SingleInfo extends StatelessWidget {
           ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: Image.network(
-                missingInfo.images.first,
+                missingInfo.imgUrl,
                 height: 170,
                 width: 380,
                 fit: BoxFit.fitWidth,
