@@ -3,7 +3,7 @@ import 'package:iris_flutter/model/comment.dart';
 import 'package:iris_flutter/model/my_comments_response.dart';
 
 class MyCommentsController extends GetxController {
-  RxList<MyCommentsResp> commentsList = <MyCommentsResp>[].obs;
+  RxList<MyCommentsResp> commentList = <MyCommentsResp>[].obs;
   RxInt currentIndex = 0.obs;
 
   void loadData() {
@@ -73,7 +73,7 @@ class MyCommentsController extends GetxController {
           ])
     ];
 
-    commentsList.value = tmpdata;
+    commentList.value = tmpdata;
   }
 
   void changeImgSlideIdx(int index) {
