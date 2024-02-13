@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
-import 'package:iris_flutter/view/page/mypage/bookmark_info.dart';
+import 'package:iris_flutter/view/page/mypage/bookmark_post.dart';
 import 'package:iris_flutter/view/page/mypage/my_posts.dart';
 import 'package:iris_flutter/view/page/mypage/my_comments.dart';
 
@@ -93,7 +93,7 @@ class _MyPageState extends State<MyPage> {
                           bottomLeft: Radius.circular(15),
                           bottomRight: Radius.circular(15))),
                   onTap: () {
-                    Get.to(() => const BookmarkInfo());
+                    Get.to(() => const BookmarkPost());
                   },
                   leading: const Icon(Icons.bookmark),
                   title: const Text("북마크한 실종 정보"),

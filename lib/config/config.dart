@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:iris_flutter/view/page/detail_info/info_page.dart';
+import 'package:iris_flutter/view/page/post/post_page.dart';
 import 'package:iris_flutter/view/page/form/comment_form/comment_form_page.dart';
 
 class Config {
@@ -17,7 +17,7 @@ class Config {
   static final routers = [
     GetPage(
         name: routerDetailInfo,
-        page: () => const InfoPage(),
+        page: () => const PostPage(),
         transition: Transition.noTransition),
     GetPage(
         name: routerCommentForm,

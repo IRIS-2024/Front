@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iris_flutter/view/controller/post/detail_controller.dart';
+import 'package:iris_flutter/view/page/post/detail_tab.dart';
+import 'package:iris_flutter/view/page/post/comment_tab.dart';
 import 'package:iris_flutter/config/config.dart';
-import 'package:iris_flutter/view/controller/detail_info/info_controller.dart';
-import 'package:iris_flutter/view/page/detail_info/info_tab.dart';
-import 'package:iris_flutter/view/page/detail_info/comment_tab.dart';
 
-class InfoPage extends StatefulWidget {
-  const InfoPage({super.key});
+class PostPage extends StatefulWidget {
+  const PostPage({super.key});
 
   @override
-  State<InfoPage> createState() => _InfoPageState();
+  State<PostPage> createState() => _PostPageState();
 }
 
-class _InfoPageState extends State<InfoPage> {
-  InfoController infoController = Get.put(InfoController());
+class _PostPageState extends State<PostPage> {
+  DetailController detailController = Get.put(DetailController());
 
   @override
   void initState() {
     super.initState();
     // *** Get.arguments 읽어와서 사용
-    infoController.loadData(Get.arguments);
+    // detailController.loadData(Get.arguments);
+    detailController.loadData();
   }
 
   @override
@@ -34,8 +35,7 @@ class _InfoPageState extends State<InfoPage> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             centerTitle: true,
-            elevation: 0,
-            // 앱 바 뒷 배경색 제거
+            elevation: 0, // 앱 바 뒷 배경색 제거
             leading: IconButton(
               icon: const Icon(Icons.arrow_back), // 햄버거버튼 아이콘 생성
               onPressed: () {
@@ -52,8 +52,7 @@ class _InfoPageState extends State<InfoPage> {
               ),
             ],
             bottom: TabBar(
-              labelColor: Colors.white,
-              // 배경색
+              labelColor: Colors.white, // 배경색
               unselectedLabelColor: Theme.of(context).colorScheme.primary,
               indicatorSize: TabBarIndicatorSize.label,
               indicator: BoxDecoration(
@@ -97,15 +96,15 @@ class _InfoPageState extends State<InfoPage> {
               ),
               Expanded(
                 child: TabBarView(
-                  children: [InfoTab(), CommentTab()],
+                  children: [DetailTab(), CommentTab()],
                 ),
               )
             ],
           ),
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
-              print('print infoController.missingInfo.value: ${infoController.missingInfo.value.address}');
-              Get.toNamed(Config.routerCommentForm, arguments: infoController.missingInfo.value);
+              print('print infoController.missingInfo.value: ${detailController.post.value.address}');
+              Get.toNamed(Config.routerCommentForm, arguments: detailController.post.value);
             },
             label: const Text('제보하기'),
             icon: const Icon(Icons.report_gmailerrorred),

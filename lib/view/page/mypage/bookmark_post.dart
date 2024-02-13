@@ -1,40 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
-import 'package:iris_flutter/view/controller/main/main_controller.dart';
-import 'package:iris_flutter/view/page/main/single_info_item.dart';
+import 'package:iris_flutter/view/controller/mypage/bookmark_controller.dart';
+import 'package:iris_flutter/view/page/main/single_post_item.dart';
 
-class BookmarkInfo extends StatefulWidget {
-  const BookmarkInfo({super.key});
+class BookmarkPost extends StatefulWidget {
+  const BookmarkPost({super.key});
 
   @override
-  State<BookmarkInfo> createState() => _BookmarkInfoState();
+  State<BookmarkPost> createState() => _BookmarkPostState();
 }
 
-class _BookmarkInfoState extends State<BookmarkInfo> {
+class _BookmarkPostState extends State<BookmarkPost> {
+  final bookmarkController = Get.put(BookmarkController());
+
   @override
   void initState() {
-    Get.put(MainController()).setTmpData();
+    bookmarkController.loadData();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    Get.put(MainController());
-    final mainController = Get.find<MainController>();
-
     return Scaffold(
         appBar: customAppBar(title: "북마크한 실종 정보"),
         body: Padding(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-            child: mainController.missingInfoList.isNotEmpty
+            child: bookmarkController.postList.isNotEmpty
                 ? ListView.builder(
                     padding: const EdgeInsets.only(top: 5, bottom: 20),
-                    itemCount: mainController.missingInfoList.length,
+                    itemCount: bookmarkController.postList.length,
                     itemBuilder: (BuildContext context, int idx) {
-                      return SingleInfoItem(
-                        controller: mainController,
-                          info: mainController.missingInfoList[idx]);
+                      return SinglePostItem(
+                          controller: bookmarkController,
+                          info: bookmarkController.postList[idx]);
                     })
                 : const Center(
                     child: Text("북마크한 실종 정보가 없습니다."),

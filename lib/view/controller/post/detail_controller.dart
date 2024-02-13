@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:iris_flutter/model/missing_info.dart';
+import 'package:iris_flutter/model/post.dart';
 
-class InfoController extends GetxController {
-  Rx<MissingInfo> missingInfo = MissingInfo(
+class DetailController extends GetxController {
+  Rx<Post> post = Post(
     name: "",
     gender: true,
     age: 0,
@@ -29,7 +29,7 @@ class InfoController extends GetxController {
   //     // 임시
   //     int postId = 1;
   //     final dio = createDio();
-  //     final InfoRepository infoRepository = InfoRepository(dio);
+  //     final PostRepository infoRepository = PostRepository(dio);
   //     final response = await infoRepository.getInfo(postId);
   //     //infoDetail.value = response;
   //     //infoDetail.refresh();
@@ -40,8 +40,8 @@ class InfoController extends GetxController {
   //   }
   // }
 
-  void loadData(int id) {
-    MissingInfo loadData = MissingInfo(
+  void loadData() {
+    Post loadData = Post(
       name: "김송송",
       age: 10,
       gender: true,
@@ -63,6 +63,6 @@ class InfoController extends GetxController {
       createdAt: "2024-02-09T07:11:42.069Z",
     );
 
-    missingInfo.value = loadData;
+    post.value = loadData;
   }
 }

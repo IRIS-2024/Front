@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:iris_flutter/model/missing_info.dart';
+import 'package:iris_flutter/model/post.dart';
 import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/page/form/comment_form/comment_form_dialog.dart';
@@ -29,7 +29,7 @@ class CommentFormController {
   TextEditingController clothesController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
 
-  void setShortPostCard(MissingInfo post) {
+  void setShortPostCard(Post post) {
     postImage.value = post.images.first;
     postName.value = post.name;
     postGender.value = post.gender;
@@ -66,7 +66,7 @@ class CommentFormController {
       "clothes": clothesController.text.isEmpty ? null : clothesController.text,
       "details": detailsController.text.isEmpty ? null : clothesController.text,
       "images": List.generate(images.length,
-              (index) => dio_package.MultipartFile.fromFile(images[index].path)),
+          (index) => dio_package.MultipartFile.fromFile(images[index].path)),
     });
 
     // final dio = createDio();

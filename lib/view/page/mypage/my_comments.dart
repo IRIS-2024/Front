@@ -6,7 +6,7 @@ import 'package:iris_flutter/model/my_comments_response.dart';
 import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/controller/mypage/my_comments_controller.dart';
-import 'package:iris_flutter/view/page/detail_info/info_page.dart';
+import 'package:iris_flutter/view/page/post/post_page.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -42,13 +42,13 @@ class _MyCommentsState extends State<MyComments> {
                   padding: const EdgeInsets.only(top: 5, bottom: 20),
                   itemCount: comtController.commentsList.length,
                   itemBuilder: (BuildContext context, int postIdx) {
-                    final missingInfo = comtController.commentsList[postIdx];
+                    final post = comtController.commentsList[postIdx];
                     return Column(
                       children: [
                         Card(
                           color: Theme.of(context).colorScheme.surfaceVariant,
                           child: InkWell(
-                            onTap: () => Get.to(const InfoPage()),
+                            onTap: () => Get.to(const PostPage()),
                             child: Row(
                               children: [
                                 Padding(
@@ -56,7 +56,7 @@ class _MyCommentsState extends State<MyComments> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(50),
                                     child: Image.network(
-                                      missingInfo.imgUrl,
+                                      post.imgUrl,
                                       height: 40,
                                       width: 40,
                                       fit: BoxFit.cover,
@@ -68,7 +68,7 @@ class _MyCommentsState extends State<MyComments> {
                                   width:
                                       MediaQuery.of(context).size.width - 120,
                                   child: Text(
-                                      '${missingInfo.name} / ${missingInfo.gender ? "남" : "여"} / ${missingInfo.age} 세 / ${missingInfo.address}',
+                                      '${post.name} / ${post.gender ? "남" : "여"} / ${post.age} 세 / ${post.address}',
                                       overflow: TextOverflow.ellipsis,
                                       style: CustomTextStyle.basic),
                                 ),
@@ -80,9 +80,9 @@ class _MyCommentsState extends State<MyComments> {
                           primary: false,
                           shrinkWrap: true,
                           padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
-                          itemCount: missingInfo.commentList.length,
+                          itemCount: post.commentList.length,
                           itemBuilder: (BuildContext context, int cmtIdx) {
-                            return commentItem(missingInfo, cmtIdx, context,
+                            return commentItem(post, cmtIdx, context,
                                 pageController, galleryPageChange);
                           },
                           separatorBuilder: (BuildContext ctx, int idx) {
@@ -99,7 +99,7 @@ class _MyCommentsState extends State<MyComments> {
   }
 
   Padding commentItem(
-      MyCommentsResp missingInfo,
+      MyCommentsResp post,
       int cmtIdx,
       BuildContext context,
       PageController pageController,
@@ -115,12 +115,12 @@ class _MyCommentsState extends State<MyComments> {
             children: [
               Flexible(
                 child: Text(
-                  missingInfo.commentList[cmtIdx].title,
+                  post.commentList[cmtIdx].title,
                   style: const TextStyle(
                       fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ),
-              Text(convertDateString(missingInfo.commentList[cmtIdx].createdAt),
+              Text(convertDateString(post.commentList[cmtIdx].createdAt),
                   style: const TextStyle(fontSize: 12))
             ],
           ),
@@ -142,26 +142,25 @@ class _MyCommentsState extends State<MyComments> {
                         onTap: () => showDialog<String>(
                           context: context,
                           builder: (BuildContext context) => imgDialog(
-                              missingInfo,
+                              post,
                               cmtIdx,
                               pageController,
                               galleryPageChange,
                               context),
                         ),
-                        child: Image.network(
-                            missingInfo.commentList[cmtIdx].images[0],
+                        child: Image.network(post.commentList[cmtIdx].images[0],
                             fit: BoxFit.cover),
                       ))),
               const SizedBox(width: 12),
-              if (missingInfo.commentList[cmtIdx].clothes != null &&
-                  missingInfo.commentList[cmtIdx].details != null)
+              if (post.commentList[cmtIdx].clothes != null &&
+                  post.commentList[cmtIdx].details != null)
                 Expanded(
                   // 상세 정보 글
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (missingInfo.commentList[cmtIdx].clothes != null)
+                      if (post.commentList[cmtIdx].clothes != null)
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -171,11 +170,10 @@ class _MyCommentsState extends State<MyComments> {
                               width: 8,
                             ),
                             Flexible(
-                                child: Text(
-                                    missingInfo.commentList[cmtIdx].clothes!))
+                                child: Text(post.commentList[cmtIdx].clothes!))
                           ],
                         ),
-                      if (missingInfo.commentList[cmtIdx].details != null)
+                      if (post.commentList[cmtIdx].details != null)
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -185,14 +183,13 @@ class _MyCommentsState extends State<MyComments> {
                               width: 8,
                             ),
                             Flexible(
-                                child: Text(
-                                    missingInfo.commentList[cmtIdx].details!))
+                                child: Text(post.commentList[cmtIdx].details!))
                           ],
                         ),
                       const SizedBox(
                         height: 6,
                       ),
-                      Text('일치율 ${missingInfo.commentList[cmtIdx].accuracy} %',
+                      Text('일치율 ${post.commentList[cmtIdx].accuracy} %',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
@@ -208,7 +205,7 @@ class _MyCommentsState extends State<MyComments> {
   }
 
   Dialog imgDialog(
-      MyCommentsResp missingInfo,
+      MyCommentsResp post,
       int cmtIdx,
       PageController pageController,
       void Function(int index) galleryPageChange,
@@ -221,7 +218,7 @@ class _MyCommentsState extends State<MyComments> {
           PhotoViewGallery.builder(
             scrollPhysics: const BouncingScrollPhysics(),
             builder: (BuildContext context, int index) {
-              final item = missingInfo.commentList[cmtIdx].images[index];
+              final item = post.commentList[cmtIdx].images[index];
               return PhotoViewGalleryPageOptions(
                   imageProvider: NetworkImage(item),
                   initialScale: PhotoViewComputedScale.contained,
@@ -230,7 +227,7 @@ class _MyCommentsState extends State<MyComments> {
                   maxScale: PhotoViewComputedScale.contained * 1.1,
                   heroAttributes: PhotoViewHeroAttributes(tag: index));
             },
-            itemCount: missingInfo.commentList[cmtIdx].images.length,
+            itemCount: post.commentList[cmtIdx].images.length,
             // loadingBuilder: loadingBuilder,
             backgroundDecoration:
                 const BoxDecoration(color: Colors.transparent),

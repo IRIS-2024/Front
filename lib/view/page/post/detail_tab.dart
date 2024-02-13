@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
-import 'package:iris_flutter/view/controller/detail_info/info_controller.dart';
+import 'package:iris_flutter/view/controller/post/detail_controller.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class InfoTab extends StatefulWidget {
-  const InfoTab({super.key});
+class DetailTab extends StatefulWidget {
+  const DetailTab({super.key});
 
   @override
-  State<InfoTab> createState() => _InfoTabState();
+  State<DetailTab> createState() => _DetailTabState();
 }
 
-class _InfoTabState extends State<InfoTab> {
+class _DetailTabState extends State<DetailTab> {
   final controller = CarouselController();
-  InfoController infoController = Get.find<InfoController>();
+  DetailController detailController = Get.find<DetailController>();
 
   int activeIndex = 0;
 
@@ -29,9 +29,9 @@ class _InfoTabState extends State<InfoTab> {
             children: [
               CarouselSlider.builder(
                   carouselController: controller,
-                  itemCount: infoController.urlImages.length,
+                  itemCount: detailController.urlImages.length,
                   itemBuilder: (context, index, realindex) {
-                    final images = infoController.urlImages[index];
+                    final images = detailController.urlImages[index];
                     return buildImage(images, index);
                   },
                   options: CarouselOptions(
@@ -55,7 +55,8 @@ class _InfoTabState extends State<InfoTab> {
                           },
                         ),
                       const Spacer(),
-                      if (activeIndex != (infoController.urlImages.length - 1))
+                      if (activeIndex !=
+                          (detailController.urlImages.length - 1))
                         IconButton(
                           icon: const Icon(Icons.arrow_forward_ios_rounded),
                           onPressed: () => {
@@ -78,19 +79,18 @@ class _InfoTabState extends State<InfoTab> {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
-                infoController.missingInfo.value.name,
+                detailController.post.value.name,
                 style: CustomTextStyle.titleBold,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: infoItem("성별",
-                        infoController.missingInfo.value.gender ? "남" : "여"),
+                    child: infoItem(
+                        "성별", detailController.post.value.gender ? "남" : "여"),
                   ),
                   Expanded(
-                    child:
-                        infoItem("만나이", infoController.missingInfo.value.age),
+                    child: infoItem("만나이", detailController.post.value.age),
                   )
                 ],
               ),
@@ -100,20 +100,20 @@ class _InfoTabState extends State<InfoTab> {
                 children: [
                   Expanded(
                     child: infoItem(
-                        "키", "${infoController.missingInfo.value.height} cm"),
+                        "키", "${detailController.post.value.height} cm"),
                   ),
                   Expanded(
                     child: infoItem(
-                        "몸무게", "${infoController.missingInfo.value.weight} kg"),
+                        "몸무게", "${detailController.post.value.weight} kg"),
                   )
                 ],
               ),
               const Divider(),
-              infoItem("마지막 위치", infoController.missingInfo.value.address),
+              infoItem("마지막 위치", detailController.post.value.address),
               const Divider(),
-              infoItem("실종 당시 옷차림", infoController.missingInfo.value.clothes),
+              infoItem("실종 당시 옷차림", detailController.post.value.clothes),
               const Divider(),
-              infoItem("특이사항", infoController.missingInfo.value.details),
+              infoItem("특이사항", detailController.post.value.details),
               const Divider(),
             ]),
           ),
@@ -126,7 +126,7 @@ class _InfoTabState extends State<InfoTab> {
       onDotClicked: animateToSlide,
       effect: const WormEffect(dotWidth: 15),
       activeIndex: activeIndex,
-      count: infoController.urlImages.length);
+      count: detailController.urlImages.length);
 
   void animateToSlide(int index) => controller.animateToPage(index);
 }
