@@ -1,4 +1,5 @@
 import 'package:iris_flutter/model/post.dart';
+import 'package:iris_flutter/model/short_post.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 
@@ -14,7 +15,13 @@ abstract class PostRepository {
 
   // 실종 정보 List 조회
   @GET('/posts')
-  Future<List<Post>> getPostList();
+  Future<List<ShortPost>> getPostList(
+    @Query('latitude') double latitude,
+    @Query('longitude') double longitude,
+    @Query('for') String? purpose,
+    @Query('pageNo') int? pageNo,
+    @Query('pageSize') int? pageSize,
+  );
 
   // 실종 정보 작성
   @POST('/posts')
