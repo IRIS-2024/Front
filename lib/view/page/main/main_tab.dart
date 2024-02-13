@@ -72,6 +72,7 @@ class _MainTabState extends State<MainTab>
             child: Padding(
               padding: CustomPadding.slimBottom,
               child: TabBarView(
+                physics: const NeverScrollableScrollPhysics(),
                 controller: _nestedTabController,
                 children: const [
                   // 최신 글
