@@ -48,7 +48,10 @@ class InfoController extends GetxController {
       address: "서울특별시 용산구 청파동3가 34",
       latitude: 37.543926,
       longitude: 126.969633,
-      images: urlImages,
+      images: [
+        'https://blenderartists.org/uploads/default/original/4X/5/4/f/54f2cbb9c456be76911967e686ca5898ac6a065d.jpeg',
+        'https://blenderartists.org/uploads/default/original/4X/5/4/f/54f2cbb9c456be76911967e686ca5898ac6a065d.jpeg'
+      ],
       height: 140,
       weight: 30,
       details:
