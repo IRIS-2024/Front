@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
@@ -18,6 +19,15 @@ class CommentFormPage extends StatefulWidget {
 }
 
 class _CommentFormState extends State<CommentFormPage> {
+
+
+  @override
+  void initState() {
+    print('print Get.arguments: ${Get.arguments}');
+    Get.put(CommentFormController()).setShortPostCard(Get.arguments);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Get.put(CommentFormController());
@@ -38,6 +48,7 @@ class _CommentFormState extends State<CommentFormPage> {
           padding: CustomPadding.pageInsets,
           child: Column(
             children: [
+              // 실종 정보 글 간략 정보 보여주는 Card
               Card(
                 color: Theme.of(context).colorScheme.tertiaryContainer,
                 child: Padding(
@@ -47,7 +58,7 @@ class _CommentFormState extends State<CommentFormPage> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(50),
                         child: Image.network(
-                          commentController.missingImage.value,
+                          commentController.postImage.value,
                           height: 45,
                           width: 45,
                         ),
@@ -56,7 +67,7 @@ class _CommentFormState extends State<CommentFormPage> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width - 120,
                         child: Text(
-                            '${commentController.missingName.value} / ${commentController.missingGender.value} / ${commentController.missingAge.value} / ${commentController.missingLocation.value}',
+                            '${commentController.postName.value} / ${Config().getGenderText(commentController.postGender.value)} / ${commentController.postAge.value}세 / ${commentController.postAddress.value}',
                             overflow: TextOverflow.ellipsis,
                             style: CustomTextStyle.basic),
                       ),
