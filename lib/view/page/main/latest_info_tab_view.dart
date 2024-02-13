@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
-import 'package:iris_flutter/view/page/main/single_info_item.dart';
+import 'package:iris_flutter/view/page/main/single_post_item.dart';
 
 class LatestInfoTabView extends StatefulWidget {
   const LatestInfoTabView({Key? key}) : super(key: key);
@@ -22,14 +22,14 @@ class _LatestInfoTabViewState extends State<LatestInfoTabView> {
     Get.put(MainController());
     final mainController = Get.find<MainController>();
 
-    return mainController.missingInfoList.isNotEmpty
+    return mainController.postList.isNotEmpty
         ? SizedBox(
             height: 180,
             child: ListView.builder(
-                itemCount: mainController.missingInfoList.length,
+                itemCount: mainController.postList.length,
                 itemBuilder: (BuildContext context, int idx) {
-                  return SingleInfoItem(
-                    info: mainController.missingInfoList[idx],
+                  return SinglePostItem(
+                    info: mainController.postList[idx],
                     controller: mainController,
                   );
                 }),

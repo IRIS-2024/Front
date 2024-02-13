@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iris_flutter/view/controller/detail_info/info_controller.dart';
-import 'package:iris_flutter/view/page/detail_info/info_tab.dart';
-import 'package:iris_flutter/view/page/detail_info/comment_tab.dart';
+import 'package:iris_flutter/view/controller/post/detail_controller.dart';
+import 'package:iris_flutter/view/page/post/detail_tab.dart';
+import 'package:iris_flutter/view/page/post/comment_tab.dart';
 
 class PostPage extends StatefulWidget {
   const PostPage({super.key});
@@ -12,14 +12,14 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPageState extends State<PostPage> {
-  InfoController infoController = Get.put(InfoController());
+  DetailController detailController = Get.put(DetailController());
 
   @override
   void initState() {
     super.initState();
     // *** Get.arguments 읽어와서 사용
-    // infoController.loadData(Get.arguments);
-    infoController.loadData();
+    // detailController.loadData(Get.arguments);
+    detailController.loadData();
   }
 
   @override
@@ -95,7 +95,7 @@ class _PostPageState extends State<PostPage> {
               ),
               Expanded(
                 child: TabBarView(
-                  children: [InfoTab(), CommentTab()],
+                  children: [DetailTab(), CommentTab()],
                 ),
               )
             ],
