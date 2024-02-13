@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/view/page/form/post_form/post_form_page.dart';
 import 'package:iris_flutter/view/page/main/main_tab.dart';
-import 'package:iris_flutter/view/page/map/map_controller.dart';
+import 'package:iris_flutter/view/controller/map/map_controller.dart';
 import 'package:iris_flutter/view/page/my_page/my_page.dart';
 
 class MainPage extends StatefulWidget {

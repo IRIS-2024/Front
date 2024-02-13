@@ -5,7 +5,7 @@ import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/page/main/latest_post_tab_view.dart';
 import 'package:iris_flutter/view/page/main/map_tab_view.dart';
-import 'package:iris_flutter/view/page/map/map_controller.dart';
+import 'package:iris_flutter/view/controller/map/map_controller.dart';
 
 class MainTab extends StatefulWidget {
   const MainTab({Key? key}) : super(key: key);
