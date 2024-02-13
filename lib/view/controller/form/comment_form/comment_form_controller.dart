@@ -52,7 +52,7 @@ class CommentFormController {
         address.value != null;
   }
 
-  Future<void> registerComment() async {
+  Future<void> submitComment() async {
     // TODO 주석 삭제, 통신 확인, pid
     int pid = 0;
 

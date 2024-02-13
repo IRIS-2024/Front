@@ -11,7 +11,7 @@ import 'package:iris_flutter/view/controller/form/post_form/post_form_controller
 import 'package:iris_flutter/view/page/form/address_form.dart';
 import 'package:iris_flutter/view/page/form/basic_form.dart';
 import 'package:iris_flutter/view/page/form/form_title.dart';
-import 'package:iris_flutter/view/page/form/register_button.dart';
+import 'package:iris_flutter/view/page/form/submit_button.dart';
 import 'package:iris_flutter/view/page/form/text_form.dart';
 import 'package:iris_flutter/view/page/form/image_carousel_form.dart';
 import 'package:iris_flutter/view/page/form/time_form.dart';
@@ -37,12 +37,12 @@ class _PostFormPageState extends State<PostFormPage> {
       child: Scaffold(
         appBar: customAppBar(
             title: '실종자 등록',
-            actions: RegisterButton(onPressed: () {
+            actions: SubmitButton(onPressed: () {
               // validate image, location
               postController.initValidation.value = false;
               if (postController.validateRequiredFields(_formKey)) {
                 // 정보 등록 (저장)
-                postController.savePost();
+                postController.submitPost();
               }
             })),
         body: SingleChildScrollView(
