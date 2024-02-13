@@ -7,21 +7,21 @@ import 'package:iris_flutter/model/short_post.dart';
 import 'package:iris_flutter/utils/time_diff_utils.dart';
 import 'package:iris_flutter/view/controller/mypage/bookmark_controller.dart';
 
-class SingleInfoItem extends StatefulWidget {
+class SinglePostItem extends StatefulWidget {
   final dynamic controller;
   final shortPost info;
 
-  const SingleInfoItem({
+  const SinglePostItem({
     super.key,
     required this.controller,
     required this.info,
   });
 
   @override
-  State<SingleInfoItem> createState() => _SingleInfoItemState();
+  State<SinglePostItem> createState() => _SinglePostItemState();
 }
 
-class _SingleInfoItemState extends State<SingleInfoItem> {
+class _SinglePostItemState extends State<SinglePostItem> {
   @override
   Widget build(BuildContext context) {
     return InkWell(

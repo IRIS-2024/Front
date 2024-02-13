@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:iris_flutter/view/page/detail_info/post_page.dart';
+import 'package:iris_flutter/view/page/post/post_page.dart';
 
 class Config {
   // gender

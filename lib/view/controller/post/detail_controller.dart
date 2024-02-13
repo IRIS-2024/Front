@@ -3,8 +3,8 @@ import 'package:iris_flutter/config/dio_config.dart';
 import 'package:iris_flutter/model/post.dart';
 import 'package:iris_flutter/repository/post_repository.dart';
 
-class InfoController extends GetxController {
-  Rx<Post> missingInfo = Post(
+class DetailController extends GetxController {
+  Rx<Post> post = Post(
     name: "",
     gender: true,
     age: 0,
@@ -62,6 +62,6 @@ class InfoController extends GetxController {
       createdAt: "2024-02-09T07:11:42.069Z",
     );
 
-    missingInfo.value = loadData;
+    post.value = loadData;
   }
 }

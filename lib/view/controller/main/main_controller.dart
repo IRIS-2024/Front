@@ -3,11 +3,11 @@ import 'package:iris_flutter/model/post.dart';
 import 'package:iris_flutter/model/short_post.dart';
 
 class MainController {
-  RxList<shortPost> missingInfoList = <shortPost>[].obs;
+  RxList<shortPost> postList = <shortPost>[].obs;
 
   setTmpData() {
     print('print DateTime.now(): ${DateTime.now()}');
-    missingInfoList.value = [
+    postList.value = [
       shortPost(
           pid: 0,
           imgUrl:
