@@ -4,10 +4,10 @@ import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
+import 'package:iris_flutter/view/controller/form/comment_form/comment_form_controller.dart';
 import 'package:iris_flutter/view/page/form/address_form.dart';
-import 'package:iris_flutter/view/controller/comment_form/comment_form_controller.dart';
 import 'package:iris_flutter/view/page/form/image_carousel_form.dart';
-import 'package:iris_flutter/view/page/form/register_button.dart';
+import 'package:iris_flutter/view/page/form/submit_button.dart';
 import 'package:iris_flutter/view/page/form/text_form.dart';
 import 'package:iris_flutter/view/page/form/time_form.dart';
 
@@ -36,11 +36,11 @@ class _CommentFormState extends State<CommentFormPage> {
     return Scaffold(
       appBar: customAppBar(
           title: '제보하기',
-          actions: RegisterButton(onPressed: () {
+          actions: SubmitButton(onPressed: () {
             // validate image, time, location
             commentController.initValidation.value = false;
             if (commentController.validateRequiredFields()) {
-              commentController.registerComment();
+              commentController.submitComment();
             }
           })),
       body: SingleChildScrollView(

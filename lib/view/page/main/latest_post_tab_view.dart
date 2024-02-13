@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/page/main/single_post_item.dart';
 
-class LatestInfoTabView extends StatefulWidget {
-  const LatestInfoTabView({Key? key}) : super(key: key);
+class LatestPostTabView extends StatefulWidget {
+  const LatestPostTabView({Key? key}) : super(key: key);
 
   @override
-  State<LatestInfoTabView> createState() => _LatestInfoTabViewState();
+  State<LatestPostTabView> createState() => _LatestPostTabViewState();
 }
 
-class _LatestInfoTabViewState extends State<LatestInfoTabView> {
+class _LatestPostTabViewState extends State<LatestPostTabView> {
   @override
   void initState() {
     Get.put(MainController()).setTmpData();
@@ -29,7 +29,7 @@ class _LatestInfoTabViewState extends State<LatestInfoTabView> {
                 itemCount: mainController.postList.length,
                 itemBuilder: (BuildContext context, int idx) {
                   return SinglePostItem(
-                    info: mainController.postList[idx],
+                    post: mainController.postList[idx],
                     controller: mainController,
                   );
                 }),

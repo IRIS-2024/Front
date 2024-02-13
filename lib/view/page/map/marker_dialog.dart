@@ -24,13 +24,13 @@ class _MarkerDialogState extends State<MarkerDialog> {
           ),
           // 사진 - 추후 추가
           // 상세 내용
-          _titleAndInfo(
+          _titleAndContent(
               title: '인적사항',
-              contents:
+              content:
               '${Config().getGenderText(widget.controller.gender.value)} / ${widget.controller.agewidget.controller.text}세 / ${widget.controller.heightwidget.controller.text == '' ? '' : '${widget.controller.heightwidget.controller.text}cm'} / ${widget.controller.weightwidget.controller.text == '' ? '' : '${widget.controller.weightwidget.controller.text}kg'}'),
-          _titleAndInfo(title: '마지막 위치', contents: widget.controller.address.value!),
-          _titleAndInfo(title: '옷차림', contents: widget.controller.clotheswidget.controller.text),
-          _titleAndInfo(title: '특이사항', contents: widget.controller.notewidget.controller.text),
+          _titleAndContent(title: '마지막 위치', content: widget.controller.address.value!),
+          _titleAndContent(title: '옷차림', content: widget.controller.clotheswidget.controller.text),
+          _titleAndContent(title: '특이사항', content: widget.controller.notewidget.controller.text),
           ElevatedButton(onPressed: () {}, child: Text('닫기')),
           ElevatedButton(onPressed: () {}, child: Text('보기')),
         ],
@@ -38,7 +38,7 @@ class _MarkerDialogState extends State<MarkerDialog> {
     );
   }
 
-  _titleAndInfo({required String title, required String contents}) {
+  _titleAndContent({required String title, required String content}) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -53,7 +53,7 @@ class _MarkerDialogState extends State<MarkerDialog> {
         SizedBox(
             width: 180,
             child: Text(
-              contents,
+              content,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             )),
