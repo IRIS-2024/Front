@@ -46,13 +46,26 @@ class _PostRepository implements PostRepository {
   }
 
   @override
-  Future<List<Post>> getPostList() async {
+  Future<List<ShortPost>> getPostList(
+    double latitude,
+    double longitude,
+    String? purpose,
+    int? pageNo,
+    int? pageSize,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'latitude': latitude,
+      r'longitude': longitude,
+      r'for': purpose,
+      r'pageNo': pageNo,
+      r'pageSize': pageSize,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Post>>(Options(
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<ShortPost>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -69,7 +82,7 @@ class _PostRepository implements PostRepository {
               baseUrl,
             ))));
     var value = _result.data!
-        .map((dynamic i) => Post.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => ShortPost.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }
