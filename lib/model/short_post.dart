@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'short_post.g.dart';
 
 @JsonSerializable()
-class shortPost {
+class ShortPost {
   int pid;
   String imgUrl;
   String name;
@@ -14,7 +14,7 @@ class shortPost {
   String? updatedAt;
   bool bookmarked;
 
-  shortPost({
+  ShortPost({
     required this.pid,
     required this.imgUrl,
     required this.name,
@@ -24,10 +24,10 @@ class shortPost {
     required this.createdAt,
     required this.updatedAt,
     required this.bookmarked,
+
   });
 
-  factory shortPost.fromJson(Map<String, dynamic> json) =>
-      _$shortPostFromJson(json);
+  factory ShortPost.fromJson(Map<String, dynamic> json) => _$ShortPostFromJson(json);
 
-  Map<String, dynamic> toJson() => _$shortPostToJson(this);
+  Map<String, dynamic> toJson() => _$ShortPostToJson(this);
 }
