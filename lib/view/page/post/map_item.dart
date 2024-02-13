@@ -32,16 +32,16 @@ class _MapItemState extends State<MapItem> {
   Widget build(BuildContext context) {
     return GoogleMap(
       initialCameraPosition: CameraPosition(target: _pGooglePlex, zoom: 17),
-      markers: {
-        Marker(
-            markerId: const MarkerId("_currentLocation"),
-            icon: BitmapDescriptor.defaultMarker,
-            position: _pGooglePlex),
-        Marker(
-            markerId: const MarkerId("_sourceLocation"),
-            icon: BitmapDescriptor.defaultMarker,
-            position: _pParkPlex)
-      },
+      markers: detailController.markersList
+          .map((location) => Marker(
+              markerId: MarkerId(location.location_id.toString()),
+              position: LatLng(location.latitude, location.longitude),
+              onTap: () {
+                Get.dialog(const Dialog(
+                  child: Text('해당 p_id 댓글을 dialog로'),
+                ));
+              }))
+          .toSet(),
     );
   }
 

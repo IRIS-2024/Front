@@ -130,73 +130,103 @@ class _MyCommentsState extends State<MyComments> {
           // 내용
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                  // 이미지(썸네일)
-                  constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width),
-                  width: 100,
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: GestureDetector(
-                        onTap: () => showDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) => imgDialog(
-                              post,
-                              cmtIdx,
-                              pageController,
-                              galleryPageChange,
-                              context),
-                        ),
-                        child: Image.network(post.commentList[cmtIdx].images[0],
-                            fit: BoxFit.cover),
-                      ))),
-              const SizedBox(width: 12),
-              if (post.commentList[cmtIdx].clothes != null &&
-                  post.commentList[cmtIdx].details != null)
-                Expanded(
-                  // 상세 정보 글
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (post.commentList[cmtIdx].clothes != null)
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text("옷차림",
-                                style: TextStyle(color: Colors.grey)),
-                            const SizedBox(
-                              width: 8,
+              if (post.commentList[cmtIdx].images.isNotEmpty)
+                Column(
+                  children: [
+                    Container(
+                      // 이미지(썸네일)
+                      constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width),
+                      width: 100,
+                      child: Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network(
+                              post.commentList[cmtIdx].images[0],
+                              fit: BoxFit.cover,
                             ),
-                            Flexible(
-                                child: Text(post.commentList[cmtIdx].clothes!))
-                          ],
-                        ),
-                      if (post.commentList[cmtIdx].details != null)
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text("당시 상황",
-                                style: TextStyle(color: Colors.grey)),
-                            const SizedBox(
-                              width: 8,
+                          ),
+                          Positioned(
+                            top: 8,
+                            right: 8,
+                            child: GestureDetector(
+                              onTap: () => showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    imgDialog(cmtIdx, context),
+                              ),
+                              child: Container(
+                                padding: const EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.6),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Text(
+                                  "${post.commentList[cmtIdx].images.length}",
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
                             ),
-                            Flexible(
-                                child: Text(post.commentList[cmtIdx].details!))
-                          ],
-                        ),
-                      const SizedBox(
-                        height: 6,
+                          ),
+                        ],
                       ),
-                      Text('일치율 ${post.commentList[cmtIdx].accuracy} %',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: Theme.of(context).colorScheme.primary))
-                    ],
-                  ),
+                    ),
+                    const Padding(padding: CustomPadding.slimBottom),
+                    if (post.commentList[cmtIdx].accuracy != null)
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                            '일치율 ${post.commentList[cmtIdx].accuracy} %',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Theme.of(context).colorScheme.primary)),
+                      )
+                  ],
                 ),
+              const Padding(padding: CustomPadding.regularRight),
+              Expanded(
+                // 상세 정보 글
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (post.commentList[cmtIdx].clothes?.isNotEmpty ?? false)
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text("옷차림",
+                              style: TextStyle(color: Colors.grey)),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Flexible(
+                              child: Text(post.commentList[cmtIdx].clothes!))
+                        ],
+                      ),
+                    if (post.commentList[cmtIdx].details?.isNotEmpty ?? false)
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text("당시 상황",
+                              style: TextStyle(color: Colors.grey)),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Flexible(
+                              child: Text(post.commentList[cmtIdx].details!))
+                        ],
+                      ),
+                  ],
+                ),
+              ),
             ],
           ),
         ],
@@ -204,12 +234,7 @@ class _MyCommentsState extends State<MyComments> {
     );
   }
 
-  Dialog imgDialog(
-      MyCommentsResp post,
-      int cmtIdx,
-      PageController pageController,
-      void Function(int index) galleryPageChange,
-      BuildContext context) {
+  Dialog imgDialog(int cmtIdx, BuildContext context) {
     return Dialog.fullscreen(
       backgroundColor: Colors.black.withOpacity(0.5),
       child: Stack(
@@ -217,18 +242,17 @@ class _MyCommentsState extends State<MyComments> {
         children: [
           PhotoViewGallery.builder(
             scrollPhysics: const BouncingScrollPhysics(),
-            builder: (BuildContext context, int index) {
-              final item = post.commentList[cmtIdx].images[index];
+            builder: (BuildContext context, int imgIdx) {
+              final item = post.commentList[cmtIdx].images[imgIdx];
               return PhotoViewGalleryPageOptions(
                   imageProvider: NetworkImage(item),
                   initialScale: PhotoViewComputedScale.contained,
                   minScale:
-                      PhotoViewComputedScale.contained * (0.5 + index / 10),
+                      PhotoViewComputedScale.contained * (0.5 + imgIdx / 10),
                   maxScale: PhotoViewComputedScale.contained * 1.1,
-                  heroAttributes: PhotoViewHeroAttributes(tag: index));
+                  heroAttributes: PhotoViewHeroAttributes(tag: imgIdx));
             },
             itemCount: post.commentList[cmtIdx].images.length,
-            // loadingBuilder: loadingBuilder,
             backgroundDecoration:
                 const BoxDecoration(color: Colors.transparent),
             pageController: pageController,

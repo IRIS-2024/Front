@@ -1,7 +1,11 @@
+// 실종 정보 페이지 > 상세 내용 탭에서 사용될 view model
+
 import 'package:get/get.dart';
+import 'package:iris_flutter/model/location.dart';
 import 'package:iris_flutter/model/post.dart';
 
 class DetailController extends GetxController {
+  // 하나의 실종 정보 글에 대한 정보를 담음
   Rx<Post> post = Post(
     name: "",
     gender: true,
@@ -15,13 +19,7 @@ class DetailController extends GetxController {
     createdAt: '',
   ).obs;
 
-  List<String> urlImages = [
-    'https://images.unsplash.com/photo-1627916607164-7b20241db935?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80',
-    'https://images.unsplash.com/photo-1522037576655-7a93ce0f4d10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-    'https://images.unsplash.com/photo-1570829053985-56e661df1ca2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-    'https://images.unsplash.com/photo-1612825173281-9a193378527e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=499&q=80',
-    'https://images.unsplash.com/photo-1580654712603-eb43273aff33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-  ];
+  RxList<Location> markersList = <Location>[].obs;
 
   // Future<void> loadData() async {
   //   // /post/{post_id}
@@ -64,5 +62,24 @@ class DetailController extends GetxController {
     );
 
     post.value = loadData;
+
+    List<Location> loadLocationData = [
+      Location(
+          location_id: 1, // 실종 위치
+          latitude: 37.543926,
+          longitude: 126.969633,
+          address: "서울특별시 용산구 청파동3가 34"),
+      Location(
+          location_id: 2, // 댓글 pid에 따라
+          latitude: 37.545555,
+          longitude: 126.963250,
+          address: "서울특별시 용산구 청파동2가 134-6"),
+      Location(
+          location_id: 3,
+          latitude: 37.544562,
+          longitude: 126.962961,
+          address: "서울특별시 용산구 청파동2가"),
+    ];
+    markersList.value = loadLocationData;
   }
 }
