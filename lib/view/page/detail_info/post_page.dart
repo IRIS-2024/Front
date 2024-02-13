@@ -18,7 +18,8 @@ class _PostPageState extends State<PostPage> {
   void initState() {
     super.initState();
     // *** Get.arguments 읽어와서 사용
-    infoController.loadData(Get.arguments);
+    // infoController.loadData(Get.arguments);
+    infoController.loadData();
   }
 
   @override
