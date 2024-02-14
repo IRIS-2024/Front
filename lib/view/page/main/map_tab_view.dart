@@ -3,6 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
+import 'package:iris_flutter/view/page/main/map_marker_dialog.dart';
 
 class MapTabView extends StatefulWidget {
   const MapTabView({Key? key}) : super(key: key);
@@ -54,9 +55,7 @@ class _MapTabViewState extends State<MapTabView> {
                               snippet:
                                   '${Config().getGenderText(shortPost.gender)} / ${shortPost.age}세/ ${shortPost.address}',
                               onTap: () {
-                                Get.dialog(const Dialog(
-                                  child: Text('MarkerDialog'),
-                                ));
+                               showMapMarkerDialog(shortPost.pid);
                               }),
                         ))
                     .toSet(),
