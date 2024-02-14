@@ -5,25 +5,23 @@ import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/form/form_map_contorller.dart';
 
-void addressInputDialog(dynamic controller) {
-  Get.dialog(LayoutBuilder(
-    builder: (context, constraints) => Dialog(
-      child: AddressInputMap(
-        controller: controller,
-      ),
+void showAddressInputMapDialog(dynamic controller) {
+  Get.dialog(Dialog(
+    child: AddressInputMapDialog(
+      controller: controller,
     ),
   ));
 }
 
-class AddressInputMap extends StatefulWidget {
+class AddressInputMapDialog extends StatefulWidget {
   final dynamic controller;
-  const AddressInputMap({Key? key, required this.controller}) : super(key: key);
+  const AddressInputMapDialog({Key? key, required this.controller}) : super(key: key);
 
   @override
-  State<AddressInputMap> createState() => _AddressInputMapState();
+  State<AddressInputMapDialog> createState() => _AddressInputMapDialogState();
 }
 
-class _AddressInputMapState extends State<AddressInputMap> {
+class _AddressInputMapDialogState extends State<AddressInputMapDialog> {
   @override
   void initState() {
     super.initState();
