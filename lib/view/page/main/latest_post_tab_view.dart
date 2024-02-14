@@ -12,12 +12,6 @@ class LatestPostTabView extends StatefulWidget {
 
 class _LatestPostTabViewState extends State<LatestPostTabView> {
   @override
-  void initState() {
-    Get.put(MainController()).setTmpData();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     Get.put(MainController());
     final mainController = Get.find<MainController>();
