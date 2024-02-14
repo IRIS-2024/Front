@@ -9,7 +9,7 @@ import 'package:iris_flutter/view/controller/my_page/bookmark_controller.dart';
 
 class SinglePostItem extends StatefulWidget {
   final dynamic controller;
-  final shortPost post;
+  final ShortPost post;
 
   const SinglePostItem({
     super.key,

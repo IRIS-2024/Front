@@ -71,12 +71,14 @@ class _PostFormPageState extends State<PostFormPage> {
                         child: BasicForm(
                           title: '성별',
                           isRequired: true,
-                          widget: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              genderButton(title: '여자', gender: Config.woman),
-                              genderButton(title: '남자', gender: Config.man),
-                            ],
+                          widget: Obx(
+                            () => Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                genderButton(title: '여자', gender: Config.woman),
+                                genderButton(title: '남자', gender: Config.man),
+                              ],
+                            ),
                           ),
                         )),
                     const Padding(padding: CustomPadding.regularRight),
