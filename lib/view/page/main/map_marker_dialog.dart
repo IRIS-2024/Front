@@ -3,15 +3,15 @@ import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 
-class MarkerDialog extends StatefulWidget {
+class MapMarkerDialog extends StatefulWidget {
   final dynamic controller;
-  const MarkerDialog({Key? key, required this.controller}) : super(key: key);
+  const MapMarkerDialog({Key? key, required this.controller}) : super(key: key);
 
   @override
-  State<MarkerDialog> createState() => _MarkerDialogState();
+  State<MapMarkerDialog> createState() => _MapMarkerDialogState();
 }
 
-class _MarkerDialogState extends State<MarkerDialog> {
+class _MapMarkerDialogState extends State<MapMarkerDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
