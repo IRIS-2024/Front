@@ -209,8 +209,8 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
         onDotClicked: animateToSlide,
         effect: WormEffect(
             activeDotColor: Theme.of(context).colorScheme.primaryContainer,
-            dotWidth: 12,
-            dotHeight: 12),
+            dotWidth: 15,
+            dotHeight: 15),
         activeIndex: activeIndex,
         count: controller.images.length);
   }

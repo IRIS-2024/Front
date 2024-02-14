@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/page/form/basic_form.dart';
-import 'package:iris_flutter/view/page/map/map_page.dart';
+import 'package:iris_flutter/view/page/form/address_input_map_dialog.dart';
 
 class AddressForm extends StatelessWidget {
   final String title;
@@ -21,9 +21,7 @@ class AddressForm extends StatelessWidget {
             children: [
               OutlinedButton.icon(
                   onPressed: () {
-                    Get.dialog(MapPage(
-                      controller: controller,
-                    ));
+                    showAddressInputMapDialog(controller);
                   },
                   style: OutlinedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 55),
