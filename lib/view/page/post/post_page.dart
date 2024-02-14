@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iris_flutter/view/controller/mypage/bookmark_controller.dart';
-import 'package:iris_flutter/view/controller/post/detail_controller.dart';
+import 'package:iris_flutter/view/controller/my_page/bookmark_controller.dart';
+import 'package:iris_flutter/view/controller/post/post_controller.dart';
 import 'package:iris_flutter/view/page/post/detail_tab.dart';
 import 'package:iris_flutter/view/page/post/comment_tab.dart';
 import 'package:iris_flutter/config/config.dart';
@@ -14,7 +14,7 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPageState extends State<PostPage> {
-  DetailController detailController = Get.put(DetailController());
+  PostController postController = Get.put(PostController());
   BookmarkController bookmrkController = Get.put(BookmarkController());
   int pid = 0; // Get.arguments['pid']
 
@@ -22,8 +22,8 @@ class _PostPageState extends State<PostPage> {
   void initState() {
     super.initState();
     // *** pid = Get.arguments 읽어와서 사용
-    // detailController.loadData(pid);
-    detailController.loadData();
+    // postController.loadData(pid);
+    postController.loadData();
   }
 
   @override
@@ -47,13 +47,13 @@ class _PostPageState extends State<PostPage> {
             ),
             actions: [
               IconButton(
-                icon: detailController.post.value.bookmarked
+                icon: postController.post.value.bookmarked
                     ? const Icon(Icons.bookmark)
                     : const Icon(Icons.bookmark_outline), // 장바구니 아이콘 생성
                 onPressed: () {
                   // 아이콘 버튼 실행
                   bookmrkController.postAndDeleteBookmark(
-                      detailController.post.value.bookmarked, pid);
+                      postController.post.value.bookmarked, pid);
                 },
               ),
             ],
@@ -109,8 +109,10 @@ class _PostPageState extends State<PostPage> {
           ),
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
-              print('print infoController.missingInfo.value: ${detailController.post.value.address}');
-              Get.toNamed(Config.routerCommentForm, arguments: detailController.post.value);
+              print(
+                  'print infoController.missingInfo.value: ${postController.post.value.address}');
+              Get.toNamed(Config.routerCommentForm,
+                  arguments: postController.post.value);
             },
             label: const Text('제보하기'),
             icon: const Icon(Icons.report_gmailerrorred),
