@@ -7,8 +7,11 @@ class ShortPost {
   int pid;
   String imgUrl;
   String name;
+  bool gender;
   int age;
   String address;
+  double latitude;
+  double longitude;
   String disappearedAt;
   String createdAt;
   String? updatedAt;
@@ -18,8 +21,11 @@ class ShortPost {
     required this.pid,
     required this.imgUrl,
     required this.name,
+    required this.gender,
     required this.age,
     required this.address,
+    required this.latitude,
+    required this.longitude,
     required this.disappearedAt,
     required this.createdAt,
     required this.updatedAt,
