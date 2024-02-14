@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:get/get.dart';
+import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/controller/map/map_controller.dart';
 
@@ -15,7 +16,7 @@ class _MapWithMarkersState extends State<MapWithMarkers> {
   @override
   void initState() {
     Get.put(MapController()).setInitialPosition();
-    // 마커 받아오기
+    // 마커 받아오기 - 임시
     Get.put(MainController()).setTmpMarkerData();
     super.initState();
   }
@@ -37,8 +38,8 @@ class _MapWithMarkersState extends State<MapWithMarkers> {
                   mapController.position.value!.latitude,
                   mapController.position.value!.longitude,
                 ),
-                zoom: 17),
-            minMaxZoomPreference: const MinMaxZoomPreference(16, 19),
+                zoom: Config.initZoom),
+            minMaxZoomPreference: MinMaxZoomPreference(Config.minZoom, Config.maxZoom),
             // 기울기 제스처 false
             tiltGesturesEnabled: false,
             // 현재 위치 표시 버튼 true
