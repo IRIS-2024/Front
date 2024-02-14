@@ -83,8 +83,10 @@ class _AddressInputMapState extends State<AddressInputMap> {
                             onPressed: formMapController.address.value != null
                             ? _onButtonPressed : null,
                             child:
-                            SizedBox(
-                              width: constraints.maxWidth - 100,
+                            Container(
+                              constraints: BoxConstraints(
+                                maxWidth: constraints.maxWidth - 100,
+                              ),
                               child: Text(formMapController.address.value ?? '위치를 선택해 주세요.'),
                             ),
                           ),

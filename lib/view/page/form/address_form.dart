@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/page/form/basic_form.dart';
-import 'package:iris_flutter/view/page/map/address_input_dialog.dart';
+import 'package:iris_flutter/view/page/form/address_input_dialog.dart';
 
 class AddressForm extends StatelessWidget {
   final String title;
