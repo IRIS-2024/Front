@@ -75,8 +75,7 @@ class CommentFormController {
     // commentRepository.postComment(pid);
 
     // 등록 Dialog
-    // Get.to(() => CommentFormDialog()));
-    commentFormDialog();
+    showCommentFormDialog();
   }
 
   Future<void> getMatchingRate() async {

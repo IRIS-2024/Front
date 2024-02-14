@@ -6,14 +6,23 @@ import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/form/post_form/post_form_controller.dart';
 
-void postFormDialog() {
-  Get.put(PostFormController());
-  final controller = Get.find<PostFormController>();
-
+void showPostFormDialog() {
   Get.dialog(
-    barrierDismissible: false,
-    Dialog(
-        child: Padding(
+      barrierDismissible: false,
+      const Dialog(
+          child: PostFormDialog()),
+  );
+}
+
+class PostFormDialog extends StatelessWidget {
+  const PostFormDialog({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Get.put(PostFormController());
+    final controller = Get.find<PostFormController>();
+
+    return Padding(
       padding: CustomPadding.dialogInsets,
       child: FutureBuilder(
         future: controller.createAIImage(),
@@ -60,7 +69,7 @@ void postFormDialog() {
                     fit: BoxFit.fitHeight,
                   )),
               Obx(
-                () => CheckboxMenuButton(
+                    () => CheckboxMenuButton(
                   value: controller.isChecked.value,
                   onChanged: (value) {
                     controller.isChecked.value = value!;
@@ -77,9 +86,9 @@ void postFormDialog() {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
-                          Theme.of(context).colorScheme.primaryContainer,
+                      Theme.of(context).colorScheme.primaryContainer,
                       foregroundColor:
-                          Theme.of(context).colorScheme.onPrimaryContainer,
+                      Theme.of(context).colorScheme.onPrimaryContainer,
                     ),
                     child: const Text('등록하기'),
                   )),
@@ -87,6 +96,9 @@ void postFormDialog() {
           );
         },
       ),
-    )),
-  );
+    );
+  }
 }
+
+
+
