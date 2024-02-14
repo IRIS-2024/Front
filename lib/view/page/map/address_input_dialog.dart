@@ -6,8 +6,12 @@ import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/form/form_map_contorller.dart';
 
 void addressInputDialog(dynamic controller) {
-  Get.dialog(AddressInputMap(
-    controller: controller,
+  Get.dialog(LayoutBuilder(
+    builder: (context, constraints) => Dialog(
+      child: AddressInputMap(
+        controller: controller,
+      ),
+    ),
   ));
 }
 
@@ -31,19 +35,18 @@ class _AddressInputMapState extends State<AddressInputMap> {
     Get.put(FormMapController());
     final formMapController = Get.find<FormMapController>();
 
-    return Obx(
-      () => formMapController.initPosition.value == null
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : SizedBox(
-            child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width - 50,
-                    height: MediaQuery.of(context).size.height / 1.3,
-                    child: GoogleMap(
+    return Scaffold(
+      appBar: AppBar(title: const Text('위치 선택'),),
+      body: LayoutBuilder(
+        builder: (context, constraints) => Obx(
+          () => formMapController.initPosition.value == null
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    GoogleMap(
                       initialCameraPosition: CameraPosition(
                           target: LatLng(
                               formMapController.initPosition.value!.latitude,
@@ -72,29 +75,32 @@ class _AddressInputMapState extends State<AddressInputMap> {
                         formMapController.getAddressForSelectedPosition(loc);
                       },
                     ),
-                  ),
-                  Positioned(
-                    bottom: 100,
-                    child: Column(
-                      children: [
-                        ElevatedButton(
-                          onPressed: formMapController.address.value != null
-                          ? _onButtonPressed : null,
-                          child:
-                          Text(formMapController.address.value ?? '위치를 선택해 주세요.'),
-                        ),
-                        formMapController.address.value != null
-                        ? const Material(
-                          child: Text('이 위치를 입력하시려면 버튼을 눌러주세요.',
-                          style: CustomTextStyle.small,),
-                        ) : const SizedBox(height: 17,
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-          ),
+                    Positioned(
+                      bottom: 100,
+                      child: Column(
+                        children: [
+                          ElevatedButton(
+                            onPressed: formMapController.address.value != null
+                            ? _onButtonPressed : null,
+                            child:
+                            SizedBox(
+                              width: constraints.maxWidth - 100,
+                              child: Text(formMapController.address.value ?? '위치를 선택해 주세요.'),
+                            ),
+                          ),
+                          formMapController.address.value != null
+                          ? const Material(
+                            child: Text('이 위치를 입력하시려면 버튼을 눌러주세요.',
+                            style: CustomTextStyle.small,),
+                          ) : const SizedBox(height: 17,
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+        ),
+      ),
     );
 
   }
