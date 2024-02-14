@@ -37,18 +37,11 @@ class _CommentTabState extends State<CommentTab> {
           ),
         ),
         Obx(() => postController.targetVisible.value == true
-            ? Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  IconButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: postController.unVisibleTargetComment,
-                      icon: const Icon(Icons.close)),
-                  SingleCmtItem(
-                      controller: postController,
-                      comment: postController.targetComment.value),
-                ],
+            ? SingleCmtItem(
+                controller: postController,
+                comment: postController.targetComment.value,
+                closeAble: true,
+                closeMethod: postController.unVisibleTargetComment,
               )
             : const Padding(padding: CustomPadding.slimBottom)),
         Container(
@@ -74,7 +67,8 @@ class _CommentTabState extends State<CommentTab> {
             itemBuilder: (BuildContext context, int cmtIdx) {
               return SingleCmtItem(
                   comment: postController.commentList[cmtIdx],
-                  controller: postController);
+                  controller: postController,
+                  closeAble: false);
             },
             separatorBuilder: (BuildContext ctx, int idx) {
               return const Divider();

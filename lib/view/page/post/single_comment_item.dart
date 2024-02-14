@@ -9,11 +9,14 @@ import 'package:photo_view/photo_view_gallery.dart';
 class SingleCmtItem extends StatefulWidget {
   final dynamic controller;
   final Comment comment;
-  const SingleCmtItem({
-    super.key,
-    required this.controller,
-    required this.comment,
-  });
+  final bool closeAble;
+  final dynamic closeMethod;
+  const SingleCmtItem(
+      {super.key,
+      required this.controller,
+      required this.comment,
+      required this.closeAble,
+      this.closeMethod});
 
   @override
   State<SingleCmtItem> createState() => _SingleCmtItemState();
@@ -44,7 +47,11 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
               Text(
                   getTimeDiffText(
                       widget.comment.createdAt, widget.comment.createdAt),
-                  style: const TextStyle(fontSize: 12))
+                  style: const TextStyle(fontSize: 12)),
+              if (widget.closeAble == true)
+                IconButton(
+                    onPressed: widget.closeMethod,
+                    icon: const Icon(Icons.close)),
             ],
           ),
           const Padding(padding: CustomPadding.regularBottom),
