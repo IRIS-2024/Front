@@ -21,6 +21,17 @@ class PostController extends GetxController {
   RxList<Comment> commentList = <Comment>[].obs;
   RxInt currentIndex = 0.obs; // 댓글 별 이미지 슬라이드
 
+  Rx<Comment> targetComment = Comment(
+          cid: 0,
+          title: '임시 댓글',
+          latitude: 0.0,
+          longitude: 0.0,
+          images: [''],
+          discoveredAt: '2024-02-09T07:11:42.069Z',
+          createdAt: '2024-02-09T07:11:42.069Z')
+      .obs;
+  RxBool targetVisible = false.obs;
+
   void changeImgSlideIdx(int index) {
     currentIndex.value = index;
   }
@@ -53,8 +64,8 @@ class PostController extends GetxController {
         'https://blenderartists.org/uploads/default/original/4X/5/4/f/54f2cbb9c456be76911967e686ca5898ac6a065d.jpeg',
         'https://blenderartists.org/uploads/default/original/4X/5/4/f/54f2cbb9c456be76911967e686ca5898ac6a065d.jpeg'
       ],
-      height: 140,
-      weight: 30,
+      // height: 140,
+      // weight: 30,
       details:
           "달볓 나래 사과 책방 그루잠 나비잠 그루잠 로운 우리는 나비잠 컴퓨터 나래 도담도담 함초롱하다 달볓 옅구름 소솜 도서관 나비잠 로운 아슬라 도르레 바람꽃 예그리나 예그리나 옅구름 우리는 예그리나 감사합니다 도담도담 이플 포도 곰다시 도서 로운 달볓 안녕 노트북 도담도담 함초롱하다 가온해 예그리나 아리아 비나리 미쁘다 별하 도서관 산들림 감사합니다 그루잠",
       clothes:
@@ -75,8 +86,8 @@ class PostController extends GetxController {
       Comment(
           cid: 1,
           title: "서울시 청파동 1가 11",
-          latitude: 37.545176,
-          longitude: 126.962722,
+          latitude: 37.544448,
+          longitude: 126.968876,
           images: [
             'https://images.unsplash.com/photo-1612825173281-9a193378527e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=499&q=80'
           ],
@@ -89,8 +100,8 @@ class PostController extends GetxController {
       Comment(
           cid: 2,
           title: "서울시 청파동 2가 21",
-          latitude: 37.545176,
-          longitude: 126.962722,
+          latitude: 37.544159,
+          longitude: 126.968737,
           images: [
             'https://images.unsplash.com/photo-1522037576655-7a93ce0f4d10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
             'https://images.unsplash.com/photo-1570829053985-56e661df1ca2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
@@ -102,8 +113,8 @@ class PostController extends GetxController {
       Comment(
           cid: 3,
           title: "서울시 청파동 3가 33",
-          latitude: 37.545176,
-          longitude: 126.962722,
+          latitude: 37.544174,
+          longitude: 126.970408,
           images: [
             'https://images.unsplash.com/photo-1580654712603-eb43273aff33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
             'https://images.unsplash.com/photo-1627916607164-7b20241db935?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80',
@@ -120,5 +131,14 @@ class PostController extends GetxController {
 
   void toggleFilter() {
     // API로 다시 받아와야 할 것 같음 (페이지네이션 때문에)
+  }
+
+  void setTargetComment(Comment data) {
+    targetComment.value = data;
+    targetVisible.value = true;
+  }
+
+  void unVisibleTargetComment() {
+    targetVisible.value = false;
   }
 }
