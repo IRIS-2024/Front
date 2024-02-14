@@ -82,6 +82,7 @@ class _MyCommentsState extends State<MyComments> {
                             return SingleCmtItem(
                               comment: post.commentList[cmtIdx],
                               controller: comtController,
+                              closeAble: false,
                             );
                           },
                           separatorBuilder: (BuildContext ctx, int idx) {
