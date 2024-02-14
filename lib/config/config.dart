@@ -14,6 +14,11 @@ class Config {
   // info, comment form
   static int maxImagesLength = 3;
 
+  // Google Map zoom
+  static double minZoom = 16;
+  static double maxZoom = 19;
+  static double initZoom = 17;
+
   static final routers = [
     GetPage(
         name: routerPost,

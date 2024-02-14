@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
+import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/page/main/latest_post_tab_view.dart';
 import 'package:iris_flutter/view/page/main/map_tab_view.dart';
-import 'package:iris_flutter/view/page/map/map_controller.dart';
 
 class MainTab extends StatefulWidget {
   const MainTab({Key? key}) : super(key: key);
@@ -58,8 +58,8 @@ class _MainTabState extends State<MainTab>
               const Padding(padding: CustomPadding.slimRight),
               IconButton(
                   onPressed: () {
-                    // update current location (Admin District)
-                    Get.put(MapController()).getAdminDistrictAddress();
+                    // update position and data
+                    Get.put(MainController()).getPositionAndPostList();
                     // updated
                     customSnackBar(title: '위치 갱신', message: '현 위치를 갱신하였습니다.', context: context);
                   },
@@ -72,6 +72,7 @@ class _MainTabState extends State<MainTab>
             child: Padding(
               padding: CustomPadding.slimBottom,
               child: TabBarView(
+                physics: const NeverScrollableScrollPhysics(),
                 controller: _nestedTabController,
                 children: const [
                   // 최신 글
