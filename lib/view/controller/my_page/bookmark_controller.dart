@@ -9,16 +9,19 @@ class BookmarkController {
   void loadData() {
     List<ShortPost> tmpData = [
       ShortPost(
-          pid: 1,
+          pid: 0,
           imgUrl:
-              'https://images.unsplash.com/photo-1580654712603-eb43273aff33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-          name: '임시1',
-          age: 10,
-          address: '서울시 동대문구 한천로 1가 11',
-          disappearedAt: "",
+          'https://blenderartists.org/uploads/default/original/4X/5/4/f/54f2cbb9c456be76911967e686ca5898ac6a065d.jpeg',
+          name: '김말순',
+          gender: true,
+          age: 85,
+          address: '용산구 갈월동',
+          latitude: 37.545144,
+          longitude: 126.964381,
+          bookmarked: false,
+          disappearedAt: "2024-02-09T07:11:42.069Z",
           createdAt: "2024-02-09T07:11:42.069Z",
-          updatedAt: "2024-02-09T07:11:42.069Z",
-          bookmarked: true)
+          updatedAt: null),
     ];
     postList.value = tmpData;
   }

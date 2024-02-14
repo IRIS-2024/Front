@@ -1,3 +1,4 @@
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/dio_config.dart';
 import 'package:iris_flutter/model/post.dart';
@@ -9,28 +10,38 @@ class MainController {
   RxList<Post> markerList = <Post>[].obs;
   RxDouble latitude = 0.0.obs;
   RxDouble longitude = 0.0.obs;
+  Rx<Position?> position = Rx<Position?>(null); // current location
+
 
   void getPostList() async {
-    final dio = createDio();
-    PostRepository postRepository = PostRepository(dio);
-    await postRepository
-        .getPostList(latitude.value, longitude.value, null, null, null)
-        .then((value) {
-      postList.value = value;
-    }).catchError((error) {
-      print('print e: $error');
-    });
+    // final dio = createDio();
+    // PostRepository postRepository = PostRepository(dio);
+    // await postRepository
+    //     .getPostList(latitude.value, longitude.value, null, null, null)
+    //     .then((value) {
+    //   postList.value = value;
+    // }).catchError((error) {
+    //   print('print e: $error');
+    // });
+
+    setTmpData();
   }
 
   setTmpData() {
+    double sampleLatitude = 0;
+    double sampleLongitude = 0;
+
     postList.value = [
       ShortPost(
           pid: 0,
           imgUrl:
               'https://blenderartists.org/uploads/default/original/4X/5/4/f/54f2cbb9c456be76911967e686ca5898ac6a065d.jpeg',
           name: '김말순',
+          gender: true,
           age: 85,
           address: '용산구 갈월동',
+          latitude: sampleLatitude + 0.0022,
+          longitude: sampleLongitude + 0.0004,
           bookmarked: false,
           disappearedAt: "2024-02-09T07:11:42.069Z",
           createdAt: "2024-02-09T07:11:42.069Z",
@@ -40,8 +51,11 @@ class MainController {
           imgUrl:
               'https://cdn.class101.net/images/587ecdf0-4329-4447-ac00-f2b25b23eab8',
           name: '김실종',
+          gender: false,
           age: 7,
           address: '용산구 왕왕동',
+          latitude: sampleLatitude + 0.0052,
+          longitude: sampleLongitude + 0.0020,
           disappearedAt: "2024-02-12 22:57:05.427963",
           createdAt: "2024-02-12 22:57:05.427963",
           updatedAt: null,
@@ -51,8 +65,11 @@ class MainController {
           imgUrl:
               'https://blenderartists.org/uploads/default/original/4X/5/4/f/54f2cbb9c456be76911967e686ca5898ac6a065d.jpeg',
           name: '김무무',
+          gender: true,
           age: 9,
           address: '용산구 왕왕동',
+          latitude: sampleLatitude + 0.0070,
+          longitude: sampleLongitude + 0.0040,
           disappearedAt: "2024-02-09T07:11:42.069Z",
           createdAt: "2024-02-09T07:11:42.069Z",
           updatedAt: null,
