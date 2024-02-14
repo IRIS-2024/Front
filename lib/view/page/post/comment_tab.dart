@@ -1,8 +1,6 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iris_flutter/view/controller/post/comment_controller.dart';
-import 'package:iris_flutter/view/controller/post/detail_controller.dart';
+import 'package:iris_flutter/view/controller/post/post_controller.dart';
 import 'package:iris_flutter/view/page/post/single_comment_item.dart';
 import 'package:iris_flutter/view/page/post/map_item.dart';
 
@@ -16,13 +14,12 @@ class CommentTab extends StatefulWidget {
 class _CommentTabState extends State<CommentTab> {
   bool isSwitched = true;
 
-  DetailController detailController = Get.find<DetailController>();
-  CommentController comtController = Get.put(CommentController());
+  PostController postController = Get.find<PostController>();
 
   @override
   void initState() {
     super.initState();
-    comtController.loadCommentsOfPost();
+    postController.loadCommentsOfPost();
   }
 
   @override
@@ -33,7 +30,7 @@ class _CommentTabState extends State<CommentTab> {
         SizedBox(
           height: 300,
           child: Obx(
-            () => detailController.post.value.latitude == null
+            () => postController.post.value.latitude == null
                 ? const CircularProgressIndicator()
                 : const MapItem(),
           ),
@@ -58,11 +55,11 @@ class _CommentTabState extends State<CommentTab> {
           child: ListView.separated(
             primary: false,
             shrinkWrap: true,
-            itemCount: comtController.commentList.length,
+            itemCount: postController.commentList.length,
             itemBuilder: (BuildContext context, int cmtIdx) {
               return singleCmtItem(
-                  comment: comtController.commentList[cmtIdx],
-                  controller: comtController);
+                  comment: postController.commentList[cmtIdx],
+                  controller: postController);
             },
             separatorBuilder: (BuildContext ctx, int idx) {
               return const Divider();

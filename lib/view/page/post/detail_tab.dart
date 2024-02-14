@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
-import 'package:iris_flutter/view/controller/post/detail_controller.dart';
+import 'package:iris_flutter/view/controller/post/post_controller.dart';
 import 'package:iris_flutter/view/page/post/image_carousel.dart';
 
 class DetailTab extends StatefulWidget {
@@ -12,7 +12,7 @@ class DetailTab extends StatefulWidget {
 }
 
 class _DetailTabState extends State<DetailTab> {
-  DetailController detailController = Get.find<DetailController>();
+  PostController detailController = Get.find<PostController>();
 
   @override
   Widget build(BuildContext context) {
