@@ -71,7 +71,7 @@ class PostFormController {
     // infoRepository.postInfo(formData);
 
     // 등록 Dialog
-    postFormDialog();
+    showPostFormDialog();
   }
 
   Future<void> createAIImage() async {

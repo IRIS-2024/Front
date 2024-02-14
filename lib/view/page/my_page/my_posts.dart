@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
-import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/controller/my_page/bookmark_controller.dart';
 import 'package:iris_flutter/view/page/main/single_post_item.dart';
 
@@ -16,7 +15,8 @@ class _MyPostsState extends State<MyPosts> {
   final bookmarkController = Get.put(BookmarkController());
   @override
   void initState() {
-    Get.put(MainController()).setTmpData();
+    // 여기 에러 때문에 주석 처리함 다른 함수 사용해 주세요!!
+    // Get.put(MainController()).setTmpData();
     super.initState();
   }
 

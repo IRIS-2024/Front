@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
+import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/page/form/post_form/post_form_page.dart';
 import 'package:iris_flutter/view/page/main/main_tab.dart';
-import 'package:iris_flutter/view/page/map/map_controller.dart';
 import 'package:iris_flutter/view/page/my_page/my_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -16,8 +16,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   void initState() {
-    // 현 위치 (Admin District)
-    Get.put(MapController()).getAdminDistrictAddress();
+    Get.put(MainController()).getPositionAndPostList();
     super.initState();
   }
 
@@ -52,11 +51,11 @@ class _MainPageState extends State<MainPage> {
                                 fontSize: 30,
                             ),
                             children: [
-                              TextSpan(text: Get.put(MapController()).regionAddress.value ?? '현 위치 주변',
+                              TextSpan(text: Get.put(MainController()).shortAddress.value ?? '현 위치',
                                   style: TextStyle(
                                       color: Theme.of(context).colorScheme.primary
                                   )),
-                              TextSpan(text: "에서 등록된 실종 정보입니다.",
+                              TextSpan(text: " 주변의 실종 정보입니다.",
                                   style: TextStyle(
                                       color: Theme.of(context).colorScheme.onBackground,
                                   )
