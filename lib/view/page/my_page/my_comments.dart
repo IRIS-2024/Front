@@ -79,7 +79,7 @@ class _MyCommentsState extends State<MyComments> {
                           padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
                           itemCount: post.commentList.length,
                           itemBuilder: (BuildContext context, int cmtIdx) {
-                            return singleCmtItem(
+                            return SingleCmtItem(
                               comment: post.commentList[cmtIdx],
                               controller: comtController,
                             );

@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
-import 'package:iris_flutter/view/comm/custom_appbar.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

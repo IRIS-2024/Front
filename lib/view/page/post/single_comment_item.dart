@@ -6,20 +6,20 @@ import 'package:iris_flutter/utils/time_diff_utils.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
-class singleCmtItem extends StatefulWidget {
+class SingleCmtItem extends StatefulWidget {
   final dynamic controller;
   final Comment comment;
-  const singleCmtItem({
+  const SingleCmtItem({
     super.key,
     required this.controller,
     required this.comment,
   });
 
   @override
-  State<singleCmtItem> createState() => _singleCmtItemState();
+  State<SingleCmtItem> createState() => _SingleCmtItemState();
 }
 
-class _singleCmtItemState extends State<singleCmtItem> {
+class _SingleCmtItemState extends State<SingleCmtItem> {
   final carouselController = CarouselController();
   PageController pageController = PageController(initialPage: 0);
 
@@ -31,7 +31,7 @@ class _singleCmtItemState extends State<singleCmtItem> {
         children: [
           // 제목
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
@@ -43,7 +43,7 @@ class _singleCmtItemState extends State<singleCmtItem> {
               ),
               Text(
                   getTimeDiffText(
-                      widget.comment.createdAt, widget.comment.updatedAt),
+                      widget.comment.createdAt, widget.comment.createdAt),
                   style: const TextStyle(fontSize: 12))
             ],
           ),
@@ -58,7 +58,6 @@ class _singleCmtItemState extends State<singleCmtItem> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        print('onTab 실행');
                         showDialog<String>(
                           context: context,
                           builder: (BuildContext context) => imgDialog(context),
