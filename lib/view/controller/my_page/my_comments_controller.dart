@@ -3,7 +3,7 @@ import 'package:iris_flutter/model/comment.dart';
 import 'package:iris_flutter/model/my_comments_response.dart';
 
 class MyCommentsController extends GetxController {
-  RxList<MyCommentsResp> commentsList = <MyCommentsResp>[].obs;
+  RxList<MyCommentsResp> commentList = <MyCommentsResp>[].obs;
   RxInt currentIndex = 0.obs;
 
   void loadData() {
@@ -62,8 +62,7 @@ class MyCommentsController extends GetxController {
                 latitude: 37.545176,
                 longitude: 126.962722,
                 images: [
-                  'https://images.unsplash.com/photo-1580654712603-eb43273aff33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-                  'https://images.unsplash.com/photo-1627916607164-7b20241db935?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80',
+                  'https://images.unsplash.com/photo-1580654712603-eb43273aff33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
                 ],
                 accuracy: 80,
                 clothes: "옷차림3은 이렇습니다.",
@@ -74,7 +73,7 @@ class MyCommentsController extends GetxController {
           ])
     ];
 
-    commentsList.value = tmpdata;
+    commentList.value = tmpdata;
   }
 
   void changeImgSlideIdx(int index) {
