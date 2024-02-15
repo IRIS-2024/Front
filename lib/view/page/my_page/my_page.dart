@@ -1,8 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
+import 'package:iris_flutter/view/controller/login/login_controller.dart';
+import 'package:iris_flutter/view/page/login/login_page.dart';
 import 'package:iris_flutter/view/page/my_page/bookmark_post.dart';
 import 'package:iris_flutter/view/page/my_page/my_posts.dart';
 import 'package:iris_flutter/view/page/my_page/my_comments.dart';
@@ -15,12 +17,23 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
-  Future<void> _signOut() async {
-    // Firebase 로그아웃
-    await FirebaseAuth.instance.signOut();
+  final controller = Get.find<LoginController>();
 
+  Future<void> _signOut() async {
     // Google Sign-In 로그아웃
     await GoogleSignIn().signOut();
+    controller.deleteInfo();
+
+    Get.to(() => const LoginPage());
+  }
+
+  Future<void> resign() async {
+    // Google Sign-In 로그아웃
+    await GoogleSignIn().signOut();
+    // 탈퇴 API 연결하기
+    controller.deleteInfo();
+
+    Get.to(() => const LoginPage());
   }
 
   bool isSwitched = true;
@@ -40,17 +53,23 @@ class _MyPageState extends State<MyPage> {
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15))),
                   onTap: () {
-                    print("사용자 사진 변경?");
+                    // 사용자 사진 변경?;
                   },
-                  leading: const CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/temp_logo.png'),
+                  leading: CircleAvatar(
+                    backgroundImage: controller.user.value.photoUrl != null
+                        ? NetworkImage(controller.user.value.photoUrl!)
+                        : const AssetImage('assets/images/temp_logo.png')
+                            as ImageProvider,
                   ),
-                  title: const Text("김용산"),
-                  subtitle: const Text("user_emial@gmail.com"),
+                  title: controller.user.value.displayName != null
+                      ? Text("${controller.user.value.displayName}")
+                      : const Text(
+                          "사용자 이름을 등록해주세요.",
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                  subtitle: Text(controller.user.value.email),
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
+                const Padding(padding: CustomPadding.regularBottom),
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -130,7 +149,6 @@ class _MyPageState extends State<MyPage> {
                 ListTile(
                   tileColor: Theme.of(context).colorScheme.surfaceVariant,
                   onTap: () {
-                    print("로그아웃");
                     _signOut();
                   },
                   leading: const Icon(Icons.logout),

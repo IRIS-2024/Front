@@ -4,7 +4,7 @@ import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/model/post.dart';
-import 'package:iris_flutter/view/controller/post/detail_controller.dart';
+import 'package:iris_flutter/view/controller/post/post_controller.dart';
 import 'package:iris_flutter/view/page/post/image_carousel.dart';
 
 void showMapMarkerDialog(int pid) {
@@ -26,13 +26,13 @@ class MapMarkerDialog extends StatefulWidget {
 class _MapMarkerDialogState extends State<MapMarkerDialog> {
   @override
   void initState() {
-    Get.put(DetailController()).loadData();
+    Get.put(PostController()).loadData();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    Post post = Get.put(DetailController()).post.value;
+    Post post = Get.put(PostController()).post.value;
 
     return Padding(
       padding: CustomPadding.dialogInsets,
@@ -72,17 +72,17 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
                   onPressed: () {
                     Get.back();
                   },
-                  child: Text('닫기')),
+                  child: const Text('닫기')),
               ElevatedButton(
                 onPressed: () {
                   Get.toNamed(Config.routerPost, arguments: widget.pid);
                 },
-                child: Text('보기'),
                 style: ElevatedButton.styleFrom(
                     backgroundColor:
                         Theme.of(context).colorScheme.primaryContainer,
                     foregroundColor:
                         Theme.of(context).colorScheme.onPrimaryContainer),
+                child: const Text('보기'),
               ),
             ],
           ),
