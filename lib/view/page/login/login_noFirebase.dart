@@ -1,27 +1,45 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
+import 'package:iris_flutter/model/user.dart';
+import 'package:iris_flutter/view/controller/login/login_controller.dart';
+import 'package:iris_flutter/view/page/my_page/my_page_noFirebase.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class LoginTest extends StatefulWidget {
+  const LoginTest({super.key});
 
-  Future<UserCredential> signInWithGoogle() async {
-    // 인증 플로우 시작
+  @override
+  State<LoginTest> createState() => _LoginTestState();
+}
+
+class _LoginTestState extends State<LoginTest> {
+  LoginController controller = Get.put(LoginController());
+
+  void signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-    // 요청으로부터 인증 세부 정보 가져오기
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
+    if (googleUser != null) {
+      // print('name = ${googleUser.displayName}');
+      // print('email = ${googleUser.email}');
+      // print('id = ${googleUser.id}');
 
-    // 새로운 credential 생성
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
+      User data = User(id: googleUser.id, email: googleUser.email);
+      if (googleUser.displayName != null) {
+        data.displayName = googleUser.displayName;
+      }
+      if (googleUser.photoUrl != null) {
+        data.photoUrl = googleUser.photoUrl;
+      }
 
-    // 로그인 성공 시, UserCredential 반환
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+      controller.updateInfo(data);
+
+      Get.to(() => const MyPageTest());
+
+      // setState(() {
+      //   _loginPlatform = google;
+      // });
+    }
   }
 
   @override
@@ -35,7 +53,7 @@ class LoginPage extends StatelessWidget {
           children: [
             const Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               Text(
-                "로그인/회원가입",
+                "No Firebase 로그인/회원가입",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ]),
