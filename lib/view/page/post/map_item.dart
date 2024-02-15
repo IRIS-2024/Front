@@ -1,7 +1,10 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:iris_flutter/view/controller/post/detail_controller.dart';
+import 'package:iris_flutter/config/config.dart';
+import 'package:iris_flutter/view/controller/post/post_controller.dart';
 import 'package:location/location.dart';
 
 class MapItem extends StatefulWidget {
@@ -13,34 +16,54 @@ class MapItem extends StatefulWidget {
 
 class _MapItemState extends State<MapItem> {
   final Location _locationController = Location();
-  DetailController detailController = Get.find<DetailController>();
+  PostController postController = Get.find<PostController>();
 
   LatLng? _currentP;
-  late LatLng _pGooglePlex;
+  late LatLng missingSpot;
   late LatLng _pParkPlex;
 
   @override
   void initState() {
     super.initState();
-    _pGooglePlex = LatLng(detailController.post.value.latitude,
-        detailController.post.value.longitude);
-    _pParkPlex = LatLng(detailController.post.value.latitude,
-        detailController.post.value.longitude);
+    missingSpot = LatLng(postController.post.value.latitude,
+        postController.post.value.longitude);
   }
 
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-      initialCameraPosition: CameraPosition(target: _pGooglePlex, zoom: 17),
+      gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+        Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer()),
+      },
+      initialCameraPosition:
+          CameraPosition(target: missingSpot, zoom: Config.initZoom),
+      // min max zoom 제한
+      minMaxZoomPreference:
+          MinMaxZoomPreference(Config.minZoom, Config.maxZoom),
+      // 기울기 제스처 false
+      tiltGesturesEnabled: false,
+      // 현재 위치 표시 버튼 true
+      myLocationButtonEnabled: true,
+      // 현재 위치 표시 true
+      myLocationEnabled: true,
       markers: {
         Marker(
-            markerId: const MarkerId("_currentLocation"),
-            icon: BitmapDescriptor.defaultMarker,
-            position: _pGooglePlex),
-        Marker(
-            markerId: const MarkerId("_sourceLocation"),
-            icon: BitmapDescriptor.defaultMarker,
-            position: _pParkPlex)
+            markerId: const MarkerId('missing spot'),
+            position: missingSpot,
+            icon:
+                BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+            infoWindow: InfoWindow(
+              title: "실종 위치",
+              snippet: postController.post.value.address,
+            )),
+        ...postController.commentList
+            .map((comment) => Marker(
+                markerId: MarkerId(comment.cid.toString()),
+                position: LatLng(comment.latitude, comment.longitude),
+                onTap: () {
+                  postController.setTargetComment(comment);
+                }))
+            .toSet()
       },
     );
   }

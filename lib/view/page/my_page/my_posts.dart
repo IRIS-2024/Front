@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
-import 'package:iris_flutter/view/controller/my_page/bookmark_controller.dart';
+import 'package:iris_flutter/view/controller/my_page/my_post_controller.dart';
 import 'package:iris_flutter/view/page/main/single_post_item.dart';
 
 class MyPosts extends StatefulWidget {
@@ -12,11 +13,10 @@ class MyPosts extends StatefulWidget {
 }
 
 class _MyPostsState extends State<MyPosts> {
-  final bookmarkController = Get.put(BookmarkController());
+  final postController = Get.put(MyPostController());
   @override
   void initState() {
-    // 여기 에러 때문에 주석 처리함 다른 함수 사용해 주세요!!
-    // Get.put(MainController()).setTmpData();
+    postController.loadData();
     super.initState();
   }
 
@@ -24,19 +24,30 @@ class _MyPostsState extends State<MyPosts> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: customAppBar(title: "작성한 실종 정보"),
-        body: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-            child: bookmarkController.postList.isNotEmpty
-                ? ListView.builder(
-                    padding: const EdgeInsets.only(top: 5, bottom: 20),
-                    itemCount: bookmarkController.postList.length,
-                    itemBuilder: (BuildContext context, int idx) {
-                      return SinglePostItem(
-                          controller: bookmarkController,
-                          post: bookmarkController.postList[idx]);
-                    })
-                : const Center(
-                    child: Text("작성한 실종 정보가 없습니다."),
-                  )));
+        body: SafeArea(
+          child: postController.postList.isNotEmpty
+              ? Padding(
+                  padding: CustomPadding.pageInsets,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: SizedBox(
+                          height: 180,
+                          child: ListView.builder(
+                              itemCount: postController.postList.length,
+                              itemBuilder: (BuildContext context, int idx) {
+                                return SinglePostItem(
+                                    controller: postController,
+                                    post: postController.postList[idx]);
+                              }),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : const Center(
+                  child: Text("작성한 실종 정보가 없습니다."),
+                ),
+        ));
   }
 }
