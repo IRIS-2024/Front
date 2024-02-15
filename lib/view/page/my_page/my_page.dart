@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
-import 'package:iris_flutter/view/page/login/login_page.dart';
+import 'package:iris_flutter/view/page/login/login_noFirebase.dart';
 import 'package:iris_flutter/view/page/my_page/bookmark_post.dart';
 import 'package:iris_flutter/view/page/my_page/my_posts.dart';
 import 'package:iris_flutter/view/page/my_page/my_comments.dart';
@@ -34,7 +34,7 @@ class _MyPageState extends State<MyPage> {
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
               if (!snapshot.hasData) {
-                return const LoginPage();
+                return const LoginTest();
               } else {
                 return Padding(
                   padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
