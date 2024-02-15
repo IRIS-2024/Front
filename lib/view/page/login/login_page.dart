@@ -4,16 +4,17 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/model/user.dart';
 import 'package:iris_flutter/view/controller/login/login_controller.dart';
-import 'package:iris_flutter/view/page/my_page/my_page_noFirebase.dart';
+import 'package:iris_flutter/view/page/main/main_page.dart';
+import 'package:iris_flutter/view/page/my_page/my_page.dart';
 
-class LoginTest extends StatefulWidget {
-  const LoginTest({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<LoginTest> createState() => _LoginTestState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginTestState extends State<LoginTest> {
+class _LoginPageState extends State<LoginPage> {
   LoginController controller = Get.put(LoginController());
 
   void signInWithGoogle() async {
@@ -33,8 +34,8 @@ class _LoginTestState extends State<LoginTest> {
       }
 
       controller.updateInfo(data);
-
-      Get.to(() => const MyPageTest());
+      // 로그인 직후 페이지 뒤로가기 방지
+      Get.offAll(() => const MainPage());
 
       // setState(() {
       //   _loginPlatform = google;
@@ -53,7 +54,7 @@ class _LoginTestState extends State<LoginTest> {
           children: [
             const Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               Text(
-                "No Firebase 로그인/회원가입",
+                "로그인/회원가입",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ]),
