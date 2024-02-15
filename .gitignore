@@ -46,4 +46,7 @@ app.*.map.json
 
 *.env
 /ios/Runner/Secret.swift
-/lib/config/hidden_config.dart
+
+# 숨김 설정 파일
+hidden_config.dart
+/config/hidden_config.dart

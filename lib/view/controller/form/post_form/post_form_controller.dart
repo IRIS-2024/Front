@@ -1,3 +1,6 @@
+import 'dart:core';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,6 +17,7 @@ class PostFormController {
   RxList<XFile> images = <XFile>[].obs;
   Rx<TimeOfDay?> timeOfDay = Rx<TimeOfDay?>(null);
   RxBool isChecked = true.obs;
+
   // validate
   RxBool initValidation = true.obs;
 
@@ -28,10 +32,19 @@ class PostFormController {
   TextEditingController clothesController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
 
+  RxList<String> aiImages = [''].obs;
+
   void pickImage() async {
     final ImagePicker picker = ImagePicker();
-    await picker.pickMultiImage().then((value) {
+    await picker
+        .pickMultiImage(
+      maxHeight: 500,
+      imageQuality: 30,
+    )
+        .then((value) {
       images += value;
+    }).catchError((error) {
+      print('pickImage error: $error');
     });
   }
 
@@ -47,8 +60,7 @@ class PostFormController {
   }
 
   Future<void> submitPost() async {
-    // TODO 주석 삭제, 통신 확인
-    // request body form data 생성
+    // request body FormData 생성
     final formData = dio_package.FormData.fromMap({
       'name': nameController.text,
       'gender': gender.value,
@@ -60,18 +72,30 @@ class PostFormController {
       'longitude': longitude.value,
       'disappearedAt': combineTimeOfDayWithCurrentDate(timeOfDay.value!),
       'clothes': clothesController.text.isEmpty ? null : clothesController.text,
-      'details': detailsController.text.isEmpty ? null : clothesController.text,
-      'images': List.generate(images.length,
-          (index) => dio_package.MultipartFile.fromFile(images[index].path)),
+      'details': detailsController.text.isEmpty ? null : detailsController.text,
     });
+    // images 추가
+    for (int i = 0; i < images.length; i++) {
+      formData.files.add(MapEntry(
+        'images',
+        await dio_package.MultipartFile.fromFile(images[i].path),
+      ));
+    }
 
-    // final dio = createDio();
-    // dio.options.contentType = 'multipart/form-data';
-    // PostRepository infoRepository = PostRepository(dio);
-    // infoRepository.postInfo(formData);
+    final dio = createDio();
+    dio.options.contentType = 'multipart/form-data';
 
-    // 등록 Dialog
-    showPostFormDialog();
+    try {
+      PostRepository postRepository = PostRepository(dio);
+      final resp = await postRepository.postPost(formData);
+      aiImages.value = resp.images;
+      print('print resp: ${resp}');
+      print('print resp.images: ${resp.images}');
+      showPostFormDialog();
+    } on DioException catch (e) {
+      print('Error ${e.response}');
+      return;
+    }
   }
 
   Future<void> createAIImage() async {
@@ -89,3 +113,4 @@ class PostFormController {
     Get.offAll(() => const MainPage());
   }
 }
+
