@@ -60,14 +60,15 @@ class PostFormDialog extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const Padding(padding: CustomPadding.mediumBottom),
-              ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
-                  child: Image.file(
-                    File(controller.images.first.path),
-                    // TODO 생성된 AI 이미지로 변경
-                    height: 200,
-                    fit: BoxFit.fitHeight,
-                  )),
+              Obx(
+                () => ClipRRect(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Image.network(
+                      controller.aiImages.first,
+                      height: 200,
+                      fit: BoxFit.fitHeight,
+                    )),
+              ),
               Obx(
                     () => CheckboxMenuButton(
                   value: controller.isChecked.value,
