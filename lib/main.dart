@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/theme.dart';
-
-import 'view/page/main/main_page.dart';
+import 'package:iris_flutter/view/page/login/login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15.0)))),
         useMaterial3: true,
       ),
-      home: const MainPage(),
+      home: const LoginPage(),
       getPages: Config.routers,
     );
   }

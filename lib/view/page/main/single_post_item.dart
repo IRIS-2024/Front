@@ -41,12 +41,15 @@ class _SinglePostItemState extends State<SinglePostItem> {
                   fit: BoxFit.fitWidth,
                 )),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "${widget.post.name} / ${widget.post.age}세 / ${widget.post.address}",
-                  style: CustomTextStyle.title,
+                Expanded(
+                  child: Text(
+                    "${widget.post.name} / ${widget.post.age}세 / ${widget.post.address}",
+                    style: CustomTextStyle.title,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 IconButton(
                   onPressed: () {
