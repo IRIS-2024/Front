@@ -71,7 +71,7 @@ class PostFormController {
       'latitude': latitude.value,
       'longitude': longitude.value,
       'disappearedAt': combineTimeOfDayWithCurrentDate(timeOfDay.value!),
-      'clothes': clothesController.text.isEmpty ? null : clothesController.text,
+      'clothes': clothesController.text,
       'details': detailsController.text.isEmpty ? null : detailsController.text,
     });
     // images 추가

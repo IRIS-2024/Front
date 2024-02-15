@@ -5,7 +5,6 @@ import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/model/user.dart';
 import 'package:iris_flutter/view/controller/login/login_controller.dart';
 import 'package:iris_flutter/view/page/main/main_page.dart';
-import 'package:iris_flutter/view/page/my_page/my_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
