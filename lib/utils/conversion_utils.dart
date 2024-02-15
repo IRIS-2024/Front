@@ -14,7 +14,8 @@ String combineTimeOfDayWithCurrentDate(TimeOfDay timeOfDay) {
 }
 
 String convertDateString(String originalDateString) {
-  // "2024-02-09T07:11:42.069Z";
+  // 2024-02-09T07:11:42.069Z
+  // 2024-02-15T03:18:29.191338
 
   DateTime dateTime = DateTime.parse(originalDateString);
 
