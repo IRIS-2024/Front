@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:iris_flutter/config/hidden_config.dart';
 
 Dio createDio() {
   final options = BaseOptions(
-    baseUrl: '#TODO: baseUrl',
+    baseUrl: HiddenConfig.baseUrl,
   );
   final dio = Dio(options);
 
@@ -11,10 +12,9 @@ Dio createDio() {
   return dio;
 }
 
-
 Dio createDioWithoutToken() {
   final options = BaseOptions(
-    baseUrl: '#TODO: baseUrl',
+    baseUrl: HiddenConfig.baseUrl,
   );
   final dio = Dio(options);
 

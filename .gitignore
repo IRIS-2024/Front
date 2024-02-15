@@ -42,6 +42,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/android/app/google-services.json
 
 *.env
 /ios/Runner/Secret.swift
+/lib/config/hidden_config.dart

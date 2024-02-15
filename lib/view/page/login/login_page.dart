@@ -19,28 +19,32 @@ class _LoginPageState extends State<LoginPage> {
 
   void signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleUser!.authentication;
 
-    if (googleUser != null) {
-      // print('name = ${googleUser.displayName}');
-      // print('email = ${googleUser.email}');
-      // print('id = ${googleUser.id}');
+    // final OAuthCredential credential = GoogleAuthProvider.credential(
+    //     accessToken: googleSignInAuthentication.accessToken,
+    //     idToken: googleSignInAuthentication.idToken);
 
-      User data = User(id: googleUser.id, email: googleUser.email);
-      if (googleUser.displayName != null) {
-        data.displayName = googleUser.displayName;
-      }
-      if (googleUser.photoUrl != null) {
-        data.photoUrl = googleUser.photoUrl;
-      }
+    // print('name = ${googleUser.displayName}');
+    // print('email = ${googleUser.email}');
+    // print('id = ${googleUser.id}');
 
-      controller.updateInfo(data);
-      // 로그인 직후 페이지 뒤로가기 방지
-      Get.offAll(() => const MainPage());
-
-      // setState(() {
-      //   _loginPlatform = google;
-      // });
+    User data = User(id: googleUser.id, email: googleUser.email);
+    if (googleUser.displayName != null) {
+      data.displayName = googleUser.displayName;
     }
+    if (googleUser.photoUrl != null) {
+      data.photoUrl = googleUser.photoUrl;
+    }
+
+    controller.updateInfo(data);
+    // 로그인 직후 페이지 뒤로가기 방지
+    Get.offAll(() => const MainPage());
+
+    // setState(() {
+    //   _loginPlatform = google;
+    // });
   }
 
   @override
@@ -72,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
               width: 300,
               height: 50,
               child: ElevatedButton(
-                onPressed: signInWithGoogle,
+                onPressed: controller.loginGoogle,
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -93,6 +97,19 @@ class _LoginPageState extends State<LoginPage> {
                     )
                   ],
                 ),
+              ),
+            ),
+            SizedBox(
+              width: 300,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: controller.logoutGoogle,
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15))),
+                ),
+                child: const Text("(임시) 로그아웃"),
               ),
             )
           ],
