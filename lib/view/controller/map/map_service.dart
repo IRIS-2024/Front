@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:iris_flutter/config/hidden_config.dart';
 
 class MapService {
   // API, Package 에서 가져온 Map 관련 기본 기능 (가공은 Map Controller 에서)
@@ -46,7 +46,7 @@ class MapService {
   static Future<String> getAddrFromLatlng(double lat, double lng) async {
     // Revise Geocoding (convert latLng to Address) - Google Map API
     try {
-      String googleMapApiKey = dotenv.get("GOOGLE_MAP_API_KEY");
+      String googleMapApiKey = HiddenConfig.googleMapApiKey;
       const String baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
       String url = '$baseUrl?latlng=$lat,$lng&key=$googleMapApiKey&language=ko';
 
@@ -59,7 +59,7 @@ class MapService {
         throw Exception('Status Exception: ${response.data['status']}');
       }
     } catch (error) {
-      print('Error [$error] (getFormattedAddress)');
+      print('Error [$error] (getAddrFromLatlng)');
       return '';
     }
   }
