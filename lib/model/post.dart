@@ -12,7 +12,7 @@ class Post {
   String address;
   double latitude;
   double longitude;
-  String? clothes;
+  String clothes;
   String? details;
   bool bookmarked;
   List<String> images;
@@ -29,7 +29,7 @@ class Post {
     required this.address,
     required this.latitude,
     required this.longitude,
-    this.clothes,
+    required this.clothes,
     this.details,
     required this.bookmarked,
     required this.images,

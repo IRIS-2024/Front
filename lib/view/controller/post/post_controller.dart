@@ -11,6 +11,7 @@ class PostController extends GetxController {
     address: "",
     latitude: 0.0,
     longitude: 0.0,
+    clothes: "빨간 상의에 청바지, 파랑색 캡모자를 썼어요.",
     bookmarked: false,
     images: [""],
     disappearedAt: '',
