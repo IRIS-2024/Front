@@ -1,27 +1,46 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
+import 'package:iris_flutter/model/user.dart';
+import 'package:iris_flutter/view/controller/login/login_controller.dart';
+import 'package:iris_flutter/view/page/main/main_page.dart';
+import 'package:iris_flutter/view/page/my_page/my_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
-  Future<UserCredential> signInWithGoogle() async {
-    // 인증 플로우 시작
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  LoginController controller = Get.put(LoginController());
+
+  void signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-    // 요청으로부터 인증 세부 정보 가져오기
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
+    if (googleUser != null) {
+      // print('name = ${googleUser.displayName}');
+      // print('email = ${googleUser.email}');
+      // print('id = ${googleUser.id}');
 
-    // 새로운 credential 생성
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
+      User data = User(id: googleUser.id, email: googleUser.email);
+      if (googleUser.displayName != null) {
+        data.displayName = googleUser.displayName;
+      }
+      if (googleUser.photoUrl != null) {
+        data.photoUrl = googleUser.photoUrl;
+      }
 
-    // 로그인 성공 시, UserCredential 반환
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+      controller.updateInfo(data);
+      // 로그인 직후 페이지 뒤로가기 방지
+      Get.offAll(() => const MainPage());
+
+      // setState(() {
+      //   _loginPlatform = google;
+      // });
+    }
   }
 
   @override
