@@ -46,13 +46,13 @@ class _LoginRepository implements LoginRepository {
   }
 
   @override
-  Future<User> getLogin(String code) async {
+  Future<LoginResp> getLogin(String code) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'code': code};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<LoginResp>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -68,7 +68,7 @@ class _LoginRepository implements LoginRepository {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = User.fromJson(_result.data!);
+    final value = LoginResp.fromJson(_result.data!);
     return value;
   }
 
