@@ -15,7 +15,7 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       address: json['address'] as String,
       latitude: (json['latitude'] as num).toDouble(),
       longitude: (json['longitude'] as num).toDouble(),
-      clothes: json['clothes'] as String?,
+      clothes: json['clothes'] as String,
       details: json['details'] as String?,
       bookmarked: json['bookmarked'] as bool,
       images:

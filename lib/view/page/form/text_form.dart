@@ -7,6 +7,7 @@ class TextForm extends StatelessWidget {
   final TextEditingController textEditingController;
   final String title;
   final bool isRequired;
+  final String? validatorText;
   final String hintText;
   final int maxLength;
   final int? maxLengths;
@@ -16,6 +17,7 @@ class TextForm extends StatelessWidget {
     required this.textEditingController,
     required this.title,
     required this.isRequired,
+    this.validatorText,
     required this.hintText,
     required this.maxLength,
     this.maxLengths,
@@ -39,8 +41,8 @@ class TextForm extends StatelessWidget {
                 BorderSide(color: Theme.of(context).colorScheme.outline)),
           ),
           validator: (value) {
-            if (value!.isEmpty && isRequired) {
-              return '이름을 입력해주세요.';
+            if (value!.isEmpty && isRequired && validatorText!.isNotEmpty) {
+              return validatorText;
             }
             return null;
           },

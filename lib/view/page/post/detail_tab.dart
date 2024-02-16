@@ -79,13 +79,12 @@ class _DetailTabState extends State<DetailTab> {
                 ),
               postItem("마지막 위치", postController.post.value.address),
               const Divider(),
-              if (postController.post.value.clothes != null)
-                Column(
-                  children: [
-                    postItem("실종 당시 옷차림", postController.post.value.clothes),
-                    const Divider(),
-                  ],
-                ),
+              Column(
+                children: [
+                  postItem("실종 당시 옷차림", postController.post.value.clothes),
+                  const Divider(),
+                ],
+              ),
               if (postController.post.value.details != null)
                 Column(
                   children: [
