@@ -19,11 +19,11 @@ class _LoginRepository implements LoginRepository {
   String? baseUrl;
 
   @override
-  Future<User> getRefreshToken(String refreshToken) async {
+  Future<LoginResp> getRefreshToken(String refreshToken) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'refreshToken': refreshToken};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
       method: 'GET',
@@ -41,7 +41,7 @@ class _LoginRepository implements LoginRepository {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = User.fromJson(_result.data!);
+    final value = LoginResp.fromJson(_result.data!);
     return value;
   }
 
@@ -50,7 +50,7 @@ class _LoginRepository implements LoginRepository {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'code': code};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<LoginResp>(Options(
       method: 'GET',
