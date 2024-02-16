@@ -60,6 +60,7 @@ class _PostFormPageState extends State<PostFormPage> {
                     textEditingController: postController.nameController,
                     title: '실종자 이름',
                     isRequired: true,
+                    validatorText: '이름을 입력해주세요.',
                     hintText: '실종자 이름을 입력해주세요.',
                     maxLength: 20),
 
@@ -125,8 +126,9 @@ class _PostFormPageState extends State<PostFormPage> {
                 TextForm(
                   textEditingController: postController.clothesController,
                   title: '실종 당시 옷차림',
-                  isRequired: false,
-                  hintText: '상•하의 모양, 색상, 액세서리 등을 적어주세요.',
+                  isRequired: true,
+                  validatorText: '옷차림을 입력해주세요.',
+                  hintText: '상•하의 모양, 색상, 액세서리 등을 자세히 적어주세요.',
                   maxLength: 40,
                 ),
                 // 특이사항

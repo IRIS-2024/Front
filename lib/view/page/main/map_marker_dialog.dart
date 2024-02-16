@@ -56,7 +56,7 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
                   '${Config().getGenderText(post.gender)} / ${post.age}세 / ${post.height == 0 ? '' : '${post.height}cm'} / ${post.weight == 0 ? '' : '${post.weight}kg'}'),
           _titleAndContent(title: '마지막 위치', content: post.address),
           post.clothes != ''
-              ? _titleAndContent(title: '옷차림', content: post.clothes!)
+              ? _titleAndContent(title: '옷차림', content: post.clothes)
               : const SizedBox(),
           post.details != ''
               ? _titleAndContent(title: '특이사항', content: post.details!)
