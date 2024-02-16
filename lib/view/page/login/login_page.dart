@@ -103,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
               width: 300,
               height: 50,
               child: ElevatedButton(
-                onPressed: controller.logoutGoogle,
+                onPressed: controller.handleLogout,
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(

@@ -43,7 +43,7 @@ class Config {
   // storage 이름
   static String id = 'id';
   static String email = 'email';
-  static String nickName = 'nickName';
+  static String displayName = 'displayName';
   static String social = 'social';
   static String google = 'google';
 }
