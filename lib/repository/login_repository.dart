@@ -1,3 +1,4 @@
+import 'package:iris_flutter/model/login_response.dart';
 import 'package:iris_flutter/model/user.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
@@ -12,5 +13,5 @@ abstract class LoginRepository {
   Future<User> getRefreshToken(@Query('refreshToken') String refreshToken);
 
   @GET('/auth/google/callback')
-  Future<User> getLogin(@Query('code') String code);
+  Future<LoginResp> getLogin(@Query('code') String code);
 }

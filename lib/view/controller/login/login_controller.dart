@@ -13,51 +13,38 @@ class LoginController extends GetxController {
   Future<void> loginGoogle() async {
     GoogleSignIn googleSignIn =
         GoogleSignIn(clientId: HiddenConfig.webClientId);
-    GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
 
-    // await googleSignIn.signIn().then((result) {
-    //   result?.authentication.then((googleKey) {
-    //     print('accessToken: ${googleKey.accessToken}');
-    //     print('idToken: ${googleKey.idToken}');
-    //     if (googleSignInAccount != null) {
-    //       print('serverAuthCode: ${googleSignInAccount.serverAuthCode}');
-    //     }
-    //     print(googleSignIn.currentUser?.displayName);
-    //   }).catchError((err) {
-    //     print('inner error');
-    //   });
-    // }).catchError((err) {
-    //   print('error occured: $err');
-    // });
-    // await userStorage.setItem(Config.social, Config.google);
+    await googleSignIn.signIn().then((result) {
+      result?.authentication.then((googleKey) {
+        print('accessToken: ${googleKey.accessToken}');
+        print('idToken: ${googleKey.idToken}');
+        print('serverAuthCode: ${result.serverAuthCode}');
+        print(googleSignIn.currentUser?.displayName);
+        print('google login 성공: $result');
 
-    if (googleSignInAccount != null) {
-      final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount.authentication;
-
-      // print('google login 성공: $googleSignInAccount');
-      print('idToken: ${googleSignInAuthentication.idToken}');
-      // print('serverAuthCode: ${googleSignInAccount.serverAuthCode}');
-
-      if (googleSignInAuthentication.accessToken != null) {
-        tokenLogin(googleSignInAuthentication.accessToken!);
-      }
-    } else {
-      print('google login 실패');
-    }
-
-    // 최종 로그인
-    // handleLogin(googleSignInAccount.email, googleSignInAccount.displayName!);
+        tokenLogin(result.serverAuthCode!);
+      }).catchError((err) {
+        print('inner error');
+      });
+    }).catchError((err) {
+      print('error occured: $err');
+    });
+    await userStorage.setItem(Config.social, Config.google);
   }
 
   Future<void> tokenLogin(String idToken) async {
+    print(idToken);
     print('tokenLogin 진입');
-    final dio = createDio();
+    final dio = createDioWithoutToken();
 
     try {
       LoginRepository loginRepository = LoginRepository(dio);
       final resp = await loginRepository.getLogin(idToken);
-      print('print resp: $resp');
+      print('print resp grantType: ${resp.grantType}');
+      print('print resp accessToken: ${resp.accessToken}');
+      // token storage
+
+      // 유저정보 api로부터 받은 user 정보 local storage에 저장.
     } on DioException catch (e) {
       print('Error ${e.response}');
       return;
