@@ -25,29 +25,32 @@ class _MyPostsState extends State<MyPosts> {
     return Scaffold(
         appBar: customAppBar(title: "작성한 실종 정보"),
         body: SafeArea(
-          child: postController.postList.isNotEmpty
-              ? Padding(
-                  padding: CustomPadding.pageInsets,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                          height: 180,
-                          child: ListView.builder(
-                              itemCount: postController.postList.length,
-                              itemBuilder: (BuildContext context, int idx) {
-                                return SinglePostItem(
-                                    controller: postController,
-                                    post: postController.postList[idx]);
-                              }),
+          child: Obx(
+            () => postController.postList.isNotEmpty
+                ? Padding(
+                    padding: CustomPadding.pageInsets,
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: SizedBox(
+                            height: 180,
+                            child: ListView.builder(
+                                itemCount: postController.postList.length,
+                                itemBuilder: (BuildContext context, int idx) {
+                                  return SinglePostItem(
+                                      controller: postController,
+                                      post: postController.postList[idx],
+                                  myPosts: true,);
+                                }),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                  )
+                : const Center(
+                    child: Text("작성한 실종 정보가 없습니다."),
                   ),
-                )
-              : const Center(
-                  child: Text("작성한 실종 정보가 없습니다."),
-                ),
+          ),
         ));
   }
 }

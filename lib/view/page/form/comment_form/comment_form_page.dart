@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
@@ -23,7 +25,7 @@ class _CommentFormState extends State<CommentFormPage> {
 
   @override
   void initState() {
-    print('print Get.arguments: ${Get.arguments}');
+    log('Get.arguments: ${Get.arguments}');
     Get.put(CommentFormController()).setShortPostCard(Get.arguments);
     super.initState();
   }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/view/controller/my_page/bookmark_controller.dart';
@@ -109,8 +111,8 @@ class _PostPageState extends State<PostPage> {
           ),
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
-              print(
-                  'print infoController.missingInfo.value: ${postController.post.value.address}');
+              log(
+                  'infoController.missingInfo.value: ${postController.post.value.address}');
               Get.toNamed(Config.routerCommentForm,
                   arguments: postController.post.value);
             },
