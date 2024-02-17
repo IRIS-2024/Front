@@ -34,6 +34,8 @@ class _MapTabViewState extends State<MapTabView> {
                       mainController.initPosition.value!.longitude,
                     ),
                     zoom: Config.initZoom),
+                mapToolbarEnabled: false,
+                zoomControlsEnabled: false,
                 // min max zoom 제한
                 minMaxZoomPreference:
                     MinMaxZoomPreference(Config.minZoom, Config.maxZoom),
