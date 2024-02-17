@@ -67,7 +67,9 @@ class _MyPageState extends State<MyPage> {
                           "사용자 이름을 등록해주세요.",
                           style: TextStyle(color: Colors.grey),
                         ),
-                  subtitle: Text(controller.user.value.email),
+                  subtitle: controller.user.value.email != null
+                      ? Text(controller.user.value.email)
+                      : const Text(" "),
                 ),
                 const Padding(padding: CustomPadding.regularBottom),
                 const Align(
