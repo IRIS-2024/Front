@@ -17,15 +17,7 @@ class LoginController extends GetxController {
 
   Future<void> loginGoogle() async {
     GoogleSignIn googleSignIn;
-
-    if (Platform.isAndroid) {
-      googleSignIn =
-      GoogleSignIn(clientId: HiddenConfig.webClientId);
-    } else {
-      googleSignIn =
-      GoogleSignIn(serverClientId: HiddenConfig.webClientId,
-      );
-    }
+    googleSignIn = GoogleSignIn(serverClientId: HiddenConfig.webClientId);
 
     await googleSignIn.signIn().then((result) {
       result?.authentication.then((googleKey) {
@@ -38,8 +30,6 @@ class LoginController extends GetxController {
     });
     await userStorage.setItem(Config.social, Config.google);
   }
-
-
 
   Future<void> tokenLogin(String idToken) async {
     final dio = createDioWithoutToken();
