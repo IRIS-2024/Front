@@ -8,12 +8,14 @@ class User {
   String email;
   String? displayName;
   String? photoUrl;
+  String? token;
 
   User({
     required this.id,
     required this.email,
     this.displayName,
     this.photoUrl,
+    this.token,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
