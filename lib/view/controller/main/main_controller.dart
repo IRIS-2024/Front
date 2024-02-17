@@ -1,7 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/dio_config.dart';
-import 'package:iris_flutter/model/post.dart';
 import 'package:iris_flutter/model/short_post.dart';
 import 'package:iris_flutter/repository/post_repository.dart';
 import 'package:iris_flutter/view/controller/map/map_service.dart';
@@ -11,7 +10,7 @@ class MainController {
   Rx<Position?> initPosition = Rx<Position?>(null); // current location
   Rx<String?> shortAddress = Rx<String?>(null);
 
-  void getPositionAndPostList() async {
+  Future getPositionAndPostList() async {
     await getCurrentPosition();
     getShortAddress(initPosition.value!);
     loadPostList(initPosition.value!.latitude, initPosition.value!.latitude);
@@ -33,17 +32,15 @@ class MainController {
   }
 
   void loadPostList(double latitude, double longitude) async {
-    // final dio = createDio();
-    // PostRepository postRepository = PostRepository(dio);
-    // await postRepository
-    //     .getPostList(latitude, longitude, null, null, null)
-    //     .then((value) {
-    //   postList.value = value;
-    // }).catchError((error) {
-    //   print('print e: $error');
-    // });
-
-    setTmpData(latitude, latitude);
+    final dio = createDio();
+    PostRepository postRepository = PostRepository(dio);
+    await postRepository
+        .getPostList(latitude, longitude, null, null, null)
+        .then((resp) {
+      postList.value = resp;
+    }).catchError((error) {
+      print('[catchError]: $error');
+    });
   }
 
   setTmpData(double latitude, double longitude) {
