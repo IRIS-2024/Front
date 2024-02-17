@@ -32,7 +32,7 @@ class PostFormController {
   TextEditingController clothesController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
 
-  RxList<String> aiImages = [''].obs;
+  RxString genImage = ''.obs;
 
   void pickImage() async {
     final ImagePicker picker = ImagePicker();
@@ -59,8 +59,13 @@ class PostFormController {
         address.value != null;
   }
 
-  Future<void> submitPost() async {
-    // request body FormData 생성
+  Future<void> submitPost(dynamic controller) async {
+    showPostFormDialog(controller);
+
+  }
+
+  Future<void> postFormAndCreateImg() async {
+    // // request body FormData 생성
     final formData = dio_package.FormData.fromMap({
       'name': nameController.text,
       'gender': gender.value,
@@ -88,20 +93,11 @@ class PostFormController {
     try {
       PostRepository postRepository = PostRepository(dio);
       final resp = await postRepository.postPost(formData);
-      aiImages.value = resp.images;
-      print('print resp: ${resp}');
-      print('print resp.images: ${resp.images}');
-      showPostFormDialog();
+      genImage.value = resp.genImgUrl;
     } on DioException catch (e) {
       print('Error ${e.response}');
       return;
     }
-  }
-
-  Future<void> createAIImage() async {
-    // AI 이미지 생성 과정
-    // TODO 임시 딜레이
-    await Future.delayed(const Duration(milliseconds: 3000));
   }
 
   void submitFinalPost(BuildContext context) {

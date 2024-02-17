@@ -51,18 +51,20 @@ class TokenInterceptor extends Interceptor {
   ) async {
     // 401 에러-> AccessToken 재발급
     if (err.response?.statusCode == 401) {
-      print('[Error AccessToken Expired]: reissue Token');
-
+      print('[Error 401 인증 실패]: reissue Token');
       // 토큰 재발급
       final token = await reissueToken();
       if (token.isNotEmpty) {
         // 토큰 재발급 성공-> 새로운 토큰으로 API request 재진행
         await _retryRequest(err.requestOptions, token);
       } else {
-        print('[Error RefreshToken 재발급 실패]: ${err}');
+        print('[Error reissue RefreshToken Fail]: $err');
       }
+
     } else if (err.response?.statusCode == 403) {
-      print('[Error 403]: 토큰이 없음 ${err}');
+      print('[Error 403]: 인증 헤더 누락 $err');
+    } else {
+      print('[Error]: ${err.response ?? err}');
     }
     super.onError(err, handler);
   }
@@ -73,9 +75,9 @@ class TokenInterceptor extends Interceptor {
       final dio = createDioWithoutToken();
       LoginRepository loginRepository = LoginRepository(dio);
 
-      final RefreshToken = await getRT();
+      final refreshToken = await getRT();
 
-      final resp = await loginRepository.getRefreshToken(RefreshToken);
+      final resp = await loginRepository.getRefreshToken(refreshToken);
       print('new AccessToken Token: ${resp.accessToken.toString()}');
 
       // storage 에 새로운 token 저장
