@@ -1,16 +1,15 @@
 import 'dart:core';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/dio_config.dart';
+import 'package:iris_flutter/model/gen_image_resp.dart';
 import 'package:iris_flutter/repository/post_repository.dart';
 import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/page/form/post_form/post_form_dialog.dart';
-import 'package:iris_flutter/view/page/main/main_page.dart';
 import 'package:dio/dio.dart' as dio_package;
 
 class PostFormController {
@@ -33,6 +32,7 @@ class PostFormController {
   TextEditingController detailsController = TextEditingController();
 
   RxString genImage = ''.obs;
+  Rx<GenImageResp?> genImageResp = Rx<GenImageResp?>(null);
 
   void pickImage() async {
     final ImagePicker picker = ImagePicker();
@@ -90,14 +90,13 @@ class PostFormController {
     final dio = createDio();
     dio.options.contentType = 'multipart/form-data';
 
-    try {
-      PostRepository postRepository = PostRepository(dio);
-      final resp = await postRepository.postPost(formData);
+    PostRepository postRepository = PostRepository(dio);
+    await postRepository.postPost(formData).then((resp) {
       genImage.value = resp.genImgUrl;
-    } on DioException catch (e) {
-      print('Error ${e.response}');
-      return;
-    }
+      genImageResp.value = resp;
+    }).catchError((err) {
+      print('[catchError] $err');
+    });
   }
 
   void submitFinalPost(BuildContext context) {
@@ -106,7 +105,7 @@ class PostFormController {
     // get navigation, snackBar
     customSnackBar(
         title: '실종 정보 등록', message: '실종 정보 등록이 완료되었습니다.', context: context);
-    Get.offAll(() => const MainPage());
+    Get.offAndToNamed(Config.routerPost, arguments: genImageResp.value?.pid);
   }
 }
 
