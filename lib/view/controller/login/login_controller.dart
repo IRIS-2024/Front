@@ -115,7 +115,7 @@ class LoginController extends GetxController {
     //   // print('요청 전 refreshToken: $refreshToken');
 
     //   final resp = await loginRepository.getRefreshToken(
-    //       "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA4MTg3Njc0LCJleHAiOjE3MDkzOTcyNzR9.mvcqo1KCuwVRV1wTpYHlOQXJNphJESW8PjQHVJmcu6D_o9GWOBVb6zm_q5hCQomfONrt2o3Hpa1RCcamnFS4Nw");
+    //       refreshToken);
     //   final AT = resp.accessToken;
     //   final RT = resp.refreshToken;
 
