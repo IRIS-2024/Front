@@ -59,10 +59,10 @@ class TokenInterceptor extends Interceptor {
         // 토큰 재발급 성공-> 새로운 토큰으로 API request 재진행
         await _retryRequest(err.requestOptions, token);
       } else {
-        print('[Error 토큰 재발급 실패]: ${err}');
+        print('[Error 토큰 재발급 실패]: $err');
       }
     } else if (err.response?.statusCode == 403) {
-      print('[Error 403]: 토큰이 없음 ${err}');
+      print('[Error 403]: 토큰이 없음 $err');
     }
     super.onError(err, handler);
   }
@@ -76,14 +76,15 @@ class TokenInterceptor extends Interceptor {
       final RefreshToken = await getRT();
 
       final resp = await loginRepository.getRefreshToken(RefreshToken);
-      print('new AccessToken Token: ${resp.accessToken.toString()}');
+      print('new AccessToken Token: ${resp.accessToken}');
+      final AT = resp.accessToken;
+      final RT = resp.refreshToken;
 
       // storage 에 새로운 token 저장
-      await tokenStorage.write(
-          key: 'AccessToken', value: resp.accessToken.toString());
-      await tokenStorage.write(
-          key: 'RefreshToken', value: resp.refreshToken.toString());
-      return resp.accessToken.toString();
+      await tokenStorage.write(key: 'AccessToken', value: AT);
+      await tokenStorage.write(key: 'RefreshToken', value: RT);
+
+      return AT;
     } on DioException catch (e) {
       print('print reissueToken Error: $e');
 

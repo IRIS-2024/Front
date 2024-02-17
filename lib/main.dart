@@ -7,6 +7,9 @@ import 'package:iris_flutter/view/page/login/login_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // localStorage ready
+  await userStorage.ready;
+
   runApp(const MyApp());
 }
 

@@ -22,6 +22,8 @@ class LoginController extends GetxController {
     await googleSignIn.signIn().then((result) {
       result?.authentication.then((googleKey) {
         tokenLogin(result.serverAuthCode!);
+        print('currentUser: ${googleSignIn.currentUser}');
+        tempSaveUser(googleSignIn);
       }).catchError((err) {
         print('inner error');
       });
@@ -31,6 +33,15 @@ class LoginController extends GetxController {
     await userStorage.setItem(Config.social, Config.google);
   }
 
+  Future<void> tempSaveUser(GoogleSignIn googleSignIn) async {
+    print("사용자 정보 임시 저장");
+    // local storage 에 id, email, nickName 저장 (임시)
+    await userStorage.setItem(Config.id, googleSignIn.currentUser?.id);
+    await userStorage.setItem(Config.email, googleSignIn.currentUser?.email);
+    await userStorage.setItem(
+        Config.displayName, googleSignIn.currentUser?.displayName);
+  }
+
   Future<void> tokenLogin(String idToken) async {
     final dio = createDioWithoutToken();
 
@@ -38,10 +49,12 @@ class LoginController extends GetxController {
       LoginRepository loginRepository = LoginRepository(dio);
       final resp = await loginRepository.getLogin(idToken);
       // token storage에 token 저장
-      await tokenStorage.write(
-          key: 'AccessToken', value: resp.accessToken.toString());
-      await tokenStorage.write(
-          key: 'RefreshToken', value: resp.refreshToken.toString());
+      final AT = resp.accessToken;
+      final RT = resp.refreshToken;
+      await tokenStorage.write(key: 'AccessToken', value: AT);
+      await tokenStorage.write(key: 'RefreshToken', value: RT);
+
+      print("tokenLogin에서의 getUserEmail(): ${getUserEmail()}");
 
       // setUserInfo(); // 유저정보 api로부터 받은 user 정보 local storage에 저장.
       Get.offAll(() => const MainPage()); // api 없어서 임시
@@ -60,9 +73,9 @@ class LoginController extends GetxController {
       // final resp = await loginRepository.getLogin(idToken);
 
       // local storage 에 id, email, nickName 저장
-      // await userStorage.setItem(Config.id, resp.id.toString());
-      // await userStorage.setItem(Config.email, resp.email.toString());
-      // await userStorage.setItem(Config.nickName, resp.nickName.toString());
+      // await userStorage.setItem(Config.id, resp.id);
+      // await userStorage.setItem(Config.email, resp.email);
+      // await userStorage.setItem(Config.nickName, resp.displayName);
 
       Get.offAll(() => const MainPage());
     } on DioException catch (e) {
@@ -76,27 +89,35 @@ class LoginController extends GetxController {
     // 토근 재발급
     // 성공 -> 로그인 중. 새로운 토큰 발급 및 저장
     // 실패 -> 로그인 상태 아님. 로그아웃.
+
     if (getUserEmail().isEmpty) {
       print('checkLogin - No UserEmail 로그인 상태 아님');
       return;
+    } else {
+      print(">> checkLogin에서의 getUserEmail(): ${getUserEmail()}");
     }
 
     try {
       final dio = createDioWithoutToken();
       LoginRepository loginRepository = LoginRepository(dio);
 
-      final refreshToken = await getRT();
+      // final refreshToken = await getRT();
+      // print('요청 전 refreshToken: $refreshToken');
 
-      final resp = await loginRepository.getRefreshToken(refreshToken);
-      final token = resp.accessToken.toString();
-      print('checkLogin - 로그인 중: $token');
+      final resp = await loginRepository.getRefreshToken(
+          "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA4MTg3Njc0LCJleHAiOjE3MDkzOTcyNzR9.mvcqo1KCuwVRV1wTpYHlOQXJNphJESW8PjQHVJmcu6D_o9GWOBVb6zm_q5hCQomfONrt2o3Hpa1RCcamnFS4Nw");
+      final AT = resp.accessToken;
+      final RT = resp.refreshToken;
 
       // storage 에 새로운 token 저장
-      await tokenStorage.write(key: 'AccessToken', value: token);
+      await tokenStorage.write(key: 'AccessToken', value: AT);
+      await tokenStorage.write(key: 'RefreshToken', value: RT);
+
       // 메인화면으로 이동
       Get.offAll(() => const MainPage());
     } on DioException catch (e) {
       print('checkLogin: $e');
+      print('checkLogin:: ${e.response}');
 
       if (e.response?.statusCode == 401) {
         print('checkLogin - 401 Err 로그인 상태 아님');
@@ -129,17 +150,18 @@ class LoginController extends GetxController {
 
     // 다른 페이지에서 로그아웃 요청 -> 로그인 페이지로 이동
     // 로그인 페이지에서 로그인 여부 확인 후 로그인 상태 아니어서 로그아웃 요청 -> 페이지 이동 x
-    if (!Get.currentRoute.contains('/login')) {
-      Get.offAll(() => const LoginPage());
-    }
+    // if (!Get.currentRoute.contains('/login')) {
+    //   Get.offAll(() => const LoginPage());
+    // }
+    Get.offAll(() => const LoginPage());
   }
 
-  void updateInfo(User data) {
-    user.value = data;
-  }
+  // void updateInfo(User data) {
+  //   user.value = data;
+  // }
 
-  void deleteInfo() {
-    // logout 시 초기화
-    user.value = User(id: '', email: '');
-  }
+  // void deleteInfo() {
+  //   // logout 시 초기화
+  //   user.value = User(id: '', email: '');
+  // }
 }

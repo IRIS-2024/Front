@@ -19,22 +19,15 @@ class MyPage extends StatefulWidget {
 class _MyPageState extends State<MyPage> {
   final controller = Get.find<LoginController>();
 
-  Future<void> _signOut() async {
-    // Google Sign-In 로그아웃
-    await GoogleSignIn().signOut();
-    controller.deleteInfo();
+  // Future<void> resign() async {
+  //   // 탈퇴하기
+  //   // Google Sign-In 로그아웃
+  //   await GoogleSignIn().signOut();
+  //   // 탈퇴 API 연결하기
+  //   controller.deleteInfo();
 
-    Get.to(() => const LoginPage());
-  }
-
-  Future<void> resign() async {
-    // Google Sign-In 로그아웃
-    await GoogleSignIn().signOut();
-    // 탈퇴 API 연결하기
-    controller.deleteInfo();
-
-    Get.to(() => const LoginPage());
-  }
+  //   Get.to(() => const LoginPage());
+  // }
 
   bool isSwitched = true;
 
@@ -151,7 +144,7 @@ class _MyPageState extends State<MyPage> {
                 ListTile(
                   tileColor: Theme.of(context).colorScheme.surfaceVariant,
                   onTap: () {
-                    _signOut();
+                    controller.handleLogout();
                   },
                   leading: const Icon(Icons.logout),
                   title: const Text("로그아웃"),
