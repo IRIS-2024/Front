@@ -8,16 +8,15 @@ import 'package:iris_flutter/view/controller/form/post_form/post_form_controller
 
 void showPostFormDialog(dynamic controller) {
   Get.dialog(
-      barrierDismissible: false,
-    Dialog(
-          child: PostFormDialog(controller: controller)),
+    barrierDismissible: false,
+    Dialog(child: PostFormDialog(controller: controller)),
   );
 }
 
 class PostFormDialog extends StatelessWidget {
   final PostFormController controller;
-  const PostFormDialog({Key? key,
-  required this.controller}) : super(key: key);
+
+  const PostFormDialog({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -62,15 +61,19 @@ class PostFormDialog extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const Padding(padding: CustomPadding.mediumBottom),
-             ClipRRect(
-                    borderRadius: BorderRadius.circular(15.0),
-                    child: Image.network(
-                      controller.genImage.value,
-                      height: 200,
-                      fit: BoxFit.fitHeight,
-                    )),
               Obx(
-                    () => CheckboxMenuButton(
+                () => ClipRRect(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: controller.genImageResp.value != null
+                        ? Image.network(
+                            controller.genImageResp.value!.genImgUrl,
+                            height: 200,
+                            fit: BoxFit.fitHeight,
+                          )
+                        : const SizedBox()),
+              ),
+              Obx(
+                () => CheckboxMenuButton(
                   value: controller.isChecked.value,
                   onChanged: (value) {
                     controller.isChecked.value = value!;
@@ -87,9 +90,9 @@ class PostFormDialog extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
-                      Theme.of(context).colorScheme.primaryContainer,
+                          Theme.of(context).colorScheme.primaryContainer,
                       foregroundColor:
-                      Theme.of(context).colorScheme.onPrimaryContainer,
+                          Theme.of(context).colorScheme.onPrimaryContainer,
                     ),
                     child: const Text('등록하기'),
                   )),
@@ -100,6 +103,3 @@ class PostFormDialog extends StatelessWidget {
     );
   }
 }
-
-
-
