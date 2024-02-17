@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
+import 'package:iris_flutter/utils/user_profile_utils.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/controller/login/login_controller.dart';
 import 'package:iris_flutter/view/page/login/login_page.dart';
@@ -54,14 +55,14 @@ class _MyPageState extends State<MyPage> {
                         : const AssetImage('assets/images/temp_logo.png')
                             as ImageProvider,
                   ),
-                  title: controller.user.value.displayName != null
-                      ? Text("${controller.user.value.displayName}")
+                  title: getUserDisplayName() != ''
+                      ? Text(getUserDisplayName())
                       : const Text(
                           "사용자 이름을 등록해주세요.",
                           style: TextStyle(color: Colors.grey),
                         ),
-                  subtitle: controller.user.value.email != null
-                      ? Text(controller.user.value.email)
+                  subtitle: getUserEmail() != ''
+                      ? Text(getUserEmail())
                       : const Text(" "),
                 ),
                 const Padding(padding: CustomPadding.regularBottom),
