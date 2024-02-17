@@ -130,14 +130,18 @@ class LogInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    List<String> respLog = ['Response\n'];
+    List<String> respLog = ['Response'];
 
     if (response.data is Map) {
       response.data.forEach((key, value) {
         respLog.add('resp map \'$key=$value\n');
       });
+    } else if (response.data is List) {
+      response.data.map((element) {
+        respLog.add('list/ $element\n');
+      }).toList();
     } else {
-      respLog.add(response.toString());
+      respLog.add(response.data.toString());
     }
     log(respLog.toString());
     super.onResponse(response, handler);
@@ -156,7 +160,7 @@ String getCurlCommand(RequestOptions options) {
   });
 
   options.queryParameters.forEach((key, value) {
-    commandParts.add('-Query \'$key: $value\n');
+    commandParts.add('-Query \'$key: $value\'\n');
   });
 
   // Request Method

@@ -18,7 +18,7 @@ class MyPostController extends GetxController {
           bookmarked: false,
           disappearedAt: "2024-02-09T07:11:42.069Z",
           createdAt: "2024-02-09T07:11:42.069Z",
-          updatedAt: null,
+          updatedAt: "2024-02-09T07:11:42.069Z",
       author: true),
       ShortPost(
           pid: 2,
@@ -32,7 +32,7 @@ class MyPostController extends GetxController {
           longitude: 126.964722,
           disappearedAt: "2024-02-12 22:57:05.427963",
           createdAt: "2024-02-12 22:57:05.427963",
-          updatedAt: null,
+          updatedAt: "2024-02-12 22:57:05.427963",
           bookmarked: true,
           author: false),
       ShortPost(
@@ -47,7 +47,7 @@ class MyPostController extends GetxController {
           address: '테스트시 용산구 왕왕동',
           disappearedAt: "2024-02-09T07:11:42.069Z",
           createdAt: "2024-02-09T07:11:42.069Z",
-          updatedAt: null,
+          updatedAt: "2024-02-09T07:11:42.069Z",
           bookmarked: true,
           author: false),
     ];
