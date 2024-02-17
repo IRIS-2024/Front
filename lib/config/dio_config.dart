@@ -59,7 +59,7 @@ class TokenInterceptor extends Interceptor {
         // 토큰 재발급 성공-> 새로운 토큰으로 API request 재진행
         await _retryRequest(err.requestOptions, token);
       } else {
-        print('[Error 토큰 재발급 실패]: ${err}');
+        print('[Error RefreshToken 재발급 실패]: ${err}');
       }
     } else if (err.response?.statusCode == 403) {
       print('[Error 403]: 토큰이 없음 ${err}');

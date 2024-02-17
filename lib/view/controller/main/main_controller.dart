@@ -63,7 +63,8 @@ class MainController {
           bookmarked: false,
           disappearedAt: "2024-02-09T07:11:42.069Z",
           createdAt: "2024-02-09T07:11:42.069Z",
-          updatedAt: null),
+          updatedAt: null,
+          author: true),
       ShortPost(
           pid: 0,
           imgUrl:
@@ -77,7 +78,8 @@ class MainController {
           disappearedAt: "2024-02-12 22:57:05.427963",
           createdAt: "2024-02-12 22:57:05.427963",
           updatedAt: null,
-          bookmarked: true),
+          bookmarked: true,
+          author: false),
       ShortPost(
           pid: 1,
           imgUrl:
@@ -91,7 +93,8 @@ class MainController {
           disappearedAt: "2024-02-09T07:11:42.069Z",
           createdAt: "2024-02-09T07:11:42.069Z",
           updatedAt: null,
-          bookmarked: true),
+          bookmarked: true,
+          author: false),
       ShortPost(
           pid: 1,
           imgUrl:
@@ -105,70 +108,8 @@ class MainController {
           disappearedAt: "2024-02-09T07:11:42.069Z",
           createdAt: "2024-02-09T07:11:42.069Z",
           updatedAt: null,
-          bookmarked: true),
-    ];
-  }
-
-  setTmpDataV2(double latitude, double longitude) {
-    print('setTmpDataV2 lat: $latitude, lng: $longitude');
-
-    postList.value = [
-      ShortPost(
-          pid: 0,
-          imgUrl:
-              'https://blenderartists.org/uploads/default/original/4X/5/4/f/54f2cbb9c456be76911967e686ca5898ac6a065d.jpeg',
-          name: '김김김',
-          gender: true,
-          age: 85,
-          address: '용산구 갈월동',
-          latitude: latitude + 0.0023,
-          longitude: longitude + 0.0020,
-          bookmarked: false,
-          disappearedAt: "2024-02-09T07:11:42.069Z",
-          createdAt: "2024-02-09T07:11:42.069Z",
-          updatedAt: null),
-      ShortPost(
-          pid: 0,
-          imgUrl:
-              'https://cdn.class101.net/images/587ecdf0-4329-4447-ac00-f2b25b23eab8',
-          name: '김실종',
-          gender: false,
-          age: 7,
-          address: '용산구 왕왕동',
-          latitude: latitude + 0.0052,
-          longitude: longitude + 0.0052,
-          disappearedAt: "2024-02-12 22:57:05.427963",
-          createdAt: "2024-02-12 22:57:05.427963",
-          updatedAt: null,
-          bookmarked: true),
-      ShortPost(
-          pid: 1,
-          imgUrl:
-              'https://blenderartists.org/uploads/default/original/4X/5/4/f/54f2cbb9c456be76911967e686ca5898ac6a065d.jpeg',
-          name: '김무무',
-          gender: true,
-          age: 9,
-          address: '용산구 왕왕동',
-          latitude: latitude + 0.0040,
-          longitude: longitude + 0.0070,
-          disappearedAt: "2024-02-09T07:11:42.069Z",
-          createdAt: "2024-02-09T07:11:42.069Z",
-          updatedAt: null,
-          bookmarked: true),
-      ShortPost(
-          pid: 1,
-          imgUrl:
-              'https://blenderartists.org/uploads/default/original/4X/5/4/f/54f2cbb9c456be76911967e686ca5898ac6a065d.jpeg',
-          name: '김멍멍',
-          gender: true,
-          age: 9,
-          address: '용산구 왕왕동',
-          latitude: latitude + 0.0001,
-          longitude: longitude + 0.0001,
-          disappearedAt: "2024-02-09T07:11:42.069Z",
-          createdAt: "2024-02-09T07:11:42.069Z",
-          updatedAt: null,
-          bookmarked: true),
+          bookmarked: true,
+          author: false),
     ];
   }
 }

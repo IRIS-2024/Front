@@ -23,9 +23,9 @@ class _LoginRepository implements LoginRepository {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'refreshToken': refreshToken};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<LoginResp>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -50,7 +50,7 @@ class _LoginRepository implements LoginRepository {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'code': code};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<LoginResp>(Options(
       method: 'GET',

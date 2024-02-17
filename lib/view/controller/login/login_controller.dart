@@ -56,7 +56,7 @@ class LoginController extends GetxController {
       // setUserInfo(); // 유저정보 api로부터 받은 user 정보 local storage에 저장.
       Get.offAll(() => const MainPage()); // api 없어서 임시
     } on DioException catch (e) {
-      print('Error ${e.response}');
+      print('Error tokenLogin ${e.response}');
       return;
     }
   }

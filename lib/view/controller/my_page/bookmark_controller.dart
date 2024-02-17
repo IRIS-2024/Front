@@ -21,7 +21,8 @@ class BookmarkController {
           bookmarked: false,
           disappearedAt: "2024-02-09T07:11:42.069Z",
           createdAt: "2024-02-09T07:11:42.069Z",
-          updatedAt: null),
+          updatedAt: null,
+      author: false),
     ];
     postList.value = tmpData;
   }
