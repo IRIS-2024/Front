@@ -3,6 +3,7 @@ import 'package:iris_flutter/model/post.dart';
 
 class DetailController extends GetxController {
   Rx<Post> post = Post(
+    pid: 0,
     name: "",
     gender: true,
     age: 0,
@@ -14,6 +15,8 @@ class DetailController extends GetxController {
     images: [""],
     disappearedAt: '',
     createdAt: '',
+    updatedAt: '',
+    author: false,
   ).obs;
 
   List<String> urlImages = [
@@ -43,6 +46,7 @@ class DetailController extends GetxController {
 
   void loadData() {
     Post loadData = Post(
+      pid: 0,
       name: "김송송",
       age: 10,
       gender: true,
@@ -62,6 +66,7 @@ class DetailController extends GetxController {
       bookmarked: false,
       disappearedAt: "2024-02-09T07:11:42.069Z",
       createdAt: "2024-02-09T07:11:42.069Z",
+      author: true, updatedAt: '2024-02-09T07:11:42.069Z',
     );
 
     post.value = loadData;

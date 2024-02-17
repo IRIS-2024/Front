@@ -1,5 +1,4 @@
 import 'package:iris_flutter/model/login_response.dart';
-import 'package:iris_flutter/model/user.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 
