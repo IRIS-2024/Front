@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -14,8 +16,16 @@ class LoginController extends GetxController {
   Rx<User> user = User(id: '', email: '').obs;
 
   Future<void> loginGoogle() async {
-    GoogleSignIn googleSignIn =
-        GoogleSignIn(clientId: HiddenConfig.webClientId);
+    GoogleSignIn googleSignIn;
+
+    if (Platform.isAndroid) {
+      googleSignIn =
+      GoogleSignIn(clientId: HiddenConfig.webClientId);
+    } else {
+      googleSignIn =
+      GoogleSignIn(serverClientId: HiddenConfig.webClientId,
+      );
+    }
 
     await googleSignIn.signIn().then((result) {
       result?.authentication.then((googleKey) {
@@ -29,13 +39,14 @@ class LoginController extends GetxController {
     await userStorage.setItem(Config.social, Config.google);
   }
 
+
+
   Future<void> tokenLogin(String idToken) async {
     final dio = createDioWithoutToken();
 
     try {
       LoginRepository loginRepository = LoginRepository(dio);
       final resp = await loginRepository.getLogin(idToken);
-      // print('print resp accessToken: ${resp.accessToken}');
       // token storage에 token 저장
       await tokenStorage.write(
           key: 'AccessToken', value: resp.accessToken.toString());
@@ -84,9 +95,9 @@ class LoginController extends GetxController {
       final dio = createDioWithoutToken();
       LoginRepository loginRepository = LoginRepository(dio);
 
-      final RefreshToken = await getRT();
+      final refreshToken = await getRT();
 
-      final resp = await loginRepository.getRefreshToken(RefreshToken);
+      final resp = await loginRepository.getRefreshToken(refreshToken);
       final token = resp.accessToken.toString();
       print('checkLogin - 로그인 중: $token');
 
