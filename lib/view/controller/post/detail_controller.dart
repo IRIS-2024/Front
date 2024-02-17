@@ -15,6 +15,7 @@ class DetailController extends GetxController {
     images: [""],
     disappearedAt: '',
     createdAt: '',
+    updatedAt: '',
     author: false,
   ).obs;
 
@@ -65,7 +66,7 @@ class DetailController extends GetxController {
       bookmarked: false,
       disappearedAt: "2024-02-09T07:11:42.069Z",
       createdAt: "2024-02-09T07:11:42.069Z",
-      author: true,
+      author: true, updatedAt: '2024-02-09T07:11:42.069Z',
     );
 
     post.value = loadData;

@@ -21,7 +21,7 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       bookmarked: json['bookmarked'] as bool,
       disappearedAt: json['disappearedAt'] as String,
       createdAt: json['createdAt'] as String,
-      updatedAt: json['updatedAt'] as String?,
+      updatedAt: json['updatedAt'] as String,
       images:
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
       author: json['author'] as bool,
