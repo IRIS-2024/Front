@@ -20,8 +20,6 @@ class PostFormDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get.put(PostFormController());
-    // final postFormController = Get.find<PostFormController>();
 
     return Padding(
       padding: CustomPadding.dialogInsets,
@@ -62,15 +60,15 @@ class PostFormDialog extends StatelessWidget {
               ),
               const Padding(padding: CustomPadding.mediumBottom),
               Obx(
-                () => ClipRRect(
-                    borderRadius: BorderRadius.circular(15.0),
-                    child: controller.genImageResp.value != null
-                        ? Image.network(
-                            controller.genImageResp.value!.genImgUrl,
-                            height: 200,
-                            fit: BoxFit.fitHeight,
-                          )
-                        : const SizedBox()),
+                () => controller.genImageResp.value != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(15.0),
+                        child: Image.network(
+                          controller.genImageResp.value!.genImgUrl,
+                          height: 200,
+                          fit: BoxFit.fitHeight,
+                        ))
+                    : const SizedBox(),
               ),
               Obx(
                 () => CheckboxMenuButton(
