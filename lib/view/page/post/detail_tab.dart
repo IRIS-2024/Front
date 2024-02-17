@@ -36,7 +36,7 @@ class _DetailTabState extends State<DetailTab> {
                   ),
                 ),
                 Text(
-                  convertDateString(postController.post.value.createdAt),
+                  convertDateString(postController.post.value.updatedAt),
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.outline),
                 )

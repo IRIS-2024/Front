@@ -1,29 +1,24 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/dio_config.dart';
 import 'package:iris_flutter/model/short_post.dart';
 import 'package:iris_flutter/repository/bookmark_repository.dart';
+import 'package:iris_flutter/repository/post_repository.dart';
 
 class BookmarkController {
-  RxList<ShortPost> postList = <ShortPost>[].obs;
+  RxList<ShortPost> shortPostList = <ShortPost>[].obs;
 
-  void loadData() {
-    List<ShortPost> tmpData = [
-      ShortPost(
-          pid: 0,
-          imgUrl:
-          'https://blenderartists.org/uploads/default/original/4X/5/4/f/54f2cbb9c456be76911967e686ca5898ac6a065d.jpeg',
-          name: '김말순',
-          gender: true,
-          age: 85,
-          address: '용산구 갈월동',
-          latitude: 37.545144,
-          longitude: 126.964381,
-          bookmarked: false,
-          disappearedAt: "2024-02-09T07:11:42.069Z",
-          createdAt: "2024-02-09T07:11:42.069Z",
-          updatedAt: null),
-    ];
-    postList.value = tmpData;
+  Future<void> loadData() async {
+    final dio = createDio();
+    PostRepository postRepository = PostRepository(dio);
+    await postRepository
+        .getPostList(0, 0, 'BOOKMARKED', 0, 6)
+        .then((resp) {
+          shortPostList.value = resp;
+    }).catchError((error) {
+      log('[catchError]: $error');
+    });
   }
 
   // 북마크 추가 or 삭제

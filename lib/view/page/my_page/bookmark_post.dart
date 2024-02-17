@@ -26,14 +26,14 @@ class _BookmarkPostState extends State<BookmarkPost> {
         appBar: customAppBar(title: "북마크한 실종 정보"),
         body: Padding(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-            child: bookmarkController.postList.isNotEmpty
+            child: bookmarkController.shortPostList.isNotEmpty
                 ? ListView.builder(
                     padding: const EdgeInsets.only(top: 5, bottom: 20),
-                    itemCount: bookmarkController.postList.length,
+                    itemCount: bookmarkController.shortPostList.length,
                     itemBuilder: (BuildContext context, int idx) {
                       return SinglePostItem(
                           controller: bookmarkController,
-                          post: bookmarkController.postList[idx]);
+                          post: bookmarkController.shortPostList[idx]);
                     })
                 : const Center(
                     child: Text("북마크한 실종 정보가 없습니다."),

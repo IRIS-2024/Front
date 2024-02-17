@@ -78,7 +78,7 @@ class _SinglePostItemState extends State<SinglePostItem> {
                 ),
                 const Padding(padding: CustomPadding.slimRight),
                 Text(
-                  getTimeDiffText(widget.post.createdAt, widget.post.createdAt),
+                  getTimeDifference(widget.post.createdAt),
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.outline),
                 ),

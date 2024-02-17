@@ -5,6 +5,7 @@ import 'package:iris_flutter/model/post.dart';
 class PostController extends GetxController {
   // 하나의 실종 정보 글에 대한 정보
   Rx<Post> post = Post(
+    pid: 0,
     name: "",
     gender: true,
     age: 0,
@@ -16,6 +17,8 @@ class PostController extends GetxController {
     images: [""],
     disappearedAt: '',
     createdAt: '',
+    updatedAt: '',
+    author: true
   ).obs;
 
   // 해당 실종 정보 글에 달린 제보 댓글들
@@ -55,6 +58,7 @@ class PostController extends GetxController {
 
   void loadData() {
     Post loadData = Post(
+      pid: 1,
       name: "김송송",
       age: 10,
       gender: true,
@@ -74,6 +78,8 @@ class PostController extends GetxController {
       bookmarked: false,
       disappearedAt: "2024-02-09T07:11:42.069Z",
       createdAt: "2024-02-09T07:11:42.069Z",
+      updatedAt: "2024-02-09T07:11:42.069Z",
+      author: false
     );
 
     post.value = loadData;

@@ -14,8 +14,9 @@ class ShortPost {
   double longitude;
   String disappearedAt;
   String createdAt;
-  String? updatedAt;
+  String updatedAt;
   bool bookmarked;
+  bool author;
 
   ShortPost({
     required this.pid,
@@ -30,7 +31,7 @@ class ShortPost {
     required this.createdAt,
     required this.updatedAt,
     required this.bookmarked,
-
+    required this.author,
   });
 
   factory ShortPost.fromJson(Map<String, dynamic> json) => _$ShortPostFromJson(json);

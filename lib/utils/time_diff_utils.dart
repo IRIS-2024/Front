@@ -1,15 +1,7 @@
 import 'package:iris_flutter/utils/conversion_utils.dart';
 
-String getTimeDiffText(String createdAt, String? updateAt) {
-  if (updateAt != null) { // 수정한 적 있음
-    return _getTimeDifference(updateAt);
-  } else {
-    return _getTimeDifference(createdAt);
-  }
-}
-
-String _getTimeDifference(String dateTimeString) {
-  DateTime givenTime = DateTime.parse(dateTimeString);
+String getTimeDifference(String updatedAt) {
+  DateTime givenTime = DateTime.parse(updatedAt);
 
   DateTime now = DateTime.now();
   Duration difference = now.difference(givenTime);
@@ -26,7 +18,7 @@ String _getTimeDifference(String dateTimeString) {
 
     // 차이가 24시간을 넘어가는 경우
     if (hoursDifference >= 24) {
-      return convertDateString(dateTimeString);
+      return convertDateString(updatedAt);
     }
 
     // 차이 24시간 이내

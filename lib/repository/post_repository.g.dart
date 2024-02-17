@@ -88,13 +88,13 @@ class _PostRepository implements PostRepository {
   }
 
   @override
-  Future<Post> postPost(FormData data) async {
+  Future<GenImageResp> postPost(FormData data) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = data;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Post>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<GenImageResp>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -110,7 +110,7 @@ class _PostRepository implements PostRepository {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = Post.fromJson(_result.data!);
+    final value = GenImageResp.fromJson(_result.data!);
     return value;
   }
 

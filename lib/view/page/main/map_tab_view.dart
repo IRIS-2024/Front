@@ -34,6 +34,8 @@ class _MapTabViewState extends State<MapTabView> {
                       mainController.initPosition.value!.longitude,
                     ),
                     zoom: Config.initZoom),
+                mapToolbarEnabled: false,
+                zoomControlsEnabled: false,
                 // min max zoom 제한
                 minMaxZoomPreference:
                     MinMaxZoomPreference(Config.minZoom, Config.maxZoom),
@@ -45,7 +47,7 @@ class _MapTabViewState extends State<MapTabView> {
                 myLocationEnabled: true,
                 // 위치 버튼과 신고하기 floatingButton 겹치지 않게 padding 설정
                 padding: const EdgeInsets.only(bottom: 55),
-                markers: mainController.postList
+                markers: mainController.shortPostList
                     .map((shortPost) => Marker(
                           markerId: MarkerId('${shortPost.pid}'),
                           position:

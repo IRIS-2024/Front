@@ -45,8 +45,7 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                 ),
               ),
               Text(
-                  getTimeDiffText(
-                      widget.comment.createdAt, widget.comment.createdAt),
+                  getTimeDifference(widget.comment.createdAt),
                   style: const TextStyle(fontSize: 12)),
               if (widget.closeAble == true)
                 IconButton(

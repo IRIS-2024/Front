@@ -7,6 +7,7 @@ part of 'post.dart';
 // **************************************************************************
 
 Post _$PostFromJson(Map<String, dynamic> json) => Post(
+      pid: json['pid'] as int,
       name: json['name'] as String,
       gender: json['gender'] as bool,
       age: json['age'] as int,
@@ -18,14 +19,16 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       clothes: json['clothes'] as String,
       details: json['details'] as String?,
       bookmarked: json['bookmarked'] as bool,
-      images:
-          (json['images'] as List<dynamic>).map((e) => e as String).toList(),
       disappearedAt: json['disappearedAt'] as String,
       createdAt: json['createdAt'] as String,
-      updatedAt: json['updatedAt'] as String?,
+      updatedAt: json['updatedAt'] as String,
+      images:
+          (json['images'] as List<dynamic>).map((e) => e as String).toList(),
+      author: json['author'] as bool,
     );
 
 Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{
+      'pid': instance.pid,
       'name': instance.name,
       'gender': instance.gender,
       'age': instance.age,
@@ -37,8 +40,9 @@ Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{
       'clothes': instance.clothes,
       'details': instance.details,
       'bookmarked': instance.bookmarked,
-      'images': instance.images,
       'disappearedAt': instance.disappearedAt,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
+      'images': instance.images,
+      'author': instance.author,
     };
