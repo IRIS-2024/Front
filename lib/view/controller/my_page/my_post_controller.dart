@@ -18,7 +18,8 @@ class MyPostController extends GetxController {
           bookmarked: false,
           disappearedAt: "2024-02-09T07:11:42.069Z",
           createdAt: "2024-02-09T07:11:42.069Z",
-          updatedAt: null),
+          updatedAt: null,
+      author: true),
       ShortPost(
           pid: 2,
           imgUrl:
@@ -32,7 +33,8 @@ class MyPostController extends GetxController {
           disappearedAt: "2024-02-12 22:57:05.427963",
           createdAt: "2024-02-12 22:57:05.427963",
           updatedAt: null,
-          bookmarked: true),
+          bookmarked: true,
+          author: false),
       ShortPost(
           pid: 3,
           imgUrl:
@@ -46,7 +48,8 @@ class MyPostController extends GetxController {
           disappearedAt: "2024-02-09T07:11:42.069Z",
           createdAt: "2024-02-09T07:11:42.069Z",
           updatedAt: null,
-          bookmarked: true),
+          bookmarked: true,
+          author: false),
     ];
 
     postList.value = tmpData;
