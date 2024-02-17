@@ -38,9 +38,7 @@ class TokenInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     // 토큰 읽어와서 헤더에 넣어주기
-    // final token = await getUserToken(); //TODO 토큰 TokenStorage에 저장하기
-    final token = HiddenConfig.tempAT;
-    // HiddenConfig.tempAT을 token storage에서 저장해둔 Acess token으로 바꾸기
+    final token = await getAT();
     options.headers['Authorization'] = 'Bearer $token';
 
     super.onRequest(options, handler);
@@ -53,23 +51,18 @@ class TokenInterceptor extends Interceptor {
   ) async {
     // 401 에러-> AccessToken 재발급
     if (err.response?.statusCode == 401) {
-      print('print AccessToken Expired: reissue Token');
+      print('[Error AccessToken Expired]: reissue Token');
 
       // 토큰 재발급
       final token = await reissueToken();
       if (token.isNotEmpty) {
         // 토큰 재발급 성공-> 새로운 토큰으로 API request 재진행
         await _retryRequest(err.requestOptions, token);
+      } else {
+        print('[Error 토큰 재발급 실패]: ${err}');
       }
     } else if (err.response?.statusCode == 403) {
-      print('Token이 없을 때');
-
-      // // 토큰 재발급
-      // final token = await reissueToken();
-      // if (token.isNotEmpty) {
-      //   // 토큰 재발급 성공-> 새로운 토큰으로 API request 재진행
-      //   await _retryRequest(err.requestOptions, token);
-      // }
+      print('[Error 403]: 토큰이 없음 ${err}');
     }
     super.onError(err, handler);
   }
