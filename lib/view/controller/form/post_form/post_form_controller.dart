@@ -1,4 +1,5 @@
 import 'dart:core';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,7 +32,6 @@ class PostFormController {
   TextEditingController clothesController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
 
-  RxString genImage = ''.obs;
   Rx<GenImageResp?> genImageResp = Rx<GenImageResp?>(null);
 
   void pickImage() async {
@@ -44,7 +44,7 @@ class PostFormController {
         .then((value) {
       images += value;
     }).catchError((error) {
-      print('pickImage error: $error');
+      log('pickImage error: $error');
     });
   }
 
@@ -61,7 +61,6 @@ class PostFormController {
 
   Future<void> submitPost(dynamic controller) async {
     showPostFormDialog(controller);
-
   }
 
   Future<void> postFormAndCreateImg() async {
@@ -92,10 +91,12 @@ class PostFormController {
 
     PostRepository postRepository = PostRepository(dio);
     await postRepository.postPost(formData).then((resp) {
-      genImage.value = resp.genImgUrl;
       genImageResp.value = resp;
+
+      // TODO image 주소 오류 수정되면 삭제
+      genImageResp.value?.genImgUrl = genImageResp.value!.genImgUrl.trim();
     }).catchError((err) {
-      print('[catchError] $err');
+      log('[catchError] $err');
     });
   }
 
@@ -105,7 +106,7 @@ class PostFormController {
     // get navigation, snackBar
     customSnackBar(
         title: '실종 정보 등록', message: '실종 정보 등록이 완료되었습니다.', context: context);
-    Get.offAndToNamed(Config.routerPost, arguments: genImageResp.value?.pid);
+    Get.offAllNamed(Config.routerPost, arguments: genImageResp.value?.pid);
   }
 }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/view/controller/my_page/bookmark_controller.dart';
 import 'package:iris_flutter/view/controller/post/post_controller.dart';
+import 'package:iris_flutter/view/page/main/main_page.dart';
 import 'package:iris_flutter/view/page/post/detail_tab.dart';
 import 'package:iris_flutter/view/page/post/comment_tab.dart';
 import 'package:iris_flutter/config/config.dart';
@@ -42,7 +43,7 @@ class _PostPageState extends State<PostPage> {
             leading: IconButton(
               icon: const Icon(Icons.arrow_back), // 햄버거버튼 아이콘 생성
               onPressed: () {
-                Get.back();
+                Get.to(() => const MainPage());
               },
             ),
             actions: [
