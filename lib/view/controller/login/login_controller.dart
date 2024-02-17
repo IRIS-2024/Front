@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -122,7 +123,7 @@ class LoginController extends GetxController {
   void handleLogout() async {
     // 소셜 로그인 플랫폼 로그아웃
     final social = await userStorage.getItem(Config.social);
-    print('print social: $social');
+    log('social Platform: $social');
     if (social == Config.google) {
       // 구글 로그아웃
       await GoogleSignIn().signOut();

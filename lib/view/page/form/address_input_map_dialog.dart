@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -70,8 +72,8 @@ class _AddressInputMapDialogState extends State<AddressInputMapDialog> {
                               ),
                             },
                       onTap: (loc) {
-                        debugPrint(
-                            'print 선택한 위치의 위경도: ${loc.latitude} ${loc.longitude}');
+                        log(
+                            '선택한 위치의 위경도: ${loc.latitude} ${loc.longitude}');
                         formMapController.getAddressForSelectedPosition(loc);
                       },
                     ),
