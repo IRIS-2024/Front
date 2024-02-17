@@ -14,7 +14,7 @@ class ShortPost {
   double longitude;
   String disappearedAt;
   String createdAt;
-  String? updatedAt;
+  String updatedAt;
   bool bookmarked;
   bool author;
 

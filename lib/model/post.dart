@@ -18,7 +18,7 @@ class Post {
   bool bookmarked;
   String disappearedAt;
   String createdAt;
-  String? updatedAt;
+  String updatedAt;
   List<String> images;
   bool author;
 
@@ -37,7 +37,7 @@ class Post {
     required this.bookmarked,
     required this.disappearedAt,
     required this.createdAt,
-    this.updatedAt,
+    required this.updatedAt,
     required this.images,
     required this.author,
   });

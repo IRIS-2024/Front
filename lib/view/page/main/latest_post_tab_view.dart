@@ -25,12 +25,12 @@ class _LatestPostTabViewState extends State<LatestPostTabView> {
           );
         }
 
-        return mainController.postList.isNotEmpty
+        return mainController.shortPostList.isNotEmpty
             ? Expanded(child: ListView.builder(
-            itemCount: mainController.postList.length,
+            itemCount: mainController.shortPostList.length,
             itemBuilder: (BuildContext context, int idx) {
               return SinglePostItem(
-                post: mainController.postList[idx],
+                post: mainController.shortPostList[idx],
                 controller: mainController,
               );
             }),)

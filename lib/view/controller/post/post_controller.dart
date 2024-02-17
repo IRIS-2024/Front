@@ -17,6 +17,7 @@ class PostController extends GetxController {
     images: [""],
     disappearedAt: '',
     createdAt: '',
+    updatedAt: '',
     author: true
   ).obs;
 
@@ -77,6 +78,7 @@ class PostController extends GetxController {
       bookmarked: false,
       disappearedAt: "2024-02-09T07:11:42.069Z",
       createdAt: "2024-02-09T07:11:42.069Z",
+      updatedAt: "2024-02-09T07:11:42.069Z",
       author: false
     );
 

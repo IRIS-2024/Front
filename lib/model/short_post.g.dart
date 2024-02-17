@@ -17,7 +17,7 @@ ShortPost _$ShortPostFromJson(Map<String, dynamic> json) => ShortPost(
       longitude: (json['longitude'] as num).toDouble(),
       disappearedAt: json['disappearedAt'] as String,
       createdAt: json['createdAt'] as String,
-      updatedAt: json['updatedAt'] as String?,
+      updatedAt: json['updatedAt'] as String,
       bookmarked: json['bookmarked'] as bool,
       author: json['author'] as bool,
     );
