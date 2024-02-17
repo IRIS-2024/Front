@@ -39,7 +39,8 @@ class _MyPostsState extends State<MyPosts> {
                                 itemBuilder: (BuildContext context, int idx) {
                                   return SinglePostItem(
                                       controller: postController,
-                                      post: postController.postList[idx]);
+                                      post: postController.postList[idx],
+                                  myPosts: true,);
                                 }),
                           ),
                         ),
