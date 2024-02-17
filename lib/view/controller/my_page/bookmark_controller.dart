@@ -34,39 +34,37 @@ class BookmarkController {
 
   // 북마크 추가
   void postBookmark(int postId) async {
-    print('postBookmark');
+    log('postBookmark');
 
-    // 임시 주석
     final dio = createDio();
     final BookmarkRepository bookmarkRepository = BookmarkRepository(dio);
     await bookmarkRepository.postBookmark(postId).then((resp) {
       if (resp.statusCode == 200) {
-        print('Info deleted successfully.');
+        log('Info deleted successfully.');
       } else {
         // 실패한 경우
-        print('Error: ${resp.data?.message ?? 'Unknown error'}');
+        log('Error: ${resp.data?.message ?? 'Unknown error'}');
       }
     }).catchError((error) {
-      print('print e: $error');
+      log('[catchError]: $error');
     });
   }
 
   // 북마크 삭제
   void deleteBookmark(int postId) async {
-    print('deleteBookmark');
+    log('deleteBookmark');
 
-    // 임시 주석
     final dio = createDio();
     final BookmarkRepository bookmarkRepository = BookmarkRepository(dio);
     await bookmarkRepository.deleteBookmark(postId).then((resp) {
       if (resp.statusCode == 200) {
-        print('Info deleted successfully.');
+        log('Info deleted successfully.');
       } else {
         // 실패한 경우
-        print('Error: ${resp.data?.message ?? 'Unknown error'}');
+        log('Error: ${resp.data?.message ?? 'Unknown error'}');
       }
     }).catchError((error) {
-      print('print e: $error');
+      log('[catchError]: $error');
     });
   }
 }
