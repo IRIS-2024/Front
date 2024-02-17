@@ -6,15 +6,18 @@ import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/model/short_post.dart';
 import 'package:iris_flutter/utils/time_diff_utils.dart';
 import 'package:iris_flutter/view/controller/my_page/bookmark_controller.dart';
+import 'package:iris_flutter/view/controller/my_page/my_post_controller.dart';
 
 class SinglePostItem extends StatefulWidget {
   final dynamic controller;
   final ShortPost post;
+  final bool? myPosts;
 
   const SinglePostItem({
     super.key,
     required this.controller,
     required this.post,
+    this.myPosts,
   });
 
   @override
@@ -32,14 +35,33 @@ class _SinglePostItemState extends State<SinglePostItem> {
         padding: CustomPadding.thickBottom,
         child: Column(
           children: [
-            ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Image.network(
-                  widget.post.imgUrl,
-                  height: 170,
-                  width: 380,
-                  fit: BoxFit.fitWidth,
-                )),
+            Stack(
+              children: [
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.network(
+                      widget.post.imgUrl,
+                      height: 170,
+                      width: 380,
+                      fit: BoxFit.fitWidth,
+                    )),
+                widget.myPosts == true
+                    ? Positioned(
+                        right: 3,
+                        child: IconButton(
+                            onPressed: () {
+                              Get.put(MyPostController()).deletePost(widget.post.pid, context);
+                            },
+                            icon: const Icon(Icons.delete_outline),
+                            style: IconButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .onBackground
+                                    .withOpacity(0.5))))
+                    : const SizedBox()
+              ],
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
