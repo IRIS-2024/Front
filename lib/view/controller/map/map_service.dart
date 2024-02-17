@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:iris_flutter/config/hidden_config.dart';
@@ -53,13 +55,13 @@ class MapService {
       final Dio dio = Dio();
       final response = await dio.get(url);
       if (response.data['status'] == "OK") {
-        print('행정 주소 Address: ${response.data['results'][0]['formatted_address']}');
+        log('행정 주소 Address: ${response.data['results'][0]['formatted_address']}');
         return response.data['results'][0]['formatted_address'];
       } else {
         throw Exception('Status Exception: ${response.data['status']}');
       }
     } catch (error) {
-      print('Error [$error] (getAddrFromLatlng)');
+      log('Error [$error] (getAddrFromLatlng)');
       return '';
     }
   }

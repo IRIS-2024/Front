@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:get/get.dart';
@@ -71,7 +73,7 @@ class _MapTabViewState extends State<MapTabView> {
                 padding: const EdgeInsets.only(top: 10),
                 child: ElevatedButton(
                     onPressed: () {
-                      print('print: 실종 정보 재로딩');
+                      log('print: 실종 정보 재로딩');
                       mainController.loadPostList(
                           cameraPosition.latitude, cameraPosition.longitude);
                     },
