@@ -6,26 +6,28 @@ import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/form/post_form/post_form_controller.dart';
 
-void showPostFormDialog() {
+void showPostFormDialog(dynamic controller) {
   Get.dialog(
       barrierDismissible: false,
-      const Dialog(
-          child: PostFormDialog()),
+    Dialog(
+          child: PostFormDialog(controller: controller)),
   );
 }
 
 class PostFormDialog extends StatelessWidget {
-  const PostFormDialog({Key? key}) : super(key: key);
+  final PostFormController controller;
+  const PostFormDialog({Key? key,
+  required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.put(PostFormController());
-    final controller = Get.find<PostFormController>();
+    // Get.put(PostFormController());
+    // final postFormController = Get.find<PostFormController>();
 
     return Padding(
       padding: CustomPadding.dialogInsets,
       child: FutureBuilder(
-        future: controller.createAIImage(),
+        future: controller.postFormAndCreateImg(),
         builder: (context, snap) {
           if (snap.connectionState != ConnectionState.done) {
             return Column(
@@ -60,15 +62,13 @@ class PostFormDialog extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const Padding(padding: CustomPadding.mediumBottom),
-              Obx(
-                () => ClipRRect(
+             ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
                     child: Image.network(
-                      controller.aiImages.first,
+                      controller.genImage.value,
                       height: 200,
                       fit: BoxFit.fitHeight,
                     )),
-              ),
               Obx(
                     () => CheckboxMenuButton(
                   value: controller.isChecked.value,

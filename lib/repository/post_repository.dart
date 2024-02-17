@@ -1,3 +1,4 @@
+import 'package:iris_flutter/model/gen_image_resp.dart';
 import 'package:iris_flutter/model/post.dart';
 import 'package:iris_flutter/model/short_post.dart';
 import 'package:retrofit/retrofit.dart';
@@ -25,7 +26,7 @@ abstract class PostRepository {
 
   // 실종 정보 작성
   @POST('/posts')
-  Future<Post> postPost(@Body() FormData data);
+  Future<GenImageResp> postPost(@Body() FormData data);
 
   // 실종 정보 삭제
   @DELETE('/posts/{id}')
