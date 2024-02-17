@@ -16,18 +16,26 @@ class _LatestPostTabViewState extends State<LatestPostTabView> {
     Get.put(MainController());
     final mainController = Get.find<MainController>();
 
-    return mainController.postList.isNotEmpty
-        ? SizedBox(
-            height: 180,
-            child: ListView.builder(
-                itemCount: mainController.postList.length,
-                itemBuilder: (BuildContext context, int idx) {
-                  return SinglePostItem(
-                    post: mainController.postList[idx],
-                    controller: mainController,
-                  );
-                }),
-          )
-        : const SizedBox();
+    return FutureBuilder(
+      future: mainController.getPositionAndPostList(),
+      builder: (context, snap) {
+        if (snap.connectionState != ConnectionState.done) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        return mainController.postList.isNotEmpty
+            ? Expanded(child: ListView.builder(
+            itemCount: mainController.postList.length,
+            itemBuilder: (BuildContext context, int idx) {
+              return SinglePostItem(
+                post: mainController.postList[idx],
+                controller: mainController,
+              );
+            }),)
+            : const Center(child: Text('등록된 실종 정보가 없습니다.'));
+      },
+    );
   }
 }

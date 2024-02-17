@@ -14,11 +14,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  @override
-  void initState() {
-    Get.put(MainController()).getPositionAndPostList();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
