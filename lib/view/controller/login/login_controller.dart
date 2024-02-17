@@ -96,38 +96,47 @@ class LoginController extends GetxController {
       return;
     } else {
       print(">> checkLogin에서의 getUserEmail(): ${getUserEmail()}");
-    }
 
-    try {
-      final dio = createDioWithoutToken();
-      LoginRepository loginRepository = LoginRepository(dio);
-
-      // final refreshToken = await getRT();
-      // print('요청 전 refreshToken: $refreshToken');
-
-      final resp = await loginRepository.getRefreshToken(
-          "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA4MTg3Njc0LCJleHAiOjE3MDkzOTcyNzR9.mvcqo1KCuwVRV1wTpYHlOQXJNphJESW8PjQHVJmcu6D_o9GWOBVb6zm_q5hCQomfONrt2o3Hpa1RCcamnFS4Nw");
-      final AT = resp.accessToken;
-      final RT = resp.refreshToken;
-
-      // storage 에 새로운 token 저장
-      await tokenStorage.write(key: 'AccessToken', value: AT);
-      await tokenStorage.write(key: 'RefreshToken', value: RT);
-
-      // 메인화면으로 이동
-      Get.offAll(() => const MainPage());
-    } on DioException catch (e) {
-      print('checkLogin: $e');
-      print('checkLogin:: ${e.response}');
-
-      if (e.response?.statusCode == 401) {
-        print('checkLogin - 401 Err 로그인 상태 아님');
-        // 로그아웃
-        Get.put(LoginController());
-        Get.find<LoginController>().handleLogout();
+      final AT = await tokenStorage.read(key: 'AccessToken');
+      if (AT == null || AT.isEmpty) {
+        // 가진 AT로 API 요청 보내보고 오류 안나면 자동 로그인 성공인 셈인가?
+        Get.offAll(() => const MainPage());
+        return;
+      } else {
+        Get.offAll(() => const LoginPage());
       }
-      return;
     }
+
+    // try {
+    //   final dio = createDioWithoutToken();
+    //   LoginRepository loginRepository = LoginRepository(dio);
+
+    //   // final refreshToken = await getRT();
+    //   // print('요청 전 refreshToken: $refreshToken');
+
+    //   final resp = await loginRepository.getRefreshToken(
+    //       "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzA4MTg3Njc0LCJleHAiOjE3MDkzOTcyNzR9.mvcqo1KCuwVRV1wTpYHlOQXJNphJESW8PjQHVJmcu6D_o9GWOBVb6zm_q5hCQomfONrt2o3Hpa1RCcamnFS4Nw");
+    //   final AT = resp.accessToken;
+    //   final RT = resp.refreshToken;
+
+    //   // storage 에 새로운 token 저장
+    //   await tokenStorage.write(key: 'AccessToken', value: AT);
+    //   await tokenStorage.write(key: 'RefreshToken', value: RT);
+
+    //   // 메인화면으로 이동
+    //   Get.offAll(() => const MainPage());
+    // } on DioException catch (e) {
+    //   print('checkLogin: $e');
+    //   print('checkLogin:: ${e.response}');
+
+    //   if (e.response?.statusCode == 401) {
+    //     print('checkLogin - 401 Err 로그인 상태 아님');
+    //     // 로그아웃
+    //     Get.put(LoginController());
+    //     Get.find<LoginController>().handleLogout();
+    //   }
+    //   return;
+    // }
   }
 
   // 로그아웃
