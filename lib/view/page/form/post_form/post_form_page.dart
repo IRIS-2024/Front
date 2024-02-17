@@ -42,7 +42,7 @@ class _PostFormPageState extends State<PostFormPage> {
               postController.initValidation.value = false;
               if (postController.validateRequiredFields(_formKey)) {
                 // 정보 등록 (저장)
-                postController.submitPost();
+                postController.submitPost(postController);
               }
             })),
         body: SingleChildScrollView(

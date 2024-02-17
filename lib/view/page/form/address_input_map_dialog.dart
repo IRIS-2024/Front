@@ -50,6 +50,8 @@ class _AddressInputMapDialogState extends State<AddressInputMapDialog> {
                               formMapController.initPosition.value!.latitude,
                               formMapController.initPosition.value!.longitude,),
                           zoom: 17),
+                      mapToolbarEnabled: false,
+                      zoomControlsEnabled: false,
                       // min max zoom 제한
                       minMaxZoomPreference:
                       MinMaxZoomPreference(Config.minZoom, Config.maxZoom),

@@ -37,6 +37,8 @@ class _MapItemState extends State<MapItem> {
       },
       initialCameraPosition:
           CameraPosition(target: missingSpot, zoom: Config.initZoom),
+      mapToolbarEnabled: false,
+      zoomControlsEnabled: false,
       // min max zoom 제한
       minMaxZoomPreference:
           MinMaxZoomPreference(Config.minZoom, Config.maxZoom),
