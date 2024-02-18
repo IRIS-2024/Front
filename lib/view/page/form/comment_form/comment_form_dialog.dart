@@ -25,7 +25,7 @@ class CommentFormDialog extends StatelessWidget {
     return Padding(
       padding: CustomPadding.dialogInsets,
       child: FutureBuilder(
-        future: controller.getMatchingRate(),
+        future: controller.postCommentForm(),
         builder: (context, snap) {
           if (snap.connectionState == ConnectionState.done) {
             // 일치율 판별 완료 되면

@@ -26,7 +26,7 @@ class _CommentFormState extends State<CommentFormPage> {
   @override
   void initState() {
     log('Get.arguments: ${Get.arguments}');
-    Get.put(CommentFormController()).setShortPostCard(Get.arguments);
+    Get.put(CommentFormController()).savePostData(Get.arguments);
     super.initState();
   }
 
@@ -97,7 +97,7 @@ class _CommentFormState extends State<CommentFormPage> {
                   maxLength: 20),
               // 발견 당시 상황
               TextForm(
-                textEditingController: commentController.clothesController,
+                textEditingController: commentController.detailsController,
                 title: '발견 당시 상황',
                 isRequired: false,
                 hintText: '상•하의 모양, 색상, 액세서리 등을 적어주세요.',
