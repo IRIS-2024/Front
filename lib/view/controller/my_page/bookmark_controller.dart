@@ -22,49 +22,41 @@ class BookmarkController {
   }
 
   // 북마크 추가 or 삭제
-  void postAndDeleteBookmark(bool bookmarked, int pid) async {
+  Future postAndDeleteBookmark(bool bookmarked, int pid) async {
     if (bookmarked) {
       // true-> false: 삭제
-      Get.put(BookmarkController()).deleteBookmark(pid);
+      return deleteBookmark(pid);
     } else {
       // false -> true: 추가
-      Get.put(BookmarkController()).postBookmark(pid);
+      return postBookmark(pid);
     }
   }
 
   // 북마크 추가
-  void postBookmark(int postId) async {
-    log('postBookmark');
-
+  Future<bool> postBookmark(int postId) async {
     final dio = createDio();
     final BookmarkRepository bookmarkRepository = BookmarkRepository(dio);
     await bookmarkRepository.postBookmark(postId).then((resp) {
-      if (resp.statusCode == 200) {
-        log('Info deleted successfully.');
-      } else {
-        // 실패한 경우
-        log('Error: ${resp.data?.message ?? 'Unknown error'}');
-      }
+      // Error 발생 안 하면 성공 (true)
+      return true;
     }).catchError((error) {
       log('[catchError]: $error');
+      return false;
     });
+    return true;
   }
 
   // 북마크 삭제
-  void deleteBookmark(int postId) async {
-    log('deleteBookmark');
-
+  Future<bool> deleteBookmark(int postId) async {
     final dio = createDio();
     final BookmarkRepository bookmarkRepository = BookmarkRepository(dio);
     await bookmarkRepository.deleteBookmark(postId).then((resp) {
-      if (resp.statusCode == 200) {
-        log('Info deleted successfully.');
-      } else {
-        // 실패한 경우
-        log('Error: ${resp.data?.message ?? 'Unknown error'}');
-      }
+      // Error 발생 안 하면 성공 (true)
+      return true;
     }).catchError((error) {
       log('[catchError]: $error');
+      return false;
     });
+    return true;
   }
 }

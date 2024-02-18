@@ -12,12 +12,14 @@ class SinglePostItem extends StatefulWidget {
   final dynamic controller;
   final ShortPost post;
   final bool? myPosts;
+  final bool? bookmarkPost;
 
   const SinglePostItem({
     super.key,
     required this.controller,
     required this.post,
     this.myPosts,
+    this.bookmarkPost,
   });
 
   @override
@@ -74,15 +76,18 @@ class _SinglePostItemState extends State<SinglePostItem> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {
+                  onPressed: () async {
                     // 북마크 추가 or 삭제
-                    // 통신
-                    Get.put(BookmarkController()).postAndDeleteBookmark(
-                        widget.post.bookmarked, widget.post.pid);
-                    // 화면 변경
-                    setState(() {
-                      widget.post.bookmarked = !widget.post.bookmarked;
-                    });
+                    if (await Get.put(BookmarkController()).postAndDeleteBookmark(
+                        widget.post.bookmarked, widget.post.pid)) { // 통신 성공 시에만  화면 변경
+                      setState(() {
+                        widget.post.bookmarked = !widget.post.bookmarked;
+                      });
+                      // bookmark Post 일 때만 데이터 재로딩
+                      if (widget.bookmarkPost != null && widget.bookmarkPost!) {
+                        Get.put(BookmarkController()).loadData();
+                      }
+                    }
                   },
                   icon: Icon(widget.post.bookmarked
                       ? Icons.bookmark_rounded

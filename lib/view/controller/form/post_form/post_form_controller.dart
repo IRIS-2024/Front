@@ -92,21 +92,28 @@ class PostFormController {
     PostRepository postRepository = PostRepository(dio);
     await postRepository.postPost(formData).then((resp) {
       genImageResp.value = resp;
-
-      // TODO image 주소 오류 수정되면 삭제
-      genImageResp.value?.genImgUrl = genImageResp.value!.genImgUrl.trim();
     }).catchError((err) {
       log('[catchError] $err');
     });
   }
 
   void submitFinalPost(BuildContext context) {
-    // TODO 최종 글 등록
+    setRepresentative();
 
     // get navigation, snackBar
     customSnackBar(
         title: '실종 정보 등록', message: '실종 정보 등록이 완료되었습니다.', context: context);
     Get.offAllNamed(Config.routerPost, arguments: genImageResp.value?.pid);
+  }
+
+  void setRepresentative() async {
+    final dio = createDio();
+    PostRepository postRepository = PostRepository(dio);
+    await postRepository.setRepresentative(genImageResp.value!.pid, isChecked.value).then((resp) {
+      log('성공: ${resp}');
+    }).catchError((err) {
+      log('[catchError] $err');
+    });
   }
 }
 

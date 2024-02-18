@@ -26,7 +26,9 @@ class _LatestPostTabViewState extends State<LatestPostTabView> {
         }
 
         return mainController.shortPostList.isNotEmpty
-            ? Expanded(child: ListView.builder(
+            ? SizedBox(
+          height: 180,
+          child: ListView.builder(
             itemCount: mainController.shortPostList.length,
             itemBuilder: (BuildContext context, int idx) {
               return SinglePostItem(
