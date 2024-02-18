@@ -47,7 +47,8 @@ class LoginController extends GetxController {
       LoginRepository loginRepository = LoginRepository(dio);
       final resp = await loginRepository.getLogin(idToken);
       // token storage에 token 저장
-      final at = resp.accessToken; // * The variable name 'AT' isn't a lowerCamelCase identifier
+      final at = resp
+          .accessToken; // * The variable name 'AT' isn't a lowerCamelCase identifier
       final rt = resp.refreshToken;
       log('tokenLogin resp: \n rt: ${resp.refreshToken} \n at: ${resp.accessToken} ');
       await tokenStorage.write(key: 'AccessToken', value: at);
@@ -64,7 +65,7 @@ class LoginController extends GetxController {
     }
   }
 
-  // 최종 로그인 -> 안 씀
+  // 최종 로그인 ->
   // Future<void> setUserInfo() async {
   //   try {
   //     final dio = createDioWithoutToken();
@@ -107,7 +108,7 @@ class LoginController extends GetxController {
       log('요청 전 refreshToken: $refreshToken');
 
       final resp = await loginRepository.getRefreshToken(refreshToken);
-      log('resp: ${resp} ${resp.accessToken} ${resp.refreshToken}');
+      log('resp: $resp ${resp.accessToken} ${resp.refreshToken}');
       final at = resp.accessToken;
       final rt = resp.refreshToken;
 
@@ -154,13 +155,4 @@ class LoginController extends GetxController {
       Get.offAllNamed(Config.routerLogin);
     }
   }
-
-  // void updateInfo(User data) {
-  //   user.value = data;
-  // }
-
-  // void deleteInfo() {
-  //   // logout 시 초기화
-  //   user.value = User(id: '', email: '');
-  // }
 }
