@@ -15,7 +15,7 @@ class MainController {
   Future getPositionAndPostList() async {
     await getCurrentPosition();
     getShortAddress(initPosition.value!);
-    loadPostList(initPosition.value!.latitude, initPosition.value!.longitude);
+    await loadPostList(initPosition.value!.latitude, initPosition.value!.longitude);
   }
 
   // 현 위치 얻어오기
@@ -33,7 +33,7 @@ class MainController {
     shortAddress.value = '${fullAddressList[1]} ${fullAddressList[2]}';
   }
 
-  void loadPostList(double latitude, double longitude) async {
+  Future loadPostList(double latitude, double longitude) async {
     final dio = createDio();
     PostRepository postRepository = PostRepository(dio);
     await postRepository

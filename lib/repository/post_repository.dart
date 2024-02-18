@@ -10,10 +10,6 @@ part 'post_repository.g.dart';
 abstract class PostRepository {
   factory PostRepository(Dio dio, {String baseUrl}) = _PostRepository;
 
-  // 실종 정보 조회
-  @GET('/posts/{id}')
-  Future<Post> getPost(@Path() int id);
-
   // 실종 정보 List 조회
   @GET('/posts')
   Future<List<ShortPost>> getPostList(
@@ -27,6 +23,15 @@ abstract class PostRepository {
   // 실종 정보 작성
   @POST('/posts')
   Future<GenImageResp> postPost(@Body() FormData data);
+
+  // 실종 정보 작성 - 생성 이미지 대표 설정
+  @POST('/posts/{pid}/set-representative')
+  Future<GenImageResp> setRepresentative(@Path() int pid, @Query('gen') bool gen);
+
+  // 실종 정보 조회
+  @GET('/posts/{id}')
+  Future<Post> getPost(@Path() int id);
+
 
   // 실종 정보 삭제
   @DELETE('/posts/{id}')
