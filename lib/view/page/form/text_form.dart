@@ -46,11 +46,10 @@ class TextForm extends StatelessWidget {
             }
             return null;
           },
+          textInputAction: TextInputAction.done,
         ),
         const Padding(padding: CustomPadding.regularBottom),
-
       ],
     );
-
   }
 }
