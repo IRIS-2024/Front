@@ -24,19 +24,23 @@ class _BookmarkPostState extends State<BookmarkPost> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: customAppBar(title: "북마크한 실종 정보"),
-        body: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-            child: bookmarkController.shortPostList.isNotEmpty
-                ? ListView.builder(
+        body: Obx(
+          () => bookmarkController.shortPostList.isNotEmpty
+              ? Padding(
+                padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+                child: ListView.builder(
                     padding: const EdgeInsets.only(top: 5, bottom: 20),
                     itemCount: bookmarkController.shortPostList.length,
                     itemBuilder: (BuildContext context, int idx) {
                       return SinglePostItem(
                           controller: bookmarkController,
-                          post: bookmarkController.shortPostList[idx]);
-                    })
-                : const Center(
-                    child: Text("북마크한 실종 정보가 없습니다."),
-                  )));
+                          post: bookmarkController.shortPostList[idx],
+                      bookmarkPost: true,);
+                    }),
+              )
+              : const Center(
+                  child: Text("북마크한 실종 정보가 없습니다."),
+                ),
+        ));
   }
 }

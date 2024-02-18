@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:iris_flutter/config/dio_config.dart';
 import 'package:iris_flutter/model/post.dart';
+import 'package:iris_flutter/repository/comment_repository.dart';
 import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/page/form/comment_form/comment_form_dialog.dart';
@@ -20,6 +24,7 @@ class CommentFormController {
   RxBool postGender = true.obs;
   RxInt postAge = 0.obs;
   RxString postAddress = ''.obs;
+  RxInt pid = 0.obs;
 
   // 제보 댓글 - 제보 사진, 시간, 위치, 옷차림, 상황
   RxList<XFile> images = <XFile>[].obs;
@@ -29,12 +34,15 @@ class CommentFormController {
   TextEditingController clothesController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
 
-  void setShortPostCard(Post post) {
+  void savePostData(Post post) {
     postImage.value = post.images.first;
     postName.value = post.name;
     postGender.value = post.gender;
     postAge.value = post.age;
     postAddress.value = post.address;
+
+    // pid 저장
+    pid.value = post.pid;
   }
 
   void pickImage() async {
@@ -53,35 +61,36 @@ class CommentFormController {
   }
 
   Future<void> submitComment() async {
-    // TODO 주석 삭제, 통신 확인, pid
-    int pid = 0;
+    showCommentFormDialog();
+  }
 
+  Future<void> postCommentForm() async {
     // request body form data 생성
     final formData = dio_package.FormData.fromMap({
-      "pid": pid,
+      "pid": pid.value,
       "discoveredAt": combineTimeOfDayWithCurrentDate(timeOfDay.value!),
       "address": address.value,
       "latitude": latitude.value,
       "longitude": longitude.value,
       "clothes": clothesController.text.isEmpty ? null : clothesController.text,
-      "details": detailsController.text.isEmpty ? null : clothesController.text,
-      "images": List.generate(images.length,
-          (index) => dio_package.MultipartFile.fromFile(images[index].path)),
+      "details": detailsController.text.isEmpty ? null : detailsController.text,
     });
+    // images files 추가
+    for (int i = 0; i < images.length; i++) {
+      formData.files.add(MapEntry(
+        'images',
+        await dio_package.MultipartFile.fromFile(images[i].path),
+      ));
+    }
 
-    // final dio = createDio();
-    // dio.options.contentType = 'multipart/form-data';
-    // CommentRepository commentRepository = CommentRepository(dio);
-    // commentRepository.postComment(pid);
-
-    // 등록 Dialog
-    showCommentFormDialog();
-  }
-
-  Future<void> getMatchingRate() async {
-    // 일치율 판별 과정
-    // TODO 임시 딜레이
-    await Future.delayed(const Duration(milliseconds: 3000));
+    final dio = createDio();
+    dio.options.contentType = 'multipart/form-data';
+    CommentRepository commentRepository = CommentRepository(dio);
+    commentRepository.postComment(formData).then((resp) {
+      // Error 발생 하지 않으면 성공
+    }).catchError((err) {
+      log('[catchError] $err');
+    });
   }
 
   void completeRegistration(BuildContext context) {

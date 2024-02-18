@@ -18,9 +18,11 @@ class Post {
   bool bookmarked;
   String disappearedAt;
   String createdAt;
-  String updatedAt;
+  String? updatedAt;
   List<String> images;
+  String genImage;
   bool author;
+  bool genRepresent;
 
   Post({
     required this.pid,
@@ -37,9 +39,11 @@ class Post {
     required this.bookmarked,
     required this.disappearedAt,
     required this.createdAt,
-    required this.updatedAt,
+    this.updatedAt,
     required this.images,
+    required this.genImage,
     required this.author,
+    required this.genRepresent,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
