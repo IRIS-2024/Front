@@ -21,10 +21,12 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       bookmarked: json['bookmarked'] as bool,
       disappearedAt: json['disappearedAt'] as String,
       createdAt: json['createdAt'] as String,
-      updatedAt: json['updatedAt'] as String,
+      updatedAt: json['updatedAt'] as String?,
       images:
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
+      genImage: json['genImage'] as String,
       author: json['author'] as bool,
+      genRepresent: json['genRepresent'] as bool,
     );
 
 Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{
@@ -44,5 +46,7 @@ Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
       'images': instance.images,
+      'genImage': instance.genImage,
       'author': instance.author,
+      'genRepresent': instance.genRepresent,
     };
