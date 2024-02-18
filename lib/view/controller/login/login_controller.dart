@@ -115,12 +115,11 @@ class LoginController extends GetxController {
     } on DioException catch (e) {
       log('checkLogin:: ${e.response}');
 
-      if (e.response?.statusCode != null &&
-          (e.response!.statusCode! >= 400 && e.response!.statusCode! < 500)) {
+      if (e.response!.statusCode! >= 400 && e.response!.statusCode! < 500) {
         log('checkLogin - 4xx번 Err 로그인 상태 아님');
         // RT 만료 외의 오류
-        handleLogout();
-        loginGoogle();
+        await handleLogoutAtCheckLogin();
+        await loginGoogle();
       }
       return;
     }
@@ -150,5 +149,25 @@ class LoginController extends GetxController {
     if (!Get.currentRoute.contains(Config.routerLogin)) {
       Get.offAllNamed(Config.routerLogin);
     }
+  }
+
+  // 로그아웃
+  Future<void> handleLogoutAtCheckLogin() async {
+    // 소셜 로그인 플랫폼 로그아웃
+    final social = await userStorage.getItem(Config.social);
+    // log('social Platform: $social');
+    if (social == Config.google) {
+      // 구글 로그아웃
+      await GoogleSignIn().signOut();
+    }
+
+    // 저장해둔 회원 정보 삭제
+    await tokenStorage.delete(key: 'AccessToken');
+    await tokenStorage.delete(key: 'RefreshToken');
+
+    await userStorage.deleteItem(Config.name);
+    await userStorage.deleteItem(Config.email);
+    await userStorage.deleteItem(Config.photo);
+    await userStorage.deleteItem(Config.social);
   }
 }
