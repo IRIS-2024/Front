@@ -92,9 +92,6 @@ class PostFormController {
     PostRepository postRepository = PostRepository(dio);
     await postRepository.postPost(formData).then((resp) {
       genImageResp.value = resp;
-
-      // TODO image 주소 오류 수정되면 삭제
-      genImageResp.value?.genImgUrl = genImageResp.value!.genImgUrl.trim();
     }).catchError((err) {
       log('[catchError] $err');
     });
