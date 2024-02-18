@@ -44,7 +44,12 @@ class _PostPageState extends State<PostPage> {
             leading: IconButton(
               icon: const Icon(Icons.arrow_back), // 햄버거버튼 아이콘 생성
               onPressed: () {
-                Get.back();
+                log('Get.currentRoute: ${Get.currentRoute}');
+                if (Get.currentRoute == Config.routerPost) {
+                  Get.offAllNamed(Config.routerMain);
+                } else {
+                  Get.back();
+                }
               },
             ),
             actions: [

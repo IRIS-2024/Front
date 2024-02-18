@@ -1,5 +1,9 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:iris_flutter/view/page/form/post_form/post_form_page.dart';
+import 'package:iris_flutter/view/page/login/login_page.dart';
+import 'package:iris_flutter/view/page/main/main_page.dart';
+import 'package:iris_flutter/view/page/my_page/my_page.dart';
 import 'package:iris_flutter/view/page/post/post_page.dart';
 import 'package:iris_flutter/view/page/form/comment_form/comment_form_page.dart';
 import 'package:localstorage/localstorage.dart';
@@ -28,6 +32,18 @@ class Config {
 
   static final routers = [
     GetPage(
+        name: routerLogin,
+        page: () => const LoginPage(),
+        transition: Transition.noTransition),
+    GetPage(
+        name: routerMain,
+        page: () => const MainPage(),
+        transition: Transition.noTransition),
+    GetPage(
+        name: routerPostForm,
+        page: () => const PostFormPage(),
+        transition: Transition.noTransition),
+    GetPage(
         name: routerPost,
         page: () => const PostPage(),
         transition: Transition.noTransition),
@@ -35,10 +51,18 @@ class Config {
         name: routerCommentForm,
         page: () => const CommentFormPage(),
         transition: Transition.noTransition),
+    GetPage(
+        name: routerMyPage,
+        page: () => const MyPage(),
+        transition: Transition.noTransition),
   ];
   // routers name
-  static String routerPost = '/detail_info';
+  static String routerLogin = '/login';
+  static String routerMain = '/main';
+  static String routerPostForm = '/post_form';
+  static String routerPost = '/post';
   static String routerCommentForm = '/comment_form';
+  static String routerMyPage = '/my_page';
 
   // storage 이름
   static String id = 'id';
