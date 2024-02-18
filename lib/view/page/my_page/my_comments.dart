@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/controller/my_page/my_comments_controller.dart';
-import 'package:iris_flutter/view/page/post/post_page.dart';
 import 'package:iris_flutter/view/page/post/single_comment_item.dart';
 
 class MyComments extends StatefulWidget {
@@ -45,7 +45,9 @@ class _MyCommentsState extends State<MyComments> {
                         Card(
                           color: Theme.of(context).colorScheme.surfaceVariant,
                           child: InkWell(
-                            onTap: () => Get.to(const PostPage()),
+                            onTap: () {
+                              Get.toNamed(Config.routerPost);
+                            },
                             child: Row(
                               children: [
                                 Padding(

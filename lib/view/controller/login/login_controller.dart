@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
@@ -10,8 +9,6 @@ import 'package:iris_flutter/config/hidden_config.dart';
 import 'package:iris_flutter/model/user.dart';
 import 'package:iris_flutter/repository/login_repository.dart';
 import 'package:iris_flutter/utils/user_profile_utils.dart';
-import 'package:iris_flutter/view/page/login/login_page.dart';
-import 'package:iris_flutter/view/page/main/main_page.dart';
 
 class LoginController extends GetxController {
   Rx<User> user = User(id: '', email: '').obs;
@@ -23,19 +20,19 @@ class LoginController extends GetxController {
     await googleSignIn.signIn().then((result) {
       result?.authentication.then((googleKey) {
         tokenLogin(result.serverAuthCode!);
-        print('currentUser: ${googleSignIn.currentUser}');
+        log('currentUser: ${googleSignIn.currentUser}');
         tempSaveUser(googleSignIn);
       }).catchError((err) {
-        print('inner error');
+        log('inner error');
       });
     }).catchError((err) {
-      print('error occured: $err');
+      log('error occured: $err');
     });
     await userStorage.setItem(Config.social, Config.google);
   }
 
   Future<void> tempSaveUser(GoogleSignIn googleSignIn) async {
-    print("사용자 정보 임시 저장");
+    log("사용자 정보 임시 저장");
     // local storage 에 id, email, nickName 저장 (임시)
     await userStorage.setItem(Config.id, googleSignIn.currentUser?.id);
     await userStorage.setItem(Config.email, googleSignIn.currentUser?.email);
@@ -50,40 +47,42 @@ class LoginController extends GetxController {
       LoginRepository loginRepository = LoginRepository(dio);
       final resp = await loginRepository.getLogin(idToken);
       // token storage에 token 저장
-      final AT = resp.accessToken;
-      final RT = resp.refreshToken;
-      await tokenStorage.write(key: 'AccessToken', value: AT);
-      await tokenStorage.write(key: 'RefreshToken', value: RT);
+      final at = resp.accessToken; // * The variable name 'AT' isn't a lowerCamelCase identifier
+      final rt = resp.refreshToken;
+      log('tokenLogin resp: \n rt: ${resp.refreshToken} \n at: ${resp.accessToken} ');
+      await tokenStorage.write(key: 'AccessToken', value: at);
+      await tokenStorage.write(key: 'RefreshToken', value: rt);
 
-      print("tokenLogin에서의 getUserEmail(): ${getUserEmail()}");
+      // log("tokenLogin에서의 getUserEmail(): ${getUserEmail()}");
 
       // setUserInfo(); // 유저정보 api로부터 받은 user 정보 local storage에 저장.
-      Get.offAll(() => const MainPage()); // api 없어서 임시
+      // Get.offAll(() => const MainPage()); // api 없어서 임시
+      Get.offAllNamed(Config.routerMain);
     } on DioException catch (e) {
-      print('Error tokenLogin ${e.response}');
+      log('Error tokenLogin ${e.response}');
       return;
     }
   }
 
-  // 최종 로그인
-  Future<void> setUserInfo() async {
-    try {
-      final dio = createDioWithoutToken();
-      LoginRepository loginRepository = LoginRepository(dio);
-      // 사용자 정보 요청 API
-      // final resp = await loginRepository.getLogin(idToken);
-
-      // local storage 에 id, email, nickName 저장
-      // await userStorage.setItem(Config.id, resp.id);
-      // await userStorage.setItem(Config.email, resp.email);
-      // await userStorage.setItem(Config.nickName, resp.displayName);
-
-      Get.offAll(() => const MainPage());
-    } on DioException catch (e) {
-      print('login $e');
-      return;
-    }
-  }
+  // 최종 로그인 -> 안 씀
+  // Future<void> setUserInfo() async {
+  //   try {
+  //     final dio = createDioWithoutToken();
+  //     LoginRepository loginRepository = LoginRepository(dio);
+  //     // 사용자 정보 요청 API
+  //     // final resp = await loginRepository.getLogin(idToken);
+  //
+  //     // local storage 에 id, email, nickName 저장
+  //     // await userStorage.setItem(Config.id, resp.id);
+  //     // await userStorage.setItem(Config.email, resp.email);
+  //     // await userStorage.setItem(Config.nickName, resp.displayName);
+  //
+  //     Get.offAll(() => const MainPage());
+  //   } on DioException catch (e) {
+  //     log('login $e');
+  //     return;
+  //   }
+  // }
 
   // 로그인 여부 확인
   Future<void> checkLogin() async {
@@ -91,42 +90,40 @@ class LoginController extends GetxController {
     // 성공 -> 로그인 중. 새로운 토큰 발급 및 저장
     // 실패 -> 로그인 상태 아님. 로그아웃.
 
-    if (getUserEmail().isEmpty) {
-      print('checkLogin - No UserEmail 로그인 상태 아님');
-      // 로그아웃됨
-      // 처음 로그인으로
-      return;
-    } else {
-      print(">> checkLogin에서의 getUserEmail(): ${getUserEmail()}");
-    }
+    // if (getUserEmail().isEmpty) {
+    //   log('checkLogin - No UserEmail 로그인 상태 아님');
+    //   // 로그아웃됨
+    //   // 처음 로그인으로
+    //   return;
+    // } else {
+    //   log(">> checkLogin에서의 getUserEmail(): ${getUserEmail()}");
+    // }
 
     try {
-      // 정보가 있으면, 저장된 RT로 AT 요청
       final dio = createDioWithoutToken();
       LoginRepository loginRepository = LoginRepository(dio);
 
       final refreshToken = await getRT();
-      print('요청 전 refreshToken: $refreshToken');
+      log('요청 전 refreshToken: $refreshToken');
 
       final resp = await loginRepository.getRefreshToken(refreshToken);
-      final AT = resp.accessToken;
-      final RT = resp.refreshToken;
+      log('resp: ${resp} ${resp.accessToken} ${resp.refreshToken}');
+      final at = resp.accessToken;
+      final rt = resp.refreshToken;
 
       // storage 에 새로운 token 저장
-      await tokenStorage.write(key: 'AccessToken', value: AT);
-      await tokenStorage.write(key: 'RefreshToken', value: RT);
+      await tokenStorage.write(key: 'AccessToken', value: at);
+      await tokenStorage.write(key: 'RefreshToken', value: rt);
 
       // 메인화면으로 이동
-      Get.offAll(() => const MainPage());
+      Get.offAllNamed(Config.routerMain);
     } on DioException catch (e) {
-      print('checkLogin: $e');
-      print('checkLogin:: ${e.response}');
+      log('checkLogin:: ${e.response}');
 
       if (e.response?.statusCode == 401) {
-        print('checkLogin - 401 Err 로그인 상태 아님');
+        log('checkLogin - 401 Err 로그인 상태 아님');
         // 로그아웃
-        Get.put(LoginController());
-        Get.find<LoginController>().handleLogout();
+        handleLogout();
       }
       return;
     }
@@ -153,10 +150,9 @@ class LoginController extends GetxController {
 
     // 다른 페이지에서 로그아웃 요청 -> 로그인 페이지로 이동
     // 로그인 페이지에서 로그인 여부 확인 후 로그인 상태 아니어서 로그아웃 요청 -> 페이지 이동 x
-    // if (!Get.currentRoute.contains('/login')) {
-    //   Get.offAll(() => const LoginPage());
-    // }
-    Get.offAll(() => const LoginPage());
+    if (!Get.currentRoute.contains(Config.routerLogin)) {
+      Get.offAllNamed(Config.routerLogin);
+    }
   }
 
   // void updateInfo(User data) {

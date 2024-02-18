@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/utils/user_profile_utils.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/controller/login/login_controller.dart';
-import 'package:iris_flutter/view/page/login/login_page.dart';
 import 'package:iris_flutter/view/page/my_page/bookmark_post.dart';
 import 'package:iris_flutter/view/page/my_page/my_posts.dart';
 import 'package:iris_flutter/view/page/my_page/my_comments.dart';
@@ -18,7 +16,6 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
-  final controller = Get.find<LoginController>();
 
   // Future<void> resign() async {
   //   // 탈퇴하기
@@ -34,6 +31,9 @@ class _MyPageState extends State<MyPage> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(LoginController());
+    final controller = Get.find<LoginController>();
+
     return Scaffold(
         appBar: customAppBar(title: "마이페이지"),
         body: Padding(
