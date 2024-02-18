@@ -1,15 +1,15 @@
 import 'package:iris_flutter/config/config.dart';
 
-int getUserId() {
-  return int.parse(userStorage.getItem(Config.id) ?? '');
-}
-
 String getUserDisplayName() {
-  return userStorage.getItem(Config.displayName) ?? '';
+  return userStorage.getItem(Config.name) ?? '';
 }
 
 String getUserEmail() {
   return userStorage.getItem(Config.email) ?? '';
+}
+
+String getUserPhoto() {
+  return userStorage.getItem(Config.photo) ?? '';
 }
 
 Future<String> getAT() async {
