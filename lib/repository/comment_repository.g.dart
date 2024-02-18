@@ -19,9 +19,38 @@ class _CommentRepository implements CommentRepository {
   String? baseUrl;
 
   @override
-  Future<List<Comment>> getCommentList(int pid) async {
+  Future<dynamic> postComment(FormData data) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = data;
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/comments',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<List<Comment>> getCommentList(
+    int pid,
+    int filter,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'filter': filter};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
@@ -32,7 +61,7 @@ class _CommentRepository implements CommentRepository {
     )
             .compose(
               _dio.options,
-              '/comments/${pid}',
+              '/posts/${pid}/comments',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -44,32 +73,6 @@ class _CommentRepository implements CommentRepository {
     var value = _result.data!
         .map((dynamic i) => Comment.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
-  }
-
-  @override
-  Future<dynamic> postComment(int pid) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/comments/${pid}',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
-    final value = _result.data;
     return value;
   }
 
