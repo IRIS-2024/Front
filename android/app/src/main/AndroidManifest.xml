@@ -4,7 +4,7 @@
     <application
     android:enableOnBackInvokedCallback="true"
         android:requestLegacyExternalStorage="true"
-        android:label="iris_flutter"
+        android:label="MissingYou"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
