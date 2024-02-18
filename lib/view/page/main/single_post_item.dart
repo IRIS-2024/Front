@@ -12,12 +12,14 @@ class SinglePostItem extends StatefulWidget {
   final dynamic controller;
   final ShortPost post;
   final bool? myPosts;
+  final bool? bookmarkPost;
 
   const SinglePostItem({
     super.key,
     required this.controller,
     required this.post,
     this.myPosts,
+    this.bookmarkPost,
   });
 
   @override
@@ -45,12 +47,54 @@ class _SinglePostItemState extends State<SinglePostItem> {
                       width: 380,
                       fit: BoxFit.fitWidth,
                     )),
-                widget.myPosts == true
+                widget.myPosts == true // 작성한 실종 정보 일때만 삭제 버튼
                     ? Positioned(
                         right: 3,
                         child: IconButton(
                             onPressed: () {
-                              Get.put(MyPostController()).deletePost(widget.post.pid, context);
+                              Get.dialog(
+                                Dialog(
+                                  child: Padding(
+                                    padding: CustomPadding.dialogInsets,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          '실종 정보 삭제',
+                                          style: CustomTextStyle.title
+                                              .copyWith(color: Theme.of(context).colorScheme.primary),
+                                        ),
+                                        const Padding(padding: CustomPadding.regularBottom),
+                                        const Text('정말 실종 정보를 삭제하시겠습니까?'),
+                                        const Padding(padding: CustomPadding.mediumBottom),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text('닫기')),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Get.put(MyPostController()).deletePost(widget.post.pid, context);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                  Theme.of(context).colorScheme.errorContainer,
+                                                  foregroundColor:
+                                                  Theme.of(context).colorScheme.onErrorContainer),
+                                              child: const Text('삭제'),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              );
+                              // Get.put(MyPostController()).deletePost(widget.post.pid, context);
                             },
                             icon: const Icon(Icons.delete_outline),
                             style: IconButton.styleFrom(
@@ -74,15 +118,18 @@ class _SinglePostItemState extends State<SinglePostItem> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {
+                  onPressed: () async {
                     // 북마크 추가 or 삭제
-                    // 통신
-                    Get.put(BookmarkController()).postAndDeleteBookmark(
-                        widget.post.bookmarked, widget.post.pid);
-                    // 화면 변경
-                    setState(() {
-                      widget.post.bookmarked = !widget.post.bookmarked;
-                    });
+                    if (await Get.put(BookmarkController()).postAndDeleteBookmark(
+                        widget.post.bookmarked, widget.post.pid)) { // 통신 성공 시에만  화면 변경
+                      setState(() {
+                        widget.post.bookmarked = !widget.post.bookmarked;
+                      });
+                      // bookmark Post 일 때만 데이터 재로딩
+                      if (widget.bookmarkPost != null && widget.bookmarkPost!) {
+                        Get.put(BookmarkController()).loadData();
+                      }
+                    }
                   },
                   icon: Icon(widget.post.bookmarked
                       ? Icons.bookmark_rounded

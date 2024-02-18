@@ -19,7 +19,7 @@ class _BookmarkRepository implements BookmarkRepository {
   String? baseUrl;
 
   @override
-  Future<dynamic> postBookmark(int id) async {
+  Future<dynamic> postBookmark(int pid) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -31,7 +31,7 @@ class _BookmarkRepository implements BookmarkRepository {
     )
         .compose(
           _dio.options,
-          '/bookmarks/${id}',
+          '/bookmarks/${pid}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -45,19 +45,19 @@ class _BookmarkRepository implements BookmarkRepository {
   }
 
   @override
-  Future<dynamic> deleteBookmark(int id) async {
+  Future<dynamic> deleteBookmark(int pid) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
-      method: 'POST',
+      method: 'DELETE',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/bookmarks/${id}',
+          '/bookmarks/${pid}',
           queryParameters: queryParameters,
           data: _data,
         )
