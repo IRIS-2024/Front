@@ -125,22 +125,22 @@ class _MyPageState extends State<MyPage> {
                   ),
                 ),
                 const SizedBox(height: 6),
-                SwitchListTile(
-                  title: const Text("알림"),
-                  value: isSwitched,
-                  tileColor: Theme.of(context).colorScheme.surfaceVariant,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15))),
-                  onChanged: (value) {
-                    setState(() {
-                      isSwitched = value;
-                      print(isSwitched);
-                    });
-                  },
-                  secondary: const Icon(Icons.notifications),
-                ),
+                // SwitchListTile(
+                //   title: const Text("알림"),
+                //   value: isSwitched,
+                //   tileColor: Theme.of(context).colorScheme.surfaceVariant,
+                //   shape: const RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.only(
+                //           topLeft: Radius.circular(15),
+                //           topRight: Radius.circular(15))),
+                //   onChanged: (value) {
+                //     setState(() {
+                //       isSwitched = value;
+                //       print(isSwitched);
+                //     });
+                //   },
+                //   secondary: const Icon(Icons.notifications),
+                // ),
                 ListTile(
                   tileColor: Theme.of(context).colorScheme.surfaceVariant,
                   onTap: () {
