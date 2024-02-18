@@ -47,12 +47,54 @@ class _SinglePostItemState extends State<SinglePostItem> {
                       width: 380,
                       fit: BoxFit.fitWidth,
                     )),
-                widget.myPosts == true
+                widget.myPosts == true // 작성한 실종 정보 일때만 삭제 버튼
                     ? Positioned(
                         right: 3,
                         child: IconButton(
                             onPressed: () {
-                              Get.put(MyPostController()).deletePost(widget.post.pid, context);
+                              Get.dialog(
+                                Dialog(
+                                  child: Padding(
+                                    padding: CustomPadding.dialogInsets,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          '실종 정보 삭제',
+                                          style: CustomTextStyle.title
+                                              .copyWith(color: Theme.of(context).colorScheme.primary),
+                                        ),
+                                        const Padding(padding: CustomPadding.regularBottom),
+                                        const Text('정말 실종 정보를 삭제하시겠습니까?'),
+                                        const Padding(padding: CustomPadding.mediumBottom),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text('닫기')),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Get.put(MyPostController()).deletePost(widget.post.pid, context);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                  Theme.of(context).colorScheme.errorContainer,
+                                                  foregroundColor:
+                                                  Theme.of(context).colorScheme.onErrorContainer),
+                                              child: const Text('삭제'),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              );
+                              // Get.put(MyPostController()).deletePost(widget.post.pid, context);
                             },
                             icon: const Icon(Icons.delete_outline),
                             style: IconButton.styleFrom(
