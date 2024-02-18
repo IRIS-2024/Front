@@ -16,16 +16,6 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
-  // Future<void> resign() async {
-  //   // 탈퇴하기
-  //   // Google Sign-In 로그아웃
-  //   await GoogleSignIn().signOut();
-  //   // 탈퇴 API 연결하기
-  //   controller.deleteInfo();
-
-  //   Get.to(() => const LoginPage());
-  // }
-
   bool isSwitched = true;
 
   @override

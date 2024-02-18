@@ -14,7 +14,7 @@ class _LoginPageState extends State<LoginPage> {
   LoginController controller = Get.put(LoginController());
   Future<void> _initCheckLogin() async {
     // 로그인 여부 확인
-    await controller.checkLogin();
+    await Get.find<LoginController>().checkLogin();
   }
 
   @override

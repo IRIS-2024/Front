@@ -86,7 +86,8 @@ class LoginController extends GetxController {
     if (getUserEmail().isEmpty) {
       log('checkLogin - No UserEmail 로그인 상태 아님');
       // 정보 없음 = 로그아웃인 상태
-      // 처음 로그인으로
+      // 로그인 화면으로 돌아감
+      isLoginIng = false.obs;
       return;
     }
 
@@ -115,11 +116,15 @@ class LoginController extends GetxController {
     } on DioException catch (e) {
       log('checkLogin:: ${e.response}');
 
-      if (e.response!.statusCode! >= 400 && e.response!.statusCode! < 500) {
+      if (e.response?.statusCode == 401) {
         log('checkLogin - 4xx번 Err 로그인 상태 아님');
         // RT 만료 외의 오류
-        await handleLogoutAtCheckLogin();
-        await loginGoogle();
+        handleLogout();
+      }
+
+      if (e.response!.statusCode! == 499) {
+        log('checkLogin - RT 만료');
+        loginGoogle();
       }
       return;
     }
@@ -146,28 +151,9 @@ class LoginController extends GetxController {
 
     // 다른 페이지에서 로그아웃 요청 -> 로그인 페이지로 이동
     // 로그인 페이지에서 로그인 여부 확인 후 로그인 상태 아니어서 로그아웃 요청 -> 페이지 이동 x
+    isLoginIng.value = false;
     if (!Get.currentRoute.contains(Config.routerLogin)) {
       Get.offAllNamed(Config.routerLogin);
     }
-  }
-
-  // 로그아웃
-  Future<void> handleLogoutAtCheckLogin() async {
-    // 소셜 로그인 플랫폼 로그아웃
-    final social = await userStorage.getItem(Config.social);
-    // log('social Platform: $social');
-    if (social == Config.google) {
-      // 구글 로그아웃
-      await GoogleSignIn().signOut();
-    }
-
-    // 저장해둔 회원 정보 삭제
-    await tokenStorage.delete(key: 'AccessToken');
-    await tokenStorage.delete(key: 'RefreshToken');
-
-    await userStorage.deleteItem(Config.name);
-    await userStorage.deleteItem(Config.email);
-    await userStorage.deleteItem(Config.photo);
-    await userStorage.deleteItem(Config.social);
   }
 }
