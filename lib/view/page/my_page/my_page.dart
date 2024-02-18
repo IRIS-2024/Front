@@ -16,7 +16,6 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
-
   // Future<void> resign() async {
   //   // 탈퇴하기
   //   // Google Sign-In 로그아웃
@@ -50,9 +49,9 @@ class _MyPageState extends State<MyPage> {
                     // 사용자 사진 변경?;
                   },
                   leading: CircleAvatar(
-                    backgroundImage: controller.user.value.photoUrl != null
-                        ? NetworkImage(controller.user.value.photoUrl!)
-                        : const AssetImage('assets/images/temp_logo.png')
+                    backgroundImage: getUserPhoto() != ''
+                        ? NetworkImage(getUserPhoto())
+                        : const AssetImage('assets/images/logo.png')
                             as ImageProvider,
                   ),
                   title: getUserDisplayName() != ''

@@ -65,9 +65,9 @@ class Config {
   static String routerMyPage = '/my_page';
 
   // storage 이름
-  static String id = 'id';
   static String email = 'email';
-  static String displayName = 'displayName';
+  static String name = 'name';
+  static String photo = 'photo';
   static String social = 'social';
   static String google = 'google';
 }
