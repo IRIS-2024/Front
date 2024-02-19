@@ -83,17 +83,17 @@ class LoginController extends GetxController {
     isLoginIng = true.obs;
     // 토근 재발급
 
-    // if (getUserEmail().isEmpty) {
-    //   log('checkLogin - No UserEmail 로그인 상태 아님');
-    //   // 정보 없음 = 로그아웃인 상태
-    //   // 로그인 화면으로 돌아감
-    //   isLoginIng = false.obs;
-    //   return;
-    // }
+    if (getUserEmail().isEmpty) {
+      log('checkLogin - No UserEmail 로그인 상태 아님');
+      // 정보 없음 = 이미 로그아웃인 상태
+      // 로그인 화면으로 돌아감
+      isLoginIng = false.obs;
+      return;
+    }
 
-    // 로그아웃 아닌 상태 // -> 로그인 확인
-    // 1. RT 만료 x 로그인 전적 // -> 로그인 상태
-    // 2. RT 만료 O 로그인 전적 // -> 로그인 상태 아님. 로그아웃 시킴
+    // 로그아웃 아닌 상태
+    // 1. RT 만료 x 로그인 전적
+    // 2. RT 만료 O 로그인 전적
     try {
       // reissue token
       final dio = createDioWithoutToken();
