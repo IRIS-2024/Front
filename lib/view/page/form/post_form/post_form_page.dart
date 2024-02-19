@@ -86,8 +86,7 @@ class _PostFormPageState extends State<PostFormPage> {
                     Flexible(
                       flex: 1,
                       child: numberField(
-                          textEditingController:
-                              postController.ageController,
+                          textEditingController: postController.ageController,
                           title: '만 나이',
                           isRequired: true,
                           unitText: '세'),
@@ -128,7 +127,7 @@ class _PostFormPageState extends State<PostFormPage> {
                   title: '실종 당시 옷차림',
                   isRequired: true,
                   validatorText: '옷차림을 입력해주세요.',
-                  hintText: '상•하의 모양, 색상, 액세서리 등을 자세히 적어주세요.',
+                  hintText: '상•하의 종류와 색상을 적어주세요. (ex.노란니트, 검정바지)',
                   maxLength: 40,
                 ),
                 // 특이사항
@@ -136,7 +135,7 @@ class _PostFormPageState extends State<PostFormPage> {
                     textEditingController: postController.detailsController,
                     title: '특이사항',
                     isRequired: false,
-                    hintText: '실종자의 체격, 얼굴형, 특이 행동, 질병 등을 적어주세요.',
+                    hintText: '실종자의 체격, 얼굴형, 특이 행동, 질병, 상세 옷차림 등을 적어주세요.',
                     maxLength: 300,
                     maxLengths: 6),
               ],

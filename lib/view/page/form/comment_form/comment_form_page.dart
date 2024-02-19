@@ -21,8 +21,6 @@ class CommentFormPage extends StatefulWidget {
 }
 
 class _CommentFormState extends State<CommentFormPage> {
-
-
   @override
   void initState() {
     log('Get.arguments: ${Get.arguments}');
@@ -93,14 +91,14 @@ class _CommentFormState extends State<CommentFormPage> {
                   textEditingController: commentController.clothesController,
                   title: '발견 당시 옷차림',
                   isRequired: false,
-                  hintText: '상•하의 모양, 색상, 액세서리 등을 적어주세요.',
+                  hintText: '상•하의 모양, 색상, 액세서리 등 당시 옷차림에 대해 적어주세요.',
                   maxLength: 20),
               // 발견 당시 상황
               TextForm(
                 textEditingController: commentController.detailsController,
                 title: '발견 당시 상황',
                 isRequired: false,
-                hintText: '상•하의 모양, 색상, 액세서리 등을 적어주세요.',
+                hintText: '발견 당시 실종자의 주변인, 행동, 상황 등을 상세히 적어주세요.',
                 maxLength: 300,
                 maxLengths: 6,
               ),
