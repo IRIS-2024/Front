@@ -36,21 +36,21 @@ class _CommentTabState extends State<CommentTab> {
           return SingleChildScrollView(
             child: Column(children: [
               // map()
-              SizedBox(
+              const SizedBox(
                 height: 300,
-                child: Obx(
-                  () => postController.post.value.latitude == null
-                      ? const CircularProgressIndicator()
-                      : const MapItem(),
-                ),
+                child: MapItem(),
               ),
+              //
               Obx(() => postController.targetVisible.value == true
-                  ? SingleCmtItem(
-                      controller: postController,
-                      comment: postController.targetComment.value,
-                      closeAble: true,
-                      closeMethod: postController.unVisibleTargetComment,
-                    )
+                  ? Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: SingleCmtItem(
+                        controller: postController,
+                        comment: postController.targetComment.value,
+                        closeAble: true,
+                        closeMethod: postController.unVisibleTargetComment,
+                      ),
+                  )
                   : const Padding(padding: CustomPadding.slimBottom)),
               Container(
                   alignment: Alignment.centerRight,
