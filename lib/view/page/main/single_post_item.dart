@@ -6,7 +6,7 @@ import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/model/short_post.dart';
 import 'package:iris_flutter/utils/time_diff_utils.dart';
 import 'package:iris_flutter/view/controller/my_page/bookmark_controller.dart';
-import 'package:iris_flutter/view/controller/my_page/my_post_controller.dart';
+import 'package:iris_flutter/view/page/main/delete_post_dialog.dart';
 
 class SinglePostItem extends StatefulWidget {
   final dynamic controller;
@@ -52,49 +52,7 @@ class _SinglePostItemState extends State<SinglePostItem> {
                         right: 3,
                         child: IconButton(
                             onPressed: () {
-                              Get.dialog(
-                                Dialog(
-                                  child: Padding(
-                                    padding: CustomPadding.dialogInsets,
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          '실종 정보 삭제',
-                                          style: CustomTextStyle.title
-                                              .copyWith(color: Theme.of(context).colorScheme.primary),
-                                        ),
-                                        const Padding(padding: CustomPadding.regularBottom),
-                                        const Text('정말 실종 정보를 삭제하시겠습니까?'),
-                                        const Padding(padding: CustomPadding.mediumBottom),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            ElevatedButton(
-                                                onPressed: () {
-                                                  Get.back();
-                                                },
-                                                child: const Text('닫기')),
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                Get.put(MyPostController()).deletePost(widget.post.pid, context);
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                  Theme.of(context).colorScheme.errorContainer,
-                                                  foregroundColor:
-                                                  Theme.of(context).colorScheme.onErrorContainer),
-                                              child: const Text('삭제'),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              );
-                              // Get.put(MyPostController()).deletePost(widget.post.pid, context);
+                              showDeletePostDialog(widget.post.pid);
                             },
                             icon: const Icon(Icons.delete_outline),
                             style: IconButton.styleFrom(
