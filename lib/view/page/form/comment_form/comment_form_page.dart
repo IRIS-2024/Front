@@ -42,7 +42,7 @@ class _CommentFormState extends State<CommentFormPage> {
             // validate image, time, location
             commentController.initValidation.value = false;
             if (commentController.validateRequiredFields()) {
-              commentController.submitComment();
+              commentController.submitComment(context);
             }
           })),
       body: SingleChildScrollView(

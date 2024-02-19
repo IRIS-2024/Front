@@ -77,6 +77,41 @@ class _CommentRepository implements CommentRepository {
   }
 
   @override
+  Future<List<MyCommentsResp>> getMyComments(
+    int pageNo,
+    int pageSize,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pageNo': pageNo,
+      r'pageSize': pageSize,
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<MyCommentsResp>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/my-comments',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) => MyCommentsResp.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
   Future<dynamic> deleteComment(int cid) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
