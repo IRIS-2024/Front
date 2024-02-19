@@ -20,13 +20,13 @@ class MyPostController {
     });
   }
 
-  void deletePost(int pid, BuildContext context) async {
+  void deletePost(int pid, BuildContext context, Function funcAfterDelete) async {
     final dio = createDio();
     PostRepository postRepository = PostRepository(dio);
     await postRepository.deletePost(pid).then((resp) {
       // Error 발생 안 하면 성공
       customSnackBar(title: '실종 정보 삭제', message: '실종 정보를 삭제하였습니다.', context: context);
-      loadData();
+      funcAfterDelete();
     }).catchError((error) {
       log('[catchError]: $error');
     });

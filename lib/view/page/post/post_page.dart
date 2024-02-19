@@ -118,8 +118,7 @@ class _PostPageState extends State<PostPage> {
                   onPressed: () {
                     // 발견 완료
                     // dialog로 한 번 더 묻고 -> 신고글 삭제
-                    log('postController.post.value.author: ${postController.post.value.author}');
-                    showDeletePostDialog(postController.postId.value);
+                    showDeletePostDialog(postController.postId.value, moveToMain);
                     // postController.deletePost();
                   },
                   backgroundColor: Colors.red,
@@ -136,5 +135,10 @@ class _PostPageState extends State<PostPage> {
                   icon: const Icon(Icons.report_gmailerrorred),
                 ))),
     );
+  }
+
+  void moveToMain() {
+    Get.back();
+    Get.offAllNamed(Config.routerMain);
   }
 }
