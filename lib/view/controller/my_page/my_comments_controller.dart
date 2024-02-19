@@ -19,7 +19,7 @@ class MyCommentsController extends GetxController {
           commentList: [
             Comment(
                 cid: 1,
-                title: "서울시 청파동 1가 11",
+                address: "서울시 청파동 1가 11",
                 latitude: 37.545176,
                 longitude: 126.962722,
                 images: [
@@ -34,7 +34,7 @@ class MyCommentsController extends GetxController {
                 createdAt: "2024-02-09T07:11:42.069Z"),
             Comment(
                 cid: 2,
-                title: "서울시 청파동 2가 21",
+                address: "서울시 청파동 2가 21",
                 latitude: 37.545176,
                 longitude: 126.962722,
                 images: [
@@ -58,7 +58,7 @@ class MyCommentsController extends GetxController {
           commentList: [
             Comment(
                 cid: 3,
-                title: "서울시 청파동 3가 33",
+                address: "서울시 청파동 3가 33",
                 latitude: 37.545176,
                 longitude: 126.962722,
                 images: [

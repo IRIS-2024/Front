@@ -30,6 +30,8 @@ class Config {
   static double maxZoom = 19;
   static double initZoom = 17;
 
+  static int filterCriteria = 60;
+
   static final routers = [
     GetPage(
         name: routerLogin,

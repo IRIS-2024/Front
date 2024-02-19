@@ -14,89 +14,117 @@ class DetailTab extends StatefulWidget {
 }
 
 class _DetailTabState extends State<DetailTab> {
-  PostController postController = Get.find<PostController>();
+  PostController postController = Get.put(PostController());
+
+  Future<void> _initPostData() async {
+    await Get.find<PostController>().loadData();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          ImageCarousel(images: postController.post.value.images),
-          const SizedBox(height: 12),
-          Container(
-            padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
-            color: Colors.white,
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Expanded(
-                  child: Text(
-                    postController.post.value.name,
-                    style: CustomTextStyle.titleBold,
-                  ),
-                ),
-                Text(
-                  convertDateString(postController.post.value.createdAt),
-                  style:
-                      TextStyle(color: Theme.of(context).colorScheme.outline),
-                )
-              ]),
-              const Padding(padding: CustomPadding.slimBottom),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: postItem(
-                        "성별", postController.post.value.gender ? "남" : "여"),
-                  ),
-                  Expanded(
-                    child: postItem("만나이", postController.post.value.age),
-                  )
-                ],
-              ),
-              const Divider(),
-              if (postController.post.value.height != null ||
-                  postController.post.value.weight != null)
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+    return FutureBuilder(
+        future: _initPostData(),
+        builder: (context, snap) {
+          if (snap.connectionState != ConnectionState.done) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                postController.post.value.images
+                        .isNotEmpty // 이미지 무조건 있어야 해서 나중에 지워도 되는 부분
+                    ? ImageCarousel(images: postController.post.value.images)
+                    : const Padding(padding: CustomPadding.mediumBottom),
+                const SizedBox(height: 12),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+                  color: Colors.white,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (postController.post.value.height != null)
-                          Expanded(
-                            child: postItem(
-                                "키", "${postController.post.value.height} cm"),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  postController.post.value.name,
+                                  style: CustomTextStyle.titleBold,
+                                ),
+                              ),
+                              Text(
+                                convertDateString(
+                                    postController.post.value.createdAt),
+                                style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.outline),
+                              )
+                            ]),
+                        const Padding(padding: CustomPadding.slimBottom),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: postItem("성별",
+                                  postController.post.value.gender ? "남" : "여"),
+                            ),
+                            Expanded(
+                              child: postItem(
+                                  "만나이", '${postController.post.value.age} 세'),
+                            )
+                          ],
+                        ),
+                        const Divider(),
+                        if (postController.post.value.height != null ||
+                            postController.post.value.weight != null)
+                          Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  if (postController.post.value.height != null)
+                                    Expanded(
+                                      child: postItem("키",
+                                          "${postController.post.value.height} cm"),
+                                    ),
+                                  if (postController.post.value.weight != null)
+                                    Expanded(
+                                      child: postItem("몸무게",
+                                          "${postController.post.value.weight} kg"),
+                                    )
+                                ],
+                              ),
+                              const Divider(),
+                            ],
                           ),
-                        if (postController.post.value.weight != null)
-                          Expanded(
-                            child: postItem("몸무게",
-                                "${postController.post.value.weight} kg"),
-                          )
-                      ],
-                    ),
-                    const Divider(),
-                  ],
+                        postItem("마지막 위치", postController.post.value.address),
+                        const Divider(),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            postItem(
+                                "실종 당시 옷차림", postController.post.value.clothes),
+                            const Divider(),
+                          ],
+                        ),
+                        if (postController.post.value.details != null &&
+                            postController.post.value.details != '')
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              postItem(
+                                  "특이사항", postController.post.value.details),
+                              const Divider(),
+                            ],
+                          ),
+                      ]),
                 ),
-              postItem("마지막 위치", postController.post.value.address),
-              const Divider(),
-              Column(
-                children: [
-                  postItem("실종 당시 옷차림", postController.post.value.clothes),
-                  const Divider(),
-                ],
-              ),
-              if (postController.post.value.details != null)
-                Column(
-                  children: [
-                    postItem("특이사항", postController.post.value.details),
-                    const Divider(),
-                  ],
-                ),
-            ]),
-          ),
-        ],
-      ),
-    );
+              ],
+            ),
+          );
+        });
   }
 
   Widget postItem(String title, dynamic context) => Column(
