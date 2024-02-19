@@ -33,65 +33,81 @@ class _CommentTabState extends State<CommentTab> {
             );
           }
 
-          return SingleChildScrollView(
-            child: Column(children: [
-              // map()
-              const SizedBox(
-                height: 300,
-                child: MapItem(),
-              ),
-              //
-              Obx(() => postController.targetVisible.value == true
-                  ? Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: SingleCmtItem(
-                        controller: postController,
-                        comment: postController.targetComment.value,
-                        closeAble: true,
-                        closeMethod: postController.unVisibleTargetComment,
-                      ),
-                  )
-                  : const Padding(padding: CustomPadding.slimBottom)),
-              Container(
-                  alignment: Alignment.centerRight,
-                  color: Colors.white,
-                  child: Obx(
-                    () => SwitchListTile(
-                        value: postController.isFilterOn.value,
-                        controlAffinity: ListTileControlAffinity.leading,
-                        title: Text("정확도 ${Config.filterCriteria}% 이상"),
-                        onChanged: (value) {
-                          print("필터 클릭 - $value");
-                          postController.isFilterOn.value = value;
-                          postController.loadComments();
-                          // if (value) {
-                          //   postController.loadComments();
-                          // } else {
-                          //   postController.loadCommentsNoFilter();
-                          // }
-                        }),
-                  )),
-              Container(
-                color: Colors.white,
-                child: Obx(
-                  () => ListView.separated(
-                    primary: false,
-                    shrinkWrap: true,
-                    itemCount: postController.commentList.length,
-                    itemBuilder: (BuildContext context, int cmtIdx) {
-                      return SingleCmtItem(
-                          comment: postController.commentList[cmtIdx],
-                          controller: postController,
-                          closeAble: false);
-                    },
-                    separatorBuilder: (BuildContext ctx, int idx) {
-                      return const Divider();
-                    },
-                  ),
-                ),
-              )
-            ]),
-          );
+          return postController.commentList.isEmpty
+              ? const Center(
+                  child: Text("아직 제보 댓글이 없습니다."),
+                )
+              : SingleChildScrollView(
+                  child: Column(children: [
+                    // map()
+                    const SizedBox(
+                      height: 300,
+                      child: MapItem(),
+                    ),
+                    //
+                    Obx(() => postController.targetVisible.value == true
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: SingleCmtItem(
+                              controller: postController,
+                              comment: postController.targetComment.value,
+                              closeAble: true,
+                              closeMethod:
+                                  postController.unVisibleTargetComment,
+                              hasImgAuth:
+                                  postController.targetComment.value.author ||
+                                          postController.post.value.author
+                                      ? true
+                                      : false,
+                            ),
+                          )
+                        : const Padding(padding: CustomPadding.slimBottom)),
+                    Column(
+                      children: [
+                        Container(
+                            alignment: Alignment.centerRight,
+                            color: Colors.white,
+                            child: Obx(
+                              () => SwitchListTile(
+                                  value: postController.isFilterOn.value,
+                                  controlAffinity:
+                                      ListTileControlAffinity.leading,
+                                  title:
+                                      Text("정확도 ${Config.filterCriteria}% 이상"),
+                                  onChanged: (value) {
+                                    print("필터 클릭 - $value");
+                                    postController.isFilterOn.value = value;
+                                    postController.loadComments();
+                                  }),
+                            )),
+                        Container(
+                          color: Colors.white,
+                          child: Obx(
+                            () => ListView.separated(
+                              primary: false,
+                              shrinkWrap: true,
+                              itemCount: postController.commentList.length,
+                              itemBuilder: (BuildContext context, int cmtIdx) {
+                                return SingleCmtItem(
+                                    comment: postController.commentList[cmtIdx],
+                                    controller: postController,
+                                    closeAble: false,
+                                    hasImgAuth: postController
+                                                .commentList[cmtIdx].author ||
+                                            postController.post.value.author
+                                        ? true
+                                        : false);
+                              },
+                              separatorBuilder: (BuildContext ctx, int idx) {
+                                return const Divider();
+                              },
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ]),
+                );
         });
   }
 }
