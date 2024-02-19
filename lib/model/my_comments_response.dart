@@ -6,16 +6,19 @@ part 'my_comments_response.g.dart';
 @JsonSerializable()
 class MyCommentsResp {
   // 실종 신고 (원글) 정보
+  int pid;
   String name;
   String imgUrl;
   int age;
   bool gender;
   String address;
+
   // 해당 글에 작성한 댓글 정보
   List<Comment> commentList;
 
   MyCommentsResp(
-      {required this.name,
+      {required this.pid,
+      required this.name,
       required this.imgUrl,
       required this.age,
       required this.gender,
