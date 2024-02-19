@@ -4,17 +4,18 @@ import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/my_page/my_post_controller.dart';
 
-void showDeletePostDialog(int pid) {
+void showDeletePostDialog(int pid, Function funcAfterDelete) {
   Get.dialog(
       Dialog(
-        child: DeletePostDialog(pid: pid,)
+        child: DeletePostDialog(pid: pid, funcAfterDelete: funcAfterDelete,)
       )
   );
 }
 
 class DeletePostDialog extends StatelessWidget {
   final int pid;
-  const DeletePostDialog({super.key, required this.pid});
+  final Function funcAfterDelete;
+  const DeletePostDialog({super.key, required this.pid, required this.funcAfterDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class DeletePostDialog extends StatelessWidget {
                   child: const Text('닫기')),
               ElevatedButton(
                 onPressed: () {
-                  Get.put(MyPostController()).deletePost(pid, context);
+                  Get.put(MyPostController()).deletePost(pid, context, funcAfterDelete);
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor:

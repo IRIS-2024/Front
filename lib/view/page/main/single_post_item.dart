@@ -6,6 +6,7 @@ import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/model/short_post.dart';
 import 'package:iris_flutter/utils/time_diff_utils.dart';
 import 'package:iris_flutter/view/controller/my_page/bookmark_controller.dart';
+import 'package:iris_flutter/view/controller/my_page/my_post_controller.dart';
 import 'package:iris_flutter/view/page/main/delete_post_dialog.dart';
 
 class SinglePostItem extends StatefulWidget {
@@ -52,7 +53,7 @@ class _SinglePostItemState extends State<SinglePostItem> {
                         right: 3,
                         child: IconButton(
                             onPressed: () {
-                              showDeletePostDialog(widget.post.pid);
+                              showDeletePostDialog(widget.post.pid, _reloadData);
                             },
                             icon: const Icon(Icons.delete_outline),
                             style: IconButton.styleFrom(
@@ -115,5 +116,10 @@ class _SinglePostItemState extends State<SinglePostItem> {
         ),
       ),
     );
+  }
+
+  void _reloadData() {
+    Get.put(MyPostController()).loadData();
+    Get.back();
   }
 }
