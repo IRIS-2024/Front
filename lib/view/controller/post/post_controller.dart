@@ -107,17 +107,17 @@ class PostController extends GetxController {
     }
   }
 
-  Future<void> deletePost() async {
-    // /post/{post_id}/comments
-    try {
-      final dio = createDio();
-      final PostRepository postRepository = PostRepository(dio);
-      final response = await postRepository.deletePost(4);
-    } catch (error) {
-      // 에러 처리
-      print('Error fetching info detail: $error');
-    }
-  }
+  // Future<void> deletePost() async { -> myPostController의 deletePost 함수로 통일하여 사용
+  //   // /post/{post_id}/comments
+  //   try {
+  //     final dio = createDio();
+  //     final PostRepository postRepository = PostRepository(dio);
+  //     final response = await postRepository.deletePost(4);
+  //   } catch (error) {
+  //     // 에러 처리
+  //     print('Error fetching info detail: $error');
+  //   }
+  // }
 
   void changeImgSlideIdx(int index) {
     currentIndex.value = index;
