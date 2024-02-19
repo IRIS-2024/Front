@@ -18,14 +18,11 @@ class PostPage extends StatefulWidget {
 class _PostPageState extends State<PostPage> {
   PostController postController = Get.put(PostController());
   BookmarkController bookmrkController = Get.put(BookmarkController());
-  int pid = 0; // Get.arguments['pid']
 
   @override
   void initState() {
     super.initState();
-    // *** pid = Get.arguments 읽어와서 사용
-    // postController.loadData(pid);
-    Get.find<PostController>().loadData();
+    postController.setPid(Get.arguments);
   }
 
   @override
@@ -60,7 +57,7 @@ class _PostPageState extends State<PostPage> {
                 onPressed: () {
                   // 아이콘 버튼 실행
                   bookmrkController.postAndDeleteBookmark(
-                      postController.post.value.bookmarked, pid);
+                      postController.post.value.bookmarked, postController.postId.value);
                 },
               ),
             ],
