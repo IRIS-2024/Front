@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
+import 'package:iris_flutter/utils/user_profile_utils.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/controller/login/login_controller.dart';
-import 'package:iris_flutter/view/page/login/login_page.dart';
 import 'package:iris_flutter/view/page/my_page/bookmark_post.dart';
 import 'package:iris_flutter/view/page/my_page/my_posts.dart';
 import 'package:iris_flutter/view/page/my_page/my_comments.dart';
@@ -17,29 +16,13 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
-  final controller = Get.find<LoginController>();
-
-  Future<void> _signOut() async {
-    // Google Sign-In 로그아웃
-    await GoogleSignIn().signOut();
-    controller.deleteInfo();
-
-    Get.to(() => const LoginPage());
-  }
-
-  Future<void> resign() async {
-    // Google Sign-In 로그아웃
-    await GoogleSignIn().signOut();
-    // 탈퇴 API 연결하기
-    controller.deleteInfo();
-
-    Get.to(() => const LoginPage());
-  }
-
   bool isSwitched = true;
 
   @override
   Widget build(BuildContext context) {
+    Get.put(LoginController());
+    final controller = Get.find<LoginController>();
+
     return Scaffold(
         appBar: customAppBar(title: "마이페이지"),
         body: Padding(
@@ -56,19 +39,19 @@ class _MyPageState extends State<MyPage> {
                     // 사용자 사진 변경?;
                   },
                   leading: CircleAvatar(
-                    backgroundImage: controller.user.value.photoUrl != null
-                        ? NetworkImage(controller.user.value.photoUrl!)
-                        : const AssetImage('assets/images/temp_logo.png')
+                    backgroundImage: getUserPhoto() != ''
+                        ? NetworkImage(getUserPhoto())
+                        : const AssetImage('assets/images/logo.png')
                             as ImageProvider,
                   ),
-                  title: controller.user.value.displayName != null
-                      ? Text("${controller.user.value.displayName}")
+                  title: getUserDisplayName() != ''
+                      ? Text(getUserDisplayName())
                       : const Text(
                           "사용자 이름을 등록해주세요.",
                           style: TextStyle(color: Colors.grey),
                         ),
-                  subtitle: controller.user.value.email != null
-                      ? Text(controller.user.value.email)
+                  subtitle: getUserEmail() != ''
+                      ? Text(getUserEmail())
                       : const Text(" "),
                 ),
                 const Padding(padding: CustomPadding.regularBottom),
@@ -132,26 +115,26 @@ class _MyPageState extends State<MyPage> {
                   ),
                 ),
                 const SizedBox(height: 6),
-                SwitchListTile(
-                  title: const Text("알림"),
-                  value: isSwitched,
-                  tileColor: Theme.of(context).colorScheme.surfaceVariant,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15))),
-                  onChanged: (value) {
-                    setState(() {
-                      isSwitched = value;
-                      print(isSwitched);
-                    });
-                  },
-                  secondary: const Icon(Icons.notifications),
-                ),
+                // SwitchListTile(
+                //   title: const Text("알림"),
+                //   value: isSwitched,
+                //   tileColor: Theme.of(context).colorScheme.surfaceVariant,
+                //   shape: const RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.only(
+                //           topLeft: Radius.circular(15),
+                //           topRight: Radius.circular(15))),
+                //   onChanged: (value) {
+                //     setState(() {
+                //       isSwitched = value;
+                //       print(isSwitched);
+                //     });
+                //   },
+                //   secondary: const Icon(Icons.notifications),
+                // ),
                 ListTile(
                   tileColor: Theme.of(context).colorScheme.surfaceVariant,
                   onTap: () {
-                    _signOut();
+                    controller.handleLogout();
                   },
                   leading: const Icon(Icons.logout),
                   title: const Text("로그아웃"),

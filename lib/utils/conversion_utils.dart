@@ -17,9 +17,14 @@ String convertDateString(String originalDateString) {
   // 2024-02-09T07:11:42.069Z
   // 2024-02-15T03:18:29.191338
 
-  DateTime dateTime = DateTime.parse(originalDateString);
+  if (originalDateString != '') {
+    DateTime dateTime = DateTime.parse(originalDateString);
 
-  String formattedDateString = DateFormat('yyyy-MM-dd HH:mm').format(dateTime);
+    String formattedDateString =
+        DateFormat('yyyy-MM-dd HH:mm').format(dateTime);
 
-  return formattedDateString;
+    return formattedDateString;
+  } else {
+    return '';
+  }
 }
