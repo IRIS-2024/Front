@@ -37,11 +37,11 @@ class _PostPageState extends State<PostPage> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             centerTitle: true,
-            elevation: 0, // 앱 바 뒷 배경색 제거
+            elevation: 0,
+            // 앱 바 뒷 배경색 제거
             leading: IconButton(
               icon: const Icon(Icons.arrow_back), // 햄버거버튼 아이콘 생성
               onPressed: () {
-                log('Get.currentRoute: ${Get.currentRoute}');
                 if (Get.currentRoute == Config.routerPost) {
                   Get.offAllNamed(Config.routerMain);
                 } else {
@@ -57,12 +57,14 @@ class _PostPageState extends State<PostPage> {
                 onPressed: () {
                   // 아이콘 버튼 실행
                   bookmrkController.postAndDeleteBookmark(
-                      postController.post.value.bookmarked, postController.postId.value);
+                      postController.post.value.bookmarked,
+                      postController.postId.value);
                 },
               ),
             ],
             bottom: TabBar(
-              labelColor: Colors.white, // 배경색
+              labelColor: Colors.white,
+              // 배경색
               unselectedLabelColor: Theme.of(context).colorScheme.primary,
               indicatorSize: TabBarIndicatorSize.label,
               indicator: BoxDecoration(
@@ -111,8 +113,20 @@ class _PostPageState extends State<PostPage> {
               )
             ],
           ),
-          floatingActionButton: postController.post.value.author
+          floatingActionButton: Obx(() => postController.post.value.author
               ? FloatingActionButton.extended(
+                  onPressed: () {
+                    // 발견 완료
+                    // dialog로 한 번 더 묻고 -> 신고글 삭제
+                    log('postController.post.value.author: ${postController.post.value.author}');
+                    showDeletePostDialog(postController.postId.value);
+                    // postController.deletePost();
+                  },
+                  backgroundColor: Colors.red,
+                  label: const Text('발견 완료'),
+                  icon: const Icon(Icons.check),
+                )
+              : FloatingActionButton.extended(
                   onPressed: () {
                     log('infoController.missingInfo.value: ${postController.post.value.address}');
                     Get.toNamed(Config.routerCommentForm,
@@ -120,18 +134,7 @@ class _PostPageState extends State<PostPage> {
                   },
                   label: const Text('제보하기'),
                   icon: const Icon(Icons.report_gmailerrorred),
-                )
-              : FloatingActionButton.extended(
-                  onPressed: () {
-                    // 발견 완료
-                    // dialog로 한 번 더 묻고 -> 신고글 삭제
-                    showDeletePostDialog(postController.postId.value);
-                    // postController.deletePost();
-                  },
-                  backgroundColor: Colors.red,
-                  label: const Text('발견 완료'),
-                  icon: const Icon(Icons.check),
-                )),
+                ))),
     );
   }
 }
