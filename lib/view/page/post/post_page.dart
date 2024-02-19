@@ -128,7 +128,7 @@ class _PostPageState extends State<PostPage> {
                 )
               : FloatingActionButton.extended(
                   onPressed: () {
-                    log('infoController.missingInfo.value: ${postController.post.value.address}');
+                    log('infoController.missingInfo.value: ${postController.post.value.pid}');
                     Get.toNamed(Config.routerCommentForm,
                         arguments: postController.post.value);
                   },
