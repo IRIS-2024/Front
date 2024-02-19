@@ -85,7 +85,7 @@ class LoginController extends GetxController {
 
     if (getUserEmail().isEmpty) {
       log('checkLogin - No UserEmail 로그인 상태 아님');
-      // 정보 없음 = 로그아웃인 상태
+      // 정보 없음 = 이미 로그아웃인 상태
       // 로그인 화면으로 돌아감
       isLoginIng = false.obs;
       return;

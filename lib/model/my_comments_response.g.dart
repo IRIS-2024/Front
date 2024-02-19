@@ -8,6 +8,7 @@ part of 'my_comments_response.dart';
 
 MyCommentsResp _$MyCommentsRespFromJson(Map<String, dynamic> json) =>
     MyCommentsResp(
+      pid: json['pid'] as int,
       name: json['name'] as String,
       imgUrl: json['imgUrl'] as String,
       age: json['age'] as int,
@@ -20,6 +21,7 @@ MyCommentsResp _$MyCommentsRespFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$MyCommentsRespToJson(MyCommentsResp instance) =>
     <String, dynamic>{
+      'pid': instance.pid,
       'name': instance.name,
       'imgUrl': instance.imgUrl,
       'age': instance.age,

@@ -14,7 +14,7 @@ class TimeForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasicForm(
-        title: '실종 시각',
+        title: title,
         isRequired: true,
         widget: Obx(
           () => Column(

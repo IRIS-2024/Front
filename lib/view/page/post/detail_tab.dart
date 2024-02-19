@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/utils/conversion_utils.dart';
@@ -17,7 +18,7 @@ class _DetailTabState extends State<DetailTab> {
   PostController postController = Get.put(PostController());
 
   Future<void> _initPostData() async {
-    await Get.find<PostController>().loadData();
+    await Get.find<PostController>().loadData(null);
   }
 
   @override
@@ -34,11 +35,12 @@ class _DetailTabState extends State<DetailTab> {
           return SingleChildScrollView(
             child: Column(
               children: [
-                postController.post.value.images
-                        .isNotEmpty // 이미지 무조건 있어야 해서 나중에 지워도 되는 부분
-                    ? ImageCarousel(images: postController.post.value.images)
-                    : const Padding(padding: CustomPadding.mediumBottom),
-                const SizedBox(height: 12),
+                ImageCarousel(
+                  images: postController.post.value.images,
+                  genImage: postController.post.value.genImage,
+                  genRepresent: postController.post.value.genRepresent,
+                ),
+                const Padding(padding: CustomPadding.regularBottom),
                 Container(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
                   color: Colors.white,
@@ -67,12 +69,14 @@ class _DetailTabState extends State<DetailTab> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Expanded(
-                              child: postItem("성별",
-                                  postController.post.value.gender ? "남" : "여"),
+                              child: postItem(
+                                  "성별",
+                                  Config().getGenderText(
+                                      postController.post.value.gender)),
                             ),
                             Expanded(
                               child: postItem(
-                                  "만나이", '${postController.post.value.age} 세'),
+                                  "만 나이", '${postController.post.value.age} 세'),
                             )
                           ],
                         ),
