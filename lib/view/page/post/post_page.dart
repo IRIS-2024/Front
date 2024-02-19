@@ -25,7 +25,7 @@ class _PostPageState extends State<PostPage> {
     super.initState();
     // *** pid = Get.arguments 읽어와서 사용
     // postController.loadData(pid);
-    postController.loadData();
+    Get.find<PostController>().loadData();
   }
 
   @override
@@ -114,16 +114,26 @@ class _PostPageState extends State<PostPage> {
               )
             ],
           ),
-          floatingActionButton: FloatingActionButton.extended(
-            onPressed: () {
-              log(
-                  'infoController.missingInfo.value: ${postController.post.value.address}');
-              Get.toNamed(Config.routerCommentForm,
-                  arguments: postController.post.value);
-            },
-            label: const Text('제보하기'),
-            icon: const Icon(Icons.report_gmailerrorred),
-          )),
+          floatingActionButton: postController.post.value.author
+              ? FloatingActionButton.extended(
+                  onPressed: () {
+                    log('infoController.missingInfo.value: ${postController.post.value.address}');
+                    Get.toNamed(Config.routerCommentForm,
+                        arguments: postController.post.value);
+                  },
+                  label: const Text('제보하기'),
+                  icon: const Icon(Icons.report_gmailerrorred),
+                )
+              : FloatingActionButton.extended(
+                  onPressed: () {
+                    // 발견 완료
+                    // 신고글 삭제
+                    postController.deletePost();
+                  },
+                  backgroundColor: Colors.red,
+                  label: const Text('발견 완료'),
+                  icon: const Icon(Icons.check),
+                )),
     );
   }
 }

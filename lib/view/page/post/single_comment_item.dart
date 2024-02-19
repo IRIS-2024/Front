@@ -28,6 +28,7 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
 
   @override
   Widget build(BuildContext context) {
+    print('widget.comment: ${widget.comment.toJson()}');
     return Padding(
       padding: CustomPadding.pageInsets,
       child: Column(
@@ -39,13 +40,12 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
             children: [
               Flexible(
                 child: Text(
-                  widget.comment.title,
+                  widget.comment.address,
                   style: const TextStyle(
                       fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ),
-              Text(
-                  getTimeDifference(widget.comment.createdAt),
+              Text(getTimeDifference(widget.comment.createdAt),
                   style: const TextStyle(fontSize: 12)),
               if (widget.closeAble == true)
                 IconButton(
@@ -107,7 +107,7 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                       ),
                     ),
                     const Padding(padding: CustomPadding.slimBottom),
-                    Text('일치율 ${widget.comment.accuracy} %',
+                    Text('일치율 ${widget.comment.accuracy!.toStringAsFixed(0)} %',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
