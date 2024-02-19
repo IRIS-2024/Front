@@ -63,28 +63,31 @@ class _CommentTabState extends State<CommentTab> {
                         onChanged: (value) {
                           print("필터 클릭 - $value");
                           postController.isFilterOn.value = value;
-                          if (value) {
-                            postController.loadComments();
-                          } else {
-                            postController.loadCommentsNoFilter();
-                          }
+                          postController.loadComments();
+                          // if (value) {
+                          //   postController.loadComments();
+                          // } else {
+                          //   postController.loadCommentsNoFilter();
+                          // }
                         }),
                   )),
               Container(
                 color: Colors.white,
-                child: ListView.separated(
-                  primary: false,
-                  shrinkWrap: true,
-                  itemCount: postController.commentList.length,
-                  itemBuilder: (BuildContext context, int cmtIdx) {
-                    return SingleCmtItem(
-                        comment: postController.commentList[cmtIdx],
-                        controller: postController,
-                        closeAble: false);
-                  },
-                  separatorBuilder: (BuildContext ctx, int idx) {
-                    return const Divider();
-                  },
+                child: Obx(
+                  () => ListView.separated(
+                    primary: false,
+                    shrinkWrap: true,
+                    itemCount: postController.commentList.length,
+                    itemBuilder: (BuildContext context, int cmtIdx) {
+                      return SingleCmtItem(
+                          comment: postController.commentList[cmtIdx],
+                          controller: postController,
+                          closeAble: false);
+                    },
+                    separatorBuilder: (BuildContext ctx, int idx) {
+                      return const Divider();
+                    },
+                  ),
                 ),
               )
             ]),

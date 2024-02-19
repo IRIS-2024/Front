@@ -92,17 +92,21 @@ class PostController extends GetxController {
   }
 
   Future<void> loadComments() async {
-    int postId = 4;
     // /post/{post_id}/comments
+    int filterNum = 0;
+    if (isFilterOn.value) {
+      filterNum = Config.filterCriteria;
+    } //
+
     try {
       final dio = createDio();
       final CommentRepository comtRepository = CommentRepository(dio);
-      final response = await comtRepository.getCommentList(postId, 0);
+      final response = await comtRepository.getCommentList(postId.value, filterNum);
 
       commentList.value = response;
-      commentList.refresh();
+      // commentList.refresh();
     } catch (error) {
-      // 에러 처리
+      // 에러 처리s
       print('Error fetching info detail: $error');
     }
   }
@@ -123,20 +127,22 @@ class PostController extends GetxController {
     currentIndex.value = index;
   }
 
-  Future<void> loadCommentsNoFilter() async {
-    try {
-      final dio = createDio();
-      final CommentRepository comtRepository = CommentRepository(dio);
-      final response =
-          await comtRepository.getCommentList(4, Config.filterCriteria);
 
-      commentList.value = response;
-      commentList.refresh();
-    } catch (error) {
-      // 에러 처리
-      print('Error fetching info detail: $error');
-    }
-  }
+  // loadComments 함수 하나로 통합
+  // Future<void> loadCommentsNoFilter() async {
+  //   try {
+  //     final dio = createDio();
+  //     final CommentRepository comtRepository = CommentRepository(dio);
+  //     final response =
+  //         await comtRepository.getCommentList(postId.value, Config.filterCriteria);
+  //
+  //     commentList.value = response;
+  //     commentList.refresh();
+  //   } catch (error) {
+  //     // 에러 처리
+  //     print('Error fetching info detail: $error');
+  //   }
+  // }
 
   void setTargetComment(Comment data) {
     targetComment.value = data;

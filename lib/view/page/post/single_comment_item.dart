@@ -121,7 +121,7 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (widget.comment.clothes != null)
+                    if (widget.comment.clothes != '')
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -133,7 +133,7 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                           Flexible(child: Text(widget.comment.clothes!))
                         ],
                       ),
-                    if (widget.comment.details != null)
+                    if (widget.comment.details !='')
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
