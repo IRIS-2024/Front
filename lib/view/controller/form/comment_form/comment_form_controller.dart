@@ -47,8 +47,14 @@ class CommentFormController {
 
   void pickImage() async {
     final ImagePicker picker = ImagePicker();
-    await picker.pickMultiImage().then((value) {
+    await picker
+        .pickMultiImage(
+      maxHeight: 500,
+      imageQuality: 30,
+    ).then((value) {
       images += value;
+    }).catchError((error) {
+      log('pickImage error: $error');
     });
   }
 
