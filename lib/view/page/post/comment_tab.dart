@@ -43,14 +43,18 @@ class _CommentTabState extends State<CommentTab> {
               //
               Obx(() => postController.targetVisible.value == true
                   ? Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: SingleCmtItem(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: SingleCmtItem(
                         controller: postController,
                         comment: postController.targetComment.value,
                         closeAble: true,
                         closeMethod: postController.unVisibleTargetComment,
+                        hasImgAuth: postController.targetComment.value.author ||
+                                postController.post.value.author
+                            ? true
+                            : false,
                       ),
-                  )
+                    )
                   : const Padding(padding: CustomPadding.slimBottom)),
               Container(
                   alignment: Alignment.centerRight,
@@ -64,32 +68,39 @@ class _CommentTabState extends State<CommentTab> {
                           print("필터 클릭 - $value");
                           postController.isFilterOn.value = value;
                           postController.loadComments();
-                          // if (value) {
-                          //   postController.loadComments();
-                          // } else {
-                          //   postController.loadCommentsNoFilter();
-                          // }
                         }),
                   )),
-              Container(
-                color: Colors.white,
-                child: Obx(
-                  () => ListView.separated(
-                    primary: false,
-                    shrinkWrap: true,
-                    itemCount: postController.commentList.length,
-                    itemBuilder: (BuildContext context, int cmtIdx) {
-                      return SingleCmtItem(
-                          comment: postController.commentList[cmtIdx],
-                          controller: postController,
-                          closeAble: false);
-                    },
-                    separatorBuilder: (BuildContext ctx, int idx) {
-                      return const Divider();
-                    },
-                  ),
-                ),
-              )
+              postController.commentList.isEmpty
+                  ? const Center(
+                      child: Padding(
+                        padding: CustomPadding.mediumTop,
+                        child: Text("제보 댓글이 없습니다."),
+                      ),
+                    )
+                  : Container(
+                      color: Colors.white,
+                      child: Obx(
+                        () => ListView.separated(
+                          primary: false,
+                          shrinkWrap: true,
+                          itemCount: postController.commentList.length,
+                          itemBuilder: (BuildContext context, int cmtIdx) {
+                            return SingleCmtItem(
+                                comment: postController.commentList[cmtIdx],
+                                controller: postController,
+                                closeAble: false,
+                                hasImgAuth:
+                                    postController.commentList[cmtIdx].author ||
+                                            postController.post.value.author
+                                        ? true
+                                        : false);
+                          },
+                          separatorBuilder: (BuildContext ctx, int idx) {
+                            return const Divider();
+                          },
+                        ),
+                      ),
+                    )
             ]),
           );
         });
