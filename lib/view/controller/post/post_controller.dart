@@ -7,6 +7,10 @@ import 'package:iris_flutter/repository/comment_repository.dart';
 import 'package:iris_flutter/repository/post_repository.dart';
 
 class PostController extends GetxController {
+  // 이전 페이지에서 전달 받은 postId
+  RxInt postId = 0.obs;
+
+  // Rx<Post?> post = Rx<Post?>(null);
   // 하나의 실종 정보 글에 대한 정보
   Rx<Post> post = Post(
     pid: 0,
@@ -16,7 +20,7 @@ class PostController extends GetxController {
     address: "",
     latitude: 0.0,
     longitude: 0.0,
-    clothes: "빨간 색 상의에 청바지를 입었어요. 파랑색 캡모자를 썼어요.",
+    clothes: "",
     bookmarked: false,
     images: [""],
     genImage: '',
@@ -26,6 +30,9 @@ class PostController extends GetxController {
     author: false,
     genRepresent: true,
   ).obs;
+
+  // imageCarousel 에 보일 전체 images
+  RxList<String> fullImages = [""].obs;
 
   // 해당 실종 정보 글에 달린 제보 댓글들
   RxList<Comment> commentList = <Comment>[].obs;
@@ -44,36 +51,40 @@ class PostController extends GetxController {
 
   RxBool isFilterOn = true.obs;
 
-  // 임시
-  int postId = 4;
+  void setPid(int argumentPid) {
+    postId.value = argumentPid;
+  }
 
-  Future<void> loadData() async {
+
+  Future<void> loadData(int? argumentPid) async {
     // /post/{post_id}
     try {
       final dio = createDio();
       final PostRepository infoRepository = PostRepository(dio);
-      final response = await infoRepository.getPost(postId);
+      final response = await infoRepository.getPost(argumentPid ?? postId.value);
 
-      post.value = Post(
-        pid: response.pid,
-        name: response.name,
-        gender: response.gender,
-        age: response.age,
-        address: response.address,
-        latitude: response.latitude,
-        longitude: response.longitude,
-        clothes: response.clothes,
-        bookmarked: response.bookmarked,
-        images: response.images,
-        genImage: response.genImage,
-        disappearedAt: response.disappearedAt,
-        createdAt: response.createdAt,
-        updatedAt: response.updatedAt,
-        author: response.author,
-        genRepresent: response.genRepresent,
-      );
+      post.value = response;
+      // post.value = Post(
+      //   pid: response.pid,
+      //   name: response.name,
+      //   gender: response.gender,
+      //   age: response.age,
+      //   address: response.address,
+      //   latitude: response.latitude,
+      //   longitude: response.longitude,
+      //   clothes: response.clothes,
+      //   bookmarked: response.bookmarked,
+      //   images: response.images,
+      //   genImage: response.genImage,
+      //   disappearedAt: response.disappearedAt,
+      //   createdAt: response.createdAt,
+      //   updatedAt: response.updatedAt,
+      //   author: response.author,
+      //   genRepresent: response.genRepresent,
+      // );
       // post.value = response;
-      post.refresh();
+      // post.refresh();
+
     } catch (error) {
       // 에러 처리
       print('Error fetching info detail: $error');
@@ -81,6 +92,7 @@ class PostController extends GetxController {
   }
 
   Future<void> loadComments() async {
+    int postId = 4;
     // /post/{post_id}/comments
     try {
       final dio = createDio();
@@ -100,7 +112,7 @@ class PostController extends GetxController {
     try {
       final dio = createDio();
       final PostRepository postRepository = PostRepository(dio);
-      final response = await postRepository.deletePost(postId);
+      final response = await postRepository.deletePost(4);
     } catch (error) {
       // 에러 처리
       print('Error fetching info detail: $error');
@@ -116,7 +128,7 @@ class PostController extends GetxController {
       final dio = createDio();
       final CommentRepository comtRepository = CommentRepository(dio);
       final response =
-          await comtRepository.getCommentList(postId, Config.filterCriteria);
+          await comtRepository.getCommentList(4, Config.filterCriteria);
 
       commentList.value = response;
       commentList.refresh();
