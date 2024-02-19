@@ -97,22 +97,25 @@ class PostFormController {
     });
   }
 
-  void submitFinalPost(BuildContext context) {
-    setRepresentative();
-
-    // get navigation, snackBar
-    customSnackBar(
-        title: '실종 정보 등록', message: '실종 정보 등록이 완료되었습니다.', context: context);
-    Get.offAllNamed(Config.routerPost, arguments: genImageResp.value?.pid);
+  void submitFinalPost(BuildContext context) async {
+    await setRepresentative(context);
   }
 
-  void setRepresentative() async {
+  Future setRepresentative(BuildContext context) async {
     final dio = createDio();
     PostRepository postRepository = PostRepository(dio);
     await postRepository.setRepresentative(genImageResp.value!.pid, isChecked.value).then((resp) {
       log('성공: ${resp}');
+      // get navigation, snackBar
+      customSnackBar(
+          title: '실종 정보 등록', message: '실종 정보 등록이 완료되었습니다.', context: context);
+      Get.offAllNamed(Config.routerPost, arguments: genImageResp.value?.pid);
     }).catchError((err) {
       log('[catchError] $err');
+      // 현재는 이 과정에서 Error 발생하면 genImageResp = true로 글 등록됨
+      customSnackBar(
+          title: '대표 이미지 지정 여부 저장 실패', message: '실종 정보는 정상적으로 등록됩니다.', context: context);
+      Get.offAllNamed(Config.routerPost, arguments: genImageResp.value?.pid);
     });
   }
 }
