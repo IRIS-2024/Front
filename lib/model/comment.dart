@@ -15,6 +15,7 @@ class Comment {
   String discoveredAt;
   String createdAt;
   String? updatedAt;
+  bool author;
 
   Comment({
     required this.cid,
@@ -23,11 +24,12 @@ class Comment {
     required this.longitude,
     this.clothes,
     this.details,
-    required this.images,
     this.accuracy,
+    required this.images,
     required this.discoveredAt,
     required this.createdAt,
     this.updatedAt,
+    required this.author,
   });
 
   factory Comment.fromJson(Map<String, dynamic> json) =>

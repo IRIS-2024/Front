@@ -1,8 +1,10 @@
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/model/comment.dart';
 import 'package:iris_flutter/utils/time_diff_utils.dart';
+import 'package:iris_flutter/view/controller/post/post_controller.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -28,7 +30,6 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
 
   @override
   Widget build(BuildContext context) {
-    print('widget.comment: ${widget.comment.toJson()}');
     return Padding(
       padding: CustomPadding.pageInsets,
       child: Column(
@@ -51,6 +52,12 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                 IconButton(
                     onPressed: widget.closeMethod,
                     icon: const Icon(Icons.close)),
+              if (widget.closeAble != true && widget.comment.author) // 댓글 삭제
+                IconButton(
+                    onPressed: () {
+                      Get.put(PostController()).deleteComment(widget.comment.cid, context);
+                    },
+                    icon: const Icon(Icons.delete_outline)),
             ],
           ),
           const Padding(padding: CustomPadding.regularBottom),
