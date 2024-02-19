@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/dio_config.dart';
@@ -5,6 +8,7 @@ import 'package:iris_flutter/model/comment.dart';
 import 'package:iris_flutter/model/post.dart';
 import 'package:iris_flutter/repository/comment_repository.dart';
 import 'package:iris_flutter/repository/post_repository.dart';
+import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 
 class PostController extends GetxController {
   // 이전 페이지에서 전달 받은 postId
@@ -40,12 +44,13 @@ class PostController extends GetxController {
 
   Rx<Comment> targetComment = Comment(
           cid: 0,
-          address: '임시 댓글',
+          address: '',
           latitude: 0.0,
           longitude: 0.0,
           images: [''],
-          discoveredAt: '2024-02-09T07:11:42.069Z',
-          createdAt: '2024-02-09T07:11:42.069Z')
+          discoveredAt: '',
+          createdAt: '',
+          author: false)
       .obs;
   RxBool targetVisible = false.obs;
 
@@ -55,13 +60,13 @@ class PostController extends GetxController {
     postId.value = argumentPid;
   }
 
-
   Future<void> loadData(int? argumentPid) async {
     // /post/{post_id}
     try {
       final dio = createDio();
       final PostRepository infoRepository = PostRepository(dio);
-      final response = await infoRepository.getPost(argumentPid ?? postId.value);
+      final response =
+          await infoRepository.getPost(argumentPid ?? postId.value);
 
       post.value = response;
       // post.value = Post(
@@ -84,7 +89,6 @@ class PostController extends GetxController {
       // );
       // post.value = response;
       // post.refresh();
-
     } catch (error) {
       // 에러 처리
       print('Error fetching info detail: $error');
@@ -101,7 +105,8 @@ class PostController extends GetxController {
     try {
       final dio = createDio();
       final CommentRepository comtRepository = CommentRepository(dio);
-      final response = await comtRepository.getCommentList(postId.value, filterNum);
+      final response =
+          await comtRepository.getCommentList(postId.value, filterNum);
 
       commentList.value = response;
       // commentList.refresh();
@@ -109,6 +114,18 @@ class PostController extends GetxController {
       // 에러 처리s
       print('Error fetching info detail: $error');
     }
+  }
+
+  void deleteComment(int cid, BuildContext context) async {
+    final dio = createDio();
+    CommentRepository commentRepository = CommentRepository(dio);
+    await commentRepository.deleteComment(cid).then((resp) {
+      // Error 발생 안 하면 성공
+      customSnackBar(title: '제보 댓글 삭제', message: '제보 댓글을 삭제하였습니다.', context: context);
+      loadComments();
+    }).catchError((error) {
+      log('[catchError]: $error');
+    });
   }
 
   // Future<void> deletePost() async { -> myPostController의 deletePost 함수로 통일하여 사용
@@ -126,7 +143,6 @@ class PostController extends GetxController {
   void changeImgSlideIdx(int index) {
     currentIndex.value = index;
   }
-
 
   // loadComments 함수 하나로 통합
   // Future<void> loadCommentsNoFilter() async {

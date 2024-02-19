@@ -18,15 +18,9 @@ class _MyCommentsState extends State<MyComments> {
   MyCommentsController comtController = Get.put(MyCommentsController());
   PageController pageController = PageController(initialPage: 0);
 
-  @override
-  void initState() {
-    super.initState();
-    comtController.loadData();
-  }
-
-  void galleryPageChange(int index) {
-    comtController.changeImgSlideIdx(index);
-  }
+  // void galleryPageChange(int index) {
+  //   comtController.changeImgSlideIdx(index);
+  // }
 
   @override
   Widget build(BuildContext context) {
