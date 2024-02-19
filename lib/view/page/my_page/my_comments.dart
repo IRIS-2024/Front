@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
@@ -47,7 +46,7 @@ class _MyCommentsState extends State<MyComments> {
                             color: Theme.of(context).colorScheme.surfaceVariant,
                             child: InkWell(
                               onTap: () {
-                                Get.toNamed(Config.routerPost);
+                                // Get.toNamed(Config.routerPost, ); // 현재 pid가 없음
                               },
                               child: Row(
                                 children: [
