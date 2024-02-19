@@ -66,7 +66,7 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
               _titleAndContent(
                   title: '인적사항',
                   content:
-                      '${Config().getGenderText(post.gender)} / ${post.age}세 / ${post.height == 0 ? '' : '${post.height}cm'} / ${post.weight == 0 ? '' : '${post.weight}kg'}'),
+                      '${Config().getGenderText(post.gender)} / ${post.age}세 ${post.height == null ? '' : '/ ${post.height}cm'} ${post.weight == null ? '' : '/ ${post.weight}kg'}'),
               _titleAndContent(title: '마지막 위치', content: post.address),
               _titleAndContent(title: '옷차림', content: post.clothes),
               post.details == null || post.details == ''

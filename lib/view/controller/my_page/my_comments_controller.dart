@@ -10,8 +10,6 @@ class MyCommentsController extends GetxController {
   RxInt currentIndex = 0.obs;
 
   Future<void> loadData() async {
-    log("작성한 제보 댓글 - loadData");
-
     final dio = createDio();
     CommentRepository commentRepository = CommentRepository(dio);
     await commentRepository
