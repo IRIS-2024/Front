@@ -65,9 +65,18 @@ class TokenInterceptor extends Interceptor {
       } else {
         log('[Error reissue RefreshToken Fail]: $err');
       }
-
     } else if (err.response?.statusCode == 403) {
       log('[Error 403]: 인증 헤더 누락 $err');
+    } else if (err.response?.statusCode == 499) {
+      log('[Error 499]: 유효한 토큰 만료 $err');
+      // 토큰 재발급
+      final token = await reissueToken();
+      if (token.isNotEmpty) {
+        // 토큰 재발급 성공-> 새로운 토큰으로 API request 재진행
+        await _retryRequest(err.requestOptions, token);
+      } else {
+        log('[Error reissue RefreshToken Fail]: $err');
+      }
     } else {
       log('[Error]: ${err.response ?? err}');
     }
@@ -83,14 +92,15 @@ class TokenInterceptor extends Interceptor {
       final refreshToken = await getRT();
 
       final resp = await loginRepository.getRefreshToken(refreshToken);
-      log('new AccessToken Token: ${resp.accessToken.toString()}');
+      print('new AccessToken Token: ${resp.accessToken}');
+      final AT = resp.accessToken;
+      final RT = resp.refreshToken;
 
       // storage 에 새로운 token 저장
-      await tokenStorage.write(
-          key: 'AccessToken', value: resp.accessToken.toString());
-      await tokenStorage.write(
-          key: 'RefreshToken', value: resp.refreshToken.toString());
-      return resp.accessToken.toString();
+      await tokenStorage.write(key: 'AccessToken', value: AT);
+      await tokenStorage.write(key: 'RefreshToken', value: RT);
+
+      return AT;
     } on DioException catch (e) {
       log('reissueToken Error: $e');
 

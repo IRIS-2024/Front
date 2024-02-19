@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ImageCarousel extends StatefulWidget {
@@ -42,8 +43,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
                     if (activeIndex != 0)
                       IconButton(
                         icon: const Icon(Icons.arrow_back_ios_rounded),
-                        onPressed: () =>
-                        {
+                        onPressed: () => {
                           setState(() {
                             activeIndex -= 1;
                             controller.animateToPage(activeIndex);
@@ -51,12 +51,10 @@ class _ImageCarouselState extends State<ImageCarousel> {
                         },
                       ),
                     const Spacer(),
-                    if (activeIndex !=
-                        (widget.images.length - 1))
+                    if (activeIndex != (widget.images.length - 1))
                       IconButton(
                         icon: const Icon(Icons.arrow_forward_ios_rounded),
-                        onPressed: () =>
-                        {
+                        onPressed: () => {
                           setState(() {
                             activeIndex += 1;
                             controller.animateToPage(activeIndex);
@@ -73,22 +71,38 @@ class _ImageCarouselState extends State<ImageCarousel> {
     );
   }
 
-  Widget buildIndicator() =>
-      AnimatedSmoothIndicator(
-          onDotClicked: animateToSlide,
-          effect: WormEffect(
-              activeDotColor: Theme.of(context).colorScheme.primaryContainer,
-              dotWidth: 15, dotHeight: 15),
-          activeIndex: activeIndex,
-          count: widget.images.length);
+  Widget buildIndicator() => AnimatedSmoothIndicator(
+      onDotClicked: animateToSlide,
+      effect: WormEffect(
+          activeDotColor: Theme.of(context).colorScheme.primaryContainer,
+          dotWidth: 15,
+          dotHeight: 15),
+      activeIndex: activeIndex,
+      count: widget.images.length);
 
   void animateToSlide(int index) => controller.animateToPage(index);
 
-
-  Widget buildImage(String urlImage, int index) =>
-      Container(
-          margin: const EdgeInsets.symmetric(horizontal: 5),
-          child: ClipRRect(
+  Widget buildImage(String urlImage, int index) => Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 5),
+            child: ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
-              child: Image.network(urlImage, fit: BoxFit.cover)));
+              child: Image.network(urlImage, fit: BoxFit.cover),
+            ),
+          ),
+          Center(
+            child: Container(
+              padding: const EdgeInsets.all(1.0),
+              color: Colors.white.withOpacity(0.5), // 반투명한 하얀 상자
+              child: const Text(
+                "입력된 정보를 기반으로 \nAI가 생성한 이미지 입니다.",
+                style: CustomTextStyle.small,
+                overflow: TextOverflow.visible,
+              ),
+            ),
+          ),
+        ],
+      );
 }
