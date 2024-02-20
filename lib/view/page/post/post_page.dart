@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/view/controller/my_page/bookmark_controller.dart';
@@ -126,7 +125,6 @@ class _PostPageState extends State<PostPage> {
                     // dialog로 한 번 더 묻고 -> 신고글 삭제
                     showDeletePostDialog(
                         postController.postId.value, moveToMain);
-                    // postController.deletePost();
                   },
                   backgroundColor: Colors.red,
                   label: const Text('신고 해제하기'),
@@ -145,7 +143,6 @@ class _PostPageState extends State<PostPage> {
   }
 
   void moveToMain() {
-    Get.back();
     Get.offAllNamed(Config.routerMain);
   }
 }

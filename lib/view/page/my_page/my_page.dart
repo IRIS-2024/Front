@@ -136,6 +136,10 @@ class _MyPageState extends State<MyPage> {
                   onTap: () {
                     controller.handleLogout();
                   },
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15))),
                   leading: const Icon(Icons.logout),
                   title: const Text("로그아웃"),
                   trailing:
