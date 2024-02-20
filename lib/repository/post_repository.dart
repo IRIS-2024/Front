@@ -26,7 +26,7 @@ abstract class PostRepository {
 
   // 실종 정보 작성 - 생성 이미지 대표 설정
   @POST('/posts/{pid}/set-representative')
-  Future<GenImageResp> setRepresentative(@Path() int pid, @Query('gen') bool gen);
+  Future<Post> setRepresentative(@Path() int pid, @Query('gen') bool gen);
 
   // 실종 정보 조회
   @GET('/posts/{id}')

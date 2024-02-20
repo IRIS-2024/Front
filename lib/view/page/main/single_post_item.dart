@@ -120,6 +120,5 @@ class _SinglePostItemState extends State<SinglePostItem> {
 
   void _reloadData() {
     Get.put(MyPostController()).loadData();
-    Get.back();
   }
 }

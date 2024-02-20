@@ -6,7 +6,7 @@ import 'package:iris_flutter/view/controller/my_page/my_post_controller.dart';
 
 void showDeletePostDialog(int pid, Function funcAfterDelete) {
   Get.dialog(Dialog(
-      child: DeletePostDialog(
+      child:  DeletePostDialog(
     pid: pid,
     funcAfterDelete: funcAfterDelete,
   )));
@@ -46,6 +46,7 @@ class DeletePostDialog extends StatelessWidget {
                 onPressed: () {
                   Get.put(MyPostController())
                       .deletePost(pid, context, funcAfterDelete);
+                  Get.back();
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor:

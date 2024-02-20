@@ -88,7 +88,7 @@ class _PostRepository implements PostRepository {
   }
 
   @override
-  Future<GenImageResp> setRepresentative(
+  Future<Post> setRepresentative(
     int pid,
     bool gen,
   ) async {
@@ -96,8 +96,8 @@ class _PostRepository implements PostRepository {
     final queryParameters = <String, dynamic>{r'gen': gen};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<GenImageResp>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Post>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -113,7 +113,7 @@ class _PostRepository implements PostRepository {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = GenImageResp.fromJson(_result.data!);
+    final value = Post.fromJson(_result.data!);
     return value;
   }
 
