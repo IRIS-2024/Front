@@ -36,7 +36,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
     } else {
       fullImages.addAll(widget.images);
       fullImages.add(widget.genImage);
-      genImageIndex = fullImages.length -1;
+      genImageIndex = fullImages.length - 1;
     }
     super.initState();
   }
@@ -124,7 +124,8 @@ class _ImageCarouselState extends State<ImageCarousel> {
         ],
       );
 
-  Center genImageInfo() { // genImage 임을 알려주는 안내 위젯
+  Center genImageInfo() {
+    // genImage 임을 알려주는 안내 위젯
     return Center(
       child: Container(
         padding: const EdgeInsets.all(1.0),
@@ -132,6 +133,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
         child: const Text(
           "입력된 정보를 기반으로 \nAI가 생성한 이미지 입니다.",
           style: CustomTextStyle.small,
+          textAlign: TextAlign.center,
           overflow: TextOverflow.visible,
         ),
       ),
