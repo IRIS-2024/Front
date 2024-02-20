@@ -5,17 +5,18 @@ import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/my_page/my_post_controller.dart';
 
 void showDeletePostDialog(int pid, Function funcAfterDelete) {
-  Get.dialog(
-      Dialog(
-        child: DeletePostDialog(pid: pid, funcAfterDelete: funcAfterDelete,)
-      )
-  );
+  Get.dialog(Dialog(
+      child: DeletePostDialog(
+    pid: pid,
+    funcAfterDelete: funcAfterDelete,
+  )));
 }
 
 class DeletePostDialog extends StatelessWidget {
   final int pid;
   final Function funcAfterDelete;
-  const DeletePostDialog({super.key, required this.pid, required this.funcAfterDelete});
+  const DeletePostDialog(
+      {super.key, required this.pid, required this.funcAfterDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class DeletePostDialog extends StatelessWidget {
         children: [
           Text(
             '실종 정보 삭제',
-            style: CustomTextStyle.title
+            style: CustomTextStyle.titleBold
                 .copyWith(color: Theme.of(context).colorScheme.primary),
           ),
           const Padding(padding: CustomPadding.regularBottom),
@@ -43,13 +44,14 @@ class DeletePostDialog extends StatelessWidget {
                   child: const Text('닫기')),
               ElevatedButton(
                 onPressed: () {
-                  Get.put(MyPostController()).deletePost(pid, context, funcAfterDelete);
+                  Get.put(MyPostController())
+                      .deletePost(pid, context, funcAfterDelete);
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor:
-                    Theme.of(context).colorScheme.errorContainer,
+                        Theme.of(context).colorScheme.errorContainer,
                     foregroundColor:
-                    Theme.of(context).colorScheme.onErrorContainer),
+                        Theme.of(context).colorScheme.onErrorContainer),
                 child: const Text('삭제'),
               ),
             ],

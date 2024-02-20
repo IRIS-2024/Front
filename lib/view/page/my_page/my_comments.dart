@@ -18,10 +18,6 @@ class _MyCommentsState extends State<MyComments> {
   MyCommentsController comtController = Get.put(MyCommentsController());
   PageController pageController = PageController(initialPage: 0);
 
-  // void galleryPageChange(int index) {
-  //   comtController.changeImgSlideIdx(index);
-  // }
-
   @override
   void initState() {
     comtController.loadData();
@@ -47,7 +43,8 @@ class _MyCommentsState extends State<MyComments> {
                             color: Theme.of(context).colorScheme.surfaceVariant,
                             child: InkWell(
                               onTap: () {
-                                Get.toNamed(Config.routerPost, arguments: post.pid);
+                                Get.toNamed(Config.routerPost,
+                                    arguments: post.pid);
                               },
                               child: Row(
                                 children: [
@@ -63,7 +60,8 @@ class _MyCommentsState extends State<MyComments> {
                                       ),
                                     ),
                                   ),
-                                  const Padding(padding: CustomPadding.slimRight),
+                                  const Padding(
+                                      padding: CustomPadding.slimRight),
                                   SizedBox(
                                     width:
                                         MediaQuery.of(context).size.width - 120,
@@ -86,6 +84,7 @@ class _MyCommentsState extends State<MyComments> {
                                 comment: post.commentList[cmtIdx],
                                 controller: comtController,
                                 closeAble: false,
+                                hasImgAuth: true,
                               );
                             },
                             separatorBuilder: (BuildContext ctx, int idx) {

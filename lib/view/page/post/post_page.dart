@@ -19,10 +19,13 @@ class _PostPageState extends State<PostPage> {
   PostController postController = Get.put(PostController());
   BookmarkController bookmrkController = Get.put(BookmarkController());
 
+  bool isbookmarked = false;
+
   @override
   void initState() {
     super.initState();
     postController.setPid(Get.arguments);
+    isbookmarked = postController.post.value.bookmarked;
   }
 
   @override
@@ -51,7 +54,7 @@ class _PostPageState extends State<PostPage> {
             ),
             actions: [
               IconButton(
-                icon: postController.post.value.bookmarked
+                icon: isbookmarked
                     ? const Icon(Icons.bookmark)
                     : const Icon(Icons.bookmark_outline), // 장바구니 아이콘 생성
                 onPressed: () {
@@ -59,6 +62,9 @@ class _PostPageState extends State<PostPage> {
                   bookmrkController.postAndDeleteBookmark(
                       postController.post.value.bookmarked,
                       postController.postId.value);
+                  setState(() {
+                    isbookmarked = !isbookmarked;
+                  });
                 },
               ),
             ],
@@ -118,16 +124,17 @@ class _PostPageState extends State<PostPage> {
                   onPressed: () {
                     // 발견 완료
                     // dialog로 한 번 더 묻고 -> 신고글 삭제
-                    showDeletePostDialog(postController.postId.value, moveToMain);
+                    showDeletePostDialog(
+                        postController.postId.value, moveToMain);
                     // postController.deletePost();
                   },
                   backgroundColor: Colors.red,
-                  label: const Text('발견 완료'),
-                  icon: const Icon(Icons.check),
+                  label: const Text('신고 해제하기'),
+                  icon: const Icon(Icons.highlight_off),
                 )
               : FloatingActionButton.extended(
                   onPressed: () {
-                    log('infoController.missingInfo.value: ${postController.post.value.pid}');
+                    // log('infoController.missingInfo.value: ${postController.post.value.pid}');
                     Get.toNamed(Config.routerCommentForm,
                         arguments: postController.post.value);
                   },

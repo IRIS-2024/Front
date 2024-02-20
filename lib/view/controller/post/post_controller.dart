@@ -69,26 +69,6 @@ class PostController extends GetxController {
           await infoRepository.getPost(argumentPid ?? postId.value);
 
       post.value = response;
-      // post.value = Post(
-      //   pid: response.pid,
-      //   name: response.name,
-      //   gender: response.gender,
-      //   age: response.age,
-      //   address: response.address,
-      //   latitude: response.latitude,
-      //   longitude: response.longitude,
-      //   clothes: response.clothes,
-      //   bookmarked: response.bookmarked,
-      //   images: response.images,
-      //   genImage: response.genImage,
-      //   disappearedAt: response.disappearedAt,
-      //   createdAt: response.createdAt,
-      //   updatedAt: response.updatedAt,
-      //   author: response.author,
-      //   genRepresent: response.genRepresent,
-      // );
-      // post.value = response;
-      // post.refresh();
     } catch (error) {
       // 에러 처리
       print('Error fetching info detail: $error');
@@ -121,44 +101,17 @@ class PostController extends GetxController {
     CommentRepository commentRepository = CommentRepository(dio);
     await commentRepository.deleteComment(cid).then((resp) {
       // Error 발생 안 하면 성공
-      customSnackBar(title: '제보 댓글 삭제', message: '제보 댓글을 삭제하였습니다.', context: context);
+      customSnackBar(
+          title: '제보 댓글 삭제', message: '제보 댓글을 삭제하였습니다.', context: context);
       loadComments();
     }).catchError((error) {
       log('[catchError]: $error');
     });
   }
 
-  // Future<void> deletePost() async { -> myPostController의 deletePost 함수로 통일하여 사용
-  //   // /post/{post_id}/comments
-  //   try {
-  //     final dio = createDio();
-  //     final PostRepository postRepository = PostRepository(dio);
-  //     final response = await postRepository.deletePost(4);
-  //   } catch (error) {
-  //     // 에러 처리
-  //     print('Error fetching info detail: $error');
-  //   }
-  // }
-
   void changeImgSlideIdx(int index) {
     currentIndex.value = index;
   }
-
-  // loadComments 함수 하나로 통합
-  // Future<void> loadCommentsNoFilter() async {
-  //   try {
-  //     final dio = createDio();
-  //     final CommentRepository comtRepository = CommentRepository(dio);
-  //     final response =
-  //         await comtRepository.getCommentList(postId.value, Config.filterCriteria);
-  //
-  //     commentList.value = response;
-  //     commentList.refresh();
-  //   } catch (error) {
-  //     // 에러 처리
-  //     print('Error fetching info detail: $error');
-  //   }
-  // }
 
   void setTargetComment(Comment data) {
     targetComment.value = data;
