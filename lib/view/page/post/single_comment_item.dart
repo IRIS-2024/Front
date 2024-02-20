@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,12 +15,14 @@ class SingleCmtItem extends StatefulWidget {
   final Comment comment;
   final bool closeAble;
   final dynamic closeMethod;
+  final bool hasImgAuth;
   const SingleCmtItem(
       {super.key,
       required this.controller,
       required this.comment,
       required this.closeAble,
-      this.closeMethod});
+      this.closeMethod,
+      required this.hasImgAuth});
 
   @override
   State<SingleCmtItem> createState() => _SingleCmtItemState();
@@ -55,7 +59,8 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
               if (widget.closeAble != true && widget.comment.author) // 댓글 삭제
                 IconButton(
                     onPressed: () {
-                      Get.put(PostController()).deleteComment(widget.comment.cid, context);
+                      Get.put(PostController())
+                          .deleteComment(widget.comment.cid, context);
                     },
                     icon: const Icon(Icons.delete_outline)),
             ],
@@ -69,50 +74,68 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
               if (widget.comment.images.isNotEmpty)
                 Column(
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        showDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) => imgDialog(context),
-                        );
-                      },
-                      child: Container(
-                        // 이미지(썸네일)
-                        constraints: BoxConstraints(
-                            maxWidth: MediaQuery.of(context).size.width),
-                        width: 100,
-                        child: Stack(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                widget.comment.images[0],
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Positioned(
-                              top: 8,
-                              right: 8,
-                              child: Container(
-                                padding: const EdgeInsets.all(4),
-                                decoration: BoxDecoration(
-                                  color: Colors.black.withOpacity(0.6),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Text(
-                                  "${widget.comment.images.length}",
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
+                    widget.hasImgAuth
+                        ? GestureDetector(
+                            onTap: () {
+                              showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    imgDialog(context),
+                              );
+                            },
+                            child: Container(
+                              // 이미지(썸네일)
+                              constraints: BoxConstraints(
+                                  maxWidth: MediaQuery.of(context).size.width),
+                              width: 100,
+                              child: Stack(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.network(
+                                      widget.comment.images[0],
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
+                                  Positioned(
+                                    top: 8,
+                                    right: 8,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: BoxDecoration(
+                                        color: Colors.black.withOpacity(0.6),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Text(
+                                        "${widget.comment.images.length}",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        : Container(
+                            constraints: BoxConstraints(
+                                maxWidth: MediaQuery.of(context).size.width),
+                            width: 100,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: ImageFiltered(
+                                imageFilter:
+                                    ImageFilter.blur(sigmaX: 4.5, sigmaY: 4.5),
+                                child: Image.network(
+                                  widget.comment.images[0],
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
+                          ),
                     const Padding(padding: CustomPadding.slimBottom),
                     Text('일치율 ${widget.comment.accuracy!.toStringAsFixed(0)} %',
                         style: TextStyle(
@@ -140,7 +163,7 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                           Flexible(child: Text(widget.comment.clothes!))
                         ],
                       ),
-                    if (widget.comment.details !='')
+                    if (widget.comment.details != '')
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

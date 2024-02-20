@@ -40,7 +40,7 @@ class TimeForm extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.0))),
                   icon: const Icon(Icons.access_time),
                   label: Text(controller.timeOfDay.value == null
-                      ? '위치 입력'
+                      ? '시간 입력'
                       : '${controller.timeOfDay.value?.hour} : ${controller.timeOfDay.value?.minute}')),
               controller.timeOfDay.value == null &&
                       controller.initValidation.value != true
