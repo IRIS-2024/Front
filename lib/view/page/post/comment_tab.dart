@@ -33,54 +33,56 @@ class _CommentTabState extends State<CommentTab> {
             );
           }
 
-          return postController.commentList.isEmpty
-              ? const Center(
-                  child: Text("아직 제보 댓글이 없습니다."),
-                )
-              : SingleChildScrollView(
-                  child: Column(children: [
-                    // map()
-                    const SizedBox(
-                      height: 300,
-                      child: MapItem(),
-                    ),
-                    //
-                    Obx(() => postController.targetVisible.value == true
-                        ? Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: SingleCmtItem(
-                              controller: postController,
-                              comment: postController.targetComment.value,
-                              closeAble: true,
-                              closeMethod:
-                                  postController.unVisibleTargetComment,
-                              hasImgAuth:
-                                  postController.targetComment.value.author ||
-                                          postController.post.value.author
-                                      ? true
-                                      : false,
-                            ),
-                          )
-                        : const Padding(padding: CustomPadding.slimBottom)),
-                    Column(
-                      children: [
-                        Container(
-                            alignment: Alignment.centerRight,
-                            color: Colors.white,
-                            child: Obx(
-                              () => SwitchListTile(
-                                  value: postController.isFilterOn.value,
-                                  controlAffinity:
-                                      ListTileControlAffinity.leading,
-                                  title:
-                                      Text("정확도 ${Config.filterCriteria}% 이상"),
-                                  onChanged: (value) {
-                                    print("필터 클릭 - $value");
-                                    postController.isFilterOn.value = value;
-                                    postController.loadComments();
-                                  }),
-                            )),
-                        Container(
+          return SingleChildScrollView(
+            child: Column(children: [
+              // map()
+              const SizedBox(
+                height: 300,
+                child: MapItem(),
+              ),
+              //
+              Obx(() => postController.targetVisible.value == true
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: SingleCmtItem(
+                        controller: postController,
+                        comment: postController.targetComment.value,
+                        closeAble: true,
+                        closeMethod: postController.unVisibleTargetComment,
+                        hasImgAuth: postController.targetComment.value.author ||
+                                postController.post.value.author
+                            ? true
+                            : false,
+                      ),
+                    )
+                  : const Padding(padding: CustomPadding.slimBottom)),
+              Column(
+                children: [
+                  Container(
+                      alignment: Alignment.centerRight,
+                      color: Colors.white,
+                      child: Obx(
+                        () => SwitchListTile(
+                            value: postController.isFilterOn.value,
+                            controlAffinity: ListTileControlAffinity.leading,
+                            title: Text("정확도 ${Config.filterCriteria}% 이상"),
+                            onChanged: (value) {
+                              print("필터 클릭 - $value");
+                              postController.isFilterOn.value = value;
+                              postController.loadComments();
+                            }),
+                      )),
+                  postController.commentList.isEmpty
+                      ? Obx(() => postController.isFilterOn.value
+                          ? const Padding(
+                              padding: CustomPadding.thickTop,
+                              child: Text("조건에 맞는 제보 댓글이 없습니다."),
+                            )
+                          : const Padding(
+                              padding: CustomPadding.thickTop,
+                              child: Text("아직 등록된 제보 댓글이 없습니다."),
+                            ))
+                      : Container(
                           color: Colors.white,
                           child: Obx(
                             () => ListView.separated(
@@ -104,10 +106,10 @@ class _CommentTabState extends State<CommentTab> {
                             ),
                           ),
                         )
-                      ],
-                    ),
-                  ]),
-                );
+                ],
+              ),
+            ]),
+          );
         });
   }
 }

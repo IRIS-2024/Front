@@ -17,6 +17,6 @@ class CustomPadding {
   static const slimRight = EdgeInsets.only(right: 5);
   static const regularRight = EdgeInsets.only(right: 10);
   // top
-  static const mediumTop = EdgeInsets.only(bottom: 18);
-  static const thick = EdgeInsets.only(bottom: 24);
+  static const mediumTop = EdgeInsets.only(top: 18);
+  static const thickTop = EdgeInsets.only(top: 24);
 }
