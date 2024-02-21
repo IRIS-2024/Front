@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:iris_flutter/utils/conversion_utils.dart';
 
 String getTimeDifference(String createdAt) {
@@ -7,9 +5,6 @@ String getTimeDifference(String createdAt) {
 
   // createdAt을 DateTime으로 파싱
   DateTime givenTime = DateTime.parse(createdAt);
-
-  // 9시간 빼기
-  givenTime = givenTime.add(const Duration(hours: 9));
 
   DateTime now = DateTime.now();
   Duration difference = now.difference(givenTime);

@@ -40,9 +40,6 @@ class MainController {
         .getPostList(latitude, longitude, 'ALL', 0, 0)
         .then((resp) {
       shortPostList.value = resp;
-
-      // 임시 reverse
-      shortPostList.value = List.from(shortPostList.reversed);
     }).catchError((error) {
       log('[catchError]: $error');
     });
