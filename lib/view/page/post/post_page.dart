@@ -68,20 +68,22 @@ class _PostPageState extends State<PostPage> {
               ),
             ],
             bottom: TabBar(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               labelColor: Colors.white,
               // 배경색
               unselectedLabelColor: Theme.of(context).colorScheme.primary,
               indicatorSize: TabBarIndicatorSize.label,
               indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: Theme.of(context).colorScheme.primary),
+                  borderRadius: BorderRadius.circular(15.0),
+                  color: Theme.of(context).colorScheme.primaryContainer),
+              dividerColor: Colors.transparent,
               tabs: [
                 Tab(
                   child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
+                        borderRadius: BorderRadius.circular(15.0),
                         border: Border.all(
-                            color: Theme.of(context).colorScheme.primary,
+                            color: Theme.of(context).colorScheme.primaryContainer,
                             width: 1)),
                     child: const Align(
                       alignment: Alignment.center,
@@ -92,9 +94,9 @@ class _PostPageState extends State<PostPage> {
                 Tab(
                   child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
+                        borderRadius: BorderRadius.circular(15.0),
                         border: Border.all(
-                            color: Theme.of(context).colorScheme.primary,
+                            color: Theme.of(context).colorScheme.primaryContainer,
                             width: 1)),
                     child: const Align(
                       alignment: Alignment.center,
@@ -107,6 +109,7 @@ class _PostPageState extends State<PostPage> {
           ),
           body: const Column(
             children: [
+
               SizedBox(
                 // 탭 바와 본문의 여백을 위해
                 height: 12,

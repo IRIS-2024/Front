@@ -35,27 +35,23 @@ class _CommentTabState extends State<CommentTab> {
 
           return SingleChildScrollView(
             child: Column(children: [
-              // map()
+              // map
               const SizedBox(
                 height: 300,
                 child: MapItem(),
               ),
-              //
               Obx(() => postController.targetVisible.value == true
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: SingleCmtItem(
-                        controller: postController,
-                        comment: postController.targetComment.value,
-                        closeAble: true,
-                        closeMethod: postController.unVisibleTargetComment,
-                        hasImgAuth: postController.targetComment.value.author ||
-                                postController.post.value.author
-                            ? true
-                            : false,
-                      ),
-                    )
-                  : const Padding(padding: CustomPadding.slimBottom)),
+                  ? SingleCmtItem(
+                    controller: postController,
+                    comment: postController.targetComment.value,
+                    closeAble: true,
+                    closeMethod: postController.unVisibleTargetComment,
+                    hasImgAuth: postController.targetComment.value.author ||
+                            postController.post.value.author
+                        ? true
+                        : false,
+                  )
+                  : const SizedBox()),
               Column(
                 children: [
                   Container(

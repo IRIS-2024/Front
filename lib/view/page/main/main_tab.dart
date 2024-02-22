@@ -44,7 +44,7 @@ class _MainTabState extends State<MainTab>
                   indicator: BoxDecoration(
                       shape: BoxShape.rectangle,
                       color: Theme.of(context).colorScheme.primaryContainer,
-                      borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+                      borderRadius: BorderRadius.circular(15.0),
                   ),
                   indicatorSize: TabBarIndicatorSize.tab,
                   dividerColor: Colors.transparent,
