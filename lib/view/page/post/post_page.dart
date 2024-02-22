@@ -83,7 +83,8 @@ class _PostPageState extends State<PostPage> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
                         border: Border.all(
-                            color: Theme.of(context).colorScheme.primaryContainer,
+                            color:
+                                Theme.of(context).colorScheme.primaryContainer,
                             width: 1)),
                     child: const Align(
                       alignment: Alignment.center,
@@ -96,7 +97,8 @@ class _PostPageState extends State<PostPage> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
                         border: Border.all(
-                            color: Theme.of(context).colorScheme.primaryContainer,
+                            color:
+                                Theme.of(context).colorScheme.primaryContainer,
                             width: 1)),
                     child: const Align(
                       alignment: Alignment.center,
@@ -109,7 +111,6 @@ class _PostPageState extends State<PostPage> {
           ),
           body: const Column(
             children: [
-
               SizedBox(
                 // 탭 바와 본문의 여백을 위해
                 height: 12,
@@ -139,6 +140,10 @@ class _PostPageState extends State<PostPage> {
                     Get.toNamed(Config.routerCommentForm,
                         arguments: postController.post.value);
                   },
+                  backgroundColor:
+                      Theme.of(context).colorScheme.tertiaryContainer,
+                  foregroundColor:
+                      Theme.of(context).colorScheme.onTertiaryContainer,
                   label: const Text('제보하기'),
                   icon: const Icon(Icons.report_gmailerrorred),
                 ))),
