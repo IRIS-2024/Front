@@ -48,9 +48,10 @@ class _MainPageState extends State<MainPage> {
                                   style: TextStyle(
                                       color: Theme.of(context).colorScheme.primary
                                   )),
-                              TextSpan(text: " 주변의 실종 정보입니다.",
+                              TextSpan(text: "\n주변의 실종 정보입니다.",
                                   style: TextStyle(
                                       color: Theme.of(context).colorScheme.onBackground,
+                                    fontSize: 27
                                   )
                               )
                             ]
