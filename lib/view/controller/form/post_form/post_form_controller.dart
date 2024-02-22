@@ -16,6 +16,7 @@ import 'package:dio/dio.dart' as dio_package;
 class PostFormController {
   RxList<XFile> images = <XFile>[].obs;
   Rx<TimeOfDay?> timeOfDay = Rx<TimeOfDay?>(null);
+  // Rx<Duration?> selectedTime = Rx<Duration?>(null);
   RxBool isChecked = true.obs;
 
   // validate
