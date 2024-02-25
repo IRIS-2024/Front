@@ -52,7 +52,12 @@ class CommentFormController {
       maxHeight: 500,
       imageQuality: 30,
     ).then((value) {
-      images += value;
+      if (images.length + value.length > Config.maxImagesLength) {
+        customErrorSnackBar(
+            title: '이미지 최대 선택 초과', message: '이미지는 최대 3개 입력할 수 있습니다.');
+      } else {
+        images += value;
+      }
     }).catchError((error) {
       log('pickImage error: $error');
     });
