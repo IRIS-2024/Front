@@ -46,7 +46,7 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
               widget.controller.pickImage();
             },
             style: OutlinedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 200),
+                minimumSize: const Size(double.infinity, 250),
                 foregroundColor: Theme.of(context).colorScheme.primary,
                 side: BorderSide(
                   color: Theme.of(context).colorScheme.outline,
@@ -168,7 +168,7 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
                   : const SizedBox(),
               buildIndicator(widget.controller),
 
-              // 추가 버튼 따로
+              // 추가 버튼
               widget.controller.images.length + 1 <= Config.maxImagesLength
                   ? OutlinedButton.icon(
                       onPressed: () {
