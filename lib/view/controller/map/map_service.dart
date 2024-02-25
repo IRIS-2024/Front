@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:iris_flutter/config/hidden_config.dart';
+import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 
 class MapService {
   // API, Package 에서 가져온 Map 관련 기본 기능 (가공은 Map Controller 에서)
@@ -58,6 +59,11 @@ class MapService {
         log('행정 주소 Address: ${response.data['results'][0]['formatted_address']}');
         return response.data['results'][0]['formatted_address'];
       } else {
+        if (response.data['status'] == 'ZERO_RESULTS') {
+          customErrorSnackBar(title: '반환된 주소 없음', message: '근처 위치로 다시 시도 해주세요.');
+        } else {
+          customErrorSnackBar(title: 'ERROR CODE: ${response.data['status']}', message: '오류가 지속되면, 관리자에게 문의하세요.');
+        }
         throw Exception('Status Exception: ${response.data['status']}');
       }
     } catch (error) {
