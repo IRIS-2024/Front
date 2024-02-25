@@ -25,7 +25,7 @@ class MyPostController {
     PostRepository postRepository = PostRepository(dio);
     await postRepository.deletePost(pid).then((resp) {
       // Error 발생 안 하면 성공
-      customSnackBar(title: '실종 정보 삭제', message: '실종 정보를 삭제하였습니다.', context: context);
+      customSnackBar(title: '실종 정보 삭제', message: '실종 정보를 삭제하였습니다.');
       funcAfterDelete();
     }).catchError((error) {
       log('[catchError]: $error');

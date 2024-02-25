@@ -18,7 +18,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
         body: SafeArea(
           child: Padding(
-            padding: CustomPadding.pageInsets,
+            padding: CustomPadding.pageInsets.copyWith(bottom: 0),
             child: Column(
               children: [
                 // my page iconButton
@@ -48,9 +48,10 @@ class _MainPageState extends State<MainPage> {
                                   style: TextStyle(
                                       color: Theme.of(context).colorScheme.primary
                                   )),
-                              TextSpan(text: " 주변의 실종 정보입니다.",
+                              TextSpan(text: "\n주변의 실종 정보입니다.",
                                   style: TextStyle(
                                       color: Theme.of(context).colorScheme.onBackground,
+                                    fontSize: 27
                                   )
                               )
                             ]
@@ -67,11 +68,14 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton.extended(onPressed: () {
-          Get.toNamed(Config.routerPostForm);
-        }, label: const Text('신고하기'),
-          icon: const Icon(Icons.report_gmailerrorred),)
-    );
-
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            Get.toNamed(Config.routerPostForm);
+          },
+          label: const Text('신고하기'),
+          backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+          foregroundColor: Theme.of(context).colorScheme.onTertiaryContainer,
+          icon: const Icon(Icons.report_gmailerrorred),
+        ));
   }
 }

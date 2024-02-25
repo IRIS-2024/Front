@@ -71,7 +71,7 @@ class _SinglePostItemState extends State<SinglePostItem> {
               children: [
                 Expanded(
                   child: Text(
-                    "${widget.post.name} / ${widget.post.age}세 / ${widget.post.address}",
+                    "${widget.post.name}(${Config().getGenderText(widget.post.gender)},${widget.post.age}세) / ${widget.post.address}",
                     style: CustomTextStyle.title,
                     overflow: TextOverflow.ellipsis,
                   ),
