@@ -1,6 +1,3 @@
-
-import 'dart:developer';
-
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -20,7 +17,6 @@ class FormMapController {
     // reverse geocoding process
     final result = await MapService.getAddrFromLatlng(
         loc.latitude, loc.longitude);
-    log('address: ${result}');
     if (result.isNotEmpty) {
       address.value = result;
       selectedPosition.value = loc;
