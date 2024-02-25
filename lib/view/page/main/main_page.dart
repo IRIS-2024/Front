@@ -68,13 +68,14 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton.extended(onPressed: () {
-          Get.toNamed(Config.routerPostForm);
-        }, label: const Text('신고하기'),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            Get.toNamed(Config.routerPostForm);
+          },
+          label: const Text('신고하기'),
           backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
-          foregroundColor:Theme.of(context).colorScheme.onTertiaryContainer ,
-          icon: const Icon(Icons.report_gmailerrorred),)
-    );
-
+          foregroundColor: Theme.of(context).colorScheme.onTertiaryContainer,
+          icon: const Icon(Icons.report_gmailerrorred),
+        ));
   }
 }

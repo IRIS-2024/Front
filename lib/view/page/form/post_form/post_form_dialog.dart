@@ -84,7 +84,7 @@ class PostFormDialog extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       // AI 이미지 추가
-                      controller.submitFinalPost(context);
+                      controller.submitFinalPost();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor:

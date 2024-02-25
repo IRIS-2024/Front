@@ -62,7 +62,7 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                   IconButton(
                       onPressed: () {
                         Get.put(PostController())
-                            .deleteComment(widget.comment.cid, context);
+                            .deleteComment(widget.comment.cid);
                       },
                       icon: const Icon(Icons.delete_outline)),
               ],

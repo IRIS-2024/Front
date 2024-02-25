@@ -66,13 +66,13 @@ class CommentFormController {
         address.value != null;
   }
 
-  Future<void> submitComment(BuildContext context) async {
+  Future<void> submitComment() async {
     showCommentFormDialog();
-    await postCommentForm(context);
+    await postCommentForm();
   }
 
 
-  Future<void> postCommentForm(BuildContext context) async {
+  Future<void> postCommentForm() async {
     // request body form data 생성
     final formData = dio_package.FormData.fromMap({
       "pid": pid.value,
@@ -98,13 +98,13 @@ class CommentFormController {
       // Error 발생 하지 않으면 성공
       Get.back();
       customSnackBar(
-          title: '제보 댓글 등록', message: '제보 댓글 등록이 완료되었습니다.', context: context);
+          title: '제보 댓글 등록', message: '제보 댓글 등록이 완료되었습니다.');
       Get.offAllNamed(Config.routerPost, arguments: pid.value);
     }).catchError((err) {
       log('[catchError] $err');
       Get.back();
-      customSnackBar(
-          title: '제보 댓글 등록 실패', message: '제보 댓글 등록이 실패 하였습니다. 다시 시도해 주세요.', context: context);
+      customErrorSnackBar(
+          title: '제보 댓글 등록 실패', message: '제보 댓글 등록이 실패 하였습니다. 다시 시도해 주세요.');
       Get.offAllNamed(Config.routerPost, arguments: pid.value);
     });
   }

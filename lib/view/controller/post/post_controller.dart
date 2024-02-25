@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/dio_config.dart';
@@ -96,13 +95,13 @@ class PostController extends GetxController {
     }
   }
 
-  void deleteComment(int cid, BuildContext context) async {
+  void deleteComment(int cid) async {
     final dio = createDio();
     CommentRepository commentRepository = CommentRepository(dio);
     await commentRepository.deleteComment(cid).then((resp) {
       // Error 발생 안 하면 성공
       customSnackBar(
-          title: '제보 댓글 삭제', message: '제보 댓글을 삭제하였습니다.', context: context);
+          title: '제보 댓글 삭제', message: '제보 댓글을 삭제하였습니다.');
       loadComments();
     }).catchError((error) {
       log('[catchError]: $error');

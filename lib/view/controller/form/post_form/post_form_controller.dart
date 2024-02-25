@@ -54,6 +54,11 @@ class PostFormController {
     // * gender는 기본 값이 정해져 있음
     // * form Key validation 방식으로 name, age 검증함
     // * images, disappearedAt, address null 여부 검증
+    if (images.length > Config.maxImagesLength) {
+      // customSnackBar(title: title, message: message, context: context)
+      return false;
+    }
+    
     return formKey.currentState!.validate() &&
         images.isNotEmpty &&
         timeOfDay.value != null &&
@@ -98,24 +103,24 @@ class PostFormController {
     });
   }
 
-  void submitFinalPost(BuildContext context) async {
-    await setRepresentative(context);
+  void submitFinalPost() async {
+    await setRepresentative();
   }
 
-  Future setRepresentative(BuildContext context) async {
+  Future setRepresentative() async {
     final dio = createDio();
     PostRepository postRepository = PostRepository(dio);
     await postRepository.setRepresentative(genImageResp.value!.pid, isChecked.value).then((resp) {
       log('성공: ${resp}');
       // get navigation, snackBar
       customSnackBar(
-          title: '실종 정보 등록', message: '실종 정보 등록이 완료되었습니다.', context: context);
+          title: '실종 정보 등록', message: '실종 정보 등록이 완료되었습니다.');
       Get.offAllNamed(Config.routerPost, arguments: genImageResp.value?.pid);
     }).catchError((err) {
       log('[catchError] $err');
       // 현재는 이 과정에서 Error 발생하면 genImageResp = true로 글 등록됨
-      customSnackBar(
-          title: '대표 이미지 지정 여부 저장 실패', message: '실종 정보는 정상적으로 등록됩니다.', context: context);
+      customErrorSnackBar(
+          title: '대표 이미지 지정 여부 저장 실패', message: '실종 정보는 정상적으로 등록됩니다.');
       Get.offAllNamed(Config.routerPost, arguments: genImageResp.value?.pid);
     });
   }
