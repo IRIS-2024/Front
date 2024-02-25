@@ -61,7 +61,7 @@ class _MainTabState extends State<MainTab>
                     // update position and data
                     Get.put(MainController()).getPositionAndPostList();
                     // updated
-                    customSnackBar(title: '위치 갱신', message: '현 위치를 갱신하였습니다.', context: context);
+                    customSnackBar(title: '위치 갱신', message: '현 위치를 갱신하였습니다.');
                   },
                   icon: const Icon(Icons.my_location)),
             ],
