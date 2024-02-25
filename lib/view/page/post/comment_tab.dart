@@ -61,7 +61,7 @@ class _CommentTabState extends State<CommentTab> {
                         () => SwitchListTile(
                             value: postController.isFilterOn.value,
                             controlAffinity: ListTileControlAffinity.leading,
-                            title: Text("정확도 ${Config.filterCriteria}% 이상"),
+                            title: Text("일치율 ${Config.filterCriteria}% 이상"),
                             onChanged: (value) {
                               print("필터 클릭 - $value");
                               postController.isFilterOn.value = value;
