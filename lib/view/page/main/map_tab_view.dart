@@ -48,7 +48,7 @@ class _MapTabViewState extends State<MapTabView> {
                 // 현재 위치 표시 true
                 myLocationEnabled: true,
                 // 위치 버튼과 신고하기 floatingButton 겹치지 않게 padding 설정
-                padding: const EdgeInsets.only(bottom: 55),
+                padding: const EdgeInsets.only(bottom: 80),
                 markers: mainController.shortPostList
                     .map((shortPost) => Marker(
                           markerId: MarkerId('${shortPost.pid}'),

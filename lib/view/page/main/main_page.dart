@@ -18,7 +18,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
         body: SafeArea(
           child: Padding(
-            padding: CustomPadding.pageInsets,
+            padding: CustomPadding.pageInsets.copyWith(bottom: 0),
             child: Column(
               children: [
                 // my page iconButton
