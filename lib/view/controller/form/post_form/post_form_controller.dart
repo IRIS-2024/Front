@@ -16,6 +16,8 @@ import 'package:dio/dio.dart' as dio_package;
 class PostFormController {
   RxList<XFile> images = <XFile>[].obs;
   Rx<TimeOfDay?> timeOfDay = Rx<TimeOfDay?>(null);
+
+  // Rx<Duration?> selectedTime = Rx<Duration?>(null);
   RxBool isChecked = true.obs;
 
   // validate
@@ -42,7 +44,12 @@ class PostFormController {
       imageQuality: 30,
     )
         .then((value) {
-      images += value;
+      if (images.length + value.length > Config.maxImagesLength) {
+        customErrorSnackBar(
+            title: '이미지 최대 선택 초과', message: '이미지는 최대 3개 입력할 수 있습니다.');
+      } else {
+        images += value;
+      }
     }).catchError((error) {
       log('pickImage error: $error');
     });
@@ -53,6 +60,7 @@ class PostFormController {
     // * gender는 기본 값이 정해져 있음
     // * form Key validation 방식으로 name, age 검증함
     // * images, disappearedAt, address null 여부 검증
+
     return formKey.currentState!.validate() &&
         images.isNotEmpty &&
         timeOfDay.value != null &&
@@ -97,26 +105,26 @@ class PostFormController {
     });
   }
 
-  void submitFinalPost(BuildContext context) async {
-    await setRepresentative(context);
+  void submitFinalPost() async {
+    await setRepresentative();
   }
 
-  Future setRepresentative(BuildContext context) async {
+  Future setRepresentative() async {
     final dio = createDio();
     PostRepository postRepository = PostRepository(dio);
-    await postRepository.setRepresentative(genImageResp.value!.pid, isChecked.value).then((resp) {
+    await postRepository
+        .setRepresentative(genImageResp.value!.pid, isChecked.value)
+        .then((resp) {
       log('성공: ${resp}');
       // get navigation, snackBar
-      customSnackBar(
-          title: '실종 정보 등록', message: '실종 정보 등록이 완료되었습니다.', context: context);
+      customSnackBar(title: '실종 정보 등록', message: '실종 정보 등록이 완료되었습니다.');
       Get.offAllNamed(Config.routerPost, arguments: genImageResp.value?.pid);
     }).catchError((err) {
       log('[catchError] $err');
       // 현재는 이 과정에서 Error 발생하면 genImageResp = true로 글 등록됨
-      customSnackBar(
-          title: '대표 이미지 지정 여부 저장 실패', message: '실종 정보는 정상적으로 등록됩니다.', context: context);
+      customErrorSnackBar(
+          title: '대표 이미지 지정 여부 저장 실패', message: '실종 정보는 정상적으로 등록됩니다.');
       Get.offAllNamed(Config.routerPost, arguments: genImageResp.value?.pid);
     });
   }
 }
-
