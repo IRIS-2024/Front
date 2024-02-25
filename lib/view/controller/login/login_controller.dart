@@ -23,7 +23,6 @@ class LoginController extends GetxController {
     await googleSignIn.signIn().then((result) {
       result?.authentication.then((googleKey) {
         tokenLogin(result.serverAuthCode!);
-        // log('currentUser: ${googleSignIn.currentUser}');
       }).catchError((err) {
         log('inner error');
       });
@@ -133,7 +132,6 @@ class LoginController extends GetxController {
   void handleLogout() async {
     // 소셜 로그인 플랫폼 로그아웃
     final social = await userStorage.getItem(Config.social);
-    // log('social Platform: $social');
     if (social == Config.google) {
       // 구글 로그아웃
       await GoogleSignIn().signOut();

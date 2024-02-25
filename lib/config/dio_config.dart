@@ -18,8 +18,6 @@ Dio createDio() {
   // JWT 헤더 추가 및 토큰 재발급 관련 처리
   dio.interceptors.add(TokenInterceptor(dio: dio));
 
-  // request curl 보는 Interceptor - TODO 개발 시에만 사용하세요
-  dio.interceptors.add(LogInterceptor(dio: dio));
   return dio;
 }
 
@@ -126,75 +124,4 @@ class TokenInterceptor extends Interceptor {
         queryParameters: requestOptions.queryParameters,
         options: options);
   }
-}
-
-class LogInterceptor extends Interceptor {
-  final Dio dio;
-  LogInterceptor({required this.dio});
-
-  @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    log('Curl: ${getCurlCommand(options)}');
-    super.onRequest(options, handler);
-  }
-
-  @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    List<String> respLog = ['Response'];
-
-    if (response.data is Map) {
-      response.data.forEach((key, value) {
-        respLog.add('resp map \'$key=$value\n');
-      });
-    } else if (response.data is List) {
-      response.data.map((element) {
-        respLog.add('list/ $element\n');
-      }).toList();
-    } else {
-      respLog.add(response.data.toString());
-    }
-    log(respLog.toString());
-    super.onResponse(response, handler);
-  }
-}
-
-String getCurlCommand(RequestOptions options) {
-  List<String> commandParts = ['curl'];
-
-  // URL
-  commandParts.add('\'${options.uri}\n');
-
-  // Headers
-  options.headers.forEach((key, value) {
-    commandParts.add('-H \'$key: $value\n');
-  });
-
-  options.queryParameters.forEach((key, value) {
-    commandParts.add('-Query \'$key: $value\'\n');
-  });
-
-  // Request Method
-  commandParts.add('-X ${options.method}\n');
-
-  // Request Body
-  if (options.data != null) {
-    if (options.data is String) {
-      commandParts.add('-d \'${options.data}\n');
-    } else if (options.data is Map) {
-      options.data.forEach((key, value) {
-        commandParts.add('-d \'$key=$value\n');
-      });
-    } else if (options.data is FormData) {
-      options.data.fields.forEach((entry) {
-        commandParts.add('-F \'${entry.key}=${entry.value}\'\n');
-      });
-      options.data.files.forEach((entry) {
-        commandParts.add('-Files \'${entry.key}=${entry.value.filename}\'\n');
-      });
-    } else {
-      commandParts.add('-d \'${options.data.toString()}\n');
-    }
-  }
-
-  return commandParts.join(' ');
 }
