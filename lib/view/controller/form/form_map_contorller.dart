@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:iris_flutter/view/controller/map/kakao_geocoding_service.dart';
+import 'package:iris_flutter/view/controller/map/reverse_geocoding_service.dart';
 import 'package:iris_flutter/view/controller/map/map_service.dart';
 
 class FormMapController {
@@ -18,7 +18,7 @@ class FormMapController {
 
   void getAddressForSelectedPosition(LatLng loc) async {
     // reverse geocoding process
-    final result = await KakaoGeocodingService.getAddrFromLatlng(loc.longitude, loc.latitude);
+    final result = await ReverseGeocodingService.getAddrFromLatlng(loc.longitude, loc.latitude);
     if (result != null) {
       address.value = result.address_name;
       selectedPosition.value = loc;
