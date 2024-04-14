@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/config/dio_config.dart';
 import 'package:iris_flutter/model/short_post.dart';
 import 'package:iris_flutter/repository/post_repository.dart';
-import 'package:iris_flutter/view/controller/map/kakao_geocoding_service.dart';
+import 'package:iris_flutter/view/controller/map/reverse_geocoding_service.dart';
 import 'package:iris_flutter/view/controller/map/map_service.dart';
 
 class MainController {
@@ -26,7 +26,7 @@ class MainController {
 
   // 일부 행정 주소(시도,구 단위) 받아오기
   void getShortAddress(Position currentPosition) async {
-    final result = await KakaoGeocodingService.getAddrFromLatlng( currentPosition.longitude, currentPosition.latitude);
+    final result = await ReverseGeocodingService.getAddrFromLatlng( currentPosition.longitude, currentPosition.latitude);
     if (result != null) {
       shortAddress.value = '${result.region_1depth_name} ${result.region_2depth_name}';
     }
