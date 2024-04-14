@@ -6,7 +6,7 @@ import 'package:iris_flutter/model/rev_geo_resp/rev_geo_resp.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 
 class KakaoGeocodingService {
-  static Future<Address?> getAddrFromLatlng(double yLat, double xLng) async {
+  static Future<Address?> getAddrFromLatlng(double xLng, double yLat) async {
     // Revise Geocoding (convert latLng to Address) - Kakao REST API
     try {
       String kakaoRestApiKey = HiddenConfig.kakaoRestApiKey;
