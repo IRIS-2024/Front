@@ -16,7 +16,7 @@ class SubmitButton extends StatelessWidget {
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.resolveWith((states) {
               if (states.contains(MaterialState.disabled)) {
-                return Theme.of(context).colorScheme.outline;
+                return Theme.of(context).colorScheme.outlineVariant;
               } else {
                 return Theme.of(context).colorScheme.primaryContainer;
               }
