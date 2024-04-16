@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/controller/map/reverse_geocoding_service.dart';
 import 'package:iris_flutter/view/controller/map/map_service.dart';
 
@@ -26,6 +27,10 @@ class FormMapController {
       // 추후 post api에 포함될 값
       log('result.region_1depth_name: ${result.region_1depth_name}');
       log('result.region_2depth_name: ${result.region_2depth_name}');
+    } else {
+      customErrorSnackBar(title: '반환된 주소 없음', message: '근처 위치로 다시 시도 해주세요.');
+      address.value = null;
+      selectedPosition.value = null;
     }
   }
 }
