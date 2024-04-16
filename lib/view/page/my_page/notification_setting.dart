@@ -24,13 +24,18 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: '알림 설정', actions: SubmitButton(
-        onPressed: selectedRegion2D != '' ? () {
-          log('selectedRegion: ${selectedRegion1D} ${selectedRegion2D}');
-          // 저장
-          // customSnackBar(title: '설정 저장', message: '설정 저장이 완료되었습니다.');
-        } : null,
-      )),
+      appBar: customAppBar(
+          title: '알림 설정',
+          actions: SubmitButton(
+            onPressed: selectedRegion2D != '' ||
+                    region1DepthWithout2Depth.contains(selectedRegion1D)
+                ? () {
+                    log('selectedRegion: ${selectedRegion1D} ${selectedRegion2D}');
+                    // 저장
+                    // customSnackBar(title: '설정 저장', message: '설정 저장이 완료되었습니다.');
+                  }
+                : null,
+          )),
       body: Padding(
         padding: CustomPadding.pageInsets,
         child: Column(
@@ -57,8 +62,7 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
               Column(
                 children: [
                   const Padding(
-                    padding:
-                        EdgeInsets.only(top: 25, left: 10, bottom: 5),
+                    padding: EdgeInsets.only(top: 25, left: 10, bottom: 5),
                     child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text('관심 지역 선택')),
@@ -82,7 +86,9 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
                               titleWidget('시﹒도'),
                               VerticalDivider(
                                 width: 0,
-                                color: Theme.of(context).colorScheme.outlineVariant,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .outlineVariant,
                               ),
                               titleWidget('시﹒군﹒구'),
                             ],
@@ -92,9 +98,7 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
                       // 리스트
                       Container(
                         decoration: BoxDecoration(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .surfaceVariant,
+                            color: Theme.of(context).colorScheme.surfaceVariant,
                             borderRadius: const BorderRadius.only(
                                 bottomLeft: Radius.circular(15.0),
                                 bottomRight: Radius.circular(15.0))),
@@ -135,25 +139,28 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
                                                       .withOpacity(0.5)
                                                   : Colors.transparent,
                                               height: 40,
-                                              child: Align(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  child: Text(
-                                                    '${region1DepthList[idx]}',
-                                                    style: CustomTextStyle.basic
-                                                        .copyWith(
-                                                            color: isSelected
-                                                                // ? Colors.white
-                                                        ? Theme.of(context).colorScheme.onPrimary
-                                                                : Colors.black),
-                                                  ))),
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(
+                                                region1DepthList[idx],
+                                                style: CustomTextStyle.basic
+                                                    .copyWith(
+                                                        color: isSelected
+                                                            // ? Colors.white
+                                                            ? Theme.of(
+                                                                    context)
+                                                                .colorScheme
+                                                                .onPrimary
+                                                            : Colors.black),
+                                              )),
                                         );
                                       }),
                                 ),
                               ),
                               VerticalDivider(
                                 width: 0,
-                                color: Theme.of(context).colorScheme.outlineVariant,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .outlineVariant,
                               ),
                               // 시군구
                               Flexible(
@@ -162,51 +169,70 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
                                   height:
                                       MediaQuery.of(context).size.height - 310,
                                   child: selectedRegion1D != ''
-                                    ? ListView.builder(
-                                      padding:
-                                      const EdgeInsets.only(bottom: 10),
-                                      itemCount:
-                                      regionMap[selectedRegion1D].length,
-                                      itemBuilder:
-                                          (BuildContext context, int idx) {
-                                        bool isSelected = selectedRegion2D ==
-                                            regionMap[selectedRegion1D][idx];
-
-                                        return InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              selectedRegion2D =
-                                              regionMap[selectedRegion1D]
-                                              [idx];
-                                            });
-                                          },
-                                          child: Container(
-                                              padding: const EdgeInsets.only(
-                                                  left: 10),
-                                              color: isSelected
-                                                  ? Theme.of(context)
+                                      ? region1DepthWithout2Depth
+                                              .contains(selectedRegion1D) // 시단구 단위 없는 경우
+                                          ? Container(
+                                              color: Theme.of(context)
                                                   .colorScheme
-                                                  .primary
-                                                  .withOpacity(0.3)
-                                                  : Colors.transparent,
+                                                  .outlineVariant,
                                               height: 40,
-                                              child: Align(
-                                                  alignment:
-                                                  Alignment.centerLeft,
-                                                  child: Text(
-                                                    '${regionMap[selectedRegion1D][idx]}',
-                                                    style: CustomTextStyle.basic
-                                                        .copyWith(
-                                                        color: isSelected
-                                                            ? Theme.of(
-                                                            context)
-                                                            .colorScheme
-                                                            .primary
-                                                            : Colors.black),
-                                                  ))),
-                                        );
-                                      })
-                                  : const SizedBox(),
+                                              alignment: Alignment.topCenter,
+                                              child: Text(
+                                                '-', style: CustomTextStyle.basic.copyWith(
+                                                  color: Theme.of(
+                                                      context)
+                                                      .colorScheme
+                                                      .outline
+                                                      ),), )
+                                          : ListView.builder(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 10),
+                                              itemCount:
+                                                  regionMap[selectedRegion1D]
+                                                      .length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int idx) {
+                                                bool isSelected =
+                                                    selectedRegion2D ==
+                                                        regionMap[
+                                                                selectedRegion1D]
+                                                            [idx];
+
+                                                return InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      selectedRegion2D = regionMap[
+                                                              selectedRegion1D]
+                                                          [idx];
+                                                    });
+                                                  },
+                                                  child: Container(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 10),
+                                                      color: isSelected
+                                                          ? Theme.of(context)
+                                                              .colorScheme
+                                                              .primary
+                                                              .withOpacity(0.3)
+                                                          : Colors.transparent,
+                                                      height: 40,
+                                                      alignment: Alignment.centerLeft,
+                                                      child: Text(
+                                                        '${regionMap[selectedRegion1D][idx]}',
+                                                        style: CustomTextStyle.basic.copyWith(
+                                                            color: isSelected
+                                                                ? Theme.of(
+                                                                        context)
+                                                                    .colorScheme
+                                                                    .primary
+                                                                : Colors
+                                                                    .black),
+                                                      )),
+                                                );
+                                              })
+                                      : const SizedBox(),
                                 ),
                               )
                             ],
@@ -227,8 +253,7 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
     return SizedBox(
       height: 45,
       width: 100,
-      child: Align(
-        alignment: Alignment.center,
+      child: Center(
         child: Text(
           text,
           style: CustomTextStyle.basicBold,
