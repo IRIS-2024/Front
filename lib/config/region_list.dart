@@ -40,6 +40,8 @@ List<String> region1DepthList = [
   '제주'
 ];
 
+List<String> region1DepthWithout2Depth = ['세종']; // 시군구가 없는 시도 단위
+
 Map regionMapKakao = {
   '서울': [
     '강남구',
