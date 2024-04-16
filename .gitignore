@@ -42,10 +42,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-/android/app/google-services.json
+android/app/google-services.json
 
 *.env
-/ios/Runner/Secret.swift
+ios/Runner/Secret.swift
+ios/Runner/Info.plist
 
 # 숨김 설정 파일
 hidden_config.dart
