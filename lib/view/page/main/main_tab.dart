@@ -14,8 +14,7 @@ class MainTab extends StatefulWidget {
   State<MainTab> createState() => _MainTabState();
 }
 
-class _MainTabState extends State<MainTab>
-    with TickerProviderStateMixin {
+class _MainTabState extends State<MainTab> with TickerProviderStateMixin {
   late TabController _nestedTabController;
 
   @override
@@ -42,9 +41,9 @@ class _MainTabState extends State<MainTab>
                   labelColor: Theme.of(context).colorScheme.onPrimaryContainer,
                   labelStyle: CustomTextStyle.basicBold,
                   indicator: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                      borderRadius: BorderRadius.circular(15.0),
+                    shape: BoxShape.rectangle,
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
                   indicatorSize: TabBarIndicatorSize.tab,
                   dividerColor: Colors.transparent,
