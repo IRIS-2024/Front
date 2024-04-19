@@ -20,8 +20,7 @@ String convertDateString(String originalDateString) {
   if (originalDateString != '') {
     DateTime dateTime = DateTime.parse(originalDateString);
 
-    String formattedDateString =
-        DateFormat('yyyy-MM-dd HH:mm').format(dateTime);
+    String formattedDateString = DateFormat('yy-MM-dd HH:mm').format(dateTime);
 
     return formattedDateString;
   } else {
