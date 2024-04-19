@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/dio_config.dart';
 import 'package:iris_flutter/model/comment.dart';
@@ -39,6 +40,7 @@ class PostController extends GetxController {
 
   // 해당 실종 정보 글에 달린 제보 댓글들
   RxList<Comment> commentList = <Comment>[].obs;
+  RxList<Marker> commentMarkers = <Marker>[].obs;
   RxInt currentIndex = 0.obs; // 댓글 별 이미지 슬라이드
 
   Rx<Comment> targetComment = Comment(
@@ -61,17 +63,44 @@ class PostController extends GetxController {
 
   Future<void> loadData(int? argumentPid) async {
     // /post/{post_id}
-    try {
-      final dio = createDio();
-      final PostRepository infoRepository = PostRepository(dio);
-      final response =
-          await infoRepository.getPost(argumentPid ?? postId.value);
+    // try {
+    //   final dio = createDio();
+    //   final PostRepository infoRepository = PostRepository(dio);
+    //   final response =
+    //       await infoRepository.getPost(argumentPid ?? postId.value);
 
-      post.value = response;
-    } catch (error) {
-      // 에러 처리
-      print('Error fetching info detail: $error');
-    }
+    //   post.value = response;
+    // } catch (error) {
+    //   // 에러 처리
+    //   print('Error fetching info detail: $error');
+    // }
+
+    Post dummy = Post(
+        pid: 1,
+        images: [
+          'https://plus.unsplash.com/premium_photo-1664203067979-47448934fd97?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+        ],
+        genImage:
+            'https://plus.unsplash.com/premium_photo-1664203067979-47448934fd97?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        genRepresent: true,
+        name: '윤여희',
+        gender: true,
+        age: 52,
+        height: 160,
+        weight: 55,
+        clothes: '흰 모자에 보라색 조끼, 검정 긴 바지',
+        details: '디테일디테일디테일디테일디테일디테일디테일디테일디테일내용내용내용내용',
+        address: '대한민국 서울특별시 숙명여대후문.이봉창활동터',
+        latitude: 37.545687433529,
+        longitude: 126.963227391242,
+        disappearedAt: '2024-04-16T11:56:52.588Z',
+        createdAt: "2024-04-16T11:56:52.588Z",
+        updatedAt: "2024-04-16T11:56:52.588Z",
+        bookmarked: false,
+        author: false);
+
+    post.value = dummy;
   }
 
   Future<void> loadComments() async {
@@ -79,20 +108,53 @@ class PostController extends GetxController {
     int filterNum = 0;
     if (isFilterOn.value) {
       filterNum = Config.filterCriteria;
-    } //
-
-    try {
-      final dio = createDio();
-      final CommentRepository comtRepository = CommentRepository(dio);
-      final response =
-          await comtRepository.getCommentList(postId.value, filterNum);
-
-      commentList.value = response;
-      // commentList.refresh();
-    } catch (error) {
-      // 에러 처리s
-      print('Error fetching info detail: $error');
     }
+
+    // try {
+    //   final dio = createDio();
+    //   final CommentRepository comtRepository = CommentRepository(dio);
+    //   final response =
+    //       await comtRepository.getCommentList(postId.value, filterNum);
+
+    //   commentList.value = response;
+    //   // commentList.refresh();
+    // } catch (error) {
+    //   // 에러 처리s
+    //   print('Error fetching info detail: $error');
+    // }
+
+    List<Comment> dummy = [
+      Comment(
+          cid: 1,
+          address: '대한민국 서울특별시 용산구 갈월동 13-6',
+          latitude: 37.545048,
+          longitude: 126.963200,
+          clothes: '',
+          details: '상세',
+          images: [
+            'https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?q=80&w=1476&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+          ],
+          discoveredAt: '2024-04-19T05:50:51.273Z',
+          createdAt: '2024-04-19T05:50:51.273Z',
+          author: true),
+      Comment(
+          cid: 2,
+          address: '대한민국 서울특별시 용산구 남영동 47-1',
+          latitude: 37.5434959020979,
+          longitude: 126.973782554268,
+          clothes: '옷차림',
+          details: '',
+          images: [
+            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            'https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?q=80&w=1476&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          ],
+          accuracy: 85,
+          discoveredAt: '2024-04-19T05:50:51.273Z',
+          createdAt: '2024-04-19T05:50:51.273Z',
+          author: false)
+    ];
+    commentList.value = dummy;
   }
 
   void deleteComment(int cid) async {
@@ -100,8 +162,7 @@ class PostController extends GetxController {
     CommentRepository commentRepository = CommentRepository(dio);
     await commentRepository.deleteComment(cid).then((resp) {
       // Error 발생 안 하면 성공
-      customSnackBar(
-          title: '제보 댓글 삭제', message: '제보 댓글을 삭제하였습니다.');
+      customSnackBar(title: '제보 댓글 삭제', message: '제보 댓글을 삭제하였습니다.');
       loadComments();
     }).catchError((error) {
       log('[catchError]: $error');
@@ -118,6 +179,16 @@ class PostController extends GetxController {
   }
 
   void unVisibleTargetComment() {
+    // 초기화
+    targetComment.value = Comment(
+        cid: 0,
+        address: '',
+        latitude: 0.0,
+        longitude: 0.0,
+        images: [''],
+        discoveredAt: '',
+        createdAt: '',
+        author: false);
     targetVisible.value = false;
   }
 }
