@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'MissingYou',
       theme: ThemeData(
         colorScheme: MaterialTheme.lightScheme().toColorScheme(),
         elevatedButtonTheme: ElevatedButtonThemeData(
