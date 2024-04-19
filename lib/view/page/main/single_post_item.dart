@@ -79,7 +79,7 @@ class _SinglePostItemState extends State<SinglePostItem> {
                     Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "${widget.post.name}(${Config().getGenderText(widget.post.gender)}, ${widget.post.age}세)",
+                          "${widget.post.name} (${Config().getGenderText(widget.post.gender)}, ${widget.post.age}세)",
                           style: CustomTextStyle.title,
                           overflow: TextOverflow.ellipsis,
                         )),
@@ -139,9 +139,19 @@ class _SinglePostItemState extends State<SinglePostItem> {
                       ],
                     ),
                     Expanded(
-                        child: Text(
-                      '마지막 위치: ${widget.post.address}',
-                    )),
+                      child: RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                            style: const TextStyle(color: Colors.black),
+                            children: [
+                              const TextSpan(
+                                  text: '마지막 위치: ',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              TextSpan(text: widget.post.address),
+                            ]),
+                      ),
+                    ),
                   ],
                 ),
               )
