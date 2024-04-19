@@ -7,6 +7,7 @@ import 'package:iris_flutter/view/controller/login/login_controller.dart';
 import 'package:iris_flutter/view/page/my_page/bookmark_post.dart';
 import 'package:iris_flutter/view/page/my_page/my_posts.dart';
 import 'package:iris_flutter/view/page/my_page/my_comments.dart';
+import 'package:iris_flutter/view/page/my_page/notification_setting.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({super.key});
@@ -115,31 +116,24 @@ class _MyPageState extends State<MyPage> {
                   ),
                 ),
                 const SizedBox(height: 6),
-                // SwitchListTile(
-                //   title: const Text("알림"),
-                //   value: isSwitched,
-                //   tileColor: Theme.of(context).colorScheme.surfaceVariant,
-                //   shape: const RoundedRectangleBorder(
-                //       borderRadius: BorderRadius.only(
-                //           topLeft: Radius.circular(15),
-                //           topRight: Radius.circular(15))),
-                //   onChanged: (value) {
-                //     setState(() {
-                //       isSwitched = value;
-                //       print(isSwitched);
-                //     });
-                //   },
-                //   secondary: const Icon(Icons.notifications),
-                // ),
                 ListTile(
                   tileColor: Theme.of(context).colorScheme.surfaceVariant,
                   onTap: () {
-                    controller.handleLogout();
+                    Get.to(() => const NotificationRegionSetting());
                   },
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(15),
                           topRight: Radius.circular(15))),
+                  leading: const Icon(Icons.notifications),
+                  title: const Text("알림 설정"),
+                  trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+                ),
+                ListTile(
+                  tileColor: Theme.of(context).colorScheme.surfaceVariant,
+                  onTap: () {
+                    controller.handleLogout();
+                  },
                   leading: const Icon(Icons.logout),
                   title: const Text("로그아웃"),
                   trailing:

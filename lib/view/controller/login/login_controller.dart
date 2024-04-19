@@ -32,12 +32,12 @@ class LoginController extends GetxController {
     await userStorage.setItem(Config.social, Config.google);
   }
 
-  Future<void> tokenLogin(String idToken) async {
+  Future<void> tokenLogin(String serverAuthCode) async {
     final dio = createDioWithoutToken();
 
     try {
       LoginRepository loginRepository = LoginRepository(dio);
-      final resp = await loginRepository.getLogin(idToken);
+      final resp = await loginRepository.getLogin(serverAuthCode);
       // token storage에 token 저장
       final at = resp.accessToken;
       final rt = resp.refreshToken;

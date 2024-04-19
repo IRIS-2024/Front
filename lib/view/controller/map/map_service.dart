@@ -1,9 +1,4 @@
-import 'dart:developer';
-
-import 'package:dio/dio.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:iris_flutter/config/hidden_config.dart';
-import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 
 class MapService {
   // API, Package 에서 가져온 Map 관련 기본 기능 (가공은 Map Controller 에서)
@@ -44,31 +39,5 @@ class MapService {
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
     return await Geolocator.getCurrentPosition();
-  }
-
-  static Future<String> getAddrFromLatlng(double lat, double lng) async {
-    // Revise Geocoding (convert latLng to Address) - Google Map API
-    try {
-      String googleMapApiKey = HiddenConfig.googleMapApiKey;
-      const String baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
-      String url = '$baseUrl?latlng=$lat,$lng&key=$googleMapApiKey&language=ko';
-
-      final Dio dio = Dio();
-      final response = await dio.get(url);
-      if (response.data['status'] == "OK") {
-        log('행정 주소 Address: ${response.data['results'][0]['formatted_address']}');
-        return response.data['results'][0]['formatted_address'];
-      } else {
-        if (response.data['status'] == 'ZERO_RESULTS') {
-          customErrorSnackBar(title: '반환된 주소 없음', message: '근처 위치로 다시 시도 해주세요.');
-        } else {
-          customErrorSnackBar(title: 'ERROR CODE: ${response.data['status']}', message: '오류가 지속되면, 관리자에게 문의하세요.');
-        }
-        throw Exception('Status Exception: ${response.data['status']}');
-      }
-    } catch (error) {
-      log('Error [$error] (getAddrFromLatlng)');
-      return '';
-    }
   }
 }
