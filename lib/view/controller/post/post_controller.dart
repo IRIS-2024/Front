@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iris_flutter/config/config.dart';
@@ -9,6 +10,7 @@ import 'package:iris_flutter/model/post.dart';
 import 'package:iris_flutter/repository/comment_repository.dart';
 import 'package:iris_flutter/repository/post_repository.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
+import 'package:label_marker/label_marker.dart';
 
 class PostController extends GetxController {
   // 이전 페이지에서 전달 받은 postId
@@ -40,7 +42,7 @@ class PostController extends GetxController {
 
   // 해당 실종 정보 글에 달린 제보 댓글들
   RxList<Comment> commentList = <Comment>[].obs;
-  RxList<Marker> commentMarkers = <Marker>[].obs;
+  RxSet<Marker> commentMarkers = <Marker>{}.obs;
   RxInt currentIndex = 0.obs; // 댓글 별 이미지 슬라이드
 
   Rx<Comment> targetComment = Comment(
@@ -92,8 +94,8 @@ class PostController extends GetxController {
         clothes: '흰 모자에 보라색 조끼, 검정 긴 바지',
         details: '디테일디테일디테일디테일디테일디테일디테일디테일디테일내용내용내용내용',
         address: '대한민국 서울특별시 숙명여대후문.이봉창활동터',
-        latitude: 37.545687433529,
-        longitude: 126.963227391242,
+        latitude: 37.544908,
+        longitude: 126.964758,
         disappearedAt: '2024-04-16T11:56:52.588Z',
         createdAt: "2024-04-16T11:56:52.588Z",
         updatedAt: "2024-04-16T11:56:52.588Z",
@@ -141,8 +143,8 @@ class PostController extends GetxController {
       Comment(
           cid: 2,
           address: '대한민국 서울특별시 용산구 남영동 47-1',
-          latitude: 37.5434959020979,
-          longitude: 126.973782554268,
+          latitude: 37.544228,
+          longitude: 126.963606,
           clothes: '옷차림',
           details: '',
           images: [
@@ -155,6 +157,31 @@ class PostController extends GetxController {
           author: false)
     ];
     commentList.value = dummy;
+
+    makeMarkers();
+  }
+
+  void makeMarkers() {
+    print(">> makeMarkers 실행");
+    for (int i = 0; i < commentList.length; i++) {
+      commentMarkers.addLabelMarker(LabelMarker(
+          label: '${i + 1}',
+          markerId: MarkerId(commentList[i].cid.toString()),
+          position: LatLng(commentList[i].latitude, commentList[i].longitude),
+          backgroundColor: changeMarkerColor(commentList[i].cid),
+          onTap: () {
+            setTargetComment(commentList[i]);
+            makeMarkers(); // 숫자가 표시되는 특별한 마커를 사용하고 있기 때문에, 클릭될 때마다 Marker들을 다 다시 그려주어야 함
+          }));
+    }
+  }
+
+  Color changeMarkerColor(id) {
+    if (id == targetComment.value.cid) {
+      return Colors.yellow;
+    } else {
+      return Colors.red;
+    }
   }
 
   void deleteComment(int cid) async {
@@ -174,6 +201,7 @@ class PostController extends GetxController {
   }
 
   void setTargetComment(Comment data) {
+    print('>> setTargetComment 실행');
     targetComment.value = data;
     targetVisible.value = true;
   }
@@ -190,5 +218,7 @@ class PostController extends GetxController {
         createdAt: '',
         author: false);
     targetVisible.value = false;
+
+    makeMarkers(); //  마커 색상 변경을 위해 재생성
   }
 }

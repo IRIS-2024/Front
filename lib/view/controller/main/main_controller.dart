@@ -27,9 +27,11 @@ class MainController {
 
   // 일부 행정 주소(시도,구 단위) 받아오기
   void getShortAddress(Position currentPosition) async {
-    final result = await ReverseGeocodingService.getAddrFromLatlng( currentPosition.longitude, currentPosition.latitude);
+    final result = await ReverseGeocodingService.getAddrFromLatlng(
+        currentPosition.longitude, currentPosition.latitude);
     if (result != null) {
-      shortAddress.value = '${result.region_1depth_name} ${result.region_2depth_name}';
+      shortAddress.value =
+          '${result.region_1depth_name} ${result.region_2depth_name}';
     }
   }
 
@@ -80,7 +82,7 @@ class MainController {
           imgUrl:
               'https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?q=80&w=1066&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
           name: '조진우',
-          gender: true,
+          gender: false,
           age: 22,
           address: '대한민국 서울특별시 용산구 청파동3가 132-171',
           latitude: 37.5425585534826,
