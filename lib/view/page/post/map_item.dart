@@ -5,9 +5,6 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/view/controller/post/post_controller.dart';
-import 'dart:ui' as ui;
-
-import 'package:label_marker/label_marker.dart';
 
 class MapItem extends StatefulWidget {
   const MapItem({super.key});
@@ -18,9 +15,7 @@ class MapItem extends StatefulWidget {
 
 class _MapItemState extends State<MapItem> {
   PostController postController = Get.find<PostController>();
-  // GoogleMapController? controller;
   late LatLng missingSpot;
-  // Set<Marker> commentMarkers = <Marker>{};
 
   @override
   void initState() {

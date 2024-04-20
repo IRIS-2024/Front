@@ -162,25 +162,23 @@ class PostController extends GetxController {
   }
 
   void makeMarkers() {
-    print(">> makeMarkers 실행");
     for (int i = 0; i < commentList.length; i++) {
       commentMarkers.addLabelMarker(LabelMarker(
           label: '${i + 1}',
           markerId: MarkerId(commentList[i].cid.toString()),
           position: LatLng(commentList[i].latitude, commentList[i].longitude),
-          backgroundColor: changeMarkerColor(commentList[i].cid),
+          backgroundColor: commentList[i].cid == targetComment.value.cid
+              ? const Color(0xffffda66)
+              : Colors.red,
+          textStyle: TextStyle(
+              fontSize: 40,
+              color: commentList[i].cid == targetComment.value.cid
+                  ? const Color(0xff544300)
+                  : Colors.white),
           onTap: () {
             setTargetComment(commentList[i]);
             makeMarkers(); // 숫자가 표시되는 특별한 마커를 사용하고 있기 때문에, 클릭될 때마다 Marker들을 다 다시 그려주어야 함
           }));
-    }
-  }
-
-  Color changeMarkerColor(id) {
-    if (id == targetComment.value.cid) {
-      return Colors.yellow;
-    } else {
-      return Colors.red;
     }
   }
 
@@ -201,7 +199,6 @@ class PostController extends GetxController {
   }
 
   void setTargetComment(Comment data) {
-    print('>> setTargetComment 실행');
     targetComment.value = data;
     targetVisible.value = true;
   }
