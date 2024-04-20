@@ -5,6 +5,9 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/view/controller/post/post_controller.dart';
+import 'dart:ui' as ui;
+
+import 'package:label_marker/label_marker.dart';
 
 class MapItem extends StatefulWidget {
   const MapItem({super.key});
@@ -15,8 +18,9 @@ class MapItem extends StatefulWidget {
 
 class _MapItemState extends State<MapItem> {
   PostController postController = Get.find<PostController>();
-
+  // GoogleMapController? controller;
   late LatLng missingSpot;
+  // Set<Marker> commentMarkers = <Marker>{};
 
   @override
   void initState() {
@@ -37,7 +41,6 @@ class _MapItemState extends State<MapItem> {
               CameraPosition(target: missingSpot, zoom: Config.initZoom),
           mapToolbarEnabled: false,
           zoomControlsEnabled: false,
-          // min max zoom 제한
           minMaxZoomPreference:
               MinMaxZoomPreference(Config.minZoom, Config.maxZoom),
           // 기울기 제스처 false
@@ -56,19 +59,7 @@ class _MapItemState extends State<MapItem> {
                   title: "실종 위치",
                   snippet: postController.post.value.address,
                 )),
-            ...postController.commentList
-                .map((comment) => Marker(
-                    markerId: MarkerId(comment.cid.toString()),
-                    position: LatLng(comment.latitude, comment.longitude),
-                    icon: postController.targetComment.value.cid == comment.cid
-                        ? BitmapDescriptor.defaultMarkerWithHue(
-                            BitmapDescriptor.hueYellow)
-                        : BitmapDescriptor.defaultMarkerWithHue(
-                            BitmapDescriptor.hueRed),
-                    onTap: () {
-                      postController.setTargetComment(comment);
-                    }))
-                .toSet()
+            ...postController.commentMarkers
           }),
     );
   }
