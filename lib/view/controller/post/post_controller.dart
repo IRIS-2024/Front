@@ -177,7 +177,6 @@ class PostController extends GetxController {
                   : Colors.white),
           onTap: () {
             setTargetComment(commentList[i]);
-            makeMarkers(); // 숫자가 표시되는 특별한 마커를 사용하고 있기 때문에, 클릭될 때마다 Marker들을 다 다시 그려주어야 함
           }));
     }
   }
@@ -201,6 +200,8 @@ class PostController extends GetxController {
   void setTargetComment(Comment data) {
     targetComment.value = data;
     targetVisible.value = true;
+
+    makeMarkers(); // 숫자가 표시되는 특별한 마커를 사용하고 있기 때문에, 클릭될 때마다 Marker들을 다 다시 그려주어야 함
   }
 
   void unVisibleTargetComment() {

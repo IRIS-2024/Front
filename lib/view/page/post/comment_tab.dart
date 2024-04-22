@@ -87,15 +87,22 @@ class _CommentTabState extends State<CommentTab> {
                               shrinkWrap: true,
                               itemCount: postController.commentList.length,
                               itemBuilder: (BuildContext context, int cmtIdx) {
-                                return SingleCmtItem(
-                                    comment: postController.commentList[cmtIdx],
-                                    controller: postController,
-                                    closeAble: false,
-                                    hasImgAuth: postController
-                                                .commentList[cmtIdx].author ||
-                                            postController.post.value.author
-                                        ? true
-                                        : false);
+                                return GestureDetector(
+                                    child: SingleCmtItem(
+                                        comment:
+                                            postController.commentList[cmtIdx],
+                                        controller: postController,
+                                        closeAble: false,
+                                        hasImgAuth: postController
+                                                    .commentList[cmtIdx]
+                                                    .author ||
+                                                postController.post.value.author
+                                            ? true
+                                            : false),
+                                    onTap: () {
+                                      postController.setTargetComment(
+                                          postController.commentList[cmtIdx]);
+                                    });
                               },
                               separatorBuilder: (BuildContext ctx, int idx) {
                                 return const Divider();
