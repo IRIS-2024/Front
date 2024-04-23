@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iris_flutter/config/custom_padding.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/my_page/bookmark_controller.dart';
 import 'package:iris_flutter/view/controller/post/post_controller.dart';
 import 'package:iris_flutter/view/page/main/delete_post_dialog.dart';
@@ -14,17 +16,25 @@ class PostPage extends StatefulWidget {
   State<PostPage> createState() => _PostPageState();
 }
 
-class _PostPageState extends State<PostPage> {
+class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
   PostController postController = Get.put(PostController());
   BookmarkController bookmrkController = Get.put(BookmarkController());
+  late TabController _nestedTabController;
 
   bool isbookmarked = false;
 
   @override
   void initState() {
-    super.initState();
     postController.setPid(Get.arguments);
     isbookmarked = postController.post.value.bookmarked;
+    _nestedTabController = TabController(length: 2, vsync: this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _nestedTabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -68,56 +78,31 @@ class _PostPageState extends State<PostPage> {
               ),
             ],
             bottom: TabBar(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              labelColor: Colors.white,
-              // 배경색
-              unselectedLabelColor: Theme.of(context).colorScheme.primary,
-              indicatorSize: TabBarIndicatorSize.label,
+              padding: CustomPadding.regularHorizontal,
+              labelColor: Theme.of(context).colorScheme.onPrimaryContainer,
+              labelStyle: CustomTextStyle.basicBold,
               indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                  color: Theme.of(context).colorScheme.primaryContainer),
+                shape: BoxShape.rectangle,
+                color: Theme.of(context).colorScheme.primaryContainer,
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              indicatorSize: TabBarIndicatorSize.tab,
               dividerColor: Colors.transparent,
-              tabs: [
-                Tab(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        border: Border.all(
-                            color:
-                                Theme.of(context).colorScheme.primaryContainer,
-                            width: 1)),
-                    child: const Align(
-                      alignment: Alignment.center,
-                      child: Text("상세 내용"),
-                    ),
-                  ),
-                ),
-                Tab(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        border: Border.all(
-                            color:
-                                Theme.of(context).colorScheme.primaryContainer,
-                            width: 1)),
-                    child: const Align(
-                      alignment: Alignment.center,
-                      child: Text("제보"),
-                    ),
-                  ),
-                ),
+              tabs: const [
+                SizedBox(height: 40, child: Tab(text: "상세 내용")),
+                SizedBox(height: 40, child: Tab(text: "제보"))
               ],
+              controller: _nestedTabController,
             ),
           ),
-          body: const Column(
+          body: Column(
             children: [
-              SizedBox(
-                // 탭 바와 본문의 여백을 위해
-                height: 12,
-              ),
+              const Padding(padding: CustomPadding.regularBottom),
               Expanded(
                 child: TabBarView(
-                  children: [DetailTab(), CommentTab()],
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: _nestedTabController,
+                  children: const [DetailTab(), CommentTab()],
                 ),
               )
             ],

@@ -40,17 +40,18 @@ class _CommentTabState extends State<CommentTab> {
                 height: 300,
                 child: MapItem(),
               ),
+              // 마커 클릭 시 뜨는 댓글
               Obx(() => postController.targetVisible.value == true
                   ? SingleCmtItem(
-                    controller: postController,
-                    comment: postController.targetComment.value,
-                    closeAble: true,
-                    closeMethod: postController.unVisibleTargetComment,
-                    hasImgAuth: postController.targetComment.value.author ||
-                            postController.post.value.author
-                        ? true
-                        : false,
-                  )
+                      controller: postController,
+                      comment: postController.targetComment.value,
+                      closeAble: true,
+                      closeMethod: postController.unVisibleTargetComment,
+                      hasImgAuth: postController.targetComment.value.author ||
+                              postController.post.value.author
+                          ? true
+                          : false,
+                    )
                   : const SizedBox()),
               Column(
                 children: [

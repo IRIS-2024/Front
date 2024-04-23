@@ -49,7 +49,10 @@ dependencies:
   flutter_secure_storage: ^9.0.0
   localstorage: ^4.0.1+4
 
+  # map
   geolocator: ^10.1.0
+  label_marker: ^1.0.1
+  
   dio: ^5.4.0
   flutter_dotenv: ^5.1.0
   get: ^4.6.6

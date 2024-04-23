@@ -34,85 +34,129 @@ class _SinglePostItemState extends State<SinglePostItem> {
       onTap: () {
         Get.toNamed(Config.routerPost, arguments: widget.post.pid);
       },
-      child: Padding(
-        padding: CustomPadding.thickBottom,
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Image.network(
-                      widget.post.imgUrl,
-                      height: 170,
-                      width: 380,
-                      fit: BoxFit.fitWidth,
-                    )),
-                widget.myPosts == true // 작성한 실종 정보 일때만 삭제 버튼
-                    ? Positioned(
-                        right: 3,
-                        child: IconButton(
-                            onPressed: () {
-                              showDeletePostDialog(widget.post.pid, _reloadData);
-                            },
-                            icon: const Icon(Icons.delete_outline),
-                            style: IconButton.styleFrom(
-                                foregroundColor: Colors.white,
-                                backgroundColor: Theme.of(context)
-                                    .colorScheme
-                                    .onBackground
-                                    .withOpacity(0.5))))
-                    : const SizedBox()
-              ],
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Text(
-                    "${widget.post.name}(${Config().getGenderText(widget.post.gender)},${widget.post.age}세) / ${widget.post.address}",
-                    style: CustomTextStyle.title,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+      child: SizedBox(
+        height: 200,
+        child: Padding(
+          padding: CustomPadding.mediumTop,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                child: Stack(
+                  children: [
+                    ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.network(
+                          widget.post.imgUrl,
+                          height: 200,
+                          width: 380,
+                          fit: BoxFit.fitWidth,
+                        )),
+                    widget.myPosts == true // 작성한 실종 정보 일때만 삭제 버튼
+                        ? Positioned(
+                            right: 3,
+                            child: IconButton(
+                                onPressed: () {
+                                  showDeletePostDialog(
+                                      widget.post.pid, _reloadData);
+                                },
+                                icon: const Icon(Icons.delete_outline),
+                                style: IconButton.styleFrom(
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground
+                                        .withOpacity(0.5))))
+                        : const SizedBox()
+                  ],
                 ),
-                IconButton(
-                  onPressed: () async {
-                    // 북마크 추가 or 삭제
-                    if (await Get.put(BookmarkController()).postAndDeleteBookmark(
-                        widget.post.bookmarked, widget.post.pid)) { // 통신 성공 시에만  화면 변경
-                      setState(() {
-                        widget.post.bookmarked = !widget.post.bookmarked;
-                      });
-                      // bookmark Post 일 때만 데이터 재로딩
-                      if (widget.bookmarkPost != null && widget.bookmarkPost!) {
-                        Get.put(BookmarkController()).loadData();
-                      }
-                    }
-                  },
-                  icon: Icon(widget.post.bookmarked
-                      ? Icons.bookmark_rounded
-                      : Icons.bookmark_border_rounded),
-                  color: Theme.of(context).colorScheme.primary,
+              ),
+              const Padding(padding: CustomPadding.regularRight),
+              Flexible(
+                child: Column(
+                  children: [
+                    Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "${widget.post.name} (${Config().getGenderText(widget.post.gender)}, ${widget.post.age}세)",
+                          style: CustomTextStyle.title,
+                          overflow: TextOverflow.ellipsis,
+                        )),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: RichText(
+                            textAlign: TextAlign.start,
+                            text: TextSpan(
+                                style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.outline),
+                                children: [
+                                  WidgetSpan(
+                                    alignment: PlaceholderAlignment.middle,
+                                    child: Icon(
+                                      Icons.access_time,
+                                      size: 18,
+                                      color:
+                                          Theme.of(context).colorScheme.outline,
+                                    ),
+                                  ),
+                                  const WidgetSpan(
+                                      child: Padding(
+                                          padding: CustomPadding.slimRight)),
+                                  TextSpan(
+                                      text: getTimeDifference(
+                                          widget.post.createdAt)),
+                                ]),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () async {
+                            // 북마크 추가 or 삭제
+                            if (await Get.put(BookmarkController())
+                                .postAndDeleteBookmark(
+                                    widget.post.bookmarked, widget.post.pid)) {
+                              // 통신 성공 시에만  화면 변경
+                              setState(() {
+                                widget.post.bookmarked =
+                                    !widget.post.bookmarked;
+                              });
+                              // bookmark Post 일 때만 데이터 재로딩
+                              if (widget.bookmarkPost != null &&
+                                  widget.bookmarkPost!) {
+                                Get.put(BookmarkController()).loadData();
+                              }
+                            }
+                          },
+                          icon: Icon(widget.post.bookmarked
+                              ? Icons.bookmark_rounded
+                              : Icons.bookmark_border_rounded),
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                            style: const TextStyle(color: Colors.black),
+                            children: [
+                              const TextSpan(
+                                  text: '마지막 위치: ',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              TextSpan(text: widget.post.address),
+                            ]),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.access_time,
-                  size: 18,
-                  color: Theme.of(context).colorScheme.outline,
-                ),
-                const Padding(padding: CustomPadding.slimRight),
-                Text(
-                  getTimeDifference(widget.post.createdAt),
-                  style:
-                      TextStyle(color: Theme.of(context).colorScheme.outline),
-                ),
-              ],
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
