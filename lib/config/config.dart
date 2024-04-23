@@ -19,7 +19,7 @@ class Config {
   static bool woman = true;
 
   String getGenderText(bool gender) {
-    return gender == Config.woman ? '여자' : '남자';
+    return gender == Config.woman ? '여' : '남';
   }
 
   // info, comment form

@@ -26,16 +26,14 @@ class _LatestPostTabViewState extends State<LatestPostTabView> {
         }
 
         return mainController.shortPostList.isNotEmpty
-            ? SizedBox(
-          height: 180,
-          child: ListView.builder(
-            itemCount: mainController.shortPostList.length,
-            itemBuilder: (BuildContext context, int idx) {
-              return SinglePostItem(
-                post: mainController.shortPostList[idx],
-                controller: mainController,
-              );
-            }),)
+            ? ListView.builder(
+                itemCount: mainController.shortPostList.length,
+                itemBuilder: (BuildContext context, int idx) {
+                  return SinglePostItem(
+                    post: mainController.shortPostList[idx],
+                    controller: mainController,
+                  );
+                })
             : const Center(child: Text('등록된 실종 정보가 없습니다.'));
       },
     );

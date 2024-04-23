@@ -35,7 +35,9 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: widget.closeAble == true ? Theme.of(context).colorScheme.primaryContainer.withOpacity(0.1) : Colors.white,
+      color: widget.closeAble == true
+          ? Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.2)
+          : Colors.white,
       child: Padding(
         padding: CustomPadding.pageInsets.copyWith(top: 16),
         child: Column(
@@ -52,6 +54,7 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                         fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ),
+                const Padding(padding: CustomPadding.slimRight),
                 Text(getTimeDifference(widget.comment.createdAt),
                     style: const TextStyle(fontSize: 12)),
                 if (widget.closeAble == true)
@@ -88,8 +91,8 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                               child: Container(
                                 // 이미지(썸네일)
                                 constraints: BoxConstraints(
-                                    maxWidth: MediaQuery.of(context).size.width),
-                                width: 100,
+                                    maxWidth:
+                                        MediaQuery.of(context).size.width),
                                 child: Stack(
                                   children: [
                                     ClipRRect(
@@ -97,6 +100,8 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                                       child: Image.network(
                                         widget.comment.images[0],
                                         fit: BoxFit.cover,
+                                        height: 100,
+                                        width: 100,
                                       ),
                                     ),
                                     Positioned(
@@ -106,7 +111,8 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                                         padding: const EdgeInsets.all(4),
                                         decoration: BoxDecoration(
                                           color: Colors.black.withOpacity(0.6),
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         ),
                                         child: Text(
                                           "${widget.comment.images.length}",
@@ -129,21 +135,25 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: ImageFiltered(
-                                  imageFilter:
-                                      ImageFilter.blur(sigmaX: 4.5, sigmaY: 4.5),
+                                  imageFilter: ImageFilter.blur(
+                                      sigmaX: 4.5, sigmaY: 4.5),
                                   child: Image.network(
                                     widget.comment.images[0],
                                     fit: BoxFit.cover,
+                                    height: 100,
+                                    width: 100,
                                   ),
                                 ),
                               ),
                             ),
                       const Padding(padding: CustomPadding.slimBottom),
-                      Text('일치율 ${widget.comment.accuracy!.toStringAsFixed(0)} %',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: Theme.of(context).colorScheme.primary))
+                      if (widget.comment.accuracy != null)
+                        Text(
+                            '일치율 ${widget.comment.accuracy!.toStringAsFixed(0)} %',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Theme.of(context).colorScheme.primary))
                     ],
                   ),
                 const SizedBox(width: 12),
@@ -190,7 +200,7 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
 
   Dialog imgDialog(BuildContext context) {
     return Dialog.fullscreen(
-      backgroundColor: Colors.black.withOpacity(0.5),
+      backgroundColor: Colors.black.withOpacity(0.6),
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -203,7 +213,7 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                   initialScale: PhotoViewComputedScale.contained,
                   minScale:
                       PhotoViewComputedScale.contained * (0.5 + imgIdx / 10),
-                  maxScale: PhotoViewComputedScale.contained * 1.1,
+                  maxScale: PhotoViewComputedScale.contained * 4.0,
                   heroAttributes: PhotoViewHeroAttributes(tag: imgIdx));
             },
             itemCount: widget.comment.images.length,
