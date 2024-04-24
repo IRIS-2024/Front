@@ -119,7 +119,7 @@ class _MyPageState extends State<MyPage> {
                 ListTile(
                   tileColor: Theme.of(context).colorScheme.surfaceVariant,
                   onTap: () {
-                    Get.to(() => const NotificationRegionSetting());
+                    Get.to(() => const NotificationSetting());
                   },
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(

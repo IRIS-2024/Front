@@ -1,22 +1,22 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/config/region_list.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
+import 'package:iris_flutter/view/controller/my_page/notification_setting_controller.dart';
 import 'package:iris_flutter/view/page/form/submit_button.dart';
 
-class NotificationRegionSetting extends StatefulWidget {
-  const NotificationRegionSetting({super.key});
+class NotificationSetting extends StatefulWidget {
+  const NotificationSetting({super.key});
 
   @override
-  State<NotificationRegionSetting> createState() =>
-      _NotificationRegionSettingState();
+  State<NotificationSetting> createState() =>
+      _NotificationSettingState();
 }
 
-class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
+class _NotificationSettingState extends State<NotificationSetting> {
   String selectedRegion1D = '';
   String selectedRegion2D = '';
   bool isSwitched = false;
@@ -28,10 +28,10 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
           title: '알림 설정',
           actions: SubmitButton(
             onPressed: selectedRegion2D != '' ||
-                    region1DepthWithout2Depth.contains(selectedRegion1D)
+                    region1DepthWithout2Depth.contains(selectedRegion1D) || isSwitched == false
                 ? () {
-                    log('selectedRegion: ${selectedRegion1D} ${selectedRegion2D}');
-                    // 저장
+                    Get.put(NotificationSettingController()).saveSetting(isSwitched, selectedRegion1D, selectedRegion2D);
+
                     // customSnackBar(title: '설정 저장', message: '설정 저장이 완료되었습니다.');
                   }
                 : null,
