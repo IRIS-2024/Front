@@ -1,9 +1,13 @@
+import 'dart:developer';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/page/main/main_tab.dart';
+import 'package:iris_flutter/view/page/my_page/my_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -13,6 +17,37 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  Future<void> setupInteractedMessage() async { // FCM push alarm
+    // interaction when app opens from terminated state
+    RemoteMessage? initialMessage =
+    await FirebaseMessaging.instance.getInitialMessage();
+    if (initialMessage != null) {
+      _handleMessage(initialMessage);
+    }
+
+    // interaction when app opens from background state
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+  }
+
+  void _handleMessage(RemoteMessage message) {
+    if (message.notification!.body != '') { // 임시
+      // 알림 받은 특정 post로 이동
+      log('notification interaction - handleMessage');
+      Get.to(() => const MyPage());
+    }
+
+    // if (message.data['pid'] != '') {
+    //   // 알림 받은 특정 post로 이동
+    //   Get.toNamed(Config.routerPost, arguments: message.data['pid']);
+    // }
+  }
+
+  @override
+  void initState() {
+    setupInteractedMessage(); // 알림 받고 앱 접속할 때 interaction
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
