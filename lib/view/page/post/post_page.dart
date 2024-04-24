@@ -20,20 +20,24 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
   PostController postController = Get.put(PostController());
   BookmarkController bookmrkController = Get.put(BookmarkController());
   late TabController _nestedTabController;
+  late ScrollController _scrollController;
 
   bool isbookmarked = false;
+  bool reachBottom = false;
 
   @override
   void initState() {
     postController.setPid(Get.arguments);
     isbookmarked = postController.post.value.bookmarked;
     _nestedTabController = TabController(length: 2, vsync: this);
+    _scrollController = ScrollController()..addListener(_scrollListener);
     super.initState();
   }
 
   @override
   void dispose() {
     _nestedTabController.dispose();
+    _scrollController.removeListener(_scrollListener);
     super.dispose();
   }
 
@@ -100,7 +104,7 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
               const Padding(padding: CustomPadding.regularBottom),
               Expanded(
                 child: TabBarView(
-                  physics: const NeverScrollableScrollPhysics(),
+                  // physics: const NeverScrollableScrollPhysics(),
                   controller: _nestedTabController,
                   children: const [DetailTab(), CommentTab()],
                 ),
@@ -133,6 +137,16 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
                   icon: const Icon(Icons.report_gmailerrorred),
                 ))),
     );
+  }
+
+  void _scrollListener() {
+    print(_scrollController.position.extentAfter);
+    if (_scrollController.position.extentAfter < 500) {
+      setState(() {
+        // rebuild 해야 함
+        reachBottom = true;
+      });
+    }
   }
 
   void moveToMain() {

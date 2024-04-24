@@ -37,30 +37,37 @@ class _MainPageState extends State<MainPage> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Obx(
-                          () => RichText(
+                      () => RichText(
                         text: TextSpan(
                             style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30,
                             ),
                             children: [
-                              TextSpan(text: Get.put(MainController()).shortAddress.value ?? '현 위치',
+                              TextSpan(
+                                  text: Get.put(MainController())
+                                          .shortAddress
+                                          .value ??
+                                      '현 위치',
                                   style: TextStyle(
-                                      color: Theme.of(context).colorScheme.primary
-                                  )),
-                              TextSpan(text: "\n주변의 실종 정보입니다.",
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary)),
+                              TextSpan(
+                                  text: "\n주변의 실종 정보입니다.",
                                   style: TextStyle(
-                                      color: Theme.of(context).colorScheme.onBackground,
-                                    fontSize: 27
-                                  )
-                              )
-                            ]
-                        ),
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground,
+                                      fontSize: 27))
+                            ]),
                       ),
                     ),
                   ),
                 ),
-                const Padding(padding: CustomPadding.mediumBottom,),
+                const Padding(
+                  padding: CustomPadding.mediumBottom,
+                ),
 
                 // main TabBar
                 const MainTab(),
@@ -70,7 +77,8 @@ class _MainPageState extends State<MainPage> {
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            Get.toNamed(Config.routerPostForm);
+            // Get.toNamed(Config.routerPostForm);
+            Get.toNamed(Config.routerAgree); // 동의화면부터
           },
           label: const Text('신고하기'),
           backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
