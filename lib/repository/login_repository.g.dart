@@ -73,7 +73,7 @@ class _LoginRepository implements LoginRepository {
   }
 
   @override
-  Future<LoginResp> getLogin(String code) async {
+  Future<LoginResp> getGoogleCallback(String code) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'code': code};
     final _headers = <String, dynamic>{};

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
@@ -21,8 +23,6 @@ class _MyPageState extends State<MyPage> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(LoginController());
-    final controller = Get.find<LoginController>();
 
     return Scaffold(
         appBar: customAppBar(title: "마이페이지"),
@@ -116,29 +116,47 @@ class _MyPageState extends State<MyPage> {
                   ),
                 ),
                 const SizedBox(height: 6),
-                ListTile(
-                  tileColor: Theme.of(context).colorScheme.surfaceVariant,
-                  onTap: () {
-                    Get.to(() => const NotificationSetting());
-                  },
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15))),
-                  leading: const Icon(Icons.notifications),
-                  title: const Text("알림 설정"),
-                  trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
-                ),
-                ListTile(
-                  tileColor: Theme.of(context).colorScheme.surfaceVariant,
-                  onTap: () {
-                    controller.handleLogout();
-                  },
-                  leading: const Icon(Icons.logout),
-                  title: const Text("로그아웃"),
-                  trailing:
-                      const Icon(Icons.arrow_forward_ios_rounded, size: 16),
-                ),
+
+                if (Platform.isAndroid) ... [
+                  ListTile(
+                    tileColor: Theme.of(context).colorScheme.surfaceVariant,
+                    onTap: () {
+                      Get.to(() => const NotificationSetting());
+                    },
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15))),
+                    leading: const Icon(Icons.notifications),
+                    title: const Text("알림 설정"),
+                    trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+                  ),
+                  ListTile(
+                    tileColor: Theme.of(context).colorScheme.surfaceVariant,
+                    onTap: () {
+                      Get.put(LoginController()).logoutWithNoti();
+                    },
+                    leading: const Icon(Icons.logout),
+                    title: const Text("로그아웃"),
+                    trailing:
+                    const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+                  ),
+                ] else ...[
+                  ListTile(
+                    tileColor: Theme.of(context).colorScheme.surfaceVariant,
+                    onTap: () {
+                      Get.put(LoginController()).logoutWithoutNoti();
+                    },
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15))),
+                    leading: const Icon(Icons.logout),
+                    title: const Text("로그아웃"),
+                    trailing:
+                    const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+                  ),
+    ],
                 ListTile(
                   tileColor: Theme.of(context).colorScheme.surfaceVariant,
                   shape: const RoundedRectangleBorder(

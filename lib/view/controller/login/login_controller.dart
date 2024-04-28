@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -25,7 +26,7 @@ class LoginController extends GetxController {
 
     await googleSignIn.signIn().then((result) {
       result?.authentication.then((googleKey) {
-        tokenLogin(result.serverAuthCode!);
+        socialLoginCallback(result.serverAuthCode!);
       }).catchError((err) {
         log('inner error');
       });
@@ -35,12 +36,12 @@ class LoginController extends GetxController {
     await userStorage.setItem(Config.social, Config.google);
   }
 
-  Future<void> tokenLogin(String serverAuthCode) async {
+  Future<void> socialLoginCallback(String serverAuthCode) async {
     final dio = createDioWithoutToken();
 
     try {
       LoginRepository loginRepository = LoginRepository(dio);
-      final resp = await loginRepository.getLogin(serverAuthCode);
+      final resp = await loginRepository.getGoogleCallback(serverAuthCode);
       // token storage에 token 저장
       final at = resp.accessToken;
       final rt = resp.refreshToken;
@@ -70,10 +71,12 @@ class LoginController extends GetxController {
         await userStorage.setItem(Config.photo, resp.profile_url);
       }
 
-      // 알림 수신을 위한 fcm device 토큰 서버 전송
-      final fcmToken = await FirebaseMessaging.instance.getToken();
-      log('fcmToken: ${fcmToken}');
-      await patchDeviceToken(fcmToken!);
+      if (Platform.isAndroid) {
+        // 알림 수신을 위한 fcm device 토큰 서버 전송
+        final fcmToken = await FirebaseMessaging.instance.getToken();
+        log('fcmToken: ${fcmToken}');
+        await patchDeviceToken(fcmToken!);
+      }
 
       isLoginIng = false.obs;
 
@@ -129,16 +132,13 @@ class LoginController extends GetxController {
       await tokenStorage.write(key: 'RefreshToken', value: rt);
 
       setUserInfo();
-
-      // 메인화면으로 이동
-      // Get.offAllNamed(Config.routerMain);
     } on DioException catch (e) {
       log('checkLogin:: ${e.response}');
 
       if (e.response?.statusCode == 401) {
         log('checkLogin - 4xx번 Err 로그인 상태 아님');
         // RT 만료 외의 오류
-        handleLogout();
+        logoutWithoutNoti();
       }
 
       if (e.response!.statusCode! == 499) {
@@ -149,17 +149,20 @@ class LoginController extends GetxController {
     }
   }
 
-  // 로그아웃
-  void handleLogout() async {
+  Future<void> logoutWithNoti() async {
+    // 서버의 fcm 디바이스 토큰 삭제 요청 - 알림 수신 제외 목적
+    await postLogoutWithNoti();
+
+    logoutWithoutNoti();
+  }
+
+  void logoutWithoutNoti() async {
     // 소셜 로그인 플랫폼 로그아웃
     final social = await userStorage.getItem(Config.social);
     if (social == Config.google) {
       // 구글 로그아웃
       await GoogleSignIn().signOut();
     }
-
-    // 서버의 fcm 디바이스 토큰 삭제 요청 - 알림 수신 제외 목적
-    await postLogout();
 
     // 저장해둔 회원 정보 삭제
     await tokenStorage.delete(key: 'AccessToken');
@@ -178,7 +181,7 @@ class LoginController extends GetxController {
     }
   }
 
-  Future<void> postLogout() async {
+  Future<void> postLogoutWithNoti() async {
     final dio = createDio();
     LoginRepository loginRepository = LoginRepository(dio);
     try {

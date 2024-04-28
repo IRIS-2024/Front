@@ -16,5 +16,5 @@ abstract class LoginRepository {
       @Header('refreshToken') String refreshToken);
 
   @GET('/auth/google/callback')
-  Future<LoginResp> getLogin(@Query('code') String code);
+  Future<LoginResp> getGoogleCallback(@Query('code') String code);
 }
