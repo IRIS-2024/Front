@@ -12,11 +12,7 @@ import 'firebase_options.dart';
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // 최상단에 유지되어야 함 - do not move
   log('receive notification - background');
-  log('Message data: ${message.data} / Message Id: ${message.messageId}');
-
-  if (message.notification != null) {
-    log('title: ${message.notification!.title}, body: ${message.notification!.body}');
-  }
+  log('Message data: ${message.data} / title: ${message.notification?.title} / body: ${message.notification?.body}');
 }
 
 void main() async {
@@ -48,11 +44,10 @@ void main() async {
   // Foreground Message 수신
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     log('receive notification - foreground');
-    log('Message data: ${message.data} / Message Id: ${message.messageId}');
+    log('Message data: ${message.data} / title: ${message.notification?.title} / body: ${message.notification?.body}');
 
     if (message.notification != null) {
-      log('title: ${message.notification!.title}, body: ${message.notification!.body}');
-      localNotificationsController.showLocalNotifications(title: message.notification!.title!, body: message.notification!.body!);
+      localNotificationsController.showLocalNotifications(title: message.notification!.title!, body: message.notification!.body!, pid: message.data['pid']);
     }
   });
 

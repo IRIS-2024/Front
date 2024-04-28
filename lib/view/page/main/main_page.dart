@@ -7,7 +7,6 @@ import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/page/main/main_tab.dart';
-import 'package:iris_flutter/view/page/my_page/my_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -30,16 +29,11 @@ class _MainPageState extends State<MainPage> {
   }
 
   void _handleMessage(RemoteMessage message) {
-    if (message.notification!.body != '') { // 임시
-      // 알림 받은 특정 post로 이동
+    if (message.data['pid'] != '') {
       log('notification interaction - handleMessage');
-      Get.to(() => const MyPage());
+      // 알림 받은 특정 post로 이동
+      Get.toNamed(Config.routerPost, arguments: int.parse(message.data['pid']));
     }
-
-    // if (message.data['pid'] != '') {
-    //   // 알림 받은 특정 post로 이동
-    //   Get.toNamed(Config.routerPost, arguments: message.data['pid']);
-    // }
   }
 
   @override

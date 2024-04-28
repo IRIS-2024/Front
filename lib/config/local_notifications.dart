@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-
-import '../view/page/my_page/my_page.dart';
+import 'package:iris_flutter/config/config.dart';
 
 class LocalNotificationsController {
   final FlutterLocalNotificationsPlugin _localPlugin =
@@ -33,8 +30,7 @@ class LocalNotificationsController {
       initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse? response) {
         // interaction when notification is clicked - only foreground
-        log('${response?.payload}');
-        Get.to(() => const MyPage()); //   Get.toNamed(Config.routerPost, arguments: response?.payload]);
+          Get.toNamed(Config.routerPost, arguments: int.parse(response?.payload ?? ''));
         _cancelNotification();
       },
     );
@@ -59,9 +55,9 @@ class LocalNotificationsController {
   Future<void> showLocalNotifications({
     required String title,
     required String body,
-    int messageId = 1,
+    required String pid,
   }) async {
-    await _localPlugin.show(messageId, title, body, NotificationDetails(
+    await _localPlugin.show(1, title, body, NotificationDetails(
       // iOS: const DarwinNotificationDetails(
       //   presentAlert: true,
       //   presentBadge: true,
@@ -73,12 +69,8 @@ class LocalNotificationsController {
         body,
         importance: Importance.max,
         priority: Priority.high,
-        // ongoing: true,
-        // 앱을 실행 해야만 메시지가 사라지도록 설정
-        // styleInformation: BigTextStyleInformation(body),
-        // icon: 'ic_notification',
       ),
-    ), payload: 'pid' // TODO: write payload
+    ), payload: pid
     );
   }
 }
