@@ -8,6 +8,9 @@ part 'login_repository.g.dart';
 abstract class LoginRepository {
   factory LoginRepository(Dio dio, {String baseUrl}) = _LoginRepository;
 
+  @POST('/auth/logout')
+  Future postLogout();
+
   @GET('/auth/refresh')
   Future<LoginResp> getRefresh(
       @Header('refreshToken') String refreshToken);

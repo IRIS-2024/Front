@@ -1,11 +1,13 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/dio_config.dart';
 import 'package:iris_flutter/config/hidden_config.dart';
+import 'package:iris_flutter/model/noti_setting.dart';
 import 'package:iris_flutter/model/user.dart';
 import 'package:iris_flutter/repository/login_repository.dart';
 import 'package:iris_flutter/repository/member_repository.dart';
@@ -68,12 +70,30 @@ class LoginController extends GetxController {
         await userStorage.setItem(Config.photo, resp.profile_url);
       }
 
+      // 알림 수신을 위한 fcm device 토큰 서버 전송
+      final fcmToken = await FirebaseMessaging.instance.getToken();
+      log('fcmToken: ${fcmToken}');
+      await patchDeviceToken(fcmToken!);
+
       isLoginIng = false.obs;
 
       Get.offAllNamed(Config.routerMain);
     } on DioException catch (e) {
       log('login $e');
       return;
+    }
+  }
+
+  Future<void> patchDeviceToken(String deviceToken) async { // only device token required
+    final dio = createDio();
+    MemberRepository memberRepository = MemberRepository(dio);
+
+    try {
+      await memberRepository
+          .patchPush(NotiSetting(region: null, deviceToken: deviceToken));
+      // 설정 완료, 안내
+    } on DioException catch (e) {
+      log('[DioException] ${e.response}');
     }
   }
 
@@ -138,6 +158,9 @@ class LoginController extends GetxController {
       await GoogleSignIn().signOut();
     }
 
+    // 서버의 fcm 디바이스 토큰 삭제 요청 - 알림 수신 제외 목적
+    await postLogout();
+
     // 저장해둔 회원 정보 삭제
     await tokenStorage.delete(key: 'AccessToken');
     await tokenStorage.delete(key: 'RefreshToken');
@@ -152,6 +175,16 @@ class LoginController extends GetxController {
     isLoginIng.value = false;
     if (!Get.currentRoute.contains(Config.routerLogin)) {
       Get.offAllNamed(Config.routerLogin);
+    }
+  }
+
+  Future<void> postLogout() async {
+    final dio = createDio();
+    LoginRepository loginRepository = LoginRepository(dio);
+    try {
+      await loginRepository.postLogout();
+    } on DioException catch (e) {
+      log('[DioException] ${e.response}');
     }
   }
 }
