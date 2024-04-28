@@ -8,7 +8,6 @@ import 'package:iris_flutter/model/noti_setting.dart';
 import 'package:iris_flutter/repository/member_repository.dart';
 import 'package:iris_flutter/utils/region_name_utils.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
-import 'package:iris_flutter/view/page/my_page/my_page.dart';
 
 class NotificationSettingController {
   RxString selectedRegion1D = ''.obs;
@@ -36,8 +35,8 @@ class NotificationSettingController {
       await memberRepository
           .patchPush(NotiSetting(region: region, deviceToken: deviceToken));
       // 설정 완료, 안내
+      Get.back();
       customSnackBar(title: '알림 설정 저장', message: '설정 저장이 완료되었습니다.');
-      Get.to(()=>const MyPage());
     } on DioException catch (e) {
       log('[DioException] ${e.response}');
       customErrorSnackBar(title: '알림 설정 실패', message: '설정 저장이 실패하였습니다. 다시 시도해 주세요.');
