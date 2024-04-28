@@ -19,7 +19,7 @@ class _LoginRepository implements LoginRepository {
   String? baseUrl;
 
   @override
-  Future<LoginResp> getRefreshToken(String refreshToken) async {
+  Future<LoginResp> getRefresh(String refreshToken) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'refreshToken': refreshToken};
@@ -70,33 +70,6 @@ class _LoginRepository implements LoginRepository {
               baseUrl,
             ))));
     final value = LoginResp.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<User> getUserInfo() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/member',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = User.fromJson(_result.data!);
     return value;
   }
 

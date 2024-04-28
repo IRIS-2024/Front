@@ -1,4 +1,5 @@
 import 'package:iris_flutter/model/noti_setting.dart';
+import 'package:iris_flutter/model/user.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 
@@ -13,4 +14,7 @@ abstract class MemberRepository {
 
   @GET('/members/push/region')
   Future<String> getPushRegion();
+
+  @GET('/member')
+  Future<User> getUserInfo();
 }

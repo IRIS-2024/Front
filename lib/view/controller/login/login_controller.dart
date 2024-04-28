@@ -8,6 +8,7 @@ import 'package:iris_flutter/config/dio_config.dart';
 import 'package:iris_flutter/config/hidden_config.dart';
 import 'package:iris_flutter/model/user.dart';
 import 'package:iris_flutter/repository/login_repository.dart';
+import 'package:iris_flutter/repository/member_repository.dart';
 import 'package:iris_flutter/utils/user_profile_utils.dart';
 
 class LoginController extends GetxController {
@@ -56,9 +57,9 @@ class LoginController extends GetxController {
   Future<void> setUserInfo() async {
     try {
       final dio = createDio();
-      LoginRepository loginRepository = LoginRepository(dio);
+      MemberRepository memberRepository = MemberRepository(dio);
       // 사용자 정보 요청 API
-      User resp = await loginRepository.getUserInfo();
+      User resp = await memberRepository.getUserInfo();
 
       //local storage 에 id, email, nickName 저장
       await userStorage.setItem(Config.name, resp.name);
@@ -98,7 +99,7 @@ class LoginController extends GetxController {
       LoginRepository loginRepository = LoginRepository(dio);
 
       final refreshToken = await getRT();
-      final resp = await loginRepository.getRefreshToken(refreshToken);
+      final resp = await loginRepository.getRefresh(refreshToken);
 
       final at = resp.accessToken;
       final rt = resp.refreshToken;
