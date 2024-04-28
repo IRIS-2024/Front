@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:iris_flutter/config/region_list.dart';
 import 'package:iris_flutter/utils/conversion_utils.dart';
+import 'package:iris_flutter/utils/region_name_utils.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/controller/map/reverse_geocoding_service.dart';
 import 'package:iris_flutter/view/controller/map/map_service.dart';
@@ -27,18 +27,12 @@ class FormMapController {
     if (result != null) {
       address.value = convertRegionNameToShort(result.address_name);
       selectedPosition.value = loc;
-
-      final shortRegion1D = convertRegionNameToShort(result.region_1depth_name);
-      if (region1DepthWithout2Depth.contains(shortRegion1D)) {
-        notiRegion.value = shortRegion1D;
-      } else {
-        notiRegion.value = '${shortRegion1D} ${result.region_2depth_name}';
-      }
+      notiRegion.value = concatRegionNames(result.region_1depth_name, result.region_2depth_name);
 
       log('address.value: ${address.value}');
       log('notiRegion.value: ${notiRegion.value}');
     } else {
-      customErrorSnackBar(title: '반환된 주소 없음', message: '근처 위치로 다시 시도 해주세요.');
+      customErrorSnackBar(title: '반환된 주소 없음', message: '근처 위치로 다시 시도해 주세요.');
       address.value = null;
       selectedPosition.value = null;
       notiRegion.value = null;
