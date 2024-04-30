@@ -54,3 +54,4 @@ hidden_config.dart
 #firebase
 firebase_options.dart
 ios/firebase_app_id_file.json
+firebase.json
