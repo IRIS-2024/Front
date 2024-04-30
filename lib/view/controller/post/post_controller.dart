@@ -65,44 +65,17 @@ class PostController extends GetxController {
 
   Future<void> loadData(int? argumentPid) async {
     // /post/{post_id}
-    // try {
-    //   final dio = createDio();
-    //   final PostRepository infoRepository = PostRepository(dio);
-    //   final response =
-    //       await infoRepository.getPost(argumentPid ?? postId.value);
+    try {
+      final dio = createDio();
+      final PostRepository infoRepository = PostRepository(dio);
+      final response =
+          await infoRepository.getPost(argumentPid ?? postId.value);
 
-    //   post.value = response;
-    // } catch (error) {
-    //   // 에러 처리
-    //   print('Error fetching info detail: $error');
-    // }
-
-    Post dummy = Post(
-        pid: 1,
-        images: [
-          'https://plus.unsplash.com/premium_photo-1664203067979-47448934fd97?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-        ],
-        genImage:
-            'https://plus.unsplash.com/premium_photo-1664203067979-47448934fd97?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        genRepresent: true,
-        name: '윤여희',
-        gender: true,
-        age: 52,
-        height: 160,
-        weight: 55,
-        clothes: '흰 모자에 보라색 조끼, 검정 긴 바지',
-        details: '디테일디테일디테일디테일디테일디테일디테일디테일디테일내용내용내용내용',
-        address: '대한민국 서울특별시 숙명여대후문.이봉창활동터',
-        latitude: 37.544908,
-        longitude: 126.964758,
-        disappearedAt: '2024-04-16T11:56:52.588Z',
-        createdAt: "2024-04-16T11:56:52.588Z",
-        updatedAt: "2024-04-16T11:56:52.588Z",
-        bookmarked: false,
-        author: false);
-
-    post.value = dummy;
+      post.value = response;
+    } catch (error) {
+      // 에러 처리
+      print('Error fetching info detail: $error');
+    }
   }
 
   Future<void> loadComments() async {
@@ -112,53 +85,19 @@ class PostController extends GetxController {
       filterNum = Config.filterCriteria;
     }
 
-    // try {
-    //   final dio = createDio();
-    //   final CommentRepository comtRepository = CommentRepository(dio);
-    //   final response =
-    //       await comtRepository.getCommentList(postId.value, filterNum);
+    try {
+      final dio = createDio();
+      final CommentRepository comtRepository = CommentRepository(dio);
+      final response =
+          await comtRepository.getCommentList(postId.value, filterNum);
 
-    //   commentList.value = response;
-    //   // commentList.refresh();
-    // } catch (error) {
-    //   // 에러 처리s
-    //   print('Error fetching info detail: $error');
-    // }
-
-    List<Comment> dummy = [
-      Comment(
-          cid: 1,
-          address: '대한민국 서울특별시 용산구 갈월동 13-6',
-          latitude: 37.545048,
-          longitude: 126.963200,
-          clothes: '',
-          details: '상세',
-          images: [
-            'https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?q=80&w=1476&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-          ],
-          discoveredAt: '2024-04-19T05:50:51.273Z',
-          createdAt: '2024-04-19T05:50:51.273Z',
-          author: true),
-      Comment(
-          cid: 2,
-          address: '대한민국 서울특별시 용산구 남영동 47-1',
-          latitude: 37.544228,
-          longitude: 126.963606,
-          clothes: '옷차림',
-          details: '',
-          images: [
-            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            'https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?q=80&w=1476&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-          ],
-          accuracy: 85,
-          discoveredAt: '2024-04-19T05:50:51.273Z',
-          createdAt: '2024-04-19T05:50:51.273Z',
-          author: false)
-    ];
-    commentList.value = dummy;
-
-    makeMarkers();
+      commentList.value = response;
+      // commentList.refresh();
+      makeMarkers();
+    } catch (error) {
+      // 에러 처리s
+      print('Error fetching info detail: $error');
+    }
   }
 
   void makeMarkers() {
