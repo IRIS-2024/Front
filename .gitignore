@@ -50,4 +50,7 @@ app.*.map.json
 # 숨김 설정 파일
 hidden_config.dart
 /config/hidden_config.dart
+
+#firebase
 firebase_options.dart
+ios/firebase_app_id_file.json
