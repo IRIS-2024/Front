@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ImageCarousel extends StatefulWidget {
   final List<String> images;
@@ -130,8 +131,8 @@ class _ImageCarouselState extends State<ImageCarousel> {
       child: Container(
         padding: const EdgeInsets.all(1.0),
         color: Colors.white.withOpacity(0.5), // 반투명한 하얀 상자
-        child: const Text(
-          "입력된 정보를 기반으로 \nAI가 생성한 이미지 입니다.",
+        child: Text(
+          AppLocalizations.of(context)!.aiImg,
           style: CustomTextStyle.small,
           textAlign: TextAlign.center,
           overflow: TextOverflow.visible,

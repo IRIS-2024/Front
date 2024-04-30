@@ -4,6 +4,7 @@ import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/page/main/main_tab.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -48,13 +49,15 @@ class _MainPageState extends State<MainPage> {
                                   text: Get.put(MainController())
                                           .shortAddress
                                           .value ??
-                                      '현 위치',
+                                      AppLocalizations.of(context)!
+                                          .currentLocation,
                                   style: TextStyle(
                                       color: Theme.of(context)
                                           .colorScheme
                                           .primary)),
                               TextSpan(
-                                  text: "\n주변의 실종 정보입니다.",
+                                  text:
+                                      "\n${AppLocalizations.of(context)!.main}",
                                   style: TextStyle(
                                       color: Theme.of(context)
                                           .colorScheme
@@ -80,7 +83,7 @@ class _MainPageState extends State<MainPage> {
             // Get.toNamed(Config.routerPostForm);
             Get.toNamed(Config.routerAgree); // 동의화면부터
           },
-          label: const Text('신고하기'),
+          label: Text(AppLocalizations.of(context)!.report),
           backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
           foregroundColor: Theme.of(context).colorScheme.onTertiaryContainer,
           icon: const Icon(Icons.report_gmailerrorred),

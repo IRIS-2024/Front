@@ -6,6 +6,7 @@ import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/controller/post/post_controller.dart';
 import 'package:iris_flutter/view/page/post/image_carousel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetailTab extends StatefulWidget {
   const DetailTab({super.key});
@@ -70,13 +71,14 @@ class _DetailTabState extends State<DetailTab> {
                           children: [
                             Expanded(
                               child: postItem(
-                                  "성별",
+                                  AppLocalizations.of(context)!.gender,
                                   Config().getGenderText(
                                       postController.post.value.gender)),
                             ),
                             Expanded(
                               child: postItem(
-                                  "만 나이", '${postController.post.value.age} 세'),
+                                  AppLocalizations.of(context)!.ageMissing,
+                                  '${postController.post.value.age} ${AppLocalizations.of(context)!.ageunit}'),
                             )
                           ],
                         ),
@@ -90,12 +92,14 @@ class _DetailTabState extends State<DetailTab> {
                                 children: [
                                   if (postController.post.value.height != null)
                                     Expanded(
-                                      child: postItem("키",
+                                      child: postItem(
+                                          AppLocalizations.of(context)!.height,
                                           "${postController.post.value.height} cm"),
                                     ),
                                   if (postController.post.value.weight != null)
                                     Expanded(
-                                      child: postItem("몸무게",
+                                      child: postItem(
+                                          AppLocalizations.of(context)!.weight,
                                           "${postController.post.value.weight} kg"),
                                     )
                                 ],
@@ -103,13 +107,16 @@ class _DetailTabState extends State<DetailTab> {
                               const Divider(),
                             ],
                           ),
-                        postItem("마지막 위치", postController.post.value.address),
+                        postItem(AppLocalizations.of(context)!.missingLocation,
+                            postController.post.value.address),
                         const Divider(),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             postItem(
-                                "실종 당시 옷차림", postController.post.value.clothes),
+                                AppLocalizations.of(context)!
+                                    .missingDescription,
+                                postController.post.value.clothes),
                             const Divider(),
                           ],
                         ),
@@ -119,7 +126,8 @@ class _DetailTabState extends State<DetailTab> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               postItem(
-                                  "특이사항", postController.post.value.details),
+                                  AppLocalizations.of(context)!.characteristics,
+                                  postController.post.value.details),
                               const Divider(),
                             ],
                           ),

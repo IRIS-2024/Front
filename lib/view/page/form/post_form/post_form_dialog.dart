@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/form/post_form/post_form_controller.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void showPostFormDialog(dynamic controller) {
   Get.dialog(
@@ -20,7 +21,6 @@ class PostFormDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: CustomPadding.dialogInsets,
       child: FutureBuilder(
@@ -30,8 +30,8 @@ class PostFormDialog extends StatelessWidget {
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  '실종자 정보를 기반으로 \nAI 이미지를 생성하는 중 입니다.',
+                Text(
+                  AppLocalizations.of(context)!.processAI,
                   style: CustomTextStyle.titleBold,
                   textAlign: TextAlign.center,
                 ),
@@ -53,8 +53,8 @@ class PostFormDialog extends StatelessWidget {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                '생성된 AI 이미지를 대표\n이미지로 사용하시겠습니까?',
+              Text(
+                AppLocalizations.of(context)!.askAI,
                 style: CustomTextStyle.titleBold,
                 textAlign: TextAlign.center,
               ),
@@ -76,7 +76,7 @@ class PostFormDialog extends StatelessWidget {
                   onChanged: (value) {
                     controller.isChecked.value = value!;
                   },
-                  child: const Text('대표 이미지로 사용하기'),
+                  child: Text(AppLocalizations.of(context)!.useAI),
                 ),
               ),
               SizedBox(

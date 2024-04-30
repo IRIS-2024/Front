@@ -51,7 +51,8 @@ class CommentFormController {
         .pickMultiImage(
       maxHeight: 500,
       imageQuality: 30,
-    ).then((value) {
+    )
+        .then((value) {
       if (images.length + value.length > Config.maxImagesLength) {
         customErrorSnackBar(
             title: '이미지 최대 선택 초과', message: '이미지는 최대 3개 입력할 수 있습니다.');
@@ -75,7 +76,6 @@ class CommentFormController {
     showCommentFormDialog();
     await postCommentForm();
   }
-
 
   Future<void> postCommentForm() async {
     // request body form data 생성
@@ -102,8 +102,7 @@ class CommentFormController {
     commentRepository.postComment(formData).then((resp) {
       // Error 발생 하지 않으면 성공
       Get.back();
-      customSnackBar(
-          title: '제보 댓글 등록', message: '제보 댓글 등록이 완료되었습니다.');
+      customSnackBar(title: '제보 댓글 등록', message: '제보 댓글 등록이 완료되었습니다.');
       Get.offAllNamed(Config.routerPost, arguments: pid.value);
     }).catchError((err) {
       log('[catchError] $err');

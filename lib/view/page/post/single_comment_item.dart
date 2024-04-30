@@ -9,6 +9,7 @@ import 'package:iris_flutter/utils/time_diff_utils.dart';
 import 'package:iris_flutter/view/controller/post/post_controller.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SingleCmtItem extends StatefulWidget {
   final dynamic controller;
@@ -149,7 +150,8 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                       const Padding(padding: CustomPadding.slimBottom),
                       if (widget.comment.accuracy != null)
                         Text(
-                            '일치율 ${widget.comment.accuracy!.toStringAsFixed(0)} %',
+                            AppLocalizations.of(context)!.matchingRate(
+                                widget.comment.accuracy!.toStringAsFixed(0)),
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
@@ -167,8 +169,8 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("옷차림",
-                                style: TextStyle(color: Colors.grey)),
+                            Text(AppLocalizations.of(context)!.clothing,
+                                style: const TextStyle(color: Colors.grey)),
                             const SizedBox(
                               width: 8,
                             ),
@@ -179,8 +181,8 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("당시 상황",
-                                style: TextStyle(color: Colors.grey)),
+                            Text(AppLocalizations.of(context)!.circumstances,
+                                style: const TextStyle(color: Colors.grey)),
                             const SizedBox(
                               width: 8,
                             ),
@@ -230,9 +232,9 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text(
-                '닫기',
-                style: TextStyle(color: Colors.white),
+              child: Text(
+                AppLocalizations.of(context)!.close,
+                style: const TextStyle(color: Colors.white),
               ),
             ),
           ),

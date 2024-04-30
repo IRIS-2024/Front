@@ -8,6 +8,7 @@ import 'package:iris_flutter/view/page/main/delete_post_dialog.dart';
 import 'package:iris_flutter/view/page/post/detail_tab.dart';
 import 'package:iris_flutter/view/page/post/comment_tab.dart';
 import 'package:iris_flutter/config/config.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PostPage extends StatefulWidget {
   const PostPage({super.key});
@@ -48,9 +49,9 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-            title: const Text(
-              '실종 정보',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            title: Text(
+              AppLocalizations.of(context)!.missingPost,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             centerTitle: true,
             elevation: 0,
@@ -92,9 +93,13 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
               ),
               indicatorSize: TabBarIndicatorSize.tab,
               dividerColor: Colors.transparent,
-              tabs: const [
-                SizedBox(height: 40, child: Tab(text: "상세 내용")),
-                SizedBox(height: 40, child: Tab(text: "제보"))
+              tabs: [
+                SizedBox(
+                    height: 40,
+                    child: Tab(text: AppLocalizations.of(context)!.detail)),
+                SizedBox(
+                    height: 40,
+                    child: Tab(text: AppLocalizations.of(context)!.comment))
               ],
               controller: _nestedTabController,
             ),
@@ -120,7 +125,7 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
                         postController.postId.value, moveToMain);
                   },
                   backgroundColor: Colors.red,
-                  label: const Text('신고 해제하기'),
+                  label: Text(AppLocalizations.of(context)!.cancelReport),
                   icon: const Icon(Icons.highlight_off),
                 )
               : FloatingActionButton.extended(
@@ -133,7 +138,7 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
                       Theme.of(context).colorScheme.tertiaryContainer,
                   foregroundColor:
                       Theme.of(context).colorScheme.onTertiaryContainer,
-                  label: const Text('제보하기'),
+                  label: Text(AppLocalizations.of(context)!.submitTip),
                   icon: const Icon(Icons.report_gmailerrorred),
                 ))),
     );

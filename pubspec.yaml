@@ -59,10 +59,9 @@ dependencies:
   retrofit: ^4.1.0
 
   location: ^5.0.3
-
-  intl: ^0.19.0
-
+  intl:
   firebase_core:
+  flutter_localization: ^0.2.0
 
 dev_dependencies:
   flutter_test:
@@ -91,6 +90,8 @@ flutter:
   assets:
     - assets/
     - assets/images/
+
+  generate: true
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -5,6 +5,7 @@ import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/view/controller/post/post_controller.dart';
 import 'package:iris_flutter/view/page/post/single_comment_item.dart';
 import 'package:iris_flutter/view/page/post/map_item.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CommentTab extends StatefulWidget {
   const CommentTab({super.key});
@@ -62,22 +63,24 @@ class _CommentTabState extends State<CommentTab> {
                         () => SwitchListTile(
                             value: postController.isFilterOn.value,
                             controlAffinity: ListTileControlAffinity.leading,
-                            title: Text("일치율 ${Config.filterCriteria}% 이상"),
+                            title: Text(AppLocalizations.of(context)!
+                                .matchingRateFilter(Config.filterCriteria)),
                             onChanged: (value) {
-                              print("필터 클릭 - $value");
                               postController.isFilterOn.value = value;
                               postController.loadComments();
                             }),
                       )),
                   postController.commentList.isEmpty
                       ? Obx(() => postController.isFilterOn.value
-                          ? const Padding(
+                          ? Padding(
                               padding: CustomPadding.thickTop,
-                              child: Text("조건에 맞는 제보 댓글이 없습니다."),
+                              child:
+                                  Text(AppLocalizations.of(context)!.noCommt),
                             )
-                          : const Padding(
+                          : Padding(
                               padding: CustomPadding.thickTop,
-                              child: Text("아직 등록된 제보 댓글이 없습니다."),
+                              child: Text(
+                                  AppLocalizations.of(context)!.emptyCommt),
                             ))
                       : Container(
                           color: Colors.white,
