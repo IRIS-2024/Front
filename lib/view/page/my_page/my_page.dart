@@ -8,6 +8,7 @@ import 'package:iris_flutter/view/page/my_page/bookmark_post.dart';
 import 'package:iris_flutter/view/page/my_page/my_posts.dart';
 import 'package:iris_flutter/view/page/my_page/my_comments.dart';
 import 'package:iris_flutter/view/page/my_page/notification_setting.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({super.key});
@@ -25,7 +26,7 @@ class _MyPageState extends State<MyPage> {
     final controller = Get.find<LoginController>();
 
     return Scaffold(
-        appBar: customAppBar(title: "마이페이지"),
+        appBar: customAppBar(title: AppLocalizations.of(context)!.mypage),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
           child: Column(
@@ -47,20 +48,20 @@ class _MyPageState extends State<MyPage> {
                   ),
                   title: getUserDisplayName() != ''
                       ? Text(getUserDisplayName())
-                      : const Text(
-                          "사용자 이름을 등록해주세요.",
-                          style: TextStyle(color: Colors.grey),
+                      : Text(
+                          AppLocalizations.of(context)!.addUserName,
+                          style: const TextStyle(color: Colors.grey),
                         ),
                   subtitle: getUserEmail() != ''
                       ? Text(getUserEmail())
                       : const Text(" "),
                 ),
                 const Padding(padding: CustomPadding.regularBottom),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "글 관리",
-                    style: TextStyle(color: Colors.grey),
+                    AppLocalizations.of(context)!.postSetting,
+                    style: const TextStyle(color: Colors.grey),
                   ),
                 ),
                 const SizedBox(height: 6),
@@ -77,7 +78,7 @@ class _MyPageState extends State<MyPage> {
                     Icons.people,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
-                  title: const Text("작성한 실종 정보"),
+                  title: Text(AppLocalizations.of(context)!.writtenPost),
                   trailing:
                       const Icon(Icons.arrow_forward_ios_rounded, size: 16),
                 ),
@@ -87,7 +88,7 @@ class _MyPageState extends State<MyPage> {
                     Get.to(() => const MyComments());
                   },
                   leading: const Icon(Icons.chat),
-                  title: const Text("작성한 제보 댓글"),
+                  title: Text(AppLocalizations.of(context)!.writtenComment),
                   trailing:
                       const Icon(Icons.arrow_forward_ios_rounded, size: 16),
                 ),
@@ -101,18 +102,18 @@ class _MyPageState extends State<MyPage> {
                     Get.to(() => const BookmarkPost());
                   },
                   leading: const Icon(Icons.bookmark),
-                  title: const Text("북마크한 실종 정보"),
+                  title: Text(AppLocalizations.of(context)!.bookmarkPost),
                   trailing:
                       const Icon(Icons.arrow_forward_ios_rounded, size: 16),
                 ),
                 const SizedBox(
                   height: 24,
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "앱 설정",
-                    style: TextStyle(color: Colors.grey),
+                    AppLocalizations.of(context)!.appSetting,
+                    style: const TextStyle(color: Colors.grey),
                   ),
                 ),
                 const SizedBox(height: 6),
@@ -126,8 +127,9 @@ class _MyPageState extends State<MyPage> {
                           topLeft: Radius.circular(15),
                           topRight: Radius.circular(15))),
                   leading: const Icon(Icons.notifications),
-                  title: const Text("알림 설정"),
-                  trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+                  title: Text(AppLocalizations.of(context)!.pushSetting),
+                  trailing:
+                      const Icon(Icons.arrow_forward_ios_rounded, size: 16),
                 ),
                 ListTile(
                   tileColor: Theme.of(context).colorScheme.surfaceVariant,
@@ -135,7 +137,7 @@ class _MyPageState extends State<MyPage> {
                     controller.handleLogout();
                   },
                   leading: const Icon(Icons.logout),
-                  title: const Text("로그아웃"),
+                  title: Text(AppLocalizations.of(context)!.logout),
                   trailing:
                       const Icon(Icons.arrow_forward_ios_rounded, size: 16),
                 ),
@@ -149,7 +151,7 @@ class _MyPageState extends State<MyPage> {
                     print("탈퇴하기");
                   },
                   leading: const Icon(Icons.person_off_rounded),
-                  title: const Text("탈퇴하기"),
+                  title: Text(AppLocalizations.of(context)!.singout),
                   trailing:
                       const Icon(Icons.arrow_forward_ios_rounded, size: 16),
                 )

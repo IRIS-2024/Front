@@ -92,7 +92,7 @@ class PostFormDialog extends StatelessWidget {
                       foregroundColor:
                           Theme.of(context).colorScheme.onPrimaryContainer,
                     ),
-                    child: const Text('등록하기'),
+                    child: Text(AppLocalizations.of(context)!.submit),
                   )),
             ],
           );

@@ -7,6 +7,7 @@ import 'package:iris_flutter/config/region_list.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/page/form/submit_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotificationRegionSetting extends StatefulWidget {
   const NotificationRegionSetting({super.key});
@@ -25,12 +26,12 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(
-          title: '알림 설정',
+          title: AppLocalizations.of(context)!.pushSettings,
           actions: SubmitButton(
             onPressed: selectedRegion2D != '' ||
                     region1DepthWithout2Depth.contains(selectedRegion1D)
                 ? () {
-                    log('selectedRegion: ${selectedRegion1D} ${selectedRegion2D}');
+                    log('selectedRegion: $selectedRegion1D $selectedRegion2D');
                     // 저장
                     // customSnackBar(title: '설정 저장', message: '설정 저장이 완료되었습니다.');
                   }
@@ -41,8 +42,8 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
         child: Column(
           children: [
             SwitchListTile(
-              title: const Text('실종 정보 등록'),
-              subtitle: const Text('관심 지역의 새로운 실종 정보'),
+              title: Text(AppLocalizations.of(context)!.addMissingPost),
+              subtitle: Text(AppLocalizations.of(context)!.newMissingPost),
               value: isSwitched,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
@@ -61,11 +62,13 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
             if (isSwitched)
               Column(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(top: 25, left: 10, bottom: 5),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 25, left: 10, bottom: 5),
                     child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Text('관심 지역 선택')),
+                        child:
+                            Text(AppLocalizations.of(context)!.selectInterest)),
                   ),
                   Column(
                     children: [
@@ -83,14 +86,16 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              titleWidget('시﹒도'),
+                              titleWidget(
+                                  AppLocalizations.of(context)!.firstArea),
                               VerticalDivider(
                                 width: 0,
                                 color: Theme.of(context)
                                     .colorScheme
                                     .outlineVariant,
                               ),
-                              titleWidget('시﹒군﹒구'),
+                              titleWidget(
+                                  AppLocalizations.of(context)!.secondArea),
                             ],
                           ),
                         ),
@@ -146,8 +151,7 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
                                                     .copyWith(
                                                         color: isSelected
                                                             // ? Colors.white
-                                                            ? Theme.of(
-                                                                    context)
+                                                            ? Theme.of(context)
                                                                 .colorScheme
                                                                 .onPrimary
                                                             : Colors.black),
@@ -169,8 +173,8 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
                                   height:
                                       MediaQuery.of(context).size.height - 310,
                                   child: selectedRegion1D != ''
-                                      ? region1DepthWithout2Depth
-                                              .contains(selectedRegion1D) // 시단구 단위 없는 경우
+                                      ? region1DepthWithout2Depth.contains(
+                                              selectedRegion1D) // 시단구 단위 없는 경우
                                           ? Container(
                                               color: Theme.of(context)
                                                   .colorScheme
@@ -178,12 +182,14 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
                                               height: 40,
                                               alignment: Alignment.topCenter,
                                               child: Text(
-                                                '-', style: CustomTextStyle.basic.copyWith(
-                                                  color: Theme.of(
-                                                      context)
-                                                      .colorScheme
-                                                      .outline
-                                                      ),), )
+                                                '-',
+                                                style: CustomTextStyle.basic
+                                                    .copyWith(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .outline),
+                                              ),
+                                            )
                                           : ListView.builder(
                                               padding: const EdgeInsets.only(
                                                   bottom: 10),
@@ -218,17 +224,20 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
                                                               .withOpacity(0.3)
                                                           : Colors.transparent,
                                                       height: 40,
-                                                      alignment: Alignment.centerLeft,
+                                                      alignment:
+                                                          Alignment.centerLeft,
                                                       child: Text(
                                                         '${regionMap[selectedRegion1D][idx]}',
-                                                        style: CustomTextStyle.basic.copyWith(
-                                                            color: isSelected
-                                                                ? Theme.of(
-                                                                        context)
-                                                                    .colorScheme
-                                                                    .primary
-                                                                : Colors
-                                                                    .black),
+                                                        style: CustomTextStyle
+                                                            .basic
+                                                            .copyWith(
+                                                                color: isSelected
+                                                                    ? Theme.of(
+                                                                            context)
+                                                                        .colorScheme
+                                                                        .primary
+                                                                    : Colors
+                                                                        .black),
                                                       )),
                                                 );
                                               })
