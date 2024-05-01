@@ -60,14 +60,14 @@ dependencies:
 
   location: ^5.0.3
   intl:
-  firebase_core:
 
   # language
   # flutter_localization: ^0.2.0
   flutter_localizations:
         sdk: flutter 
   get_it:
-  intl: ^0.19.0
+  
+  # push notification
   firebase_messaging: ^14.7.19
   flutter_local_notifications: ^17.1.0
   firebase_core: ^2.27.0
