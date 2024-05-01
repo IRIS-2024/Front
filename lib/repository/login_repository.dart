@@ -1,5 +1,4 @@
 import 'package:iris_flutter/model/login_response.dart';
-import 'package:iris_flutter/model/user.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 
@@ -9,13 +8,13 @@ part 'login_repository.g.dart';
 abstract class LoginRepository {
   factory LoginRepository(Dio dio, {String baseUrl}) = _LoginRepository;
 
+  @POST('/auth/logout')
+  Future postLogout();
+
   @GET('/auth/refresh')
-  Future<LoginResp> getRefreshToken(
+  Future<LoginResp> getRefresh(
       @Header('refreshToken') String refreshToken);
 
   @GET('/auth/google/callback')
-  Future<LoginResp> getLogin(@Query('code') String code);
-
-  @GET('/member')
-  Future<User> getUserInfo();
+  Future<LoginResp> getGoogleCallback(@Query('code') String code);
 }

@@ -27,7 +27,7 @@ def googleMapApiKey = localProperties.getProperty('google.map.key')
 
 android {
     namespace "com.example.iris_flutter"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {

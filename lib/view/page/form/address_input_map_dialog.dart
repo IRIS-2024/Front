@@ -113,6 +113,7 @@ class _AddressInputMapDialogState extends State<AddressInputMapDialog> {
     final formMapController = Get.put(FormMapController());
     // 주소 저장
     widget.controller.address.value = formMapController.address.value!;
+    widget.controller.notiRegion.value = formMapController.notiRegion.value!;
     // 위도, 경도 저장
     widget.controller.latitude.value = formMapController.selectedPosition.value?.latitude;
     widget.controller.longitude.value = formMapController.selectedPosition.value?.longitude;

@@ -89,7 +89,7 @@ class TokenInterceptor extends Interceptor {
 
       final refreshToken = await getRT();
 
-      final resp = await loginRepository.getRefreshToken(refreshToken);
+      final resp = await loginRepository.getRefresh(refreshToken);
       print('new AccessToken Token: ${resp.accessToken}');
       final AT = resp.accessToken;
       final RT = resp.refreshToken;
@@ -107,7 +107,7 @@ class TokenInterceptor extends Interceptor {
         log('refreshToken Expired: Logout');
 
         Get.put(LoginController());
-        Get.find<LoginController>().handleLogout();
+        Get.find<LoginController>().logoutWithoutNoti();
       }
       return '';
     }
