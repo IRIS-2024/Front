@@ -1,13 +1,17 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/dio_config.dart';
 import 'package:iris_flutter/config/hidden_config.dart';
+import 'package:iris_flutter/model/noti_setting.dart';
 import 'package:iris_flutter/model/user.dart';
 import 'package:iris_flutter/repository/login_repository.dart';
+import 'package:iris_flutter/repository/member_repository.dart';
 import 'package:iris_flutter/utils/user_profile_utils.dart';
 
 class LoginController extends GetxController {
@@ -22,7 +26,7 @@ class LoginController extends GetxController {
 
     await googleSignIn.signIn().then((result) {
       result?.authentication.then((googleKey) {
-        tokenLogin(result.serverAuthCode!);
+        socialLoginCallback(result.serverAuthCode!);
       }).catchError((err) {
         log('inner error');
       });
@@ -32,12 +36,12 @@ class LoginController extends GetxController {
     await userStorage.setItem(Config.social, Config.google);
   }
 
-  Future<void> tokenLogin(String serverAuthCode) async {
+  Future<void> socialLoginCallback(String serverAuthCode) async {
     final dio = createDioWithoutToken();
 
     try {
       LoginRepository loginRepository = LoginRepository(dio);
-      final resp = await loginRepository.getLogin(serverAuthCode);
+      final resp = await loginRepository.getGoogleCallback(serverAuthCode);
       // token storage에 token 저장
       final at = resp.accessToken;
       final rt = resp.refreshToken;
@@ -56,9 +60,9 @@ class LoginController extends GetxController {
   Future<void> setUserInfo() async {
     try {
       final dio = createDio();
-      LoginRepository loginRepository = LoginRepository(dio);
+      MemberRepository memberRepository = MemberRepository(dio);
       // 사용자 정보 요청 API
-      User resp = await loginRepository.getUserInfo();
+      User resp = await memberRepository.getUserInfo();
 
       //local storage 에 id, email, nickName 저장
       await userStorage.setItem(Config.name, resp.name);
@@ -67,12 +71,32 @@ class LoginController extends GetxController {
         await userStorage.setItem(Config.photo, resp.profile_url);
       }
 
+      if (Platform.isAndroid) {
+        // 알림 수신을 위한 fcm device 토큰 서버 전송
+        final fcmToken = await FirebaseMessaging.instance.getToken();
+        log('fcmToken: ${fcmToken}');
+        await patchDeviceToken(fcmToken!);
+      }
+
       isLoginIng = false.obs;
 
       Get.offAllNamed(Config.routerMain);
     } on DioException catch (e) {
       log('login $e');
       return;
+    }
+  }
+
+  Future<void> patchDeviceToken(String deviceToken) async { // only device token required
+    final dio = createDio();
+    MemberRepository memberRepository = MemberRepository(dio);
+
+    try {
+      await memberRepository
+          .patchPush(NotiSetting(region: null, deviceToken: deviceToken));
+      // 설정 완료, 안내
+    } on DioException catch (e) {
+      log('[DioException] ${e.response}');
     }
   }
 
@@ -98,7 +122,7 @@ class LoginController extends GetxController {
       LoginRepository loginRepository = LoginRepository(dio);
 
       final refreshToken = await getRT();
-      final resp = await loginRepository.getRefreshToken(refreshToken);
+      final resp = await loginRepository.getRefresh(refreshToken);
 
       final at = resp.accessToken;
       final rt = resp.refreshToken;
@@ -108,16 +132,13 @@ class LoginController extends GetxController {
       await tokenStorage.write(key: 'RefreshToken', value: rt);
 
       setUserInfo();
-
-      // 메인화면으로 이동
-      // Get.offAllNamed(Config.routerMain);
     } on DioException catch (e) {
       log('checkLogin:: ${e.response}');
 
       if (e.response?.statusCode == 401) {
         log('checkLogin - 4xx번 Err 로그인 상태 아님');
         // RT 만료 외의 오류
-        handleLogout();
+        logoutWithoutNoti();
       }
 
       if (e.response!.statusCode! == 499) {
@@ -128,8 +149,14 @@ class LoginController extends GetxController {
     }
   }
 
-  // 로그아웃
-  void handleLogout() async {
+  Future<void> logoutWithNoti() async {
+    // 서버의 fcm 디바이스 토큰 삭제 요청 - 알림 수신 제외 목적
+    await postLogoutWithNoti();
+
+    logoutWithoutNoti();
+  }
+
+  void logoutWithoutNoti() async {
     // 소셜 로그인 플랫폼 로그아웃
     final social = await userStorage.getItem(Config.social);
     if (social == Config.google) {
@@ -151,6 +178,16 @@ class LoginController extends GetxController {
     isLoginIng.value = false;
     if (!Get.currentRoute.contains(Config.routerLogin)) {
       Get.offAllNamed(Config.routerLogin);
+    }
+  }
+
+  Future<void> postLogoutWithNoti() async {
+    final dio = createDio();
+    LoginRepository loginRepository = LoginRepository(dio);
+    try {
+      await loginRepository.postLogout();
+    } on DioException catch (e) {
+      log('[DioException] ${e.response}');
     }
   }
 }

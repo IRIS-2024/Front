@@ -51,6 +51,8 @@ ios/Runner/Info.plist
 # 숨김 설정 파일
 hidden_config.dart
 /config/hidden_config.dart
-lib/firebase_options.dart
-firebase.json
+
+#firebase
+firebase_options.dart
 ios/firebase_app_id_file.json
+firebase.json

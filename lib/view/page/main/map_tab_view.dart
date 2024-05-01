@@ -39,13 +39,12 @@ class _MapTabViewState extends State<MapTabView> {
                     zoom: Config.initZoom),
                 mapToolbarEnabled: false,
                 zoomControlsEnabled: false,
+                myLocationButtonEnabled: false,
                 // min max zoom 제한
                 minMaxZoomPreference:
                     MinMaxZoomPreference(Config.minZoom, Config.maxZoom),
                 // 기울기 제스처 false
                 tiltGesturesEnabled: false,
-                // 현재 위치 표시 버튼 true
-                myLocationButtonEnabled: true,
                 // 현재 위치 표시 true
                 myLocationEnabled: true,
                 // 위치 버튼과 신고하기 floatingButton 겹치지 않게 padding 설정

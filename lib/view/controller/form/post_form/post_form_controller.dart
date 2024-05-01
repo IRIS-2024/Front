@@ -30,6 +30,7 @@ class PostFormController {
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
   Rx<String?> address = Rx<String?>(null);
+  Rx<String?> notiRegion = Rx<String?>(null);
   Rx<double?> latitude = Rx<double?>(null);
   Rx<double?> longitude = Rx<double?>(null);
   TextEditingController clothesController = TextEditingController();
@@ -82,6 +83,7 @@ class PostFormController {
       'height': heightController.text, // * nullable 여부
       'weight': weightController.text,
       'address': address.value,
+      'region': notiRegion.value,
       'latitude': latitude.value,
       'longitude': longitude.value,
       'disappearedAt': combineTimeOfDayWithCurrentDate(timeOfDay.value!),

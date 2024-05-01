@@ -1,14 +1,61 @@
+import 'dart:developer';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
+import 'package:iris_flutter/config/local_notifications.dart';
 import 'package:iris_flutter/config/theme.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:iris_flutter/generated/l10n.dart';
 import 'package:iris_flutter/core/localization/generated/l10n.dart';
+import 'firebase_options.dart';
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // 최상단에 유지되어야 함 - do not move
+  log('receive notification - background');
+  log('Message data: ${message.data} / title: ${message.notification?.title} / body: ${message.notification?.body}');
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // for FCM
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // Background Message 수신
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // permission
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+  log('User granted permission: ${settings.authorizationStatus}');
+
+  // local notification permission
+  LocalNotificationsController localNotificationsController =
+      LocalNotificationsController();
+  localNotificationsController.initializeLocalNotifications();
+
+  // Foreground Message 수신
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    log('receive notification - foreground');
+    log('Message data: ${message.data} / title: ${message.notification?.title} / body: ${message.notification?.body}');
+
+    if (message.notification != null) {
+      localNotificationsController.showLocalNotifications(
+          title: message.notification!.title!,
+          body: message.notification!.body!,
+          pid: message.data['pid']);
+    }
+  });
 
   // localStorage ready
   await userStorage.ready;
@@ -32,7 +79,7 @@ class MyApp extends StatelessWidget {
       ),
       localizationsDelegates: const [
         I10n.delegate,
-        AppLocalizations.delegate,
+        // AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
