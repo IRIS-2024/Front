@@ -5,7 +5,7 @@ import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/page/form/submit_button.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class AgreementPage extends StatefulWidget {
   const AgreementPage({super.key});
@@ -27,7 +27,7 @@ class _AgreementPageState extends State<AgreementPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(
-        title: AppLocalizations.of(context)!.reportMissingTitle,
+        title: Intl.message('reportMissingTitle'),
       ),
       body: Padding(
         padding: CustomPadding.pageInsets,
@@ -35,7 +35,7 @@ class _AgreementPageState extends State<AgreementPage> {
             child: Column(
           children: [
             const Padding(padding: CustomPadding.mediumBottom),
-            Text(AppLocalizations.of(context)!.agreementTitle,
+            Text(Intl.message('agreementTitle'),
                 style: CustomTextStyle.basicBold, textAlign: TextAlign.center),
             const Padding(padding: CustomPadding.regularBottom),
             Flexible(
@@ -50,7 +50,7 @@ class _AgreementPageState extends State<AgreementPage> {
                   controller: _controller,
                   child: Padding(
                     padding: CustomPadding.dialogInsets,
-                    child: Text(AppLocalizations.of(context)!.agreementContent),
+                    child: Text(Intl.message('agreementContent')),
                   ),
                 ),
               ),
@@ -65,7 +65,7 @@ class _AgreementPageState extends State<AgreementPage> {
                 onPressed: () {
                   Get.toNamed(Config.routerPostForm);
                 },
-                child: Text(AppLocalizations.of(context)!.agreementCheck))
+                child: Text(Intl.message('agreementCheck')))
           ],
         )),
       ),

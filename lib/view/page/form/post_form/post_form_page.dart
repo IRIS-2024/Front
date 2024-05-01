@@ -15,7 +15,7 @@ import 'package:iris_flutter/view/page/form/submit_button.dart';
 import 'package:iris_flutter/view/page/form/text_form.dart';
 import 'package:iris_flutter/view/page/form/image_carousel_form.dart';
 import 'package:iris_flutter/view/page/form/time_form.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class PostFormPage extends StatefulWidget {
   const PostFormPage({Key? key}) : super(key: key);
@@ -37,7 +37,7 @@ class _PostFormPageState extends State<PostFormPage> {
       // autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Scaffold(
         appBar: customAppBar(
-            title: AppLocalizations.of(context)!.reportMissingTitle,
+            title: Intl.message('reportMissingTitle'),
             actions: SubmitButton(onPressed: () {
               // validate image, location
               postController.initValidation.value = false;
@@ -53,16 +53,16 @@ class _PostFormPageState extends State<PostFormPage> {
               children: [
                 // 사진
                 ImageCarouselForm(
-                  title: AppLocalizations.of(context)!.reportMissingTitle,
+                  title: Intl.message('reportMissingTitle'),
                   controller: postController,
                 ),
                 // 실종자 이름
                 TextForm(
                     textEditingController: postController.nameController,
-                    title: AppLocalizations.of(context)!.postMissingName,
+                    title: Intl.message('postMissingName'),
                     isRequired: true,
-                    validatorText: AppLocalizations.of(context)!.postName,
-                    hintText: AppLocalizations.of(context)!.postHintName,
+                    validatorText: Intl.message('postName'),
+                    hintText: Intl.message('postHintName'),
                     maxLength: 20),
 
                 // 성별, 만 나이
@@ -71,17 +71,17 @@ class _PostFormPageState extends State<PostFormPage> {
                     Flexible(
                         flex: 1,
                         child: BasicForm(
-                          title: AppLocalizations.of(context)!.gender,
+                          title: Intl.message('gender'),
                           isRequired: true,
                           widget: Obx(
                             () => Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 genderButton(
-                                    title: AppLocalizations.of(context)!.female,
+                                    title: Intl.message('female'),
                                     gender: Config.woman),
                                 genderButton(
-                                    title: AppLocalizations.of(context)!.male,
+                                    title: Intl.message('male'),
                                     gender: Config.man),
                               ],
                             ),
@@ -92,9 +92,9 @@ class _PostFormPageState extends State<PostFormPage> {
                       flex: 1,
                       child: numberField(
                           textEditingController: postController.ageController,
-                          title: AppLocalizations.of(context)!.ageMissing,
+                          title: Intl.message('ageMissing'),
                           isRequired: true,
-                          unitText: AppLocalizations.of(context)!.ageunit),
+                          unitText: Intl.message('ageunit')),
                     )
                   ],
                 ),
@@ -106,7 +106,7 @@ class _PostFormPageState extends State<PostFormPage> {
                         child: numberField(
                             textEditingController:
                                 postController.heightController,
-                            title: AppLocalizations.of(context)!.height,
+                            title: Intl.message('height'),
                             isRequired: false,
                             unitText: 'cm')),
                     const Padding(padding: CustomPadding.regularRight),
@@ -115,7 +115,7 @@ class _PostFormPageState extends State<PostFormPage> {
                         child: numberField(
                             textEditingController:
                                 postController.weightController,
-                            title: AppLocalizations.of(context)!.weight,
+                            title: Intl.message('weight'),
                             isRequired: false,
                             unitText: 'kg')),
                   ],
@@ -123,28 +123,28 @@ class _PostFormPageState extends State<PostFormPage> {
 
                 // 실종 시각
                 TimeForm(
-                    title: AppLocalizations.of(context)!.missingTime,
+                    title: Intl.message('missingTime'),
                     controller: postController),
                 // 마지막 위치
                 AddressForm(
-                    title: AppLocalizations.of(context)!.missingLocation,
+                    title: Intl.message('missingLocation'),
                     controller: postController),
 
                 // 실종 당시 옷차림
                 TextForm(
                   textEditingController: postController.clothesController,
-                  title: AppLocalizations.of(context)!.missingDescription,
+                  title: Intl.message('missingDescription'),
                   isRequired: true,
-                  validatorText: AppLocalizations.of(context)!.postClothing,
-                  hintText: AppLocalizations.of(context)!.postHintCharact,
+                  validatorText: Intl.message('postClothing'),
+                  hintText: Intl.message('postHintCharact'),
                   maxLength: 40,
                 ),
                 // 특이사항
                 TextForm(
                     textEditingController: postController.detailsController,
-                    title: AppLocalizations.of(context)!.characteristics,
+                    title: Intl.message('characteristics'),
                     isRequired: false,
-                    hintText: AppLocalizations.of(context)!.postHintCharact,
+                    hintText: Intl.message('postHintCharact'),
                     maxLength: 300,
                     maxLengths: 6),
               ],
@@ -179,7 +179,7 @@ class _PostFormPageState extends State<PostFormPage> {
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             validator: (value) {
               if (value!.isEmpty && isRequired) {
-                return AppLocalizations.of(context)!.postAge;
+                return Intl.message('postAge');
               }
               return null;
             },

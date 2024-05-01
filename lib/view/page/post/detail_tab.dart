@@ -6,7 +6,7 @@ import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/controller/post/post_controller.dart';
 import 'package:iris_flutter/view/page/post/image_carousel.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class DetailTab extends StatefulWidget {
   const DetailTab({super.key});
@@ -71,14 +71,13 @@ class _DetailTabState extends State<DetailTab> {
                           children: [
                             Expanded(
                               child: postItem(
-                                  AppLocalizations.of(context)!.gender,
+                                  Intl.message('gender'),
                                   Config().getGenderText(
                                       postController.post.value.gender)),
                             ),
                             Expanded(
-                              child: postItem(
-                                  AppLocalizations.of(context)!.ageMissing,
-                                  '${postController.post.value.age} ${AppLocalizations.of(context)!.ageunit}'),
+                              child: postItem(Intl.message('ageMissing'),
+                                  '${postController.post.value.age} ${Intl.message('ageunit')}'),
                             )
                           ],
                         ),
@@ -92,14 +91,12 @@ class _DetailTabState extends State<DetailTab> {
                                 children: [
                                   if (postController.post.value.height != null)
                                     Expanded(
-                                      child: postItem(
-                                          AppLocalizations.of(context)!.height,
+                                      child: postItem(Intl.message('height'),
                                           "${postController.post.value.height} cm"),
                                     ),
                                   if (postController.post.value.weight != null)
                                     Expanded(
-                                      child: postItem(
-                                          AppLocalizations.of(context)!.weight,
+                                      child: postItem(Intl.message('weight'),
                                           "${postController.post.value.weight} kg"),
                                     )
                                 ],
@@ -107,15 +104,13 @@ class _DetailTabState extends State<DetailTab> {
                               const Divider(),
                             ],
                           ),
-                        postItem(AppLocalizations.of(context)!.missingLocation,
+                        postItem(Intl.message('missingLocation'),
                             postController.post.value.address),
                         const Divider(),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            postItem(
-                                AppLocalizations.of(context)!
-                                    .missingDescription,
+                            postItem(Intl.message('missingDescription'),
                                 postController.post.value.clothes),
                             const Divider(),
                           ],
@@ -125,8 +120,7 @@ class _DetailTabState extends State<DetailTab> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              postItem(
-                                  AppLocalizations.of(context)!.characteristics,
+                              postItem(Intl.message('characteristics'),
                                   postController.post.value.details),
                               const Divider(),
                             ],

@@ -4,7 +4,7 @@ import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/page/form/basic_form.dart';
 import 'package:iris_flutter/view/page/form/address_input_map_dialog.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class AddressForm extends StatelessWidget {
   final String title;
@@ -36,14 +36,14 @@ class AddressForm extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.0))),
                   icon: const Icon(Icons.my_location),
                   label: Text(controller.address.value ??
-                      AppLocalizations.of(context)!.enterLocation)),
+                      Intl.message('enterLocation'))),
               controller.address.value == null &&
                       controller.initValidation.value != true
                   ? Column(
                       children: [
                         const Padding(padding: CustomPadding.slimBottom),
                         Text(
-                          AppLocalizations.of(context)!.enterLocationPlz,
+                          Intl.message('enterLocationPlz'),
                           style: CustomTextStyle.small.copyWith(
                               color: Theme.of(context).colorScheme.error),
                         ),

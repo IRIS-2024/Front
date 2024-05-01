@@ -7,7 +7,7 @@ import 'package:iris_flutter/config/region_list.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/page/form/submit_button.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class NotificationRegionSetting extends StatefulWidget {
   const NotificationRegionSetting({super.key});
@@ -26,7 +26,7 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(
-          title: AppLocalizations.of(context)!.pushSettings,
+          title: Intl.message('pushSettings'),
           actions: SubmitButton(
             onPressed: selectedRegion2D != '' ||
                     region1DepthWithout2Depth.contains(selectedRegion1D)
@@ -42,8 +42,8 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
         child: Column(
           children: [
             SwitchListTile(
-              title: Text(AppLocalizations.of(context)!.addMissingPost),
-              subtitle: Text(AppLocalizations.of(context)!.newMissingPost),
+              title: Text(Intl.message('addMissingPost')),
+              subtitle: Text(Intl.message('newMissingPost')),
               value: isSwitched,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
@@ -67,8 +67,7 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
                         const EdgeInsets.only(top: 25, left: 10, bottom: 5),
                     child: Align(
                         alignment: Alignment.centerLeft,
-                        child:
-                            Text(AppLocalizations.of(context)!.selectInterest)),
+                        child: Text(Intl.message('selectInterest'))),
                   ),
                   Column(
                     children: [
@@ -86,16 +85,14 @@ class _NotificationRegionSettingState extends State<NotificationRegionSetting> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              titleWidget(
-                                  AppLocalizations.of(context)!.firstArea),
+                              titleWidget(Intl.message('firstArea')),
                               VerticalDivider(
                                 width: 0,
                                 color: Theme.of(context)
                                     .colorScheme
                                     .outlineVariant,
                               ),
-                              titleWidget(
-                                  AppLocalizations.of(context)!.secondArea),
+                              titleWidget(Intl.message('secondArea')),
                             ],
                           ),
                         ),

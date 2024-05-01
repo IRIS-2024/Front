@@ -6,7 +6,7 @@ import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/page/main/latest_post_tab_view.dart';
 import 'package:iris_flutter/view/page/main/map_tab_view.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class MainTab extends StatefulWidget {
   const MainTab({Key? key}) : super(key: key);
@@ -50,11 +50,8 @@ class _MainTabState extends State<MainTab> with TickerProviderStateMixin {
                   dividerColor: Colors.transparent,
                   tabs: [
                     SizedBox(
-                        height: 40,
-                        child: Tab(text: AppLocalizations.of(context)!.post)),
-                    SizedBox(
-                        height: 40,
-                        child: Tab(text: AppLocalizations.of(context)!.map))
+                        height: 40, child: Tab(text: Intl.message('post'))),
+                    SizedBox(height: 40, child: Tab(text: Intl.message('map')))
                   ],
                   controller: _nestedTabController,
                 ),
@@ -66,9 +63,8 @@ class _MainTabState extends State<MainTab> with TickerProviderStateMixin {
                     Get.put(MainController()).getPositionAndPostList();
                     // updated
                     customSnackBar(
-                        title: AppLocalizations.of(context)!.updateLocation,
-                        message:
-                            AppLocalizations.of(context)!.updateLocationAlert);
+                        title: Intl.message('updateLocation'),
+                        message: Intl.message('updateLocationAlert'));
                   },
                   icon: const Icon(Icons.my_location)),
             ],

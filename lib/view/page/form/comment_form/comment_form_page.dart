@@ -12,7 +12,7 @@ import 'package:iris_flutter/view/page/form/image_carousel_form.dart';
 import 'package:iris_flutter/view/page/form/submit_button.dart';
 import 'package:iris_flutter/view/page/form/text_form.dart';
 import 'package:iris_flutter/view/page/form/time_form.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class CommentFormPage extends StatefulWidget {
   const CommentFormPage({Key? key}) : super(key: key);
@@ -36,7 +36,7 @@ class _CommentFormState extends State<CommentFormPage> {
 
     return Scaffold(
       appBar: customAppBar(
-          title: AppLocalizations.of(context)!.submitTip,
+          title: Intl.message('submitTip'),
           actions: SubmitButton(onPressed: () {
             // validate image, time, location
             commentController.initValidation.value = false;
@@ -68,7 +68,7 @@ class _CommentFormState extends State<CommentFormPage> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width - 120,
                         child: Text(
-                            '${commentController.postName.value} / ${Config().getGenderText(commentController.postGender.value)} / ${commentController.postAge.value}${AppLocalizations.of(context)!.ageunit} / ${commentController.postAddress.value}',
+                            '${commentController.postName.value} / ${Config().getGenderText(commentController.postGender.value)} / ${commentController.postAge.value}${Intl.message('ageunit')} / ${commentController.postAddress.value}',
                             overflow: TextOverflow.ellipsis,
                             style: CustomTextStyle.basic),
                       ),
@@ -80,31 +80,30 @@ class _CommentFormState extends State<CommentFormPage> {
 
               // 제보 사진 추가
               ImageCarouselForm(
-                title: AppLocalizations.of(context)!.comment,
+                title: Intl.message('comment'),
                 controller: commentController,
               ),
               // 발견 당시 시간
               TimeForm(
-                  title: AppLocalizations.of(context)!.commentTime,
+                  title: Intl.message('commentTime'),
                   controller: commentController),
               // 발견 당시 위치
               AddressForm(
-                  title: AppLocalizations.of(context)!.commentLocation,
+                  title: Intl.message('commentLocation'),
                   controller: commentController),
               // 발견 당시 옷차림
               TextForm(
                   textEditingController: commentController.clothesController,
-                  title: AppLocalizations.of(context)!.commentClothing,
+                  title: Intl.message('commentClothing'),
                   isRequired: false,
-                  hintText: AppLocalizations.of(context)!.commentClothingHint,
+                  hintText: Intl.message('commentClothingHint'),
                   maxLength: 20),
               // 발견 당시 상황
               TextForm(
                 textEditingController: commentController.detailsController,
-                title: AppLocalizations.of(context)!.commentCircumstances,
+                title: Intl.message('commentCircumstances'),
                 isRequired: false,
-                hintText:
-                    AppLocalizations.of(context)!.commentCircumstancesHint,
+                hintText: Intl.message('commentCircumstancesHint'),
                 maxLength: 300,
                 maxLengths: 6,
               ),

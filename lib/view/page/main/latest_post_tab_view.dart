@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/page/main/single_post_item.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class LatestPostTabView extends StatefulWidget {
   const LatestPostTabView({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class _LatestPostTabViewState extends State<LatestPostTabView> {
                     controller: mainController,
                   );
                 })
-            : Center(child: Text(AppLocalizations.of(context)!.emptyInfo));
+            : Center(child: Text(Intl.message('emptyInfo')));
       },
     );
   }

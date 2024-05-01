@@ -8,7 +8,7 @@ import 'package:iris_flutter/view/page/main/delete_post_dialog.dart';
 import 'package:iris_flutter/view/page/post/detail_tab.dart';
 import 'package:iris_flutter/view/page/post/comment_tab.dart';
 import 'package:iris_flutter/config/config.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class PostPage extends StatefulWidget {
   const PostPage({super.key});
@@ -50,7 +50,7 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
       child: Scaffold(
           appBar: AppBar(
             title: Text(
-              AppLocalizations.of(context)!.missingPost,
+              Intl.message('missingPost'),
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             centerTitle: true,
@@ -94,12 +94,8 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
               indicatorSize: TabBarIndicatorSize.tab,
               dividerColor: Colors.transparent,
               tabs: [
-                SizedBox(
-                    height: 40,
-                    child: Tab(text: AppLocalizations.of(context)!.detail)),
-                SizedBox(
-                    height: 40,
-                    child: Tab(text: AppLocalizations.of(context)!.comment))
+                SizedBox(height: 40, child: Tab(text: Intl.message('detail'))),
+                SizedBox(height: 40, child: Tab(text: Intl.message('comment')))
               ],
               controller: _nestedTabController,
             ),
@@ -125,7 +121,7 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
                         postController.postId.value, moveToMain);
                   },
                   backgroundColor: Colors.red,
-                  label: Text(AppLocalizations.of(context)!.cancelReport),
+                  label: Text(Intl.message('cancelReport')),
                   icon: const Icon(Icons.highlight_off),
                 )
               : FloatingActionButton.extended(
@@ -138,7 +134,7 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
                       Theme.of(context).colorScheme.tertiaryContainer,
                   foregroundColor:
                       Theme.of(context).colorScheme.onTertiaryContainer,
-                  label: Text(AppLocalizations.of(context)!.submitTip),
+                  label: Text(Intl.message('submitTip')),
                   icon: const Icon(Icons.report_gmailerrorred),
                 ))),
     );

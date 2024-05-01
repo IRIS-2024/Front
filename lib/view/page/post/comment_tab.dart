@@ -5,7 +5,7 @@ import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/view/controller/post/post_controller.dart';
 import 'package:iris_flutter/view/page/post/single_comment_item.dart';
 import 'package:iris_flutter/view/page/post/map_item.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class CommentTab extends StatefulWidget {
   const CommentTab({super.key});
@@ -63,8 +63,8 @@ class _CommentTabState extends State<CommentTab> {
                         () => SwitchListTile(
                             value: postController.isFilterOn.value,
                             controlAffinity: ListTileControlAffinity.leading,
-                            title: Text(AppLocalizations.of(context)!
-                                .matchingRateFilter(Config.filterCriteria)),
+                            title: Text(Intl.message('matchingRateFilter',
+                                args: [Config.filterCriteria])),
                             onChanged: (value) {
                               postController.isFilterOn.value = value;
                               postController.loadComments();
@@ -74,13 +74,11 @@ class _CommentTabState extends State<CommentTab> {
                       ? Obx(() => postController.isFilterOn.value
                           ? Padding(
                               padding: CustomPadding.thickTop,
-                              child:
-                                  Text(AppLocalizations.of(context)!.noCommt),
+                              child: Text(Intl.message('noCommt')),
                             )
                           : Padding(
                               padding: CustomPadding.thickTop,
-                              child: Text(
-                                  AppLocalizations.of(context)!.emptyCommt),
+                              child: Text(Intl.message('emptyCommt')),
                             ))
                       : Container(
                           color: Colors.white,

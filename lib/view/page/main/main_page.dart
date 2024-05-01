@@ -4,7 +4,7 @@ import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/page/main/main_tab.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -49,15 +49,13 @@ class _MainPageState extends State<MainPage> {
                                   text: Get.put(MainController())
                                           .shortAddress
                                           .value ??
-                                      AppLocalizations.of(context)!
-                                          .currentLocation,
+                                      Intl.message('currentLocation'),
                                   style: TextStyle(
                                       color: Theme.of(context)
                                           .colorScheme
                                           .primary)),
                               TextSpan(
-                                  text:
-                                      "\n${AppLocalizations.of(context)!.main}",
+                                  text: "\n${Intl.message('main')}",
                                   style: TextStyle(
                                       color: Theme.of(context)
                                           .colorScheme
@@ -83,7 +81,7 @@ class _MainPageState extends State<MainPage> {
             // Get.toNamed(Config.routerPostForm);
             Get.toNamed(Config.routerAgree); // 동의화면부터
           },
-          label: Text(AppLocalizations.of(context)!.report),
+          label: Text(Intl.message('report')),
           backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
           foregroundColor: Theme.of(context).colorScheme.onTertiaryContainer,
           icon: const Icon(Icons.report_gmailerrorred),

@@ -8,7 +8,7 @@ import 'package:iris_flutter/view/page/my_page/bookmark_post.dart';
 import 'package:iris_flutter/view/page/my_page/my_posts.dart';
 import 'package:iris_flutter/view/page/my_page/my_comments.dart';
 import 'package:iris_flutter/view/page/my_page/notification_setting.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({super.key});
@@ -26,7 +26,7 @@ class _MyPageState extends State<MyPage> {
     final controller = Get.find<LoginController>();
 
     return Scaffold(
-        appBar: customAppBar(title: AppLocalizations.of(context)!.mypage),
+        appBar: customAppBar(title: Intl.message('mypage')),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
           child: Column(
@@ -49,7 +49,7 @@ class _MyPageState extends State<MyPage> {
                   title: getUserDisplayName() != ''
                       ? Text(getUserDisplayName())
                       : Text(
-                          AppLocalizations.of(context)!.addUserName,
+                          Intl.message('addUserName'),
                           style: const TextStyle(color: Colors.grey),
                         ),
                   subtitle: getUserEmail() != ''
@@ -60,7 +60,7 @@ class _MyPageState extends State<MyPage> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    AppLocalizations.of(context)!.postSetting,
+                    Intl.message('postSetting'),
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ),
@@ -78,7 +78,7 @@ class _MyPageState extends State<MyPage> {
                     Icons.people,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
-                  title: Text(AppLocalizations.of(context)!.writtenPost),
+                  title: Text(Intl.message('writtenPost')),
                   trailing:
                       const Icon(Icons.arrow_forward_ios_rounded, size: 16),
                 ),
@@ -88,7 +88,7 @@ class _MyPageState extends State<MyPage> {
                     Get.to(() => const MyComments());
                   },
                   leading: const Icon(Icons.chat),
-                  title: Text(AppLocalizations.of(context)!.writtenComment),
+                  title: Text(Intl.message('writtenComment')),
                   trailing:
                       const Icon(Icons.arrow_forward_ios_rounded, size: 16),
                 ),
@@ -102,7 +102,7 @@ class _MyPageState extends State<MyPage> {
                     Get.to(() => const BookmarkPost());
                   },
                   leading: const Icon(Icons.bookmark),
-                  title: Text(AppLocalizations.of(context)!.bookmarkPost),
+                  title: Text(Intl.message('bookmarkPost')),
                   trailing:
                       const Icon(Icons.arrow_forward_ios_rounded, size: 16),
                 ),
@@ -112,7 +112,7 @@ class _MyPageState extends State<MyPage> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    AppLocalizations.of(context)!.appSetting,
+                    Intl.message('appSetting'),
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ),
@@ -127,7 +127,7 @@ class _MyPageState extends State<MyPage> {
                           topLeft: Radius.circular(15),
                           topRight: Radius.circular(15))),
                   leading: const Icon(Icons.notifications),
-                  title: Text(AppLocalizations.of(context)!.pushSetting),
+                  title: Text(Intl.message('pushSetting')),
                   trailing:
                       const Icon(Icons.arrow_forward_ios_rounded, size: 16),
                 ),
@@ -137,7 +137,7 @@ class _MyPageState extends State<MyPage> {
                     controller.handleLogout();
                   },
                   leading: const Icon(Icons.logout),
-                  title: Text(AppLocalizations.of(context)!.logout),
+                  title: Text(Intl.message('logout')),
                   trailing:
                       const Icon(Icons.arrow_forward_ios_rounded, size: 16),
                 ),
@@ -151,7 +151,7 @@ class _MyPageState extends State<MyPage> {
                     print("탈퇴하기");
                   },
                   leading: const Icon(Icons.person_off_rounded),
-                  title: Text(AppLocalizations.of(context)!.singout),
+                  title: Text(Intl.message('singout')),
                   trailing:
                       const Icon(Icons.arrow_forward_ios_rounded, size: 16),
                 )

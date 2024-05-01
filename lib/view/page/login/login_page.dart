@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/view/controller/login/login_controller.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  AppLocalizations.of(context)!.login,
+                                  Intl.message('login'),
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                                       fit: BoxFit.fitHeight),
                                   const SizedBox(width: 6),
                                   Text(
-                                    AppLocalizations.of(context)!.googleLogin,
+                                    Intl.message('googleLogin'),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 12),

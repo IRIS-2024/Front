@@ -6,7 +6,7 @@ import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 // form: 이미지 캐로셀
 class ImageCarouselForm extends StatefulWidget {
@@ -63,11 +63,11 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
                     const Icon(Icons.add_circle_outline),
                     const Padding(padding: CustomPadding.slimRight),
                     // Text(widget.title)
-                    Text(AppLocalizations.of(context)!.addPhoto)
+                    Text(Intl.message('addPhoto'))
                   ],
                 ),
                 Text(
-                  AppLocalizations.of(context)!.maxPhoto,
+                  Intl.message('maxPhoto'),
                   style: CustomTextStyle.small.copyWith(
                     color: Theme.of(context).colorScheme.outline,
                   ),
@@ -82,7 +82,7 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
                     children: [
                       const Padding(padding: CustomPadding.slimBottom),
                       Text(
-                        AppLocalizations.of(context)!.addPhoto,
+                        Intl.message('addPhoto'),
                         style: CustomTextStyle.small.copyWith(
                             color: Theme.of(context).colorScheme.error),
                       ),
@@ -187,7 +187,7 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0))),
                       icon: const Icon(Icons.add_circle_outline),
-                      label: Text(AppLocalizations.of(context)!.add))
+                      label: Text(Intl.message('add')))
                   : const SizedBox(),
             ],
           ),

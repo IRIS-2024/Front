@@ -6,7 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/form/form_map_contorller.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 void showAddressInputMapDialog(dynamic controller) {
   Get.dialog(Dialog(
@@ -39,7 +39,7 @@ class _AddressInputMapDialogState extends State<AddressInputMapDialog> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.pickLocation),
+        title: Text(Intl.message('pickLocation')),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) => Obx(
@@ -95,14 +95,13 @@ class _AddressInputMapDialogState extends State<AddressInputMapDialog> {
                                 maxWidth: constraints.maxWidth - 100,
                               ),
                               child: Text(formMapController.address.value ??
-                                  AppLocalizations.of(context)!
-                                      .pickLocationPlz),
+                                  Intl.message('pickLocationPlz')),
                             ),
                           ),
                           formMapController.address.value != null
                               ? Material(
                                   child: Text(
-                                    AppLocalizations.of(context)!.checkLocation,
+                                    Intl.message('checkLocation'),
                                     style: CustomTextStyle.small,
                                   ),
                                 )

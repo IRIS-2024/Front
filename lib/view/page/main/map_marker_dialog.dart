@@ -6,7 +6,7 @@ import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/model/post.dart';
 import 'package:iris_flutter/view/controller/post/post_controller.dart';
 import 'package:iris_flutter/view/page/post/image_carousel.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 void showMapMarkerDialog(int pid) {
   Get.dialog(Dialog(
@@ -65,19 +65,18 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
                 const Padding(padding: CustomPadding.regularBottom),
                 // 상세 내용
                 _titleAndContent(
-                    title: AppLocalizations.of(context)!.profile,
+                    title: Intl.message('profile'),
                     content:
-                        '${Config().getGenderText(post.gender)} / ${post.age}${AppLocalizations.of(context)!.ageunit} ${post.height == null ? '' : '/ ${post.height}cm'} ${post.weight == null ? '' : '/ ${post.weight}kg'}'),
+                        '${Config().getGenderText(post.gender)} / ${post.age}${Intl.message('ageunit')} ${post.height == null ? '' : '/ ${post.height}cm'} ${post.weight == null ? '' : '/ ${post.weight}kg'}'),
                 _titleAndContent(
-                    title: AppLocalizations.of(context)!.missingLocation,
+                    title: Intl.message('missingLocation'),
                     content: post.address),
                 _titleAndContent(
-                    title: AppLocalizations.of(context)!.clothing,
-                    content: post.clothes),
+                    title: Intl.message('clothing'), content: post.clothes),
                 post.details == null || post.details == ''
                     ? const SizedBox()
                     : _titleAndContent(
-                        title: AppLocalizations.of(context)!.characteristics,
+                        title: Intl.message('characteristics'),
                         content: post.details!),
                 const Padding(
                   padding: CustomPadding.mediumBottom,
@@ -90,7 +89,7 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
                         onPressed: () {
                           Get.back();
                         },
-                        child: Text(AppLocalizations.of(context)!.close)),
+                        child: Text(Intl.message('close'))),
                     ElevatedButton(
                       onPressed: () {
                         Get.toNamed(Config.routerPost, arguments: widget.pid);
@@ -100,7 +99,7 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
                               Theme.of(context).colorScheme.primaryContainer,
                           foregroundColor:
                               Theme.of(context).colorScheme.onPrimaryContainer),
-                      child: Text(AppLocalizations.of(context)!.view),
+                      child: Text(Intl.message('view')),
                     ),
                   ],
                 ),

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/page/form/basic_form.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class TimeForm extends StatefulWidget {
   final String title;
@@ -50,18 +50,14 @@ class _TimeFormState extends State<TimeForm> {
                                         onPressed: () {
                                           Get.back();
                                         },
-                                        child: Text(
-                                            AppLocalizations.of(context)!
-                                                .cancel)),
+                                        child: Text(Intl.message('cancel'))),
                                     TextButton(
                                         onPressed: () {
                                           widget.controller.timeOfDay.value =
                                               timeOfDay;
                                           Get.back();
                                         },
-                                        child: Text(
-                                            AppLocalizations.of(context)!
-                                                .save)),
+                                        child: Text(Intl.message('save'))),
                                   ],
                                 ),
                                 CupertinoTimerPicker(
@@ -95,7 +91,7 @@ class _TimeFormState extends State<TimeForm> {
                           borderRadius: BorderRadius.circular(10.0))),
                   icon: const Icon(Icons.access_time),
                   label: Text(widget.controller.timeOfDay.value == null
-                      ? AppLocalizations.of(context)!.enterTime
+                      ? Intl.message('enterTime')
                       : '${widget.controller.timeOfDay.value?.hour.toString().padLeft(2, "0")} : ${widget.controller.timeOfDay.value?.minute.toString().padLeft(2, "0")}')),
               widget.controller.timeOfDay.value == null &&
                       widget.controller.initValidation.value != true
@@ -103,7 +99,7 @@ class _TimeFormState extends State<TimeForm> {
                       children: [
                         const Padding(padding: CustomPadding.slimBottom),
                         Text(
-                          AppLocalizations.of(context)!.enterTimePlz,
+                          Intl.message('enterTimePlz'),
                           style: CustomTextStyle.small.copyWith(
                               color: Theme.of(context).colorScheme.error),
                         ),

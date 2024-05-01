@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/form/comment_form/comment_form_controller.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 void showCommentFormDialog() {
   Get.dialog(
@@ -26,7 +26,7 @@ class CommentFormDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            AppLocalizations.of(context)!.processMatchingRate,
+            Intl.message('processMatchingRate'),
             style: CustomTextStyle.titleBold,
             textAlign: TextAlign.center,
           ),
@@ -43,7 +43,7 @@ class CommentFormDialog extends StatelessWidget {
           ]),
           const Padding(padding: CustomPadding.regularBottom),
           Text(
-            AppLocalizations.of(context)!.indicatorMatchingRate,
+            Intl.message('indicatorMatchingRate'),
             textAlign: TextAlign.center,
           ),
         ],

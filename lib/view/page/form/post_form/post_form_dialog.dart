@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/form/post_form/post_form_controller.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 void showPostFormDialog(dynamic controller) {
   Get.dialog(
@@ -31,7 +31,7 @@ class PostFormDialog extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  AppLocalizations.of(context)!.processAI,
+                  Intl.message('processAI'),
                   style: CustomTextStyle.titleBold,
                   textAlign: TextAlign.center,
                 ),
@@ -54,7 +54,7 @@ class PostFormDialog extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                AppLocalizations.of(context)!.askAI,
+                Intl.message('askAI'),
                 style: CustomTextStyle.titleBold,
                 textAlign: TextAlign.center,
               ),
@@ -76,7 +76,7 @@ class PostFormDialog extends StatelessWidget {
                   onChanged: (value) {
                     controller.isChecked.value = value!;
                   },
-                  child: Text(AppLocalizations.of(context)!.useAI),
+                  child: Text(Intl.message('useAI')),
                 ),
               ),
               SizedBox(
@@ -92,7 +92,7 @@ class PostFormDialog extends StatelessWidget {
                       foregroundColor:
                           Theme.of(context).colorScheme.onPrimaryContainer,
                     ),
-                    child: Text(AppLocalizations.of(context)!.submit),
+                    child: Text(Intl.message('submit')),
                   )),
             ],
           );

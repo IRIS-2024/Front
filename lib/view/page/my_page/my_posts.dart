@@ -4,7 +4,7 @@ import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/controller/my_page/my_post_controller.dart';
 import 'package:iris_flutter/view/page/main/single_post_item.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class MyPosts extends StatefulWidget {
   const MyPosts({super.key});
@@ -24,7 +24,7 @@ class _MyPostsState extends State<MyPosts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: customAppBar(title: AppLocalizations.of(context)!.writtenPost),
+        appBar: customAppBar(title: Intl.message('writtenPost')),
         body: SafeArea(
           child: Obx(
             () => postController.postList.isNotEmpty
@@ -50,7 +50,7 @@ class _MyPostsState extends State<MyPosts> {
                     ),
                   )
                 : Center(
-                    child: Text(AppLocalizations.of(context)!.noPost),
+                    child: Text(Intl.message('noPost')),
                   ),
           ),
         ));

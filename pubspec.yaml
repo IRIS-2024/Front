@@ -61,7 +61,12 @@ dependencies:
   location: ^5.0.3
   intl:
   firebase_core:
+
+  # language
   flutter_localization: ^0.2.0
+  flutter_localizations:
+        sdk: flutter 
+  get_it:
 
 dev_dependencies:
   flutter_test:
@@ -110,7 +115,7 @@ flutter:
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
-  #   - family: Trajan Pro
+  #   - family: Trajan ProS
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
@@ -118,3 +123,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_intl:
+  enabled: true             
+  class_name: I10n     
+  main_locale: en          
+  arb_dir: lib/core/localization/l10n
+  output_dir: lib/core/localization/generated 

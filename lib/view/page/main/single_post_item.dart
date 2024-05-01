@@ -8,7 +8,7 @@ import 'package:iris_flutter/utils/time_diff_utils.dart';
 import 'package:iris_flutter/view/controller/my_page/bookmark_controller.dart';
 import 'package:iris_flutter/view/controller/my_page/my_post_controller.dart';
 import 'package:iris_flutter/view/page/main/delete_post_dialog.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class SinglePostItem extends StatefulWidget {
   final dynamic controller;
@@ -80,7 +80,7 @@ class _SinglePostItemState extends State<SinglePostItem> {
                     Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "${widget.post.name} (${Config().getGenderText(widget.post.gender)}, ${widget.post.age}${AppLocalizations.of(context)!.ageunit})",
+                          "${widget.post.name} (${Config().getGenderText(widget.post.gender)}, ${widget.post.age}${Intl.message('ageunit')})",
                           style: CustomTextStyle.title,
                           overflow: TextOverflow.ellipsis,
                         )),
@@ -146,8 +146,7 @@ class _SinglePostItemState extends State<SinglePostItem> {
                             style: const TextStyle(color: Colors.black),
                             children: [
                               TextSpan(
-                                  text:
-                                      '${AppLocalizations.of(context)!.missingLocation}: ',
+                                  text: '${Intl.message('missingLocation')}: ',
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold)),
                               TextSpan(text: widget.post.address),
