@@ -27,3 +27,20 @@ String convertDateString(String originalDateString) {
     return '';
   }
 }
+
+String convertRegionNameToShort(String originalRegion) {
+  // 강원특별자치도->강원
+  // 세종특별자치시->세종
+  // 전라북도특별자치도->전북
+  // 제주특별자치도->제주
+
+  if (originalRegion.contains('전라북도특별자치도')) {
+    return originalRegion.replaceAll('전라북도특별자치도', '전북');
+  } else if (originalRegion.contains('특별자치도')) {
+    return originalRegion.replaceAll('특별자치도', '');
+  } else if (originalRegion.contains('특별자치시')) {
+    return originalRegion.replaceAll('특별자치시', '');
+  } else {
+    return originalRegion; // 변경 대상이 아닌 경우 원래 값 반환
+  }
+}

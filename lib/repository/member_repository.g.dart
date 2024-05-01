@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_repository.dart';
+part of 'member_repository.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'login_repository.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _LoginRepository implements LoginRepository {
-  _LoginRepository(
+class _MemberRepository implements MemberRepository {
+  _MemberRepository(
     this._dio, {
     this.baseUrl,
   });
@@ -19,19 +19,20 @@ class _LoginRepository implements LoginRepository {
   String? baseUrl;
 
   @override
-  Future<dynamic> postLogout() async {
+  Future<dynamic> patchPush(NotiSetting notiSetting) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(notiSetting.toJson());
     final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
-      method: 'POST',
+      method: 'PATCH',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/auth/logout',
+          '/members/push',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -45,48 +46,46 @@ class _LoginRepository implements LoginRepository {
   }
 
   @override
-  Future<LoginResp> getRefresh(String refreshToken) async {
+  Future<String> getPushRegion() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'refreshToken': refreshToken};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<LoginResp>(Options(
+    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/auth/refresh',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = LoginResp.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          '/members/push/region',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value = _result.data!;
     return value;
   }
 
   @override
-  Future<LoginResp> getGoogleCallback(String code) async {
+  Future<User> getUserInfo() async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'code': code};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<LoginResp>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/auth/google/callback',
+              '/member',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -95,7 +94,7 @@ class _LoginRepository implements LoginRepository {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = LoginResp.fromJson(_result.data!);
+    final value = User.fromJson(_result.data!);
     return value;
   }
 
