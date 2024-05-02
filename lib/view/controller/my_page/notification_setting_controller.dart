@@ -8,6 +8,7 @@ import 'package:iris_flutter/model/noti_setting.dart';
 import 'package:iris_flutter/repository/member_repository.dart';
 import 'package:iris_flutter/utils/region_name_utils.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
+import 'package:intl/intl.dart';
 
 class NotificationSettingController {
   RxString selectedRegion1D = ''.obs;
@@ -18,16 +19,19 @@ class NotificationSettingController {
     if (isSwitched.value) {
       // 알림 on
       final fcmToken = await FirebaseMessaging.instance.getToken();
-      log('fcmToken: ${fcmToken}');
-      patchSetting(region: concatRegionNames(selectedRegion1D.value, selectedRegion2D.value), deviceToken: fcmToken!);
+      log('fcmToken: $fcmToken');
+      patchSetting(
+          region:
+              concatRegionNames(selectedRegion1D.value, selectedRegion2D.value),
+          deviceToken: fcmToken!);
     } else {
       // 알림 off
       patchSetting(region: null, deviceToken: null);
     }
   }
 
-  Future<void> patchSetting(
-      {String? region, String? deviceToken}) async { // 관심 지역 설정, 수정 -> region required
+  Future<void> patchSetting({String? region, String? deviceToken}) async {
+    // 관심 지역 설정, 수정 -> region required
     final dio = createDio();
     MemberRepository memberRepository = MemberRepository(dio);
 
@@ -36,10 +40,13 @@ class NotificationSettingController {
           .patchPush(NotiSetting(region: region, deviceToken: deviceToken));
       // 설정 완료, 안내
       Get.back();
-      customSnackBar(title: '알림 설정 저장', message: '설정 저장이 완료되었습니다.');
+      customSnackBar(
+          title: Intl.message('saveNoti'), message: Intl.message('sucessNoti'));
     } on DioException catch (e) {
       log('[DioException] ${e.response}');
-      customErrorSnackBar(title: '알림 설정 실패', message: '설정 저장이 실패하였습니다. 다시 시도해 주세요.');
+      customErrorSnackBar(
+          title: Intl.message('failSaveNoti'),
+          message: Intl.message('failSaveNotiSnackBar'));
     }
   }
 
@@ -49,7 +56,7 @@ class NotificationSettingController {
 
     try {
       final resp = await memberRepository.getPushRegion();
-      log('getSetting: ${resp}');
+      log('getSetting: $resp');
 
       if (resp.isNotEmpty) {
         isSwitched.value = true;

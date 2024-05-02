@@ -80,7 +80,7 @@ class _SinglePostItemState extends State<SinglePostItem> {
                     Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "${widget.post.name} (${Config().getGenderText(widget.post.gender)}, ${widget.post.age}${Intl.message('ageunit')})",
+                          "${widget.post.name} (${Config().getGenderTextShort(widget.post.gender)}, ${widget.post.age}${Intl.message('ageunit')})",
                           style: CustomTextStyle.title,
                           overflow: TextOverflow.ellipsis,
                         )),

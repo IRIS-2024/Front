@@ -6,6 +6,7 @@ import 'package:iris_flutter/config/dio_config.dart';
 import 'package:iris_flutter/model/short_post.dart';
 import 'package:iris_flutter/repository/post_repository.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
+import 'package:intl/intl.dart';
 
 class MyPostController {
   RxList<ShortPost> postList = <ShortPost>[].obs;
@@ -20,12 +21,15 @@ class MyPostController {
     });
   }
 
-  void deletePost(int pid, BuildContext context, Function funcAfterDelete) async {
+  void deletePost(
+      int pid, BuildContext context, Function funcAfterDelete) async {
     final dio = createDio();
     PostRepository postRepository = PostRepository(dio);
     await postRepository.deletePost(pid).then((resp) {
       // Error 발생 안 하면 성공
-      customSnackBar(title: '실종 정보 삭제', message: '실종 정보를 삭제하였습니다.');
+      customSnackBar(
+          title: Intl.message('delReport'),
+          message: Intl.message('delReportSnackBar'));
       funcAfterDelete();
     }).catchError((error) {
       log('[catchError]: $error');

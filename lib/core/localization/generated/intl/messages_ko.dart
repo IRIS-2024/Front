@@ -31,8 +31,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "addComment": MessageLookupByLibrary.simpleMessage("제보 댓글 등록"),
         "addCommentAlert":
             MessageLookupByLibrary.simpleMessage("제보 댓글 등록이 완료되었습니다."),
+        "addCommentSnackBar": MessageLookupByLibrary.simpleMessage("제보 댓글 등록"),
         "addMissingPost": MessageLookupByLibrary.simpleMessage("실종 정보 등록"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("사진을 추가해주세요."),
+        "addReport": MessageLookupByLibrary.simpleMessage("실종 정보 등록"),
         "addUserName": MessageLookupByLibrary.simpleMessage("사용자 이름을 등록해주세요."),
         "ageMissing": MessageLookupByLibrary.simpleMessage("만 나이"),
         "ageunit": MessageLookupByLibrary.simpleMessage("세"),
@@ -67,6 +69,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "commentLocation": MessageLookupByLibrary.simpleMessage("발견 당시 위치"),
         "commentTime": MessageLookupByLibrary.simpleMessage("발견 당시 시간"),
         "currentLocation": MessageLookupByLibrary.simpleMessage("현 위치"),
+        "delComment": MessageLookupByLibrary.simpleMessage("제보 댓글 삭제"),
+        "delCommentSnackBar":
+            MessageLookupByLibrary.simpleMessage("제보 댓글을 삭제하였습니다."),
+        "delReport": MessageLookupByLibrary.simpleMessage("실종 정보 삭제"),
+        "delReportSnackBar":
+            MessageLookupByLibrary.simpleMessage("실종 정보를 삭제하였습니다."),
         "deleteComment": MessageLookupByLibrary.simpleMessage("제보 댓글 삭제"),
         "deleteCommentAlert":
             MessageLookupByLibrary.simpleMessage("제보 댓글을 삭제하였습니다."),
@@ -81,9 +89,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "exceedImgNum": MessageLookupByLibrary.simpleMessage("이미지 최대 선택 초과"),
         "exceedImgNumAlert":
             MessageLookupByLibrary.simpleMessage("이미지는 최대 3개까지 등록할 수 있습니다."),
+        "f": MessageLookupByLibrary.simpleMessage("여자"),
         "failAddComment": MessageLookupByLibrary.simpleMessage("제보 댓글 등록 실패"),
         "failAddCommentAlert": MessageLookupByLibrary.simpleMessage(
             "제보 댓글 등록이 실패 하였습니다. 다시 시도해 주세요."),
+        "failComment": MessageLookupByLibrary.simpleMessage("제보 댓글 등록 실패"),
+        "failSaveNoti": MessageLookupByLibrary.simpleMessage("알림 설정 실패"),
+        "failSaveNotiSnackBar":
+            MessageLookupByLibrary.simpleMessage("설정 저장이 실패하였습니다. 다시 시도해 주세요."),
+        "failThumbnail":
+            MessageLookupByLibrary.simpleMessage("대표 이미지 지정 여부 저장 실패"),
         "female": MessageLookupByLibrary.simpleMessage("여자"),
         "firstArea": MessageLookupByLibrary.simpleMessage("시﹒도"),
         "gender": MessageLookupByLibrary.simpleMessage("성별"),
@@ -93,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("일치율 판별이 완료되면\n제보 댓글이 등록됩니다."),
         "login": MessageLookupByLibrary.simpleMessage("로그인/회원가입"),
         "logout": MessageLookupByLibrary.simpleMessage("로그아웃"),
+        "m": MessageLookupByLibrary.simpleMessage("남자"),
         "main": MessageLookupByLibrary.simpleMessage("주변의 실종 정보입니다."),
         "male": MessageLookupByLibrary.simpleMessage("남자"),
         "map": MessageLookupByLibrary.simpleMessage("지도"),
@@ -106,10 +122,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "mypage": MessageLookupByLibrary.simpleMessage("마이페이지"),
         "newMissingPost":
             MessageLookupByLibrary.simpleMessage("관심 지역의 새로운 실종 정보"),
+        "noAddress": MessageLookupByLibrary.simpleMessage("반환된 주소 없음"),
         "noBookmark": MessageLookupByLibrary.simpleMessage("북마크한 실종 정보가 없습니다."),
         "noComment": MessageLookupByLibrary.simpleMessage("작성한 제보 댓글이 없습니다."),
         "noCommt": MessageLookupByLibrary.simpleMessage("조건에 맞는 제보 댓글이 없습니다."),
         "noPost": MessageLookupByLibrary.simpleMessage("작성한 실종 정보가 없습니다."),
+        "overImgNum": MessageLookupByLibrary.simpleMessage("이미지 최대 선택 초과"),
+        "overImgNumMsg":
+            MessageLookupByLibrary.simpleMessage("이미지는 최대 3개 입력할 수 있습니다."),
         "pickLocation": MessageLookupByLibrary.simpleMessage("위치 선택"),
         "pickLocationPlz": MessageLookupByLibrary.simpleMessage("위치를 선택해 주세요."),
         "post": MessageLookupByLibrary.simpleMessage("최신 글"),
@@ -135,11 +155,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "report": MessageLookupByLibrary.simpleMessage("신고하기"),
         "reportMissingTitle": MessageLookupByLibrary.simpleMessage("실종자 등록"),
         "save": MessageLookupByLibrary.simpleMessage("저장"),
+        "saveNoti": MessageLookupByLibrary.simpleMessage("알림 설정 저장"),
         "secondArea": MessageLookupByLibrary.simpleMessage("시﹒군﹒구"),
         "selectInterest": MessageLookupByLibrary.simpleMessage("관심 지역 선택"),
         "singout": MessageLookupByLibrary.simpleMessage("탈퇴하기"),
         "submit": MessageLookupByLibrary.simpleMessage("등록"),
         "submitTip": MessageLookupByLibrary.simpleMessage("제보하기"),
+        "sucessAddComment":
+            MessageLookupByLibrary.simpleMessage("제보 댓글 등록이 완료되었습니다."),
+        "sucessAddReport":
+            MessageLookupByLibrary.simpleMessage("실종 정보 등록이 완료되었습니다."),
+        "sucessNoti": MessageLookupByLibrary.simpleMessage("설정 저장이 완료되었습니다."),
+        "sucessReport":
+            MessageLookupByLibrary.simpleMessage("실종 정보는 정상적으로 등록됩니다."),
+        "tryAgainAdress":
+            MessageLookupByLibrary.simpleMessage("근처 위치로 다시 시도해 주세요."),
+        "tryAgainComment": MessageLookupByLibrary.simpleMessage(
+            "제보 댓글 등록이 실패 하였습니다. 다시 시도해 주세요."),
         "updateLocation": MessageLookupByLibrary.simpleMessage("위치 갱신"),
         "updateLocationAlert":
             MessageLookupByLibrary.simpleMessage("현 위치를 갱신하였습니다."),

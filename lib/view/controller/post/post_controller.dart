@@ -11,6 +11,7 @@ import 'package:iris_flutter/repository/comment_repository.dart';
 import 'package:iris_flutter/repository/post_repository.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:label_marker/label_marker.dart';
+import 'package:intl/intl.dart';
 
 class PostController extends GetxController {
   // 이전 페이지에서 전달 받은 postId
@@ -125,7 +126,9 @@ class PostController extends GetxController {
     CommentRepository commentRepository = CommentRepository(dio);
     await commentRepository.deleteComment(cid).then((resp) {
       // Error 발생 안 하면 성공
-      customSnackBar(title: '제보 댓글 삭제', message: '제보 댓글을 삭제하였습니다.');
+      customSnackBar(
+          title: Intl.message('delComment'),
+          message: Intl.message('delCommentSnackBar'));
       loadComments();
     }).catchError((error) {
       log('[catchError]: $error');

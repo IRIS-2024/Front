@@ -270,10 +270,10 @@ class I10n {
     );
   }
 
-  /// `Submit a Witness Comment`
+  /// `Submit a Comment`
   String get submitTip {
     return Intl.message(
-      'Submit a Witness Comment',
+      'Submit a Comment',
       name: 'submitTip',
       desc: '',
       args: [],
@@ -460,11 +460,31 @@ class I10n {
     );
   }
 
+  /// `F`
+  String get f {
+    return Intl.message(
+      'F',
+      name: 'f',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Male`
   String get male {
     return Intl.message(
       'Male',
       name: 'male',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `M`
+  String get m {
+    return Intl.message(
+      'M',
+      name: 'm',
       desc: '',
       args: [],
     );
@@ -1025,6 +1045,206 @@ class I10n {
     return Intl.message(
       'The witness comment has been deleted.',
       name: 'deleteCommentAlert',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No address returned.`
+  String get noAddress {
+    return Intl.message(
+      'No address returned.',
+      name: 'noAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try again with nearby locations.`
+  String get tryAgainAdress {
+    return Intl.message(
+      'Try again with nearby locations.',
+      name: 'tryAgainAdress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submitted Witness Comment.`
+  String get addCommentSnackBar {
+    return Intl.message(
+      'Submitted Witness Comment.',
+      name: 'addCommentSnackBar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Witness Comment has been submitted successfully.`
+  String get sucessAddComment {
+    return Intl.message(
+      'Witness Comment has been submitted successfully.',
+      name: 'sucessAddComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to submit witness comment.`
+  String get failComment {
+    return Intl.message(
+      'Failed to submit witness comment.',
+      name: 'failComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to submit witness comment. Please try again.`
+  String get tryAgainComment {
+    return Intl.message(
+      'Failed to submit witness comment. Please try again.',
+      name: 'tryAgainComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Missing Report`
+  String get addReport {
+    return Intl.message(
+      'Add Missing Report',
+      name: 'addReport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Report has been submitted successfully.`
+  String get sucessAddReport {
+    return Intl.message(
+      'Your Report has been submitted successfully.',
+      name: 'sucessAddReport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to save thumbnail selection`
+  String get failThumbnail {
+    return Intl.message(
+      'Failed to save thumbnail selection',
+      name: 'failThumbnail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Report has been submitted successfully.`
+  String get sucessReport {
+    return Intl.message(
+      'Your Report has been submitted successfully.',
+      name: 'sucessReport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Missing Report`
+  String get delReport {
+    return Intl.message(
+      'Delete Missing Report',
+      name: 'delReport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Missing Report deleted.`
+  String get delReportSnackBar {
+    return Intl.message(
+      'Missing Report deleted.',
+      name: 'delReportSnackBar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Notification Settings`
+  String get saveNoti {
+    return Intl.message(
+      'Save Notification Settings',
+      name: 'saveNoti',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings saved successfully.`
+  String get sucessNoti {
+    return Intl.message(
+      'Settings saved successfully.',
+      name: 'sucessNoti',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to save notification settings`
+  String get failSaveNoti {
+    return Intl.message(
+      'Failed to save notification settings',
+      name: 'failSaveNoti',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to save settings. Please try again.`
+  String get failSaveNotiSnackBar {
+    return Intl.message(
+      'Failed to save settings. Please try again.',
+      name: 'failSaveNotiSnackBar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete witness comment`
+  String get delComment {
+    return Intl.message(
+      'Delete witness comment',
+      name: 'delComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Witness comment deleted.`
+  String get delCommentSnackBar {
+    return Intl.message(
+      'Witness comment deleted.',
+      name: 'delCommentSnackBar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exceeded maximum image selection.`
+  String get overImgNum {
+    return Intl.message(
+      'Exceeded maximum image selection.',
+      name: 'overImgNum',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can input a maximum of 3 images.`
+  String get overImgNumMsg {
+    return Intl.message(
+      'You can input a maximum of 3 images.',
+      name: 'overImgNumMsg',
       desc: '',
       args: [],
     );

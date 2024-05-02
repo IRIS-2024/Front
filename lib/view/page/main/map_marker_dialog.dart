@@ -67,7 +67,7 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
                 _titleAndContent(
                     title: Intl.message('profile'),
                     content:
-                        '${Config().getGenderText(post.gender)} / ${post.age}${Intl.message('ageunit')} ${post.height == null ? '' : '/ ${post.height}cm'} ${post.weight == null ? '' : '/ ${post.weight}kg'}'),
+                        '${Config().getGenderTextShort(post.gender)} / ${post.age}${Intl.message('ageunit')} ${post.height == null ? '' : '/ ${post.height}cm'} ${post.weight == null ? '' : '/ ${post.weight}kg'}'),
                 _titleAndContent(
                     title: Intl.message('missingLocation'),
                     content: post.address),

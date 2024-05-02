@@ -8,6 +8,7 @@ import 'package:iris_flutter/view/page/my_page/my_page.dart';
 import 'package:iris_flutter/view/page/post/post_page.dart';
 import 'package:iris_flutter/view/page/form/comment_form/comment_form_page.dart';
 import 'package:localstorage/localstorage.dart';
+import 'package:intl/intl.dart';
 
 // token 저장하는 secure storage
 FlutterSecureStorage tokenStorage = const FlutterSecureStorage();
@@ -20,7 +21,13 @@ class Config {
   static bool woman = true;
 
   String getGenderText(bool gender) {
-    return gender == Config.woman ? '여' : '남';
+    return gender == Config.woman
+        ? Intl.message('female')
+        : Intl.message('male');
+  }
+
+  String getGenderTextShort(bool gender) {
+    return gender == Config.woman ? Intl.message('f') : Intl.message('m');
   }
 
   // info, comment form

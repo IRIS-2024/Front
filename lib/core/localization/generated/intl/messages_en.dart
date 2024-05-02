@@ -32,9 +32,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Submit Witness Comment"),
         "addCommentAlert": MessageLookupByLibrary.simpleMessage(
             "Witness comment registration is complete."),
+        "addCommentSnackBar":
+            MessageLookupByLibrary.simpleMessage("Submitted Witness Comment."),
         "addMissingPost":
             MessageLookupByLibrary.simpleMessage("Report Missing Person"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("Please add a photo."),
+        "addReport": MessageLookupByLibrary.simpleMessage("Add Missing Report"),
         "addUserName":
             MessageLookupByLibrary.simpleMessage("Register your username."),
         "ageMissing": MessageLookupByLibrary.simpleMessage("Age Missing"),
@@ -74,6 +77,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "commentTime": MessageLookupByLibrary.simpleMessage("When"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Current Location"),
+        "delComment":
+            MessageLookupByLibrary.simpleMessage("Delete witness comment"),
+        "delCommentSnackBar":
+            MessageLookupByLibrary.simpleMessage("Witness comment deleted."),
+        "delReport":
+            MessageLookupByLibrary.simpleMessage("Delete Missing Report"),
+        "delReportSnackBar":
+            MessageLookupByLibrary.simpleMessage("Missing Report deleted."),
         "deleteComment":
             MessageLookupByLibrary.simpleMessage("Delete Witness Comment"),
         "deleteCommentAlert": MessageLookupByLibrary.simpleMessage(
@@ -93,10 +104,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "Exceeded maximum image selection"),
         "exceedImgNumAlert": MessageLookupByLibrary.simpleMessage(
             "You can only register up to 3 images."),
+        "f": MessageLookupByLibrary.simpleMessage("F"),
         "failAddComment": MessageLookupByLibrary.simpleMessage(
             "Failed to submit witness comment"),
         "failAddCommentAlert": MessageLookupByLibrary.simpleMessage(
             "Failed to submit witness comment. Please try again."),
+        "failComment": MessageLookupByLibrary.simpleMessage(
+            "Failed to submit witness comment."),
+        "failSaveNoti": MessageLookupByLibrary.simpleMessage(
+            "Failed to save notification settings"),
+        "failSaveNotiSnackBar": MessageLookupByLibrary.simpleMessage(
+            "Failed to save settings. Please try again."),
+        "failThumbnail": MessageLookupByLibrary.simpleMessage(
+            "Failed to save thumbnail selection"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "firstArea": MessageLookupByLibrary.simpleMessage("City"),
         "gender": MessageLookupByLibrary.simpleMessage("Gender"),
@@ -107,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Once the matching rate determination is complete,\nthe witness comment will be submitted."),
         "login": MessageLookupByLibrary.simpleMessage("Sign in/Sign up"),
         "logout": MessageLookupByLibrary.simpleMessage("Log Out"),
+        "m": MessageLookupByLibrary.simpleMessage("M"),
         "main": MessageLookupByLibrary.simpleMessage("Missing Persons"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "map": MessageLookupByLibrary.simpleMessage("Map"),
@@ -124,6 +145,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "mypage": MessageLookupByLibrary.simpleMessage("My Page"),
         "newMissingPost": MessageLookupByLibrary.simpleMessage(
             "New Missing Report in Area of Interest"),
+        "noAddress":
+            MessageLookupByLibrary.simpleMessage("No address returned."),
         "noBookmark": MessageLookupByLibrary.simpleMessage(
             "No bookmarked missing reports."),
         "noComment": MessageLookupByLibrary.simpleMessage(
@@ -132,6 +155,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "No matching witness comments found."),
         "noPost":
             MessageLookupByLibrary.simpleMessage("No written missing reports."),
+        "overImgNum": MessageLookupByLibrary.simpleMessage(
+            "Exceeded maximum image selection."),
+        "overImgNumMsg": MessageLookupByLibrary.simpleMessage(
+            "You can input a maximum of 3 images."),
         "pickLocation": MessageLookupByLibrary.simpleMessage("Select Location"),
         "pickLocationPlz":
             MessageLookupByLibrary.simpleMessage("Please select a location."),
@@ -168,14 +195,27 @@ class MessageLookup extends MessageLookupByLibrary {
         "reportMissingTitle":
             MessageLookupByLibrary.simpleMessage("Report Missing Person"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "saveNoti":
+            MessageLookupByLibrary.simpleMessage("Save Notification Settings"),
         "secondArea":
             MessageLookupByLibrary.simpleMessage("State/Province/Region"),
         "selectInterest":
             MessageLookupByLibrary.simpleMessage("Select Area of Interest"),
         "singout": MessageLookupByLibrary.simpleMessage("Sing Out"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
-        "submitTip":
-            MessageLookupByLibrary.simpleMessage("Submit a Witness Comment"),
+        "submitTip": MessageLookupByLibrary.simpleMessage("Submit a Comment"),
+        "sucessAddComment": MessageLookupByLibrary.simpleMessage(
+            "Witness Comment has been submitted successfully."),
+        "sucessAddReport": MessageLookupByLibrary.simpleMessage(
+            "Your Report has been submitted successfully."),
+        "sucessNoti": MessageLookupByLibrary.simpleMessage(
+            "Settings saved successfully."),
+        "sucessReport": MessageLookupByLibrary.simpleMessage(
+            "Your Report has been submitted successfully."),
+        "tryAgainAdress": MessageLookupByLibrary.simpleMessage(
+            "Try again with nearby locations."),
+        "tryAgainComment": MessageLookupByLibrary.simpleMessage(
+            "Failed to submit witness comment. Please try again."),
         "updateLocation":
             MessageLookupByLibrary.simpleMessage("Location Update"),
         "updateLocationAlert": MessageLookupByLibrary.simpleMessage(
