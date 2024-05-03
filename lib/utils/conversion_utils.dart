@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -16,9 +18,12 @@ String combineTimeOfDayWithCurrentDate(TimeOfDay timeOfDay) {
 String convertDateString(String originalDateString) {
   // 2024-02-09T07:11:42.069Z
   // 2024-02-15T03:18:29.191338
+  log('originalDateString: ${originalDateString}');
   if (originalDateString.isNotEmpty) {
-    DateTime dateTime = DateTime.parse(originalDateString).toLocal();
-    String formattedDateString = DateFormat('yy-MM-dd HH:mm').format(dateTime);
+    DateTime dateTime = DateTime.parse(originalDateString);
+    Duration timeZoneOffset = DateTime.now().timeZoneOffset;
+    DateTime localTime = dateTime.add(timeZoneOffset);
+    String formattedDateString = DateFormat('yy-MM-dd HH:mm').format(localTime);
     return formattedDateString;
   } else {
     return '';
