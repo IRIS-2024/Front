@@ -41,7 +41,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
                     : null,
               ))),
       body: Padding(
-        padding: CustomPadding.pageInsets,
+        padding: CustomPadding.pageInsets.copyWith(top: 12),
         child: Obx(() => Column(
               children: [
                 SwitchListTile(

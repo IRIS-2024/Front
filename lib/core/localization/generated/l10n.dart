@@ -880,20 +880,20 @@ class I10n {
     );
   }
 
-  /// `City`
+  /// `State/Province`
   String get firstArea {
     return Intl.message(
-      'City',
+      'State/Province',
       name: 'firstArea',
       desc: '',
       args: [],
     );
   }
 
-  /// `State/Province/Region`
+  /// `City`
   String get secondArea {
     return Intl.message(
-      'State/Province/Region',
+      'City',
       name: 'secondArea',
       desc: '',
       args: [],

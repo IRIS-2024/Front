@@ -120,7 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "failThumbnail": MessageLookupByLibrary.simpleMessage(
             "Failed to save thumbnail selection"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
-        "firstArea": MessageLookupByLibrary.simpleMessage("City"),
+        "firstArea": MessageLookupByLibrary.simpleMessage("State/Province"),
         "gender": MessageLookupByLibrary.simpleMessage("Gender"),
         "googleLogin":
             MessageLookupByLibrary.simpleMessage("Login with Google"),
@@ -205,8 +205,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "saveNoti":
             MessageLookupByLibrary.simpleMessage("Save Notification Settings"),
-        "secondArea":
-            MessageLookupByLibrary.simpleMessage("State/Province/Region"),
+        "secondArea": MessageLookupByLibrary.simpleMessage("City"),
         "selectInterest":
             MessageLookupByLibrary.simpleMessage("Select Area of Interest"),
         "singout": MessageLookupByLibrary.simpleMessage("Sign Out"),
