@@ -53,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("취소"),
         "cancelReport": MessageLookupByLibrary.simpleMessage("신고 해제하기"),
         "characteristics": MessageLookupByLibrary.simpleMessage("특이사항"),
+        "characteristicsShort": MessageLookupByLibrary.simpleMessage("특이사항"),
         "checkLocation":
             MessageLookupByLibrary.simpleMessage("이 위치를 입력하시려면 버튼을 눌러주세요."),
         "circumstances": MessageLookupByLibrary.simpleMessage("당시 상황"),
@@ -119,8 +120,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "minutesAgo": MessageLookupByLibrary.simpleMessage("분 전"),
         "missingDescription": MessageLookupByLibrary.simpleMessage("실종 당시 옷차림"),
         "missingLocation": MessageLookupByLibrary.simpleMessage("마지막 위치"),
+        "missingLocationShort": MessageLookupByLibrary.simpleMessage("마지막 위치"),
         "missingPost": MessageLookupByLibrary.simpleMessage("실종 정보"),
         "missingTime": MessageLookupByLibrary.simpleMessage("실종 시각"),
+        "missingTimeShort": MessageLookupByLibrary.simpleMessage("실종 시각"),
         "momentAgo": MessageLookupByLibrary.simpleMessage("방금 전"),
         "mypage": MessageLookupByLibrary.simpleMessage("마이페이지"),
         "newMissingPost":

@@ -330,6 +330,16 @@ class I10n {
     );
   }
 
+  /// `Location`
+  String get missingLocationShort {
+    return Intl.message(
+      'Location',
+      name: 'missingLocationShort',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Clothing Description`
   String get missingDescription {
     return Intl.message(
@@ -345,6 +355,16 @@ class I10n {
     return Intl.message(
       'Identifying Characteristics',
       name: 'characteristics',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Characteristics`
+  String get characteristicsShort {
+    return Intl.message(
+      'Characteristics',
+      name: 'characteristicsShort',
       desc: '',
       args: [],
     );
@@ -525,6 +545,16 @@ class I10n {
     return Intl.message(
       'Time of Disappearance',
       name: 'missingTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time`
+  String get missingTimeShort {
+    return Intl.message(
+      'Time',
+      name: 'missingTimeShort',
       desc: '',
       args: [],
     );

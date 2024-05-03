@@ -59,6 +59,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancelReport": MessageLookupByLibrary.simpleMessage("Cancel Report"),
         "characteristics":
             MessageLookupByLibrary.simpleMessage("Identifying Characteristics"),
+        "characteristicsShort":
+            MessageLookupByLibrary.simpleMessage("Characteristics"),
         "checkLocation": MessageLookupByLibrary.simpleMessage(
             "To enter this location, please press the button."),
         "circumstances": MessageLookupByLibrary.simpleMessage("Circumstances"),
@@ -140,10 +142,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Clothing Description"),
         "missingLocation":
             MessageLookupByLibrary.simpleMessage("Missing Location"),
+        "missingLocationShort":
+            MessageLookupByLibrary.simpleMessage("Location"),
         "missingPost":
             MessageLookupByLibrary.simpleMessage("Missing Person Reports"),
         "missingTime":
             MessageLookupByLibrary.simpleMessage("Time of Disappearance"),
+        "missingTimeShort": MessageLookupByLibrary.simpleMessage("Time"),
         "momentAgo": MessageLookupByLibrary.simpleMessage("just a moment ago"),
         "mypage": MessageLookupByLibrary.simpleMessage("My Page"),
         "newMissingPost": MessageLookupByLibrary.simpleMessage(

@@ -4,6 +4,7 @@ import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/model/post.dart';
+import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/controller/post/post_controller.dart';
 import 'package:iris_flutter/view/page/post/image_carousel.dart';
 import 'package:intl/intl.dart';
@@ -69,14 +70,17 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
                     content:
                         '${Config().getGenderTextShort(post.gender)} / ${post.age}${Intl.message('ageunit')} ${post.height == null ? '' : '/ ${post.height}cm'} ${post.weight == null ? '' : '/ ${post.weight}kg'}'),
                 _titleAndContent(
-                    title: Intl.message('missingLocation'),
+                    title: Intl.message('missingTimeShort'),
+                    content: convertDateString(post.disappearedAt)),
+                _titleAndContent(
+                    title: Intl.message('missingLocationShort'),
                     content: post.address),
                 _titleAndContent(
                     title: Intl.message('clothing'), content: post.clothes),
                 post.details == null || post.details == ''
                     ? const SizedBox()
                     : _titleAndContent(
-                        title: Intl.message('characteristics'),
+                        title: Intl.message('characteristicsShort'),
                         content: post.details!),
                 const Padding(
                   padding: CustomPadding.mediumBottom,
