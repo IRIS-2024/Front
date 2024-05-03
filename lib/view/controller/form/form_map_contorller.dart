@@ -8,6 +8,7 @@ import 'package:iris_flutter/utils/region_name_utils.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/controller/map/reverse_geocoding_service.dart';
 import 'package:iris_flutter/view/controller/map/map_service.dart';
+import 'package:intl/intl.dart';
 
 class FormMapController {
   Rx<Position?> initPosition = Rx<Position?>(null); // current location
@@ -27,12 +28,15 @@ class FormMapController {
     if (result != null) {
       address.value = convertRegionNameToShort(result.address_name);
       selectedPosition.value = loc;
-      notiRegion.value = concatRegionNames(result.region_1depth_name, result.region_2depth_name);
+      notiRegion.value = concatRegionNames(
+          result.region_1depth_name, result.region_2depth_name);
 
       log('address.value: ${address.value}');
       log('notiRegion.value: ${notiRegion.value}');
     } else {
-      customErrorSnackBar(title: '반환된 주소 없음', message: '근처 위치로 다시 시도해 주세요.');
+      customErrorSnackBar(
+          title: Intl.message('noAddress'),
+          message: Intl.message('tryAgainAdress'));
       address.value = null;
       selectedPosition.value = null;
       notiRegion.value = null;

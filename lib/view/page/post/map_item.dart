@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/view/controller/post/post_controller.dart';
+import 'package:intl/intl.dart';
 
 class MapItem extends StatefulWidget {
   const MapItem({super.key});
@@ -51,7 +52,7 @@ class _MapItemState extends State<MapItem> {
                 icon: BitmapDescriptor.defaultMarkerWithHue(
                     BitmapDescriptor.hueBlue),
                 infoWindow: InfoWindow(
-                  title: "실종 위치",
+                  title: Intl.message('missingLocation'),
                   snippet: postController.post.value.address,
                 )),
             ...postController.commentMarkers

@@ -11,6 +11,7 @@ import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:dio/dio.dart' as dio_package;
 import 'package:iris_flutter/view/page/form/comment_form/comment_form_dialog.dart';
+import 'package:intl/intl.dart';
 
 class CommentFormController {
   Rx<TimeOfDay?> timeOfDay = Rx<TimeOfDay?>(null);
@@ -52,10 +53,12 @@ class CommentFormController {
         .pickMultiImage(
       maxHeight: 500,
       imageQuality: 30,
-    ).then((value) {
+    )
+        .then((value) {
       if (images.length + value.length > Config.maxImagesLength) {
         customErrorSnackBar(
-            title: '이미지 최대 선택 초과', message: '이미지는 최대 3개 입력할 수 있습니다.');
+            title: Intl.message('overImgNum'),
+            message: Intl.message('overImgNumMsg'));
       } else {
         images += value;
       }
@@ -76,7 +79,6 @@ class CommentFormController {
     showCommentFormDialog();
     await postCommentForm();
   }
-
 
   Future<void> postCommentForm() async {
     // request body form data 생성
@@ -104,13 +106,16 @@ class CommentFormController {
       // Error 발생 하지 않으면 성공
       Get.back();
       customSnackBar(
-          title: '제보 댓글 등록', message: '제보 댓글 등록이 완료되었습니다.');
+          title: Intl.message('addCommentSnackBar'),
+          message: Intl.message('sucessAddComment'));
       Get.offAllNamed(Config.routerPost, arguments: pid.value);
     }).catchError((err) {
       log('[catchError] $err');
       Get.back();
       customErrorSnackBar(
-          title: '제보 댓글 등록 실패', message: '제보 댓글 등록이 실패 하였습니다. 다시 시도해 주세요.');
+        title: Intl.message('failComment'),
+        message: Intl.message('tryAgainComment'),
+      );
       Get.offAllNamed(Config.routerPost, arguments: pid.value);
     });
   }

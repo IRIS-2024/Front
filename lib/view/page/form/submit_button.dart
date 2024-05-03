@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
+import 'package:intl/intl.dart';
 
 class SubmitButton extends StatelessWidget {
   final Function()? onPressed;
@@ -29,7 +30,7 @@ class SubmitButton extends StatelessWidget {
               }
             }),
           ),
-          child: const Text('등록', style: CustomTextStyle.basicBold),
+          child: Text(Intl.message('submit'), style: CustomTextStyle.basicBold),
         ),
         const Padding(padding: CustomPadding.regularRight),
       ],

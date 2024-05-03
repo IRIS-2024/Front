@@ -15,6 +15,7 @@ import 'package:iris_flutter/view/page/form/submit_button.dart';
 import 'package:iris_flutter/view/page/form/text_form.dart';
 import 'package:iris_flutter/view/page/form/image_carousel_form.dart';
 import 'package:iris_flutter/view/page/form/time_form.dart';
+import 'package:intl/intl.dart';
 
 class PostFormPage extends StatefulWidget {
   const PostFormPage({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class _PostFormPageState extends State<PostFormPage> {
       // autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Scaffold(
         appBar: customAppBar(
-            title: '실종자 등록',
+            title: Intl.message('reportMissingTitle'),
             actions: SubmitButton(onPressed: () {
               // validate image, location
               postController.initValidation.value = false;
@@ -52,16 +53,16 @@ class _PostFormPageState extends State<PostFormPage> {
               children: [
                 // 사진
                 ImageCarouselForm(
-                  title: '실종자',
+                  title: Intl.message('reportMissingTitle'),
                   controller: postController,
                 ),
                 // 실종자 이름
                 TextForm(
                     textEditingController: postController.nameController,
-                    title: '실종자 이름',
+                    title: Intl.message('postMissingName'),
                     isRequired: true,
-                    validatorText: '이름을 입력해주세요.',
-                    hintText: '실종자 이름을 입력해주세요.',
+                    validatorText: Intl.message('postName'),
+                    hintText: Intl.message('postHintName'),
                     maxLength: 20),
 
                 // 성별, 만 나이
@@ -70,14 +71,18 @@ class _PostFormPageState extends State<PostFormPage> {
                     Flexible(
                         flex: 1,
                         child: BasicForm(
-                          title: '성별',
+                          title: Intl.message('gender'),
                           isRequired: true,
                           widget: Obx(
                             () => Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                genderButton(title: '여자', gender: Config.woman),
-                                genderButton(title: '남자', gender: Config.man),
+                                genderButton(
+                                    title: Intl.message('female'),
+                                    gender: Config.woman),
+                                genderButton(
+                                    title: Intl.message('male'),
+                                    gender: Config.man),
                               ],
                             ),
                           ),
@@ -87,9 +92,9 @@ class _PostFormPageState extends State<PostFormPage> {
                       flex: 1,
                       child: numberField(
                           textEditingController: postController.ageController,
-                          title: '만 나이',
+                          title: Intl.message('ageMissing'),
                           isRequired: true,
-                          unitText: '세'),
+                          unitText: Intl.message('ageunit')),
                     )
                   ],
                 ),
@@ -101,7 +106,7 @@ class _PostFormPageState extends State<PostFormPage> {
                         child: numberField(
                             textEditingController:
                                 postController.heightController,
-                            title: '키',
+                            title: Intl.message('height'),
                             isRequired: false,
                             unitText: 'cm')),
                     const Padding(padding: CustomPadding.regularRight),
@@ -110,32 +115,36 @@ class _PostFormPageState extends State<PostFormPage> {
                         child: numberField(
                             textEditingController:
                                 postController.weightController,
-                            title: '몸무게',
+                            title: Intl.message('weight'),
                             isRequired: false,
                             unitText: 'kg')),
                   ],
                 ),
 
                 // 실종 시각
-                TimeForm(title: '실종 시각', controller: postController),
+                TimeForm(
+                    title: Intl.message('missingTime'),
+                    controller: postController),
                 // 마지막 위치
-                AddressForm(title: '마지막 위치', controller: postController),
+                AddressForm(
+                    title: Intl.message('missingLocation'),
+                    controller: postController),
 
                 // 실종 당시 옷차림
                 TextForm(
                   textEditingController: postController.clothesController,
-                  title: '실종 당시 옷차림',
+                  title: Intl.message('missingDescription'),
                   isRequired: true,
-                  validatorText: '옷차림을 입력해주세요.',
-                  hintText: '상•하의 종류와 색상을 적어주세요. (ex.노란니트, 검정바지)',
+                  validatorText: Intl.message('postClothing'),
+                  hintText: Intl.message('postHintCharact'),
                   maxLength: 40,
                 ),
                 // 특이사항
                 TextForm(
                     textEditingController: postController.detailsController,
-                    title: '특이사항',
+                    title: Intl.message('characteristics'),
                     isRequired: false,
-                    hintText: '실종자의 체격, 얼굴형, 특이 행동, 질병, 상세 옷차림 등을 적어주세요.',
+                    hintText: Intl.message('postHintCharact'),
                     maxLength: 300,
                     maxLengths: 6),
               ],
@@ -170,7 +179,7 @@ class _PostFormPageState extends State<PostFormPage> {
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             validator: (value) {
               if (value!.isEmpty && isRequired) {
-                return '만 나이를 입력해 주세요.';
+                return Intl.message('postAge');
               }
               return null;
             },

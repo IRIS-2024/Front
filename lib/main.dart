@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/local_notifications.dart';
 import 'package:iris_flutter/config/theme.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:iris_flutter/core/localization/generated/l10n.dart';
 import 'firebase_options.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -38,7 +40,8 @@ void main() async {
   log('User granted permission: ${settings.authorizationStatus}');
 
   // local notification permission
-  LocalNotificationsController localNotificationsController = LocalNotificationsController();
+  LocalNotificationsController localNotificationsController =
+      LocalNotificationsController();
   localNotificationsController.initializeLocalNotifications();
 
   // Foreground Message 수신
@@ -47,13 +50,15 @@ void main() async {
     log('Message data: ${message.data} / title: ${message.notification?.title} / body: ${message.notification?.body}');
 
     if (message.notification != null) {
-      localNotificationsController.showLocalNotifications(title: message.notification!.title!, body: message.notification!.body!, pid: message.data['pid']);
+      localNotificationsController.showLocalNotifications(
+          title: message.notification!.title!,
+          body: message.notification!.body!,
+          pid: message.data['pid']);
     }
   });
 
   // localStorage ready
   await userStorage.ready;
-
   runApp(const MyApp());
 }
 
@@ -72,6 +77,17 @@ class MyApp extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15.0)))),
         useMaterial3: true,
       ),
+      localizationsDelegates: const [
+        I10n.delegate,
+        // AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ko'),
+      ],
       initialRoute: Config.routerLogin,
       getPages: Config.routers,
     );

@@ -6,6 +6,7 @@ import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/controller/my_page/my_comments_controller.dart';
 import 'package:iris_flutter/view/page/post/single_comment_item.dart';
+import 'package:intl/intl.dart';
 
 class MyComments extends StatefulWidget {
   const MyComments({super.key});
@@ -27,7 +28,7 @@ class _MyCommentsState extends State<MyComments> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: "작성한 제보 댓글"),
+      appBar: customAppBar(title: Intl.message('writtenComment')),
       body: Obx(
         () => Padding(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
@@ -66,7 +67,7 @@ class _MyCommentsState extends State<MyComments> {
                                     width:
                                         MediaQuery.of(context).size.width - 120,
                                     child: Text(
-                                        '${post.name} / ${Config().getGenderText(post.gender)} / ${post.age} 세 / ${post.address}',
+                                        '${post.name} / ${Config().getGenderText(post.gender)} / ${post.age} ${Intl.message('ageunit')} / ${post.address}',
                                         overflow: TextOverflow.ellipsis,
                                         style: CustomTextStyle.basic),
                                   ),
@@ -94,8 +95,8 @@ class _MyCommentsState extends State<MyComments> {
                         ],
                       );
                     })
-                : const Center(
-                    child: Text("작성한 제보 댓글이 없습니다."),
+                : Center(
+                    child: Text(Intl.message('noComment')),
                   )),
       ),
     );

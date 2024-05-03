@@ -6,6 +6,7 @@ import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:intl/intl.dart';
 
 // form: 이미지 캐로셀
 class ImageCarouselForm extends StatefulWidget {
@@ -61,11 +62,12 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
                   children: [
                     const Icon(Icons.add_circle_outline),
                     const Padding(padding: CustomPadding.slimRight),
-                    Text('${widget.title} 사진 추가')
+                    // Text(widget.title)
+                    Text(Intl.message('addPhoto'))
                   ],
                 ),
                 Text(
-                  '(최대 3장)',
+                  Intl.message('maxPhoto'),
                   style: CustomTextStyle.small.copyWith(
                     color: Theme.of(context).colorScheme.outline,
                   ),
@@ -77,15 +79,15 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
             () => widget.controller.images.isEmpty &&
                     widget.controller.initValidation.value != true
                 ? Column(
-                  children: [
-                    const Padding(padding: CustomPadding.slimBottom),
-                    Text(
-                      '사진을 추가해 주세요.',
-                      style: CustomTextStyle.small
-                          .copyWith(color: Theme.of(context).colorScheme.error),
-                    ),
-                  ],
-                )
+                    children: [
+                      const Padding(padding: CustomPadding.slimBottom),
+                      Text(
+                        Intl.message('addPhoto'),
+                        style: CustomTextStyle.small.copyWith(
+                            color: Theme.of(context).colorScheme.error),
+                      ),
+                    ],
+                  )
                 : const SizedBox(),
           ),
         ],
@@ -152,7 +154,10 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
                       icon: const Icon(Icons.delete_outline),
                       style: IconButton.styleFrom(
                           foregroundColor: Colors.white,
-                          backgroundColor: Theme.of(context).colorScheme.onBackground.withOpacity(0.5))))
+                          backgroundColor: Theme.of(context)
+                              .colorScheme
+                              .onBackground
+                              .withOpacity(0.5))))
             ],
           ),
         ),
@@ -182,7 +187,7 @@ class _ImageCarouselFormState extends State<ImageCarouselForm> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0))),
                       icon: const Icon(Icons.add_circle_outline),
-                      label: const Text('추가'))
+                      label: Text(Intl.message('add')))
                   : const SizedBox(),
             ],
           ),

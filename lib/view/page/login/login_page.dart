@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/view/controller/login/login_controller.dart';
+import 'package:intl/intl.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -37,12 +38,12 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Row(
+                          Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  "로그인/회원가입",
-                                  style: TextStyle(
+                                  Intl.message('login'),
+                                  style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
                                 ),
@@ -79,9 +80,9 @@ class _LoginPageState extends State<LoginPage> {
                                       'http://pngimg.com/uploads/google/google_PNG19635.png',
                                       fit: BoxFit.fitHeight),
                                   const SizedBox(width: 6),
-                                  const Text(
-                                    "구글로 로그인하기",
-                                    style: TextStyle(
+                                  Text(
+                                    Intl.message('googleLogin'),
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 12),
                                   )

@@ -1,12 +1,14 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/view/page/form/post_form/post_form_page.dart';
+import 'package:iris_flutter/view/page/form/post_form/agreement_page.dart';
 import 'package:iris_flutter/view/page/login/login_page.dart';
 import 'package:iris_flutter/view/page/main/main_page.dart';
 import 'package:iris_flutter/view/page/my_page/my_page.dart';
 import 'package:iris_flutter/view/page/post/post_page.dart';
 import 'package:iris_flutter/view/page/form/comment_form/comment_form_page.dart';
 import 'package:localstorage/localstorage.dart';
+import 'package:intl/intl.dart';
 
 // token 저장하는 secure storage
 FlutterSecureStorage tokenStorage = const FlutterSecureStorage();
@@ -19,7 +21,13 @@ class Config {
   static bool woman = true;
 
   String getGenderText(bool gender) {
-    return gender == Config.woman ? '여' : '남';
+    return gender == Config.woman
+        ? Intl.message('female')
+        : Intl.message('male');
+  }
+
+  String getGenderTextShort(bool gender) {
+    return gender == Config.woman ? Intl.message('f') : Intl.message('m');
   }
 
   // info, comment form
@@ -46,6 +54,10 @@ class Config {
         page: () => const PostFormPage(),
         transition: Transition.noTransition),
     GetPage(
+        name: routerAgree,
+        page: () => const AgreementPage(),
+        transition: Transition.noTransition),
+    GetPage(
         name: routerPost,
         page: () => const PostPage(),
         transition: Transition.noTransition),
@@ -65,6 +77,7 @@ class Config {
   static String routerPost = '/post';
   static String routerCommentForm = '/comment_form';
   static String routerMyPage = '/my_page';
+  static String routerAgree = '/post_agree';
 
   // storage 이름
   static String email = 'email';

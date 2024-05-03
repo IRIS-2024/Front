@@ -6,6 +6,7 @@ import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/page/main/latest_post_tab_view.dart';
 import 'package:iris_flutter/view/page/main/map_tab_view.dart';
+import 'package:intl/intl.dart';
 
 class MainTab extends StatefulWidget {
   const MainTab({Key? key}) : super(key: key);
@@ -47,9 +48,10 @@ class _MainTabState extends State<MainTab> with TickerProviderStateMixin {
                   ),
                   indicatorSize: TabBarIndicatorSize.tab,
                   dividerColor: Colors.transparent,
-                  tabs: const [
-                    SizedBox(height: 40, child: Tab(text: "최신 글")),
-                    SizedBox(height: 40, child: Tab(text: "지도"))
+                  tabs: [
+                    SizedBox(
+                        height: 40, child: Tab(text: Intl.message('post'))),
+                    SizedBox(height: 40, child: Tab(text: Intl.message('map')))
                   ],
                   controller: _nestedTabController,
                 ),
@@ -60,7 +62,9 @@ class _MainTabState extends State<MainTab> with TickerProviderStateMixin {
                     // update position and data
                     Get.put(MainController()).getPositionAndPostList();
                     // updated
-                    customSnackBar(title: '위치 갱신', message: '현 위치를 갱신하였습니다.');
+                    customSnackBar(
+                        title: Intl.message('updateLocation'),
+                        message: Intl.message('updateLocationAlert'));
                   },
                   icon: const Icon(Icons.my_location)),
             ],

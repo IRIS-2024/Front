@@ -12,6 +12,7 @@ import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/comm/custom_snackbar.dart';
 import 'package:iris_flutter/view/page/form/post_form/post_form_dialog.dart';
 import 'package:dio/dio.dart' as dio_package;
+import 'package:intl/intl.dart';
 
 class PostFormController {
   RxList<XFile> images = <XFile>[].obs;
@@ -47,7 +48,8 @@ class PostFormController {
         .then((value) {
       if (images.length + value.length > Config.maxImagesLength) {
         customErrorSnackBar(
-            title: '이미지 최대 선택 초과', message: '이미지는 최대 3개 입력할 수 있습니다.');
+            title: Intl.message('exceedImgNum'),
+            message: Intl.message('exceedImgNumAlert'));
       } else {
         images += value;
       }
@@ -117,15 +119,18 @@ class PostFormController {
     await postRepository
         .setRepresentative(genImageResp.value!.pid, isChecked.value)
         .then((resp) {
-      log('성공: ${resp}');
+      log('성공: $resp');
       // get navigation, snackBar
-      customSnackBar(title: '실종 정보 등록', message: '실종 정보 등록이 완료되었습니다.');
+      customSnackBar(
+          title: Intl.message('addReport'),
+          message: Intl.message('sucessAddReport'));
       Get.offAllNamed(Config.routerPost, arguments: genImageResp.value?.pid);
     }).catchError((err) {
       log('[catchError] $err');
       // 현재는 이 과정에서 Error 발생하면 genImageResp = true로 글 등록됨
       customErrorSnackBar(
-          title: '대표 이미지 지정 여부 저장 실패', message: '실종 정보는 정상적으로 등록됩니다.');
+          title: Intl.message('failThumbnail'),
+          message: Intl.message('sucessReport'));
       Get.offAllNamed(Config.routerPost, arguments: genImageResp.value?.pid);
     });
   }

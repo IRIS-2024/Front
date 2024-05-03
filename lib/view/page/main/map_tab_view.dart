@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/view/controller/main/main_controller.dart';
 import 'package:iris_flutter/view/page/main/map_marker_dialog.dart';
+import 'package:intl/intl.dart';
 
 class MapTabView extends StatefulWidget {
   const MapTabView({Key? key}) : super(key: key);
@@ -56,9 +57,9 @@ class _MapTabViewState extends State<MapTabView> {
                           infoWindow: InfoWindow(
                               title: shortPost.name,
                               snippet:
-                                  '${Config().getGenderText(shortPost.gender)} / ${shortPost.age}세/ ${shortPost.address}',
+                                  '${Config().getGenderText(shortPost.gender)} / ${shortPost.age}${Intl.message('ageunit')}/ ${shortPost.address}',
                               onTap: () {
-                               showMapMarkerDialog(shortPost.pid);
+                                showMapMarkerDialog(shortPost.pid);
                               }),
                         ))
                     .toSet(),
@@ -76,7 +77,7 @@ class _MapTabViewState extends State<MapTabView> {
                       mainController.loadPostList(
                           cameraPosition.latitude, cameraPosition.longitude);
                     },
-                    child: const Text('이 위치에서 재검색하기')),
+                    child: Text(Intl.message('refreshMap'))),
               )
             ],
           ));

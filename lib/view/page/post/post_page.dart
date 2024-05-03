@@ -8,6 +8,7 @@ import 'package:iris_flutter/view/page/main/delete_post_dialog.dart';
 import 'package:iris_flutter/view/page/post/detail_tab.dart';
 import 'package:iris_flutter/view/page/post/comment_tab.dart';
 import 'package:iris_flutter/config/config.dart';
+import 'package:intl/intl.dart';
 
 class PostPage extends StatefulWidget {
   const PostPage({super.key});
@@ -20,20 +21,24 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
   PostController postController = Get.put(PostController());
   BookmarkController bookmrkController = Get.put(BookmarkController());
   late TabController _nestedTabController;
+  late ScrollController _scrollController;
 
   bool isbookmarked = false;
+  bool reachBottom = false;
 
   @override
   void initState() {
     postController.setPid(Get.arguments);
     isbookmarked = postController.post.value.bookmarked;
     _nestedTabController = TabController(length: 2, vsync: this);
+    _scrollController = ScrollController()..addListener(_scrollListener);
     super.initState();
   }
 
   @override
   void dispose() {
     _nestedTabController.dispose();
+    _scrollController.removeListener(_scrollListener);
     super.dispose();
   }
 
@@ -44,9 +49,9 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-            title: const Text(
-              '실종 정보',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            title: Text(
+              Intl.message('missingPost'),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             centerTitle: true,
             elevation: 0,
@@ -88,9 +93,9 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
               ),
               indicatorSize: TabBarIndicatorSize.tab,
               dividerColor: Colors.transparent,
-              tabs: const [
-                SizedBox(height: 40, child: Tab(text: "상세 내용")),
-                SizedBox(height: 40, child: Tab(text: "제보"))
+              tabs: [
+                SizedBox(height: 40, child: Tab(text: Intl.message('detail'))),
+                SizedBox(height: 40, child: Tab(text: Intl.message('comment')))
               ],
               controller: _nestedTabController,
             ),
@@ -100,7 +105,7 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
               const Padding(padding: CustomPadding.regularBottom),
               Expanded(
                 child: TabBarView(
-                  physics: const NeverScrollableScrollPhysics(),
+                  // physics: const NeverScrollableScrollPhysics(),
                   controller: _nestedTabController,
                   children: const [DetailTab(), CommentTab()],
                 ),
@@ -116,7 +121,7 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
                         postController.postId.value, moveToMain);
                   },
                   backgroundColor: Colors.red,
-                  label: const Text('신고 해제하기'),
+                  label: Text(Intl.message('cancelReport')),
                   icon: const Icon(Icons.highlight_off),
                 )
               : FloatingActionButton.extended(
@@ -129,10 +134,20 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
                       Theme.of(context).colorScheme.tertiaryContainer,
                   foregroundColor:
                       Theme.of(context).colorScheme.onTertiaryContainer,
-                  label: const Text('제보하기'),
+                  label: Text(Intl.message('submitTip')),
                   icon: const Icon(Icons.report_gmailerrorred),
                 ))),
     );
+  }
+
+  void _scrollListener() {
+    print(_scrollController.position.extentAfter);
+    if (_scrollController.position.extentAfter < 500) {
+      setState(() {
+        // rebuild 해야 함
+        reachBottom = true;
+      });
+    }
   }
 
   void moveToMain() {

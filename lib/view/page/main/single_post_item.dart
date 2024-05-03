@@ -8,6 +8,7 @@ import 'package:iris_flutter/utils/time_diff_utils.dart';
 import 'package:iris_flutter/view/controller/my_page/bookmark_controller.dart';
 import 'package:iris_flutter/view/controller/my_page/my_post_controller.dart';
 import 'package:iris_flutter/view/page/main/delete_post_dialog.dart';
+import 'package:intl/intl.dart';
 
 class SinglePostItem extends StatefulWidget {
   final dynamic controller;
@@ -79,7 +80,7 @@ class _SinglePostItemState extends State<SinglePostItem> {
                     Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "${widget.post.name} (${Config().getGenderText(widget.post.gender)}, ${widget.post.age}세)",
+                          "${widget.post.name} (${Config().getGenderTextShort(widget.post.gender)}, ${widget.post.age}${Intl.message('ageunit')})",
                           style: CustomTextStyle.title,
                           overflow: TextOverflow.ellipsis,
                         )),
@@ -144,10 +145,10 @@ class _SinglePostItemState extends State<SinglePostItem> {
                         text: TextSpan(
                             style: const TextStyle(color: Colors.black),
                             children: [
-                              const TextSpan(
-                                  text: '마지막 위치: ',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
+                              TextSpan(
+                                  text: '${Intl.message('missingLocation')}: ',
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold)),
                               TextSpan(text: widget.post.address),
                             ]),
                       ),

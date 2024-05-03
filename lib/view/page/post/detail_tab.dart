@@ -6,6 +6,7 @@ import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/utils/conversion_utils.dart';
 import 'package:iris_flutter/view/controller/post/post_controller.dart';
 import 'package:iris_flutter/view/page/post/image_carousel.dart';
+import 'package:intl/intl.dart';
 
 class DetailTab extends StatefulWidget {
   const DetailTab({super.key});
@@ -70,13 +71,13 @@ class _DetailTabState extends State<DetailTab> {
                           children: [
                             Expanded(
                               child: postItem(
-                                  "성별",
+                                  Intl.message('gender'),
                                   Config().getGenderText(
                                       postController.post.value.gender)),
                             ),
                             Expanded(
-                              child: postItem(
-                                  "만 나이", '${postController.post.value.age} 세'),
+                              child: postItem(Intl.message('ageMissing'),
+                                  '${postController.post.value.age} ${Intl.message('ageunit')}'),
                             )
                           ],
                         ),
@@ -90,12 +91,12 @@ class _DetailTabState extends State<DetailTab> {
                                 children: [
                                   if (postController.post.value.height != null)
                                     Expanded(
-                                      child: postItem("키",
+                                      child: postItem(Intl.message('height'),
                                           "${postController.post.value.height} cm"),
                                     ),
                                   if (postController.post.value.weight != null)
                                     Expanded(
-                                      child: postItem("몸무게",
+                                      child: postItem(Intl.message('weight'),
                                           "${postController.post.value.weight} kg"),
                                     )
                                 ],
@@ -103,13 +104,14 @@ class _DetailTabState extends State<DetailTab> {
                               const Divider(),
                             ],
                           ),
-                        postItem("마지막 위치", postController.post.value.address),
+                        postItem(Intl.message('missingLocation'),
+                            postController.post.value.address),
                         const Divider(),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            postItem(
-                                "실종 당시 옷차림", postController.post.value.clothes),
+                            postItem(Intl.message('missingDescription'),
+                                postController.post.value.clothes),
                             const Divider(),
                           ],
                         ),
@@ -118,8 +120,8 @@ class _DetailTabState extends State<DetailTab> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              postItem(
-                                  "특이사항", postController.post.value.details),
+                              postItem(Intl.message('characteristics'),
+                                  postController.post.value.details),
                               const Divider(),
                             ],
                           ),

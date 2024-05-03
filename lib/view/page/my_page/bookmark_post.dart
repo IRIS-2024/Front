@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
 import 'package:iris_flutter/view/controller/my_page/bookmark_controller.dart';
 import 'package:iris_flutter/view/page/main/single_post_item.dart';
+import 'package:intl/intl.dart';
 
 class BookmarkPost extends StatefulWidget {
   const BookmarkPost({super.key});
@@ -23,23 +24,24 @@ class _BookmarkPostState extends State<BookmarkPost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: customAppBar(title: "북마크한 실종 정보"),
+        appBar: customAppBar(title: Intl.message('bookmarkPost')),
         body: Obx(
           () => bookmarkController.shortPostList.isNotEmpty
               ? Padding(
-                padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-                child: ListView.builder(
-                    padding: const EdgeInsets.only(top: 5, bottom: 20),
-                    itemCount: bookmarkController.shortPostList.length,
-                    itemBuilder: (BuildContext context, int idx) {
-                      return SinglePostItem(
+                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+                  child: ListView.builder(
+                      padding: const EdgeInsets.only(top: 5, bottom: 20),
+                      itemCount: bookmarkController.shortPostList.length,
+                      itemBuilder: (BuildContext context, int idx) {
+                        return SinglePostItem(
                           controller: bookmarkController,
                           post: bookmarkController.shortPostList[idx],
-                      bookmarkPost: true,);
-                    }),
-              )
-              : const Center(
-                  child: Text("북마크한 실종 정보가 없습니다."),
+                          bookmarkPost: true,
+                        );
+                      }),
+                )
+              : Center(
+                  child: Text(Intl.message('noBookmark')),
                 ),
         ));
   }

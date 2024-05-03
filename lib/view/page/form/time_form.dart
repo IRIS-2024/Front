@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/page/form/basic_form.dart';
+import 'package:intl/intl.dart';
 
 class TimeForm extends StatefulWidget {
   final String title;
@@ -49,14 +50,14 @@ class _TimeFormState extends State<TimeForm> {
                                         onPressed: () {
                                           Get.back();
                                         },
-                                        child: const Text('취소')),
+                                        child: Text(Intl.message('cancel'))),
                                     TextButton(
                                         onPressed: () {
                                           widget.controller.timeOfDay.value =
                                               timeOfDay;
                                           Get.back();
                                         },
-                                        child: const Text('저장')),
+                                        child: Text(Intl.message('save'))),
                                   ],
                                 ),
                                 CupertinoTimerPicker(
@@ -64,7 +65,10 @@ class _TimeFormState extends State<TimeForm> {
                                   minuteInterval: 1,
                                   onTimerDurationChanged: (Duration value) {
                                     setState(() {
-                                      timeOfDay = TimeOfDay(hour: value.inHours, minute: value.inMinutes.remainder(60));
+                                      timeOfDay = TimeOfDay(
+                                          hour: value.inHours,
+                                          minute:
+                                              value.inMinutes.remainder(60));
                                     });
                                   },
                                   initialTimerDuration: Duration(
@@ -87,15 +91,15 @@ class _TimeFormState extends State<TimeForm> {
                           borderRadius: BorderRadius.circular(10.0))),
                   icon: const Icon(Icons.access_time),
                   label: Text(widget.controller.timeOfDay.value == null
-                      ? '시간 입력'
-                      : '${widget.controller.timeOfDay.value?.hour.toString().padLeft(2,"0")} : ${widget.controller.timeOfDay.value?.minute.toString().padLeft(2,"0")}')),
+                      ? Intl.message('enterTime')
+                      : '${widget.controller.timeOfDay.value?.hour.toString().padLeft(2, "0")} : ${widget.controller.timeOfDay.value?.minute.toString().padLeft(2, "0")}')),
               widget.controller.timeOfDay.value == null &&
                       widget.controller.initValidation.value != true
                   ? Column(
                       children: [
                         const Padding(padding: CustomPadding.slimBottom),
                         Text(
-                          '시간을 입력해 주세요.',
+                          Intl.message('enterTimePlz'),
                           style: CustomTextStyle.small.copyWith(
                               color: Theme.of(context).colorScheme.error),
                         ),

@@ -6,6 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/form/form_map_contorller.dart';
+import 'package:intl/intl.dart';
 
 void showAddressInputMapDialog(dynamic controller) {
   Get.dialog(Dialog(
@@ -17,7 +18,8 @@ void showAddressInputMapDialog(dynamic controller) {
 
 class AddressInputMapDialog extends StatefulWidget {
   final dynamic controller;
-  const AddressInputMapDialog({Key? key, required this.controller}) : super(key: key);
+  const AddressInputMapDialog({Key? key, required this.controller})
+      : super(key: key);
 
   @override
   State<AddressInputMapDialog> createState() => _AddressInputMapDialogState();
@@ -36,7 +38,9 @@ class _AddressInputMapDialogState extends State<AddressInputMapDialog> {
     final formMapController = Get.find<FormMapController>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('위치 선택'),),
+      appBar: AppBar(
+        title: Text(Intl.message('pickLocation')),
+      ),
       body: LayoutBuilder(
         builder: (context, constraints) => Obx(
           () => formMapController.initPosition.value == null
@@ -49,14 +53,15 @@ class _AddressInputMapDialogState extends State<AddressInputMapDialog> {
                     GoogleMap(
                       initialCameraPosition: CameraPosition(
                           target: LatLng(
-                              formMapController.initPosition.value!.latitude,
-                              formMapController.initPosition.value!.longitude,),
+                            formMapController.initPosition.value!.latitude,
+                            formMapController.initPosition.value!.longitude,
+                          ),
                           zoom: 17),
                       mapToolbarEnabled: false,
                       zoomControlsEnabled: false,
                       // min max zoom 제한
                       minMaxZoomPreference:
-                      MinMaxZoomPreference(Config.minZoom, Config.maxZoom),
+                          MinMaxZoomPreference(Config.minZoom, Config.maxZoom),
                       // 기울기 제스처 false
                       tiltGesturesEnabled: false,
                       // 현재 위치 표시 버튼 true
@@ -68,12 +73,12 @@ class _AddressInputMapDialogState extends State<AddressInputMapDialog> {
                           : {
                               Marker(
                                 markerId: const MarkerId('selectedLocation'),
-                                position: formMapController.selectedPosition.value!,
+                                position:
+                                    formMapController.selectedPosition.value!,
                               ),
                             },
                       onTap: (loc) {
-                        log(
-                            '선택한 위치의 위경도: ${loc.latitude} ${loc.longitude}');
+                        log('선택한 위치의 위경도: ${loc.latitude} ${loc.longitude}');
                         formMapController.getAddressForSelectedPosition(loc);
                       },
                     ),
@@ -83,21 +88,26 @@ class _AddressInputMapDialogState extends State<AddressInputMapDialog> {
                         children: [
                           ElevatedButton(
                             onPressed: formMapController.address.value != null
-                            ? _onButtonPressed : null,
-                            child:
-                            Container(
+                                ? _onButtonPressed
+                                : null,
+                            child: Container(
                               constraints: BoxConstraints(
                                 maxWidth: constraints.maxWidth - 100,
                               ),
-                              child: Text(formMapController.address.value ?? '위치를 선택해 주세요.'),
+                              child: Text(formMapController.address.value ??
+                                  Intl.message('pickLocationPlz')),
                             ),
                           ),
                           formMapController.address.value != null
-                          ? const Material(
-                            child: Text('이 위치를 입력하시려면 버튼을 눌러주세요.',
-                            style: CustomTextStyle.small,),
-                          ) : const SizedBox(height: 17,
-                          )
+                              ? Material(
+                                  child: Text(
+                                    Intl.message('checkLocation'),
+                                    style: CustomTextStyle.small,
+                                  ),
+                                )
+                              : const SizedBox(
+                                  height: 17,
+                                )
                         ],
                       ),
                     )
@@ -106,7 +116,6 @@ class _AddressInputMapDialogState extends State<AddressInputMapDialog> {
         ),
       ),
     );
-
   }
 
   void _onButtonPressed() {
@@ -115,8 +124,10 @@ class _AddressInputMapDialogState extends State<AddressInputMapDialog> {
     widget.controller.address.value = formMapController.address.value!;
     widget.controller.notiRegion.value = formMapController.notiRegion.value!;
     // 위도, 경도 저장
-    widget.controller.latitude.value = formMapController.selectedPosition.value?.latitude;
-    widget.controller.longitude.value = formMapController.selectedPosition.value?.longitude;
+    widget.controller.latitude.value =
+        formMapController.selectedPosition.value?.latitude;
+    widget.controller.longitude.value =
+        formMapController.selectedPosition.value?.longitude;
     Get.back();
   }
 }

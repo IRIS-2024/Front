@@ -4,12 +4,14 @@ import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/page/form/basic_form.dart';
 import 'package:iris_flutter/view/page/form/address_input_map_dialog.dart';
+import 'package:intl/intl.dart';
 
 class AddressForm extends StatelessWidget {
   final String title;
   final dynamic controller;
 
-  const AddressForm({Key? key, required this.title, required this.controller}) : super(key: key);
+  const AddressForm({Key? key, required this.title, required this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +35,15 @@ class AddressForm extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0))),
                   icon: const Icon(Icons.my_location),
-                  label: Text(controller.address.value ?? '위치 입력')),
+                  label: Text(controller.address.value ??
+                      Intl.message('enterLocation'))),
               controller.address.value == null &&
                       controller.initValidation.value != true
                   ? Column(
                       children: [
                         const Padding(padding: CustomPadding.slimBottom),
                         Text(
-                          '위치를 입력해 주세요.',
+                          Intl.message('enterLocationPlz'),
                           style: CustomTextStyle.small.copyWith(
                               color: Theme.of(context).colorScheme.error),
                         ),

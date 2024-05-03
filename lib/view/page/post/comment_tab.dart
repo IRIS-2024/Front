@@ -5,6 +5,7 @@ import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/view/controller/post/post_controller.dart';
 import 'package:iris_flutter/view/page/post/single_comment_item.dart';
 import 'package:iris_flutter/view/page/post/map_item.dart';
+import 'package:intl/intl.dart';
 
 class CommentTab extends StatefulWidget {
   const CommentTab({super.key});
@@ -62,22 +63,22 @@ class _CommentTabState extends State<CommentTab> {
                         () => SwitchListTile(
                             value: postController.isFilterOn.value,
                             controlAffinity: ListTileControlAffinity.leading,
-                            title: Text("일치율 ${Config.filterCriteria}% 이상"),
+                            title: Text(Intl.message('matchingRateFilter',
+                                args: [Config.filterCriteria])),
                             onChanged: (value) {
-                              print("필터 클릭 - $value");
                               postController.isFilterOn.value = value;
                               postController.loadComments();
                             }),
                       )),
                   postController.commentList.isEmpty
                       ? Obx(() => postController.isFilterOn.value
-                          ? const Padding(
+                          ? Padding(
                               padding: CustomPadding.thickTop,
-                              child: Text("조건에 맞는 제보 댓글이 없습니다."),
+                              child: Text(Intl.message('noCommt')),
                             )
-                          : const Padding(
+                          : Padding(
                               padding: CustomPadding.thickTop,
-                              child: Text("아직 등록된 제보 댓글이 없습니다."),
+                              child: Text(Intl.message('emptyCommt')),
                             ))
                       : Container(
                           color: Colors.white,
@@ -87,15 +88,22 @@ class _CommentTabState extends State<CommentTab> {
                               shrinkWrap: true,
                               itemCount: postController.commentList.length,
                               itemBuilder: (BuildContext context, int cmtIdx) {
-                                return SingleCmtItem(
-                                    comment: postController.commentList[cmtIdx],
-                                    controller: postController,
-                                    closeAble: false,
-                                    hasImgAuth: postController
-                                                .commentList[cmtIdx].author ||
-                                            postController.post.value.author
-                                        ? true
-                                        : false);
+                                return GestureDetector(
+                                    child: SingleCmtItem(
+                                        comment:
+                                            postController.commentList[cmtIdx],
+                                        controller: postController,
+                                        closeAble: false,
+                                        hasImgAuth: postController
+                                                    .commentList[cmtIdx]
+                                                    .author ||
+                                                postController.post.value.author
+                                            ? true
+                                            : false),
+                                    onTap: () {
+                                      postController.setTargetComment(
+                                          postController.commentList[cmtIdx]);
+                                    });
                               },
                               separatorBuilder: (BuildContext ctx, int idx) {
                                 return const Divider();
