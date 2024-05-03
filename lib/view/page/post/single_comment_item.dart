@@ -56,7 +56,7 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                   ),
                 ),
                 const Padding(padding: CustomPadding.slimRight),
-                Text(getTimeDifference(widget.comment.createdAt),
+                Text(getTimeDifference(widget.comment.discoveredAt),
                     style: const TextStyle(fontSize: 12)),
                 if (widget.closeAble == true)
                   IconButton(
@@ -74,11 +74,11 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
             const Padding(padding: CustomPadding.regularBottom),
             // 내용
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (widget.comment.images.isNotEmpty)
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       widget.hasImgAuth
                           ? GestureDetector(
@@ -155,7 +155,7 @@ class _SingleCmtItemState extends State<SingleCmtItem> {
                             ]),
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: 16,
                                 color: Theme.of(context).colorScheme.primary))
                     ],
                   ),
