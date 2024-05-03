@@ -54,65 +54,62 @@ class _CommentTabState extends State<CommentTab> {
                           : false,
                     )
                   : const SizedBox()),
-              Column(
+              Obx(() => Column(
                 children: [
                   Container(
-                      alignment: Alignment.centerRight,
-                      color: Colors.white,
-                      child: Obx(
-                        () => SwitchListTile(
-                            value: postController.isFilterOn.value,
-                            controlAffinity: ListTileControlAffinity.leading,
-                            title: Text(Intl.message('matchingRateFilter',
-                                args: [Config.filterCriteria])),
-                            onChanged: (value) {
-                              postController.isFilterOn.value = value;
-                              postController.loadComments();
-                            }),
-                      )),
+                    alignment: Alignment.centerRight,
+                    color: Colors.white,
+                    child: SwitchListTile(
+                        value: postController.isFilterOn.value,
+                        controlAffinity: ListTileControlAffinity.leading,
+                        title: Text(Intl.message('matchingRateFilter',
+                            args: [Config.filterCriteria])),
+                        onChanged: (value) {
+                          postController.isFilterOn.value = value;
+                          postController.loadComments();
+                        }),
+                  ),
                   postController.commentList.isEmpty
-                      ? Obx(() => postController.isFilterOn.value
-                          ? Padding(
-                              padding: CustomPadding.thickTop,
-                              child: Text(Intl.message('noCommt')),
-                            )
-                          : Padding(
-                              padding: CustomPadding.thickTop,
-                              child: Text(Intl.message('emptyCommt')),
-                            ))
+                      ? postController.isFilterOn.value
+                      ? Padding(
+                    padding: CustomPadding.thickTop,
+                    child: Text(Intl.message('noCommt')),
+                  )
+                      : Padding(
+                    padding: CustomPadding.thickTop,
+                    child: Text(Intl.message('emptyCommt')),
+                  )
                       : Container(
-                          color: Colors.white,
-                          child: Obx(
-                            () => ListView.separated(
-                              primary: false,
-                              shrinkWrap: true,
-                              itemCount: postController.commentList.length,
-                              itemBuilder: (BuildContext context, int cmtIdx) {
-                                return GestureDetector(
-                                    child: SingleCmtItem(
-                                        comment:
-                                            postController.commentList[cmtIdx],
-                                        controller: postController,
-                                        closeAble: false,
-                                        hasImgAuth: postController
-                                                    .commentList[cmtIdx]
-                                                    .author ||
-                                                postController.post.value.author
-                                            ? true
-                                            : false),
-                                    onTap: () {
-                                      postController.setTargetComment(
-                                          postController.commentList[cmtIdx]);
-                                    });
-                              },
-                              separatorBuilder: (BuildContext ctx, int idx) {
-                                return const Divider();
-                              },
-                            ),
-                          ),
-                        )
+                    color: Colors.white,
+                    child: ListView.separated(
+                      primary: false,
+                      shrinkWrap: true,
+                      itemCount: postController.commentList.length,
+                      itemBuilder: (BuildContext context, int cmtIdx) {
+                        return GestureDetector(
+                            child: SingleCmtItem(
+                                comment:
+                                postController.commentList[cmtIdx],
+                                controller: postController,
+                                closeAble: false,
+                                hasImgAuth: postController
+                                    .commentList[cmtIdx]
+                                    .author ||
+                                    postController.post.value.author
+                                    ? true
+                                    : false),
+                            onTap: () {
+                              postController.setTargetComment(
+                                  postController.commentList[cmtIdx]);
+                            });
+                      },
+                      separatorBuilder: (BuildContext ctx, int idx) {
+                        return const Divider();
+                      },
+                    ),
+                  )
                 ],
-              ),
+              ),)
             ]),
           );
         });

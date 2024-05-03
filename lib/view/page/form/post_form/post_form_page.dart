@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -77,12 +75,16 @@ class _PostFormPageState extends State<PostFormPage> {
                             () => Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                genderButton(
+                                Flexible(
+                                  flex: 1,
+                                  child: genderButton(
                                     title: Intl.message('female'),
-                                    gender: Config.woman),
-                                genderButton(
+                                    gender: Config.woman),),
+                                Flexible(
+                                  flex: 1,
+                                  child: genderButton(
                                     title: Intl.message('male'),
-                                    gender: Config.man),
+                                    gender: Config.man),)
                               ],
                             ),
                           ),
@@ -136,7 +138,7 @@ class _PostFormPageState extends State<PostFormPage> {
                   title: Intl.message('missingDescription'),
                   isRequired: true,
                   validatorText: Intl.message('postClothing'),
-                  hintText: Intl.message('postHintCharact'),
+                  hintText: Intl.message('postHintClothing'),
                   maxLength: 40,
                 ),
                 // 특이사항

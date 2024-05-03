@@ -160,10 +160,10 @@ class I10n {
     );
   }
 
-  /// `Latest post`
+  /// `Latest Reports`
   String get post {
     return Intl.message(
-      'Latest post',
+      'Latest Reports',
       name: 'post',
       desc: '',
       args: [],
@@ -230,10 +230,10 @@ class I10n {
     );
   }
 
-  /// `Missing Person Posters`
+  /// `Missing Person Reports`
   String get missingPost {
     return Intl.message(
-      'Missing Person Posters',
+      'Missing Person Reports',
       name: 'missingPost',
       desc: '',
       args: [],
@@ -290,10 +290,10 @@ class I10n {
     );
   }
 
-  /// `Age Missing`
+  /// `Age`
   String get ageMissing {
     return Intl.message(
-      'Age Missing',
+      'Age',
       name: 'ageMissing',
       desc: '',
       args: [],
@@ -350,6 +350,36 @@ class I10n {
     );
   }
 
+  /// `just a moment ago`
+  String get momentAgo {
+    return Intl.message(
+      'just a moment ago',
+      name: 'momentAgo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` minutes ago`
+  String get minutesAgo {
+    return Intl.message(
+      ' minutes ago',
+      name: 'minutesAgo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` hours ago`
+  String get hoursAgo {
+    return Intl.message(
+      ' hours ago',
+      name: 'hoursAgo',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Matching rate of {rate}% or higher`
   String matchingRateFilter(Object rate) {
     return Intl.message(
@@ -380,10 +410,10 @@ class I10n {
     );
   }
 
-  /// `Matching rate: {rate2} %`
+  /// `Matching rate\n{rate2}%`
   String matchingRate(Object rate2) {
     return Intl.message(
-      'Matching rate: $rate2 %',
+      'Matching rate\n$rate2%',
       name: 'matchingRate',
       desc: '',
       args: [rate2],
@@ -420,10 +450,10 @@ class I10n {
     );
   }
 
-  /// `Missing Person&apos;s Name`
+  /// `Missing Person's Name`
   String get postMissingName {
     return Intl.message(
-      'Missing Person&apos;s Name',
+      'Missing Person\'s Name',
       name: 'postMissingName',
       desc: '',
       args: [],
@@ -440,10 +470,10 @@ class I10n {
     );
   }
 
-  /// `Please enter the missing person&apos;s name.`
+  /// `Please enter the missing person's name.`
   String get postHintName {
     return Intl.message(
-      'Please enter the missing person&apos;s name.',
+      'Please enter the missing person\'s name.',
       name: 'postHintName',
       desc: '',
       args: [],
@@ -520,20 +550,20 @@ class I10n {
     );
   }
 
-  /// `Please describe the type and color of the clothing. (e.g. yellow sweater, black pants)`
+  /// `Please describe clothing type and color. (e.g. yellow sweater, black pants)`
   String get postHintClothing {
     return Intl.message(
-      'Please describe the type and color of the clothing. (e.g. yellow sweater, black pants)',
+      'Please describe clothing type and color. (e.g. yellow sweater, black pants)',
       name: 'postHintClothing',
       desc: '',
       args: [],
     );
   }
 
-  /// `Please provide details such as the missing person&apos;s physique, facial features, distinctive behaviors, medical conditions, and detailed clothing description.`
+  /// `Please provide details such as the missing person's physique, facial features, distinctive behaviors, medical conditions, and detailed clothing description.`
   String get postHintCharact {
     return Intl.message(
-      'Please provide details such as the missing person&apos;s physique, facial features, distinctive behaviors, medical conditions, and detailed clothing description.',
+      'Please provide details such as the missing person\'s physique, facial features, distinctive behaviors, medical conditions, and detailed clothing description.',
       name: 'postHintCharact',
       desc: '',
       args: [],
@@ -910,10 +940,10 @@ class I10n {
     );
   }
 
-  /// `Bookmarked Missing Info`
+  /// `Bookmarked Missing Reports`
   String get bookmarkPost {
     return Intl.message(
-      'Bookmarked Missing Info',
+      'Bookmarked Missing Reports',
       name: 'bookmarkPost',
       desc: '',
       args: [],
@@ -960,10 +990,10 @@ class I10n {
     );
   }
 
-  /// `Sing Out`
+  /// `Sign Out`
   String get singout {
     return Intl.message(
-      'Sing Out',
+      'Sign Out',
       name: 'singout',
       desc: '',
       args: [],
@@ -1270,10 +1300,10 @@ class I10n {
     );
   }
 
-  /// `According to Article 15 of the Personal Information Protection Act, personal information may be provided without the consent of the missing person if it is deemed necessary for the urgent benefit of the data subject or a third party&apos;s life, body, property, or in cases where the missing person or their legal representative is unable to express their intentions due to incapacity or unknown address, and it is clear that consent cannot be obtained in advance.\n\nUnder Article 71 of the Personal Information Protection Act, if personal information of the missing person is registered with MissingYou without meeting the aforementioned conditions, the registrant may face imprisonment for up to five years or a fine of up to 50 million won.\n\nFurthermore, according to Article 36 of the Personal Information Protection Act (Correction/Deletion of Personal Information), individuals who have accessed their personal information have the right to request its correction or deletion from MissingYou.\n\n• I acknowledge that under the Personal Information Protection Act, if it is not recognized as necessary for the urgent benefit of the missing person&apos;s life, body, or welfare, their personal information cannot be registered with the MissingYou app.\n\nIn other words, I understand that registering missing information with the intention of harming the life or body of the missing person, or unfairly infringing upon their property or other benefits, may result in penalties for violating the Personal Information Protection Act.\n\n• Additionally, I acknowledge that this declaration may serve as evidence of the intentions or consent of the author in case of legal issues.\n\n• I understand that, in accordance with Article 36 of the Personal Information Protection Act, missing reports may be deleted without separate notice to the author upon request from the data subject, the missing person.\n\n• I fully understand the above contents and solemnly pledge to handle the missing person&apos;s personal information appropriately.`
+  /// `According to Article 15 of the Personal Information Protection Act, personal information may be provided without the consent of the missing person if it is deemed necessary for the urgent benefit of the data subject or a third party's life, body, property, or in cases where the missing person or their legal representative is unable to express their intentions due to incapacity or unknown address, and it is clear that consent cannot be obtained in advance.\n\nUnder Article 71 of the Personal Information Protection Act, if personal information of the missing person is registered with MissingYou without meeting the aforementioned conditions, the registrant may face imprisonment for up to five years or a fine of up to 50 million won.\n\nFurthermore, according to Article 36 of the Personal Information Protection Act (Correction/Deletion of Personal Information), individuals who have accessed their personal information have the right to request its correction or deletion from MissingYou.\n\n• I acknowledge that under the Personal Information Protection Act, if it is not recognized as necessary for the urgent benefit of the missing person's life, body, or welfare, their personal information cannot be registered with the MissingYou app.\n\nIn other words, I understand that registering missing information with the intention of harming the life or body of the missing person, or unfairly infringing upon their property or other benefits, may result in penalties for violating the Personal Information Protection Act.\n\n• Additionally, I acknowledge that this declaration may serve as evidence of the intentions or consent of the author in case of legal issues.\n\n• I understand that, in accordance with Article 36 of the Personal Information Protection Act, missing reports may be deleted without separate notice to the author upon request from the data subject, the missing person.\n\n• I fully understand the above contents and solemnly pledge to handle the missing person's personal information appropriately.`
   String get agreementContent {
     return Intl.message(
-      'According to Article 15 of the Personal Information Protection Act, personal information may be provided without the consent of the missing person if it is deemed necessary for the urgent benefit of the data subject or a third party&apos;s life, body, property, or in cases where the missing person or their legal representative is unable to express their intentions due to incapacity or unknown address, and it is clear that consent cannot be obtained in advance.\n\nUnder Article 71 of the Personal Information Protection Act, if personal information of the missing person is registered with MissingYou without meeting the aforementioned conditions, the registrant may face imprisonment for up to five years or a fine of up to 50 million won.\n\nFurthermore, according to Article 36 of the Personal Information Protection Act (Correction/Deletion of Personal Information), individuals who have accessed their personal information have the right to request its correction or deletion from MissingYou.\n\n• I acknowledge that under the Personal Information Protection Act, if it is not recognized as necessary for the urgent benefit of the missing person&apos;s life, body, or welfare, their personal information cannot be registered with the MissingYou app.\n\nIn other words, I understand that registering missing information with the intention of harming the life or body of the missing person, or unfairly infringing upon their property or other benefits, may result in penalties for violating the Personal Information Protection Act.\n\n• Additionally, I acknowledge that this declaration may serve as evidence of the intentions or consent of the author in case of legal issues.\n\n• I understand that, in accordance with Article 36 of the Personal Information Protection Act, missing reports may be deleted without separate notice to the author upon request from the data subject, the missing person.\n\n• I fully understand the above contents and solemnly pledge to handle the missing person&apos;s personal information appropriately.',
+      'According to Article 15 of the Personal Information Protection Act, personal information may be provided without the consent of the missing person if it is deemed necessary for the urgent benefit of the data subject or a third party\'s life, body, property, or in cases where the missing person or their legal representative is unable to express their intentions due to incapacity or unknown address, and it is clear that consent cannot be obtained in advance.\n\nUnder Article 71 of the Personal Information Protection Act, if personal information of the missing person is registered with MissingYou without meeting the aforementioned conditions, the registrant may face imprisonment for up to five years or a fine of up to 50 million won.\n\nFurthermore, according to Article 36 of the Personal Information Protection Act (Correction/Deletion of Personal Information), individuals who have accessed their personal information have the right to request its correction or deletion from MissingYou.\n\n• I acknowledge that under the Personal Information Protection Act, if it is not recognized as necessary for the urgent benefit of the missing person\'s life, body, or welfare, their personal information cannot be registered with the MissingYou app.\n\nIn other words, I understand that registering missing information with the intention of harming the life or body of the missing person, or unfairly infringing upon their property or other benefits, may result in penalties for violating the Personal Information Protection Act.\n\n• Additionally, I acknowledge that this declaration may serve as evidence of the intentions or consent of the author in case of legal issues.\n\n• I understand that, in accordance with Article 36 of the Personal Information Protection Act, missing reports may be deleted without separate notice to the author upon request from the data subject, the missing person.\n\n• I fully understand the above contents and solemnly pledge to handle the missing person\'s personal information appropriately.',
       name: 'agreementContent',
       desc: '',
       args: [],
