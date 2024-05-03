@@ -29,6 +29,7 @@ class CommentFormController {
   // 제보 댓글 - 제보 사진, 시간, 위치, 옷차림, 상황
   RxList<XFile> images = <XFile>[].obs;
   Rx<String?> address = Rx<String?>(null);
+  Rx<String?> notiRegion = Rx<String?>(null);
   Rx<double?> latitude = Rx<double?>(null);
   Rx<double?> longitude = Rx<double?>(null);
   TextEditingController clothesController = TextEditingController();
