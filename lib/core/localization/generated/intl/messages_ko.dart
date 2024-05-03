@@ -20,7 +20,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ko';
 
-  static String m0(rate2) => "일치율 ${rate2} %";
+  static String m0(rate2) => "일치율 ${rate2}%";
 
   static String m1(rate) => "일치율 ${rate}% 이상";
 
@@ -104,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "gender": MessageLookupByLibrary.simpleMessage("성별"),
         "googleLogin": MessageLookupByLibrary.simpleMessage("구글로 로그인하기"),
         "height": MessageLookupByLibrary.simpleMessage("키"),
+        "hoursAgo": MessageLookupByLibrary.simpleMessage("시간 전"),
         "indicatorMatchingRate":
             MessageLookupByLibrary.simpleMessage("일치율 판별이 완료되면\n제보 댓글이 등록됩니다."),
         "login": MessageLookupByLibrary.simpleMessage("로그인/회원가입"),
@@ -115,10 +116,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "matchingRate": m0,
         "matchingRateFilter": m1,
         "maxPhoto": MessageLookupByLibrary.simpleMessage("(최대 3장)"),
+        "minutesAgo": MessageLookupByLibrary.simpleMessage("분 전"),
         "missingDescription": MessageLookupByLibrary.simpleMessage("실종 당시 옷차림"),
         "missingLocation": MessageLookupByLibrary.simpleMessage("마지막 위치"),
         "missingPost": MessageLookupByLibrary.simpleMessage("실종 정보"),
         "missingTime": MessageLookupByLibrary.simpleMessage("실종 시각"),
+        "momentAgo": MessageLookupByLibrary.simpleMessage("방금 전"),
         "mypage": MessageLookupByLibrary.simpleMessage("마이페이지"),
         "newMissingPost":
             MessageLookupByLibrary.simpleMessage("관심 지역의 새로운 실종 정보"),

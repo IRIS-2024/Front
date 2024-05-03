@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
+import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/controller/login/login_controller.dart';
 import 'package:intl/intl.dart';
 
@@ -82,9 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                                   const SizedBox(width: 6),
                                   Text(
                                     Intl.message('googleLogin'),
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12),
+                                    style: CustomTextStyle.basicBold,
                                   )
                                 ],
                               ),

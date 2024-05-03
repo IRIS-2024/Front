@@ -20,7 +20,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(rate2) => "Matching rate: ${rate2} %";
+  static String m0(rate2) => "Matching rate\n${rate2}%";
 
   static String m1(rate) => "Matching rate of ${rate}% or higher";
 
@@ -40,12 +40,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "addReport": MessageLookupByLibrary.simpleMessage("Add Missing Report"),
         "addUserName":
             MessageLookupByLibrary.simpleMessage("Register your username."),
-        "ageMissing": MessageLookupByLibrary.simpleMessage("Age Missing"),
+        "ageMissing": MessageLookupByLibrary.simpleMessage("Age"),
         "ageunit": MessageLookupByLibrary.simpleMessage("y.o."),
         "agreementCheck": MessageLookupByLibrary.simpleMessage(
             "I have reviewed the above content and agree."),
         "agreementContent": MessageLookupByLibrary.simpleMessage(
-            "According to Article 15 of the Personal Information Protection Act, personal information may be provided without the consent of the missing person if it is deemed necessary for the urgent benefit of the data subject or a third party&apos;s life, body, property, or in cases where the missing person or their legal representative is unable to express their intentions due to incapacity or unknown address, and it is clear that consent cannot be obtained in advance.\n\nUnder Article 71 of the Personal Information Protection Act, if personal information of the missing person is registered with MissingYou without meeting the aforementioned conditions, the registrant may face imprisonment for up to five years or a fine of up to 50 million won.\n\nFurthermore, according to Article 36 of the Personal Information Protection Act (Correction/Deletion of Personal Information), individuals who have accessed their personal information have the right to request its correction or deletion from MissingYou.\n\n• I acknowledge that under the Personal Information Protection Act, if it is not recognized as necessary for the urgent benefit of the missing person&apos;s life, body, or welfare, their personal information cannot be registered with the MissingYou app.\n\nIn other words, I understand that registering missing information with the intention of harming the life or body of the missing person, or unfairly infringing upon their property or other benefits, may result in penalties for violating the Personal Information Protection Act.\n\n• Additionally, I acknowledge that this declaration may serve as evidence of the intentions or consent of the author in case of legal issues.\n\n• I understand that, in accordance with Article 36 of the Personal Information Protection Act, missing reports may be deleted without separate notice to the author upon request from the data subject, the missing person.\n\n• I fully understand the above contents and solemnly pledge to handle the missing person&apos;s personal information appropriately."),
+            "According to Article 15 of the Personal Information Protection Act, personal information may be provided without the consent of the missing person if it is deemed necessary for the urgent benefit of the data subject or a third party\'s life, body, property, or in cases where the missing person or their legal representative is unable to express their intentions due to incapacity or unknown address, and it is clear that consent cannot be obtained in advance.\n\nUnder Article 71 of the Personal Information Protection Act, if personal information of the missing person is registered with MissingYou without meeting the aforementioned conditions, the registrant may face imprisonment for up to five years or a fine of up to 50 million won.\n\nFurthermore, according to Article 36 of the Personal Information Protection Act (Correction/Deletion of Personal Information), individuals who have accessed their personal information have the right to request its correction or deletion from MissingYou.\n\n• I acknowledge that under the Personal Information Protection Act, if it is not recognized as necessary for the urgent benefit of the missing person\'s life, body, or welfare, their personal information cannot be registered with the MissingYou app.\n\nIn other words, I understand that registering missing information with the intention of harming the life or body of the missing person, or unfairly infringing upon their property or other benefits, may result in penalties for violating the Personal Information Protection Act.\n\n• Additionally, I acknowledge that this declaration may serve as evidence of the intentions or consent of the author in case of legal issues.\n\n• I understand that, in accordance with Article 36 of the Personal Information Protection Act, missing reports may be deleted without separate notice to the author upon request from the data subject, the missing person.\n\n• I fully understand the above contents and solemnly pledge to handle the missing person\'s personal information appropriately."),
         "agreementTitle": MessageLookupByLibrary.simpleMessage(
             "Wait a moment! Have you checked before submitting the missing person report?"),
         "aiImg": MessageLookupByLibrary.simpleMessage(
@@ -54,7 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "askAI": MessageLookupByLibrary.simpleMessage(
             "Would you like to use the generated AI image\n as the representative image?"),
         "bookmarkPost":
-            MessageLookupByLibrary.simpleMessage("Bookmarked Missing Info"),
+            MessageLookupByLibrary.simpleMessage("Bookmarked Missing Reports"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancelReport": MessageLookupByLibrary.simpleMessage("Cancel Report"),
         "characteristics":
@@ -123,6 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "googleLogin":
             MessageLookupByLibrary.simpleMessage("Login with Google"),
         "height": MessageLookupByLibrary.simpleMessage("Height"),
+        "hoursAgo": MessageLookupByLibrary.simpleMessage(" hours ago"),
         "indicatorMatchingRate": MessageLookupByLibrary.simpleMessage(
             "Once the matching rate determination is complete,\nthe witness comment will be submitted."),
         "login": MessageLookupByLibrary.simpleMessage("Sign in/Sign up"),
@@ -134,14 +135,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "matchingRate": m0,
         "matchingRateFilter": m1,
         "maxPhoto": MessageLookupByLibrary.simpleMessage("(Up to 3 photos.)"),
+        "minutesAgo": MessageLookupByLibrary.simpleMessage(" minutes ago"),
         "missingDescription":
             MessageLookupByLibrary.simpleMessage("Clothing Description"),
         "missingLocation":
             MessageLookupByLibrary.simpleMessage("Missing Location"),
         "missingPost":
-            MessageLookupByLibrary.simpleMessage("Missing Person Posters"),
+            MessageLookupByLibrary.simpleMessage("Missing Person Reports"),
         "missingTime":
             MessageLookupByLibrary.simpleMessage("Time of Disappearance"),
+        "momentAgo": MessageLookupByLibrary.simpleMessage("just a moment ago"),
         "mypage": MessageLookupByLibrary.simpleMessage("My Page"),
         "newMissingPost": MessageLookupByLibrary.simpleMessage(
             "New Missing Report in Area of Interest"),
@@ -162,19 +165,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "pickLocation": MessageLookupByLibrary.simpleMessage("Select Location"),
         "pickLocationPlz":
             MessageLookupByLibrary.simpleMessage("Please select a location."),
-        "post": MessageLookupByLibrary.simpleMessage("Latest post"),
+        "post": MessageLookupByLibrary.simpleMessage("Latest Reports"),
         "postAge": MessageLookupByLibrary.simpleMessage(
             "Please enter the age in years."),
         "postClothing":
             MessageLookupByLibrary.simpleMessage("Description of Clothing"),
         "postHintCharact": MessageLookupByLibrary.simpleMessage(
-            "Please provide details such as the missing person&apos;s physique, facial features, distinctive behaviors, medical conditions, and detailed clothing description."),
+            "Please provide details such as the missing person\'s physique, facial features, distinctive behaviors, medical conditions, and detailed clothing description."),
         "postHintClothing": MessageLookupByLibrary.simpleMessage(
-            "Please describe the type and color of the clothing. (e.g. yellow sweater, black pants)"),
+            "Please describe clothing type and color. (e.g. yellow sweater, black pants)"),
         "postHintName": MessageLookupByLibrary.simpleMessage(
-            "Please enter the missing person&apos;s name."),
+            "Please enter the missing person\'s name."),
         "postMissingName":
-            MessageLookupByLibrary.simpleMessage("Missing Person&apos;s Name"),
+            MessageLookupByLibrary.simpleMessage("Missing Person\'s Name"),
         "postMissingPerson":
             MessageLookupByLibrary.simpleMessage("Missing Person"),
         "postName":
@@ -201,7 +204,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("State/Province/Region"),
         "selectInterest":
             MessageLookupByLibrary.simpleMessage("Select Area of Interest"),
-        "singout": MessageLookupByLibrary.simpleMessage("Sing Out"),
+        "singout": MessageLookupByLibrary.simpleMessage("Sign Out"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "submitTip": MessageLookupByLibrary.simpleMessage("Submit a Comment"),
         "sucessAddComment": MessageLookupByLibrary.simpleMessage(

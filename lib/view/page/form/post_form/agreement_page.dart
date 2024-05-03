@@ -4,7 +4,6 @@ import 'package:iris_flutter/config/config.dart';
 import 'package:iris_flutter/config/custom_padding.dart';
 import 'package:iris_flutter/config/custom_text_style.dart';
 import 'package:iris_flutter/view/comm/custom_appbar.dart';
-import 'package:iris_flutter/view/page/form/submit_button.dart';
 import 'package:intl/intl.dart';
 
 class AgreementPage extends StatefulWidget {
@@ -65,7 +64,9 @@ class _AgreementPageState extends State<AgreementPage> {
                 onPressed: () {
                   Get.toNamed(Config.routerPostForm);
                 },
-                child: Text(Intl.message('agreementCheck')))
+                child: Text(Intl.message('agreementCheck'))),
+            const Padding(padding: CustomPadding.regularBottom),
+
           ],
         )),
       ),
