@@ -35,8 +35,39 @@ With "MissingYou", we want to expand beyond the existing high-risk missing perso
 
 ## 👯‍♀️  People of IRIS Front
 
-| Name | 김희서 (Heeseo Kim) | 최예나 (Yena Choi) |
-|---|:---:|:---:|
-| Role | - UI Design (Main Page, Report Registration Page, Witness Comment Registration Page)<br/> - Implement Google Map API (Google Map Widget, Geocoding)<br/> - Implement API Communication: Main Page, Report Registration Page, Witness Comment Registration Page, My Page, Bookmark) <br/> | - UI Design (Report Detail Page, Report Comment Page, My Page, Login Page)<br/>- Implement Google Map API (Google Map Widget)<br/> - Implement Google Login<br/> |
-| GitHub <br/>Repository | [<img src="https://avatars.githubusercontent.com/u/76986589?v=4" width="200">](https://github.com/hap6v6) | [<img src="https://avatars.githubusercontent.com/u/71956482?v=4" width="200">](https://github.com/YenaChoi00) |
+<table style="border:none;">
+   <tr>
+      <td width="10%">
+         <b>Name</b>
+      </td>
+      <td width="30%">
+        <a href="https://github.com/hap6v6"><b>김희서</b></a> <br/>(Heeseo Kim)
+      </td>
+      <td width="30%">
+             <a href="https://github.com/YenaChoi00"><b>최예나</b></a> <br/>(Yena Choi)
+      </td>
+   </tr>
+    <tr>
+      <td>
+         Role
+      </td>
+      <td>
+       - UI Design (Main Page, Report Registration Page, Witness Comment Submit Page)<br/>- Implement Google Map API (Google Map Widget, Geocoding)<br/>- Implement API Communication: Main Page, Report Registration Page, Witness Comment Submit Page, My Page, Bookmark)<br/>
+      </td>
+               <td>
+- UI Design (Report Detail Page, Report Comment Page, My Page, Login Page)<br/>- Implement Google Map API (Google Map Widget)<br/>- Implement Google Login<br/>
+      </td>
+   </tr>
+<tr>
+      <td>
+         GitHub<br/>Repository
+      </td>
+      <td>
+      <a href="https://github.com/hap6v6"><img src="https://avatars.githubusercontent.com/u/76986589?v=4" width="150"></a> 
+      </td>
+        <td>
+<a href="https://github.com/YenaChoi00"><img src="https://avatars.githubusercontent.com/u/71956482?v=4" width="150"></a> 
+      </td>
+   </tr>
+</table><br/>
 
